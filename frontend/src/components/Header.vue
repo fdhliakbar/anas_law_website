@@ -15,7 +15,7 @@
           />
           <span
             class="self-center text-2xl font-semibold whitespace-nowrap dark:text-white"
-            >Flowbite</span
+            >Anas Konsultant</span
           >
         </a>
         <div
@@ -30,7 +30,11 @@
             data-dropdown-placement="bottom"
           >
             <span class="sr-only">Open user menu</span>
-            <img class="w-8 h-8 rounded-full" src="" alt="user photo" />
+            <img
+              class="w-8 h-8 rounded-full"
+              src="../assets/images/profile.png"
+              alt="User Profile"
+            />
           </button>
           <!-- Dropdown menu -->
           <div
