@@ -1,8 +1,11 @@
-<script setup></script>
+<script setup>
+import MainBtn from "./components/MainBtn.vue";
+import Header from "./components/Header.vue";
+// import Footer from "./components/Footer.vue";
+</script>
 
 <template>
-  <h1>Hello World</h1>
-  <p>My name is fadhli</p>
+  <Header />
 </template>
 
 <style scoped></style>
