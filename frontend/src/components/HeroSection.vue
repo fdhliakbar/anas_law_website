@@ -1,26 +1,36 @@
 <!-- filepath: c:\laragon\www\anas_law_website\frontend\src\components\HeroSection.vue -->
 <template>
-  <section class="w-full bg-[#0A2025] py-9 px-8">
+  <section
+    class="w-full bg-gray-700 py-9 px-8"
+    style="
+      background-image: url('../assets/images/makise_kurisu.png');
+      background-size: 100%;
+      background-position: center;
+    "
+  >
     <div
       class="mx-auto flex flex-col items-center lg:flex-row justify-center gap-10 py-40 max-w-[1440px] bg-no-repeat"
     >
+      <img src="../assets/images/makise_kurisu.png" alt="" />
       <div
         class="w-[660px] flex-col justify-center items-start gap-20 inline-flex"
       >
         <div class="self-stretch flex-col justify-start items-start gap-5 flex">
           <h1 class="self-stretch">
             <span class="text-white text-5xl font-bold font-['Roboto']"
-              >Redefining Motion:</span
-            ><span class="text-[#3e9d26] text-5xl font-bold font-['Roboto']"
-              >The Future of Footwear is Here</span
+              >Law Office ANAS & Partners :</span
+            ><br /><span
+              class="text-blue-500/100 text-5xl font-bold font-['Roboto']"
+              >Professional and Reliable Legal Solutions</span
             >
           </h1>
           <p
             class="self-stretch text-white text-xl font-normal font-['Roboto']"
           >
-            Experience unparalleled comfort and innovative design with our
-            state-of-the-art, futuristic sports shoes. Built for champions,
-            designed for you.
+            Is a professional and experienced law office in its field, upholding
+            professionalism, professional ethics and loyalty, providing a
+            variety of legal services to protect your legal rights and business
+            activities wherever you are.
           </p>
         </div>
         <div class="justify-start items-center gap-5 inline-flex">
@@ -50,11 +60,6 @@
           </button>
         </div>
       </div>
-      <img
-        class="w-full max-w-[400px]"
-        src="https://iili.io/338c9je.png"
-        alt=""
-      />
     </div>
   </section>
 </template>
