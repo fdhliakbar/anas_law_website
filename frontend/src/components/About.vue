@@ -2,10 +2,11 @@
   <!-- Start Section -->
   <section
     class="pt-10 overflow-hidden bg-gray-50 dark:bg-gray-800 md:pt-0 sm:pt-16 2xl:pt-16"
+    id="about"
   >
     <div class="px-4 mx-auto sm:px-6 lg:px-8 max-w-7xl">
       <div class="grid items-center grid-cols-1 md:grid-cols-2">
-        <div>
+        <div data-aos="fade-up" data-aos-delay="200">
           <h2
             class="text-3xl font-bold leading-tight text-black dark:text-white sm:text-4xl lg:text-5xl"
           >
@@ -36,7 +37,7 @@
           </p>
         </div>
 
-        <div class="relative">
+        <div class="relative" data-aos="fade-up" data-aos-delay="200">
           <img
             class="absolute inset-x-0 bottom-0 -mb-48 -translate-x-1/2 left-1/2"
             src="https://cdn.rareblocks.xyz/collection/celebration/images/team/1/blob-shape.svg"
@@ -55,6 +56,18 @@
   <!-- End Section -->
 </template>
 
-<script></script>
+<script>
+import AOS from "aos";
+import "aos/dist/aos.css";
+
+export default {
+  mounted() {
+    AOS.init({
+      once: false,
+      duration: 1000,
+    });
+  },
+};
+</script>
 
 <style scoped></style>
