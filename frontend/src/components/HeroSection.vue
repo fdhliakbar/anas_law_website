@@ -12,8 +12,8 @@
       class="mx-auto flex flex-col items-center lg:flex-row justify-center gap-10 py-40 max-w-[1440px] bg-no-repeat"
     >
       <img
-        src="../assets/images/founder.jpg"
-        alt="Founder image"
+        src="../assets/images/profile.jpg"
+        alt="Profile Image"
         class="w-full max-w-xs md:max-w-sm lg:max-w-md rounded-lg shadow-lg"
       />
       <div
@@ -24,7 +24,7 @@
             <span class="text-white text-5xl font-bold font-['Roboto']"
               >Law Office ANAS & Partners :</span
             ><br /><span
-              class="text-blue-500/100 text-5xl font-bold font-['Roboto']"
+              class="text-[#D8A85D] text-5xl font-bold font-['Roboto']"
               >Professional and Reliable Legal Solutions</span
             >
           </h1>
@@ -40,7 +40,7 @@
         <div class="justify-start items-center gap-5 inline-flex">
           <div class="justify-start items-center gap-2.5 flex"></div>
           <button
-            class="px-8 py-2.5 bg-[#3e9d26] rounded-[10px] justify-center items-center gap-2.5 flex text-white text-sm font-semibold font-['Roboto']"
+            class="px-8 py-2.5 bg-[#D8A85D] rounded-[10px] justify-center items-center gap-2.5 flex text-white text-sm font-semibold font-['Roboto']"
           >
             Consult now
           </button>
