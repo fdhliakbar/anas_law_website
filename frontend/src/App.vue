@@ -12,7 +12,7 @@ import Footer from "./components/Footer.vue";
   <Header />
   <HeroSection />
   <Services />
-  <OurTeam />
+  <!-- <OurTeam /> -->
   <About />
   <Testimonials />
   <Footer />
