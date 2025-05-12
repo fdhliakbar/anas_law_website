@@ -1,32 +1,30 @@
 <!-- filepath: c:\laragon\www\anas_law_website\frontend\src\components\Header.vue -->
 <template>
   <header class="sticky top-0 z-50">
-    <!-- Top Bar -->
-    <div
-      class="bg-blue-500/100 text-white text-sm py-2 px-4 flex justify-between items-center"
-    >
-      <p class="font-semibold">Monday - Saturday 8:00 AM - 9:00 PM</p>
-      <div class="flex items-center space-x-4 font-semibold">
-        <a href="mailto:fadhliakbar125@gmail.com" class="hover:underline">
-          fadhliakbar125@gmail.com
-        </a>
-      </div>
-    </div>
-
     <!-- Navbar -->
-    <nav class="absolute top-0 left-0 w-full bg-transparent mt-8">
+    <nav
+      :class="[
+        'fixed w-full z-50 transition-all duration-300 ease-in-out',
+        scrolled ? 'bg-gray-600 shadow-md py-2' : 'bg-transparent py-4',
+      ]"
+    >
       <div
-        class="max-w-screen-xl mx-auto flex items-center justify-between p-4"
+        class="max-w-screen-xl mx-auto flex items-center justify-between p-3"
       >
         <!-- Logo -->
         <a href="#" class="flex items-center">
-          <img src="../assets/images/principal.png" alt="Logo" class="h-10" />
+          <img
+            src="../assets/images/logo.png"
+            alt="Logo"
+            class="h-10"
+            width="60"
+            height="50"
+          />
         </a>
-
         <!-- Navigation Links -->
-        <ul class="hidden lg:flex space-x-6 text-white text-sm font-medium">
+        <ul class="hidden lg:flex space-x-6 text-white text-lg font-medium">
           <li><a href="#" class="hover:underline">Home</a></li>
-          <li><a href="#" class="hover:underline">About</a></li>
+          <li><a href="#about" class="hover:underline">About</a></li>
           <li><a href="#" class="hover:underline">Services</a></li>
           <li><a href="#" class="hover:underline">Our Team</a></li>
           <li><a href="#" class="hover:underline">Reviews</a></li>
@@ -38,7 +36,7 @@
             <button
               type="button"
               data-dropdown-toggle="language-dropdown-menu"
-              class="inline-flex items-center font-medium justify-center px-4 py-2 text-sm text-gray-900 dark:text-white rounded-lg cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-700 dark:hover:text-white"
+              class="inline-flex items-center font-medium justify-center px-4 text-sm text-gray-900 dark:text-white rounded-lg cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-700 dark:hover:text-white"
             >
               <svg
                 class="w-5 h-5 rounded-full me-3"
@@ -304,13 +302,25 @@ export default {
   name: "Header",
   data() {
     return {
+      scrolled: false,
       isMobileMenuOpen: false,
     };
   },
   methods: {
+    handleScroll() {
+      this.scrolled = window.scrollY > 10;
+    },
     toggleMobileMenu() {
       this.isMobileMenuOpen = !this.isMobileMenuOpen;
     },
+  },
+  mounted() {
+    window.addEventListener("scroll", this.handleScroll);
+    // Set initial state based on scroll position
+    this.handleScroll();
+  },
+  beforeDestroy() {
+    window.removeEventListener("scroll", this.handleScroll);
   },
 };
 </script>
