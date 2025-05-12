@@ -23,12 +23,54 @@
         </a>
         <!-- Navigation Links -->
         <ul class="hidden lg:flex space-x-6 text-white text-lg font-medium">
-          <li><a href="#" class="hover:underline">Home</a></li>
-          <li><a href="#about" class="hover:underline">About</a></li>
-          <li><a href="#" class="hover:underline">Services</a></li>
-          <li><a href="#" class="hover:underline">Our Team</a></li>
-          <li><a href="#" class="hover:underline">Reviews</a></li>
-          <li><a href="#" class="hover:underline">Contact</a></li>
+          <li>
+            <a
+              href="#"
+              class="hover:underline"
+              @click.prevent="scrollTo('home')"
+              >Home</a
+            >
+          </li>
+          <li>
+            <a
+              href="#about"
+              class="hover:underline"
+              @click.prevent="scrollTo('about')"
+              >About</a
+            >
+          </li>
+          <li>
+            <a
+              href="#"
+              class="hover:underline"
+              @click.prevent="scrollTo('services')"
+              >Services</a
+            >
+          </li>
+          <li>
+            <a
+              href="#"
+              class="hover:underline"
+              @click.prevent="scrollTo('team')"
+              >Our Team</a
+            >
+          </li>
+          <li>
+            <a
+              href="#"
+              class="hover:underline"
+              @click.prevent="scrollTo('reviews')"
+              >Reviews</a
+            >
+          </li>
+          <li>
+            <a
+              href="#footer"
+              class="hover:underline"
+              @click.prevent="scrollTo('footer')"
+              >Contact</a
+            >
+          </li>
           <!-- Language Start -->
           <div
             class="flex items-center md:order-2 space-x-1 md:space-x-0 rtl:space-x-reverse"
@@ -312,6 +354,12 @@ export default {
     },
     toggleMobileMenu() {
       this.isMobileMenuOpen = !this.isMobileMenuOpen;
+    },
+    scrollTo(id) {
+      const el = document.getElementById(id);
+      if (el) {
+        el.scrollIntoView({ behavior: "smooth" });
+      }
     },
   },
   mounted() {

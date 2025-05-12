@@ -2,7 +2,7 @@
 <script setup></script>
 
 <template>
-  <footer class="bg-[#122F4F] text-white">
+  <footer class="bg-[#122F4F] text-white" id="footer">
     <div class="mx-auto w-full max-w-screen-xl p-6 lg:py-8">
       <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
         <!-- Left Section -->
