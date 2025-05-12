@@ -1,27 +1,76 @@
 <!-- filepath: c:\laragon\www\anas_law_website\frontend\src\components\Header.vue -->
 <template>
   <header class="sticky top-0 z-50">
-
     <!-- Navbar -->
-    <nav 
+    <nav
       :class="[
         'fixed w-full z-50 transition-all duration-300 ease-in-out',
-        scrolled ? 'bg-gray-600 shadow-md py-2' : 'bg-transparent py-4'
+        scrolled ? 'bg-gray-600 shadow-md py-2' : 'bg-transparent py-4',
       ]"
     >
-      <div class="max-w-screen-xl mx-auto flex items-center justify-between p-3">
+      <div
+        class="max-w-screen-xl mx-auto flex items-center justify-between p-3"
+      >
         <!-- Logo -->
         <a href="#" class="flex items-center">
-          <img src="../assets/images/logo.png" alt="Logo" class="h-10" width="60" height="50"/>
+          <img
+            src="../assets/images/logo.png"
+            alt="Logo"
+            class="h-10"
+            width="60"
+            height="50"
+          />
         </a>
         <!-- Navigation Links -->
         <ul class="hidden lg:flex space-x-6 text-white text-lg font-medium">
-          <li><a href="#" class="hover:underline">Home</a></li>
-          <li><a href="#about" class="hover:underline">About</a></li>
-          <li><a href="#" class="hover:underline">Services</a></li>
-          <li><a href="#" class="hover:underline">Our Team</a></li>
-          <li><a href="#" class="hover:underline">Reviews</a></li>
-          <li><a href="#" class="hover:underline">Contact</a></li>
+          <li>
+            <a
+              href="#"
+              class="hover:underline"
+              @click.prevent="scrollTo('home')"
+              >Home</a
+            >
+          </li>
+          <li>
+            <a
+              href="#about"
+              class="hover:underline"
+              @click.prevent="scrollTo('about')"
+              >About</a
+            >
+          </li>
+          <li>
+            <a
+              href="#"
+              class="hover:underline"
+              @click.prevent="scrollTo('services')"
+              >Services</a
+            >
+          </li>
+          <li>
+            <a
+              href="#"
+              class="hover:underline"
+              @click.prevent="scrollTo('team')"
+              >Our Team</a
+            >
+          </li>
+          <li>
+            <a
+              href="#"
+              class="hover:underline"
+              @click.prevent="scrollTo('reviews')"
+              >Reviews</a
+            >
+          </li>
+          <li>
+            <a
+              href="#footer"
+              class="hover:underline"
+              @click.prevent="scrollTo('footer')"
+              >Contact</a
+            >
+          </li>
           <!-- Language Start -->
           <div
             class="flex items-center md:order-2 space-x-1 md:space-x-0 rtl:space-x-reverse"
@@ -29,7 +78,7 @@
             <button
               type="button"
               data-dropdown-toggle="language-dropdown-menu"
-              class="inline-flex items-center font-medium justify-center px-4  text-sm text-gray-900 dark:text-white rounded-lg cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-700 dark:hover:text-white"
+              class="inline-flex items-center font-medium justify-center px-4 text-sm text-gray-900 dark:text-white rounded-lg cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-700 dark:hover:text-white"
             >
               <svg
                 class="w-5 h-5 rounded-full me-3"
@@ -279,12 +328,42 @@
         v-if="isMobileMenuOpen"
         class="lg:hidden bg-white text-gray-900 p-4 space-y-4"
       >
-        <a href="#" class="block hover:underline">Home</a>
-        <a href="#" class="block hover:underline">About</a>
-        <a href="#" class="block hover:underline">Services</a>
-        <a href="#" class="block hover:underline">Our Team</a>
-        <a href="#" class="block hover:underline">Reviews</a>
-        <a href="#" class="block hover:underline">Contact</a>
+        <a
+          href="#"
+          class="block hover:underline"
+          @click.prevent="scrollTo('home')"
+          >Home</a
+        >
+        <a
+          href="#"
+          class="block hover:underline"
+          @click.prevent="scrollTo('about')"
+          >About</a
+        >
+        <a
+          href="#"
+          class="block hover:underline"
+          @click.prevent="scrollTo('services')"
+          >Services</a
+        >
+        <a
+          href="#"
+          class="block hover:underline"
+          @click.prevent="scrollTo('team')"
+          >Our Team</a
+        >
+        <a
+          href="#"
+          class="block hover:underline"
+          @click.prevent="scrollTo('reviews')"
+          >Reviews</a
+        >
+        <a
+          href="#"
+          class="block hover:underline"
+          @click.prevent="scrollTo('footer')"
+          >Contact</a
+        >
       </div>
     </nav>
   </header>
@@ -292,12 +371,12 @@
 
 <script>
 export default {
-  name: 'Header',
+  name: "Header",
   data() {
     return {
       scrolled: false,
-      isMobileMenuOpen: false
-    }
+      isMobileMenuOpen: false,
+    };
   },
   methods: {
     handleScroll() {
@@ -305,17 +384,23 @@ export default {
     },
     toggleMobileMenu() {
       this.isMobileMenuOpen = !this.isMobileMenuOpen;
-    }
+    },
+    scrollTo(id) {
+      const el = document.getElementById(id);
+      if (el) {
+        el.scrollIntoView({ behavior: "smooth" });
+      }
+    },
   },
   mounted() {
-    window.addEventListener('scroll', this.handleScroll);
+    window.addEventListener("scroll", this.handleScroll);
     // Set initial state based on scroll position
     this.handleScroll();
   },
   beforeDestroy() {
-    window.removeEventListener('scroll', this.handleScroll);
-  }
-}
+    window.removeEventListener("scroll", this.handleScroll);
+  },
+};
 </script>
 
 <style scoped>
