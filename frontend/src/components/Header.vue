@@ -328,12 +328,42 @@
         v-if="isMobileMenuOpen"
         class="lg:hidden bg-white text-gray-900 p-4 space-y-4"
       >
-        <a href="#" class="block hover:underline">Home</a>
-        <a href="#" class="block hover:underline">About</a>
-        <a href="#" class="block hover:underline">Services</a>
-        <a href="#" class="block hover:underline">Our Team</a>
-        <a href="#" class="block hover:underline">Reviews</a>
-        <a href="#" class="block hover:underline">Contact</a>
+        <a
+          href="#"
+          class="block hover:underline"
+          @click.prevent="scrollTo('home')"
+          >Home</a
+        >
+        <a
+          href="#"
+          class="block hover:underline"
+          @click.prevent="scrollTo('about')"
+          >About</a
+        >
+        <a
+          href="#"
+          class="block hover:underline"
+          @click.prevent="scrollTo('services')"
+          >Services</a
+        >
+        <a
+          href="#"
+          class="block hover:underline"
+          @click.prevent="scrollTo('team')"
+          >Our Team</a
+        >
+        <a
+          href="#"
+          class="block hover:underline"
+          @click.prevent="scrollTo('reviews')"
+          >Reviews</a
+        >
+        <a
+          href="#"
+          class="block hover:underline"
+          @click.prevent="scrollTo('footer')"
+          >Contact</a
+        >
       </div>
     </nav>
   </header>
