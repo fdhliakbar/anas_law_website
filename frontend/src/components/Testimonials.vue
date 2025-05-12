@@ -1,6 +1,6 @@
 <!-- filepath: c:\laragon\www\anas_law_website\frontend\src\components\Testimonials.vue -->
 <template>
-  <div class="py-5 bg-gray-100">
+  <div class="py-5 bg-gray-100" id="testimonials">
     <div
       class="container flex flex-col items-center justify-center w-full p-6 mx-auto text-center xl:px-0"
     >
@@ -24,6 +24,7 @@
         <div class="lg:col-span-2 xl:col-auto">
           <div
             class="flex flex-col justify-between w-full h-full px-6 py-6 bg-white shadow-md md:px-14 rounded-2xl md:py-14"
+            data-aos="fade-zoom-in"
           >
             <p class="text-2xl leading-normal text-gray-700">
               Share a
@@ -54,6 +55,7 @@
         <div class="">
           <div
             class="flex flex-col justify-between w-full h-full px-6 py-6 bg-white shadow-md md:px-14 rounded-2xl md:py-14"
+            data-aos="fade-zoom-in"
           >
             <p class="text-2xl leading-normal text-gray-700">
               Make sure you only pick the
@@ -83,6 +85,7 @@
         <div class="">
           <div
             class="flex flex-col justify-between w-full h-full px-6 py-6 bg-white shadow-md md:px-14 rounded-2xl md:py-14"
+            data-aos="fade-zoom-in"
           >
             <p class="text-2xl leading-normal text-gray-700">
               This is an
@@ -114,5 +117,18 @@
   </div>
 </template>
 
-<script></script>
+<script>
+import AOS from "aos";
+import "aos/dist/aos.css";
+
+export default {
+  mounted() {
+    AOS.init({
+      once: false,
+      duration: 1000,
+      easing: "ease-in-out-back",
+    });
+  },
+};
+</script>
 <style scoped></style>

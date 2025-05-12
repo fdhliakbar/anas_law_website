@@ -1,6 +1,23 @@
 import "./assets/main.css";
-
 import { createApp } from "vue";
 import App from "./App.vue";
 
-createApp(App).mount("#app");
+import AOS from "aos";
+import "aos/dist/aos.css";
+import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
+import { library } from "@fortawesome/fontawesome-svg-core";
+import {
+  faHeart,
+  faGlobe,
+  faMagnifyingGlass,
+  faBook,
+  faScaleBalanced,
+} from "@fortawesome/free-solid-svg-icons"; // Tambahkan faMagnifyingGlass
+
+library.add(faHeart, faGlobe, faMagnifyingGlass, faBook, faScaleBalanced); // Tambahkan ke library
+
+AOS.init();
+
+const app = createApp(App);
+app.component("font-awesome-icon", FontAwesomeIcon);
+app.mount("#app");
