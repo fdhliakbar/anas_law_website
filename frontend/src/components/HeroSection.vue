@@ -2,6 +2,7 @@
 <template>
   <section
     class="w-full bg-gray-700 py-9 px-8"
+    id="hero"
     style="
       background-image: url('../assets/images/makise_kurisu.png');
       background-size: 100%;
@@ -42,7 +43,7 @@
           <button
             class="px-8 py-2.5 bg-[#D8A85D] rounded-[10px] justify-center items-center gap-2.5 flex text-white text-sm font-semibold font-['Roboto']"
           >
-            Consult now
+            <a href="">Consult Now</a>
           </button>
         </div>
       </div>

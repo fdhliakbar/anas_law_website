@@ -1,6 +1,7 @@
 <template>
   <div
     class="px-4 py-16 mx-auto max-w-7xl md:px-8 lg:py-20 bg-gradient-to-b from-green-50 via-white to-white rounded-2xl shadow-inner"
+    id="services"
   >
     <div class="max-w-xl mb-12 mx-auto text-center lg:max-w-2xl">
       <h2
@@ -29,12 +30,12 @@
               height="24"
             ></rect>
           </svg>
-          <span class="relative">Our</span>
+          <!-- <span class="relative">Our</span> -->
         </span>
         Services
       </h2>
       <p class="text-gray-500 text-lg mt-2">
-        Layanan hukum profesional, terpercaya, dan solutif untuk kebutuhan Anda.
+        Professional, reliable, and solutive legal services for your needs.
       </p>
     </div>
 
@@ -53,12 +54,12 @@
         <h6
           class="mb-2 font-semibold leading-6 text-center text-green-700 text-lg"
         >
-          Dampingan Hukum
+          Legal Assistance
         </h6>
         <p class="mb-6 text-sm text-gray-600 text-center">
-          Menyediakan pendampingan hukum di dalam maupun di luar pengadilan
-          (litigasi dan non-litigasi) guna menyelesaikan permasalahan dengan
-          prinsip solusi saling menguntungkan (win-win solution).
+          Providing legal assistance inside and outside the litigation and
+          non-litigation courts to resolve problems with the principle of
+          win-win solutions.
         </p>
         <a
           href="/"
@@ -98,10 +99,9 @@
           Legal Research
         </h6>
         <p class="mb-6 text-sm text-gray-600 text-center">
-          Mengadakan penelitian hukum yang komprehensif dan mendalam untuk
-          mendukung berbagai kepentingan hukum, baik untuk kepentingan litigasi
-          maupun non-litigasi, termasuk penelitian hukum untuk kepentingan
-          akademis.
+          Conducting comprehensive and in-depth legal research to support
+          various legal interests, both for litigation and non-litigation
+          purposes, including legal research for academic purposes.
         </p>
         <a
           href="/"
@@ -141,9 +141,9 @@
           Legal Audit
         </h6>
         <p class="mb-6 text-sm text-gray-600 text-center">
-          Legal audit atau legal due diligence (LDD) merupakan kegiatan
-          pemeriksaan hukum secara seksama yang dilakukan konsultan hukum
-          terhadap perusahaan atau objek transaksi sesuai tujuan.
+          Legal audit or legal due diligence (LDD) is a thorough legal
+          examination activity carried out by legal consultants on companies or
+          transaction objects according to the objectives.
         </p>
         <a
           href="/"
@@ -183,9 +183,9 @@
           Legal Consultant
         </h6>
         <p class="mb-6 text-sm text-gray-600 text-center">
-          Memberikan pendapat hukum profesional yang tepat untuk berbagai isu
-          hukum, berikut analisa dan solusi yang diperlukan dalam penyelesaian
-          permasalahan hukum.
+          Providing appropriate professional legal opinions for various legal
+          issues, along with the necessary analysis and solutions in solving
+          legal problems.
         </p>
         <a
           href="/"

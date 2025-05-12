@@ -2,6 +2,7 @@
   <!-- Start Section -->
   <section
     class="pt-10 overflow-hidden bg-gray-50 dark:bg-gray-800 md:pt-0 sm:pt-16 2xl:pt-16"
+    id="about"
   >
     <div class="px-4 mx-auto sm:px-6 lg:px-8 max-w-7xl">
       <div class="grid items-center grid-cols-1 md:grid-cols-2">

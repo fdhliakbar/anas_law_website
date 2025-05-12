@@ -1,4 +1,3 @@
-<!-- filepath: c:\laragon\www\anas_law_website\frontend\src\components\Header.vue -->
 <template>
   <header class="sticky top-0 z-50">
     <!-- Navbar -->
@@ -59,7 +58,7 @@
             <a
               href="#"
               class="hover:underline"
-              @click.prevent="scrollTo('reviews')"
+              @click.prevent="scrollTo('testimonials')"
               >Reviews</a
             >
           </li>
@@ -355,7 +354,7 @@
         <a
           href="#"
           class="block hover:underline"
-          @click.prevent="scrollTo('reviews')"
+          @click.prevent="scrollTo('testimonials')"
           >Reviews</a
         >
         <a
@@ -364,6 +363,10 @@
           @click.prevent="scrollTo('footer')"
           >Contact</a
         >
+        <!-- Language -->
+        <button>Indonesia</button>
+        <br />
+        <button>English (US)</button>
       </div>
     </nav>
   </header>
