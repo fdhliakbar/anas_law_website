@@ -2,7 +2,10 @@
 <script setup></script>
 
 <template>
-  <footer class="bg-[#122F4F] text-white" id="footer">
+  <footer
+    class="bg-gradient-to-br from-blue-900 via-blue-800 to-blue-700 text-white"
+    id="footer"
+  >
     <div class="mx-auto w-full max-w-screen-xl p-6 lg:py-8">
       <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
         <!-- Left Section -->
@@ -97,7 +100,7 @@
         </div>
       </div>
       <hr class="my-6 border-gray-700" />
-      <div class="text-center text-sm text-gray-400">
+      <div class="text-center text-sm text-white">
         ©2023 Powered by Anaslawoffice
       </div>
     </div>

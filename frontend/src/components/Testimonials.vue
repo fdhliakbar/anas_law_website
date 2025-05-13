@@ -1,16 +1,16 @@
 <!-- filepath: c:\laragon\www\anas_law_website\frontend\src\components\Testimonials.vue -->
 <template>
-  <div class="py-5 bg-gray-100" id="testimonials">
+  <div class="py-5 bg-gray-100">
     <div
       class="container flex flex-col items-center justify-center w-full p-6 mx-auto text-center xl:px-0"
     >
       <div class="text-sm font-bold tracking-wider text-indigo-600 uppercase">
-        Testimonials
+        Testimoni
       </div>
       <h2
         class="max-w-2xl mt-3 text-3xl font-bold leading-snug tracking-tight text-gray-800 lg:leading-tight lg:text-4xl"
       >
-        Here's what our customers said
+        Kata Klien Kami
       </h2>
       <p
         class="max-w-2xl py-4 text-lg leading-normal text-gray-500 lg:text-xl xl:text-xl"
@@ -39,7 +39,7 @@
               <div class="flex-shrink-0 overflow-hidden rounded-full w-14 h-14">
                 <img
                   alt="Avatar"
-                  src="https://images.unsplash.com/photo-1511485977113-f34c92461ad9?crop=faces&amp;cs=tinysrgb&amp;fit=crop&amp;fm=jpg&amp;ixid=MnwxfDB8MXxhbGx8fHx8fHx8fHwxNjIwMTQ5ODEx&amp;ixlib=rb-1.2.1&amp;q=80&amp;w=100&amp;h=100"
+                  src="../assets/images/icons/Frieren.jpeg"
                   loading="lazy"
                 />
               </div>
@@ -69,7 +69,7 @@
               <div class="flex-shrink-0 overflow-hidden rounded-full w-14 h-14">
                 <img
                   alt="Avatar"
-                  src="https://images.unsplash.com/photo-1463453091185-61582044d556?ixlib=rb-1.2.1&amp;ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&amp;auto=format&amp;crop=faces&amp;fit=crop&amp;w=100&amp;h=100&amp;q=80"
+                  src="../assets/images/icons/Frieren.jpeg"
                   loading="lazy"
                 />
               </div>
@@ -99,7 +99,7 @@
               <div class="flex-shrink-0 overflow-hidden rounded-full w-14 h-14">
                 <img
                   alt="Avatar"
-                  src="https://images.unsplash.com/photo-1624224971170-2f84fed5eb5e?ixlib=rb-1.2.1&amp;ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&amp;auto=format&amp;fit=crop&amp;w=100&amp;h=100&amp;crop=faces&amp;q=80"
+                  src="../assets/images/icons/Frieren.jpeg"
                   loading="lazy"
                 />
               </div>
@@ -117,18 +117,5 @@
   </div>
 </template>
 
-<script>
-import AOS from "aos";
-import "aos/dist/aos.css";
-
-export default {
-  mounted() {
-    AOS.init({
-      once: false,
-      duration: 1000,
-      easing: "ease-in-out-back",
-    });
-  },
-};
-</script>
+<script></script>
 <style scoped></style>
