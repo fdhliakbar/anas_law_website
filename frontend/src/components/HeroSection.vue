@@ -43,7 +43,9 @@
           <button
             class="px-8 py-2.5 bg-[#D8A85D] rounded-[10px] justify-center items-center gap-2.5 flex text-white text-sm font-semibold font-['Roboto']"
           >
-            <a href="">Consult Now</a>
+            <a href="https://wa.me/+6282179972653" target="_blank"
+              >Consult Now</a
+            >
           </button>
         </div>
       </div>
