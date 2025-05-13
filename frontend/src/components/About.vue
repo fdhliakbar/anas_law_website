@@ -1,26 +1,28 @@
 <template>
   <!-- Start Section -->
   <section
-    class="pt-10 overflow-hidden bg-gray-50 dark:bg-gray-800 md:pt-0 sm:pt-16 2xl:pt-16"
+    class="pt-10 overflow-hidden bg-[#F1F4F9] md:pt-0 sm:pt-16 2xl:pt-16"
     id="about"
   >
     <div class="px-4 mx-auto sm:px-6 lg:px-8 max-w-7xl">
       <div class="grid items-center grid-cols-1 md:grid-cols-2">
         <div data-aos="fade-up" data-aos-delay="200">
-          <h2
-            class="text-3xl font-bold leading-tight text-black dark:text-white sm:text-4xl lg:text-5xl"
-          >
-            Hey 👋 I am <br class="block sm:hidden" />Jenny Carter
+          <h2 class="text-3xl font-bold leading-tight sm:text-4xl lg:text-5xl">
+            Hey 👋 I am <br class="block sm:hidden" />
+            <span
+              class="bg-gradient-to-r from-rose-400 via-fuchsia-500 to-indigo-500 bg-[length:100%_4px] bg-no-repeat bg-bottom"
+              >Anas Law</span
+            >
           </h2>
           <p
-            class="max-w-lg mt-3 text-xl leading-relaxed text-gray-600 dark:text-gray-300 md:mt-8"
+            class="max-w-lg mt-3 text-xl leading-relaxed text-[#888D94] md:mt-8"
           >
             Amet minim mollit non deserunt ullamco est sit aliqua dolor do amet
             sint. Velit officia consequat duis enim velit mollit. Exercitation
             veniam consequat sunt nostrud amet.
           </p>
 
-          <p class="mt-4 text-xl text-gray-600 dark:text-gray-300 md:mt-8">
+          <p class="mt-4 text-xl text-[#05142D] md:mt-8">
             <span class="relative inline-block">
               <span
                 class="absolute inline-block w-full bottom-0.5 h-2 bg-yellow-300 dark:bg-gray-900"
