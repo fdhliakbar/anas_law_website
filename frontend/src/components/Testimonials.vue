@@ -1,6 +1,6 @@
 <!-- filepath: c:\laragon\www\anas_law_website\frontend\src\components\Testimonials.vue -->
 <template>
-  <div class="py-5 bg-gray-100" id="reviews">
+  <div class="py-5 bg-gray-100">
     <div
       class="container flex flex-col items-center justify-center w-full p-6 mx-auto text-center xl:px-0"
     >
@@ -117,18 +117,5 @@
   </div>
 </template>
 
-<script>
-import AOS from "aos";
-import "aos/dist/aos.css";
-
-export default {
-  mounted() {
-    AOS.init({
-      duration: 400,
-      easing: "ease-in-back",
-      once: false,
-    });
-  },
-};
-</script>
+<script></script>
 <style scoped></style>

@@ -1,4 +1,3 @@
-<!-- filepath: c:\laragon\www\anas_law_website\frontend\src\components\Header.vue -->
 <template>
   <header class="sticky top-0 z-50">
     <!-- Navbar -->
@@ -22,55 +21,13 @@
           />
         </a>
         <!-- Navigation Links -->
-        <ul class="hidden lg:flex space-x-6 text-white text-lg font-medium">
-          <li>
-            <a
-              href="#"
-              class="hover:underline"
-              @click.prevent="scrollTo('home')"
-              >Home</a
-            >
-          </li>
-          <li>
-            <a
-              href="#about"
-              class="hover:underline"
-              @click.prevent="scrollTo('about')"
-              >About</a
-            >
-          </li>
-          <li>
-            <a
-              href="#"
-              class="hover:underline"
-              @click.prevent="scrollTo('services')"
-              >Services</a
-            >
-          </li>
-          <li>
-            <a
-              href="#"
-              class="hover:underline"
-              @click.prevent="scrollTo('team')"
-              >Our Team</a
-            >
-          </li>
-          <li>
-            <a
-              href="#"
-              class="hover:underline"
-              @click.prevent="scrollTo('reviews')"
-              >Reviews</a
-            >
-          </li>
-          <li>
-            <a
-              href="#footer"
-              class="hover:underline"
-              @click.prevent="scrollTo('footer')"
-              >Contact</a
-            >
-          </li>
+        <ul class="hidden lg:flex space-x-6 text-white text-sm font-medium">
+          <li><a href="#" class="hover:underline">Home</a></li>
+          <li><a href="#" class="hover:underline">About</a></li>
+          <li><a href="#" class="hover:underline">Services</a></li>
+          <li><a href="#" class="hover:underline">Our Team</a></li>
+          <li><a href="#" class="hover:underline">Reviews</a></li>
+          <li><a href="#" class="hover:underline">Contact</a></li>
           <!-- Language Start -->
           <div
             class="flex items-center md:order-2 space-x-1 md:space-x-0 rtl:space-x-reverse"
@@ -328,42 +285,12 @@
         v-if="isMobileMenuOpen"
         class="lg:hidden bg-white text-gray-900 p-4 space-y-4"
       >
-        <a
-          href="#"
-          class="block hover:underline"
-          @click.prevent="scrollTo('home')"
-          >Home</a
-        >
-        <a
-          href="#"
-          class="block hover:underline"
-          @click.prevent="scrollTo('about')"
-          >About</a
-        >
-        <a
-          href="#"
-          class="block hover:underline"
-          @click.prevent="scrollTo('services')"
-          >Services</a
-        >
-        <a
-          href="#"
-          class="block hover:underline"
-          @click.prevent="scrollTo('team')"
-          >Our Team</a
-        >
-        <a
-          href="#"
-          class="block hover:underline"
-          @click.prevent="scrollTo('reviews')"
-          >Reviews</a
-        >
-        <a
-          href="#"
-          class="block hover:underline"
-          @click.prevent="scrollTo('footer')"
-          >Contact</a
-        >
+        <a href="#" class="block hover:underline">Home</a>
+        <a href="#" class="block hover:underline">About</a>
+        <a href="#" class="block hover:underline">Services</a>
+        <a href="#" class="block hover:underline">Our Team</a>
+        <a href="#" class="block hover:underline">Reviews</a>
+        <a href="#" class="block hover:underline">Contact</a>
       </div>
     </nav>
   </header>
