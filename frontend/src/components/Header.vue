@@ -34,11 +34,12 @@
         </ul>
         <!-- Login Button -->
         <div class="hidden lg:flex flex-none">
-          <button
+          <router-link
+            to="/login"
             class="border border-gray-300 px-6 py-2 rounded-lg hover:bg-gray-100 transition"
           >
             Login
-          </button>
+          </router-link>
         </div>
         <!-- Mobile Menu Button -->
         <button class="lg:hidden text-gray-800" @click="toggleMobileMenu">
