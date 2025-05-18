@@ -1,7 +1,7 @@
 import "./assets/main.css";
 import { createApp } from "vue";
 import App from "./App.vue";
-
+import "@splidejs/vue-splide/css";
 import AOS from "aos";
 import "aos/dist/aos.css";
 import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
@@ -14,10 +14,13 @@ import {
   faScaleBalanced,
 } from "@fortawesome/free-solid-svg-icons"; // Tambahkan faMagnifyingGlass
 
+import router from "./router";
+
 library.add(faHeart, faGlobe, faMagnifyingGlass, faBook, faScaleBalanced); // Tambahkan ke library
 
 AOS.init();
 
 const app = createApp(App);
+app.use(router);
 app.component("font-awesome-icon", FontAwesomeIcon);
 app.mount("#app");

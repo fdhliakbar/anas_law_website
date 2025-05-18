@@ -1,7 +1,8 @@
 <template>
-  <h1 class="text-3xl font-bold underline">Hello world</h1>
+  <div class="login-page">
+    <h1>Login Page</h1>
+    <!-- Tambahkan form login di sini -->
+  </div>
 </template>
 
-<script></script>
-
-<style scoped></style>
+<script setup></script>
