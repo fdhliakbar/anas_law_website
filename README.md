@@ -123,6 +123,11 @@ src/
 └── main.js               # Application entry
 ```
 
+## Library
+
+- https://splidejs.com/
+- https://vueuse.org/
+
 ## 🤝 Contributing
 
 We welcome contributions! Please follow these steps:
