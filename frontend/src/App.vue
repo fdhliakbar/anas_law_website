@@ -9,14 +9,10 @@ import Footer from "./components/Footer.vue";
 </script>
 
 <template>
-  <Header />
-  <HeroSection />
-  <Services />
-  <!-- <OurTeam /> -->
-  <About />
-  <Testimonials />
-  <Footer />
+  <router-view></router-view>
 </template>
+
+
 <script>
 export default {
   name: "App",
