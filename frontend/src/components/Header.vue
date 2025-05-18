@@ -40,7 +40,7 @@
           </li>
           <li>
             <a
-              href="#"
+              href="#login"
               class="hover:underline"
               @click.prevent="scrollTo('services')"
               >Services</a

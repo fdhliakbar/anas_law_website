@@ -6,7 +6,11 @@ import Services from "./components/Services.vue";
 import OurTeam from "./components/OurTeam.vue";
 import Testimonials from "./components/Testimonials.vue";
 import Footer from "./components/Footer.vue";
+import Login from "./components/login.vue"
 </script>
+
+
+
 
 <template>
   <Header />
