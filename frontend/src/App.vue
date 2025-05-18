@@ -16,7 +16,7 @@ import Login from "./components/login.vue"
   <Header />
   <HeroSection />
   <Services />
-  <OurTeam />
+  <!-- <OurTeam /> -->
   <About />
   <Testimonials />
   <Footer />

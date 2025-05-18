@@ -4,20 +4,21 @@
     <nav
       :class="[
         'fixed w-full z-50 transition-all duration-300 ease-in-out',
-        scrolled ? 'bg-gray-600 shadow-md py-2' : 'bg-transparent py-4',
+        scrolled
+          ? 'bg-white/30 backdrop-blur-md shadow-md py-2'
+          : 'bg-transparent py-4',
       ]"
     >
       <div
         class="max-w-screen-xl mx-auto flex items-center justify-between p-3"
       >
         <!-- Logo -->
-        <a href="#" class="flex items-center">
+        <a href="#" class="flex items-center flex-none">
           <img
             src="../assets/images/logo.png"
             alt="Logo"
             class="h-10"
-            width="60"
-            height="50"
+            width="200%"
           />
         </a>
         <!-- Navigation Links -->
@@ -40,7 +41,7 @@
           </li>
           <li>
             <a
-              href="#login"
+              href="#"
               class="hover:underline"
               @click.prevent="scrollTo('services')"
               >Services</a
@@ -304,7 +305,7 @@
         </ul>
 
         <!-- Mobile Menu Button -->
-        <button class="lg:hidden text-white" @click="toggleMobileMenu">
+        <button class="lg:hidden text-gray-800" @click="toggleMobileMenu">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             fill="none"
@@ -327,46 +328,12 @@
         v-if="isMobileMenuOpen"
         class="lg:hidden bg-white text-gray-900 p-4 space-y-4"
       >
-        <a
-          href="#"
-          class="block hover:underline"
-          @click.prevent="scrollTo('home')"
-          >Home</a
-        >
-        <a
-          href="#"
-          class="block hover:underline"
-          @click.prevent="scrollTo('about')"
-          >About</a
-        >
-        <a
-          href="#"
-          class="block hover:underline"
-          @click.prevent="scrollTo('services')"
-          >Services</a
-        >
-        <a
-          href="#"
-          class="block hover:underline"
-          @click.prevent="scrollTo('team')"
-          >Our Team</a
-        >
-        <a
-          href="#"
-          class="block hover:underline"
-          @click.prevent="scrollTo('testimonials')"
-          >Reviews</a
-        >
-        <a
-          href="#"
-          class="block hover:underline"
-          @click.prevent="scrollTo('footer')"
-          >Contact</a
-        >
-        <!-- Language -->
-        <button>Indonesia</button>
-        <br />
-        <button>English (US)</button>
+        <a href="#" class="block hover:underline">Home</a>
+        <a href="#" class="block hover:underline">About</a>
+        <a href="#" class="block hover:underline">Services</a>
+        <a href="#" class="block hover:underline">Our Team</a>
+        <a href="#" class="block hover:underline">Reviews</a>
+        <a href="#" class="block hover:underline">Contact</a>
       </div>
     </nav>
   </header>
