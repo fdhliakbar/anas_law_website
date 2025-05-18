@@ -12,20 +12,16 @@
       </p>
       <div class="flex flex-col md:flex-row gap-4">
         <button
-          class="bg-black text-white px-8 py-4 rounded-lg text-lg font-semibold hover:bg-gray-900 transition"
+          class="border border-black bg-black text-white px-8 py-4 rounded-lg text-lg font-semibold transition"
         >
           Schedule now
         </button>
         <button
-          class="border border-black text-black px-8 py-4 rounded-lg text-lg font-semibold bg-white hover:bg-gray-100 transition"
+          class="border border-black text-black px-8 py-4 rounded-lg text-lg font-semibold bg-white hover:bg-black hover:text-white transition"
         >
           Get in touch
         </button>
       </div>
-    </div>
-
-    <div>
-      <img src="../assets/images/justice.jpg" alt="" />
     </div>
   </section>
 </template>

@@ -3,7 +3,7 @@
 
 <template>
   <footer
-    class="bg-gradient-to-br from-blue-900 via-blue-800 to-blue-700 text-white"
+    class="bg-gradient-to-br from-black via-gray-900 to-gray-800 text-white"
     id="footer"
   >
     <div class="mx-auto w-full max-w-screen-xl p-6 lg:py-8">
