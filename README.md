@@ -142,6 +142,3 @@ We welcome contributions! Please follow these steps:
 ## 📜 License
 
 This project is licensed under the MIT License - see the LICENSE.md file for details.
-
-<img src="./frontend/src/assets/images/tekken-8-reina-4k-wallpaper-uhdpaper.com-463@5@b.jpg" width="100%" >
-<img src="./frontend/src/assets/images/preview.jpg" width="100%" >
