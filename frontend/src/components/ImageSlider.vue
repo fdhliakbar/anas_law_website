@@ -12,6 +12,9 @@
       </SplideSlide>
     </Splide>
   </div>
+
+  <!-- Divider -->
+  <hr class="w-3/4 border-t-1 border-gray-300 my-4 mx-auto" />
 </template>
 
 <script setup>

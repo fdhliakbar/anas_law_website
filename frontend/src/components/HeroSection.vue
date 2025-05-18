@@ -12,7 +12,7 @@
       </p>
       <div class="flex flex-col md:flex-row gap-4">
         <button
-          class="border border-black bg-black text-white px-8 py-4 rounded-lg text-lg font-semibold hover:bg-white hover:text-black transition"
+          class="border border-black bg-black text-white px-8 py-4 rounded-lg text-lg font-semibold transition"
         >
           Schedule now
         </button>
