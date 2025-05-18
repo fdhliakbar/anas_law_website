@@ -1,8 +1,9 @@
 <template>
-  <div class="px-35 py-8 space-y-8">
+  <div class="px-35 py-8 space-y-8" id="about">
     <!-- Section Atas -->
     <div
       class="bg-[#ECF0FF] rounded-2xl p-10 py-8 flex flex-col md:flex-row justify-between items-start gap-8"
+      data-aos="fade-right"
     >
       <!-- Kiri -->
       <div class="flex-1">
@@ -33,7 +34,10 @@
 
     <!-- Section Bawah -->
     <div class="grid md:grid-cols-3 gap-4">
-      <div class="bg-[#F5F8E0] p-6 rounded-xl flex items-start gap-4">
+      <div
+        class="bg-[#F5F8E0] p-6 rounded-xl flex items-start gap-4"
+        data-aos="fade-up"
+      >
         <div class="text-2xl font-bold">💲</div>
         <div>
           <p class="font-semibold text-lg">No fee guarantee</p>
@@ -43,7 +47,10 @@
         </div>
       </div>
 
-      <div class="bg-[#F5F8E0] p-6 rounded-xl flex items-start gap-4">
+      <div
+        class="bg-[#F5F8E0] p-6 rounded-xl flex items-start gap-4"
+        data-aos="fade-up"
+      >
         <div class="text-2xl font-bold">✨</div>
         <div>
           <p class="font-semibold text-lg">Top rated service</p>
@@ -53,7 +60,10 @@
         </div>
       </div>
 
-      <div class="bg-[#F5F8E0] p-6 rounded-xl flex items-start gap-4">
+      <div
+        class="bg-[#F5F8E0] p-6 rounded-xl flex items-start gap-4"
+        data-aos="fade-up"
+      >
         <div class="text-2xl font-bold">✅</div>
         <div>
           <p class="font-semibold text-lg">Battle tested lawyers</p>
