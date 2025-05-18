@@ -24,15 +24,11 @@
       </div>
       <!-- Right: Video -->
       <div class="flex-1 flex justify-center">
-        <video
-          src="../assets/images/videos/lawyer_video.mp4"
-          class="rounded-3xl w-full max-w-xl"
-          alt="Laywer Video
-          controls
-          autoplay
-          muted
-          loop"
-        ></video>
+        <img
+          src="../assets/images/founder.jpg"
+          alt="Legal Team"
+          class="rounded-3xl w-full max-w-xl object-cover"
+        />
       </div>
     </div>
   </section>

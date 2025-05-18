@@ -6,7 +6,6 @@
   <Schedule />
   <About />
   <Testimonials />
-  <button @click="goToLogin">Go to Login</button>
   <Footer />
 </template>
 
