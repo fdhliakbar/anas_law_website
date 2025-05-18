@@ -127,6 +127,7 @@ src/
 
 - https://splidejs.com/
 - https://vueuse.org/
+- https://developers.lottiefiles.com/docs/dotlottie-player/dotlottie-vue/
 
 ## 🤝 Contributing
 

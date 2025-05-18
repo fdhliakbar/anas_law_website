@@ -1,75 +1,81 @@
 <template>
-  <!-- Start Section -->
-  <section
-    class="pt-10 overflow-hidden bg-[#F1F4F9] md:pt-0 sm:pt-16 2xl:pt-16"
-    id="about"
-  >
-    <div class="px-4 mx-auto sm:px-6 lg:px-8 max-w-7xl">
-      <div class="grid items-center grid-cols-1 md:grid-cols-2">
-        <div data-aos="fade-up" data-aos-delay="200">
-          <h2 class="text-3xl font-bold leading-tight sm:text-4xl lg:text-5xl">
-            Hey 👋 I am <br class="block sm:hidden" />
-            <span
-              class="bg-gradient-to-r from-rose-400 via-fuchsia-500 to-indigo-500 bg-[length:100%_4px] bg-no-repeat bg-bottom"
-              >Anas Law</span
-            >
-          </h2>
-          <p
-            class="max-w-lg mt-3 text-xl leading-relaxed text-[#888D94] md:mt-8"
-          >
-            Amet minim mollit non deserunt ullamco est sit aliqua dolor do amet
-            sint. Velit officia consequat duis enim velit mollit. Exercitation
-            veniam consequat sunt nostrud amet.
-          </p>
+  <div class="px-35 py-8 space-y-8" id="about">
+    <!-- Section Atas -->
+    <div
+      class="bg-[#ECF0FF] rounded-2xl p-10 py-8 flex flex-col md:flex-row justify-between items-start gap-8"
+      data-aos="fade-right"
+    >
+      <!-- Kiri -->
+      <div class="flex-1">
+        <h2 class="font-semibold text-xl mb-4">About us</h2>
+        <p class="text-2xl leading-relaxed font-medium text-gray-800">
+          Learn about our dedication to helping personal injury victims. Our
+          experienced team is committed to seeking justice and holding the
+          responsible parties accountable.
+        </p>
+      </div>
 
-          <p class="mt-4 text-xl text-[#05142D] md:mt-8">
-            <span class="relative inline-block">
-              <span
-                class="absolute inline-block w-full bottom-0.5 h-2 bg-yellow-300 dark:bg-gray-900"
-              ></span>
-              <span class="relative"> Have a question? </span>
-            </span>
-            <br class="block sm:hidden" />Ask me on
-            <a
-              href="#"
-              title=""
-              class="transition-all duration-200 text-sky-500 dark:text-sky-400 hover:text-sky-600 dark:hover:text-sky-500 hover:underline"
-              >Twitter</a
-            >
-          </p>
+      <!-- Kanan -->
+      <div class="space-y-6">
+        <div>
+          <p class="text-xl font-semibold">$350,000k</p>
+          <p class="text-sm text-gray-600">Recovered for our clients</p>
         </div>
-
-        <div class="relative" data-aos="fade-up" data-aos-delay="200">
-          <img
-            class="absolute inset-x-0 bottom-0 -mb-48 -translate-x-1/2 left-1/2"
-            src="https://cdn.rareblocks.xyz/collection/celebration/images/team/1/blob-shape.svg"
-            alt=""
-          />
-
-          <img
-            class="relative w-full xl:max-w-lg xl:mx-auto 2xl:origin-bottom 2xl:scale-110"
-            src="https://cdn.rareblocks.xyz/collection/celebration/images/team/1/business-woman.png"
-            alt=""
-          />
+        <div>
+          <p class="text-xl font-semibold">230+ five stars</p>
+          <p class="text-sm text-gray-600">Reviews on Google</p>
+        </div>
+        <div>
+          <p class="text-xl font-semibold">100+ years</p>
+          <p class="text-sm text-gray-600">Of NYC legal experience</p>
         </div>
       </div>
     </div>
-  </section>
-  <!-- End Section -->
+
+    <!-- Section Bawah -->
+    <div class="grid md:grid-cols-3 gap-4">
+      <div
+        class="bg-[#F5F8E0] p-6 rounded-xl flex items-start gap-4"
+        data-aos="fade-up"
+      >
+        <div class="text-2xl font-bold">💲</div>
+        <div>
+          <p class="font-semibold text-lg">No fee guarantee</p>
+          <p class="text-sm text-gray-700">
+            We will win your injury case, or it’s 100% free
+          </p>
+        </div>
+      </div>
+
+      <div
+        class="bg-[#F5F8E0] p-6 rounded-xl flex items-start gap-4"
+        data-aos="fade-up"
+      >
+        <div class="text-2xl font-bold">✨</div>
+        <div>
+          <p class="font-semibold text-lg">Top rated service</p>
+          <p class="text-sm text-gray-700">
+            We have over 230 5-star reviews on Google review
+          </p>
+        </div>
+      </div>
+
+      <div
+        class="bg-[#F5F8E0] p-6 rounded-xl flex items-start gap-4"
+        data-aos="fade-up"
+      >
+        <div class="text-2xl font-bold">✅</div>
+        <div>
+          <p class="font-semibold text-lg">Battle tested lawyers</p>
+          <p class="text-sm text-gray-700">
+            We have prepared over 5,000 cases for trial.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
 </template>
 
-<script>
-import AOS from "aos";
-import "aos/dist/aos.css";
-
-export default {
-  mounted() {
-    AOS.init({
-      once: false,
-      duration: 1000,
-    });
-  },
-};
-</script>
+<script></script>
 
 <style scoped></style>
