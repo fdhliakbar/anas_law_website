@@ -1,7 +1,7 @@
 import "./assets/main.css";
 import { createApp } from "vue";
 import App from "./App.vue";
-
+import "@splidejs/vue-splide/css";
 import AOS from "aos";
 import "aos/dist/aos.css";
 import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
