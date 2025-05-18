@@ -2,9 +2,9 @@
   <Header />
   <HeroSection />
   <ImageSlider />
+  <About />
   <Services />
   <Schedule />
-  <About />
   <Testimonials />
   <Blog />
   <Footer />

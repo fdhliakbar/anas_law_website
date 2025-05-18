@@ -1,7 +1,7 @@
 <template>
   <section class="py-16 bg-white text-gray-800">
     <div class="text-center mb-12">
-      <p class="text-orange-600 font-semibold uppercase">Blog</p>
+      <p class="text-[#B49F2B] font-semibold uppercase">Blog</p>
       <h2 class="text-4xl font-bold mt-2 mb-4">
         Our Regular Updated Blog Posts
       </h2>

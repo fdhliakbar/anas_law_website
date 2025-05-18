@@ -26,11 +26,46 @@
           class="hidden lg:flex flex-1 justify-center space-x-10 text-base text-gray-700 font-medium"
         >
           <li><a href="#" class="hover:text-[#B49F2B]">Home</a></li>
-          <li><a href="#" class="hover:text-[#B49F2B]">About</a></li>
-          <li><a href="#" class="hover:text-[#B49F2B]">Services</a></li>
-          <li><a href="#" class="hover:text-[#B49F2B]">Our Team</a></li>
-          <li><a href="#" class="hover:text-[#B49F2B]">Reviews</a></li>
-          <li><a href="#" class="hover:text-[#B49F2B]">Contact</a></li>
+          <li>
+            <a
+              href="#"
+              class="hover:text-[#B49F2B]"
+              @click.prevent="scrollTo('about')"
+              >About</a
+            >
+          </li>
+          <li>
+            <a
+              href="#"
+              class="hover:text-[#B49F2B]"
+              @click.prevent="scrollTo('services')"
+              >Services</a
+            >
+          </li>
+          <li>
+            <a
+              href="#"
+              class="hover:text-[#B49F2B]"
+              @click.prevent="scrollTo('team')"
+              >Our Team</a
+            >
+          </li>
+          <li>
+            <a
+              href="#"
+              class="hover:text-[#B49F2B]"
+              @click.prevent="scrollTo('reviews')"
+              >Reviews</a
+            >
+          </li>
+          <li>
+            <a
+              href="#"
+              class="hover:text-[#B49F2B]"
+              @click.prevent="scrollTo('footer')"
+              >Contact</a
+            >
+          </li>
         </ul>
         <!-- Login Button -->
         <div class="hidden lg:flex flex-none">
