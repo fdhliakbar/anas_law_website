@@ -1,9 +1,11 @@
 import "./assets/main.css";
 import { createApp } from "vue";
 import App from "./App.vue";
+import router from "./router/router";
 
 import AOS from "aos";
 import "aos/dist/aos.css";
+
 import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
 import { library } from "@fortawesome/fontawesome-svg-core";
 import {
@@ -12,12 +14,18 @@ import {
   faMagnifyingGlass,
   faBook,
   faScaleBalanced,
-} from "@fortawesome/free-solid-svg-icons"; // Tambahkan faMagnifyingGlass
+} from "@fortawesome/free-solid-svg-icons";
 
-library.add(faHeart, faGlobe, faMagnifyingGlass, faBook, faScaleBalanced); // Tambahkan ke library
+// Tambahkan semua icon ke library
+library.add(faHeart, faGlobe, faMagnifyingGlass, faBook, faScaleBalanced);
 
-AOS.init();
-
+// Buat satu instance app saja
 const app = createApp(App);
+
+// Register plugin dan komponen global
+app.use(router);
 app.component("font-awesome-icon", FontAwesomeIcon);
+
+// Inisialisasi AOS setelah DOM siap
 app.mount("#app");
+AOS.init();
