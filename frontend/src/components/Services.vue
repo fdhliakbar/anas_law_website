@@ -1,212 +1,76 @@
 <template>
-  <div
-    class="px-4 py-16 mx-auto sm:max-w-xl md:max-w-full lg:max-w-screen-xl md:px-24 lg:px-8 lg:py-20"
-  >
-    <div class="max-w-xl mb-10 md:mx-auto sm:text-center lg:max-w-2xl md:mb-12">
-      <div>
-        <p
-          class="inline-block px-3 py-px mb-4 text-xs font-semibold tracking-wider text-teal-900 uppercase rounded-full bg-linear-to-r/oklab from-indigo-500 to-teal-400 text-white"
-        >
-          Brand new
-        </p>
-      </div>
-      <h2
-        class="max-w-lg mb-4 font-sans text-4xl font-extrabold leading-tight tracking-tight text-green-700 sm:text-5xl mx-auto relative"
-      >
-        <span class="relative inline-block">
-          <svg
-            viewBox="0 0 52 24"
-            fill="currentColor"
-            class="absolute top-0 left-0 z-0 hidden w-32 -mt-8 -ml-20 text-green-100 lg:w-32 lg:-ml-28 lg:-mt-10 sm:block"
-          >
-            <rect
-              fill="url(#fdca20a0-aeb4-4caf-ba1b-4351eee42363)"
-              width="52"
-              height="24"
-            ></rect>
-          </svg>
-          <!-- <span class="relative">Our</span> -->
-        </span>
-        Service
-      </h2>
-      <p class="text-gray-500 text-lg mt-2">
-        Professional, reliable, and solutive legal services for your needs.
+  <div class="max-w-7xl mx-auto px-4 py-12 space-y-12" id="services">
+    <!-- Gambar utama -->
+    <div class="flex justify-center">
+      <img
+        src="/src/assets/images/injury.jpg"
+        alt="Injury Image"
+        class="rounded-2xl w-[800px] shadow-md"
+      />
+    </div>
+
+    <!-- Judul dan Deskripsi -->
+    <div class="text-center">
+      <h2 class="text-4xl font-bold">Our Expertise in Personal Injury Cases</h2>
+      <p class="mt-2 text-gray-600 max-w-2xl mx-auto">
+        Discover how we specialize in personal injury cases, ranging from
+        accidents to medical malpractice. Let us guide you through this
+        challenging time.
       </p>
     </div>
 
-    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+    <!-- Grid Items -->
+    <div class="grid md:grid-cols-2 gap-8">
       <div
-        class="flex flex-col items-center bg-white rounded-2xl shadow-lg p-8 hover:shadow-2xl transition-all duration-300 border border-green-100 group"
+        v-for="(post, index) in expertiseItems"
+        :key="index"
+        class="flex items-start gap-4"
       >
-        <div
-          class="flex items-center justify-center w-20 h-20 mb-6 rounded-full bg-green-100 group-hover:bg-green-500 transition"
-        >
-          <font-awesome-icon
-            :icon="['fas', 'globe']"
-            class="text-green-500 group-hover:text-white text-4xl transition"
-          />
+        <img
+          :src="post.image"
+          alt=""
+          class="w-20 h-20 rounded-xl object-cover"
+        />
+        <div>
+          <h3 class="text-xl font-semibold">{{ post.title }}</h3>
+          <p class="text-gray-600 text-sm">{{ post.description }}</p>
         </div>
-        <h6
-          class="mb-2 font-semibold leading-6 text-center text-green-700 text-lg"
-        >
-          Legal Assistance
-        </h6>
-        <p class="mb-6 text-sm text-gray-600 text-center">
-          Providing legal assistance inside and outside the litigation and
-          non-litigation courts to resolve problems with the principle of
-          win-win solutions.
-        </p>
-        <a
-          href="/"
-          aria-label=""
-          class="inline-flex items-center font-semibold transition-colors duration-200 text-green-600 hover:text-green-800"
-          >Learn more
-          <svg
-            class="ml-2 w-4 h-4"
-            fill="none"
-            stroke="currentColor"
-            stroke-width="2"
-            viewBox="0 0 24 24"
-          >
-            <path
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              d="M17 8l4 4m0 0l-4 4m4-4H3"
-            />
-          </svg>
-        </a>
-      </div>
-
-      <div
-        class="flex flex-col items-center bg-white rounded-2xl shadow-lg p-8 hover:shadow-2xl transition-all duration-300 border border-green-100 group"
-      >
-        <div
-          class="flex items-center justify-center w-20 h-20 mb-6 rounded-full bg-green-100 group-hover:bg-green-500 transition"
-        >
-          <font-awesome-icon
-            :icon="['fas', 'magnifying-glass']"
-            class="text-green-500 group-hover:text-white text-4xl transition"
-          />
-        </div>
-        <h6
-          class="mb-2 font-semibold leading-6 text-center text-green-700 text-lg"
-        >
-          Legal Research
-        </h6>
-        <p class="mb-6 text-sm text-gray-600 text-center">
-          Conducting comprehensive and in-depth legal research to support
-          various legal interests, both for litigation and non-litigation
-          purposes, including legal research for academic purposes.
-        </p>
-        <a
-          href="/"
-          aria-label=""
-          class="inline-flex items-center font-semibold transition-colors duration-200 text-green-600 hover:text-green-800"
-          >Learn more
-          <svg
-            class="ml-2 w-4 h-4"
-            fill="none"
-            stroke="currentColor"
-            stroke-width="2"
-            viewBox="0 0 24 24"
-          >
-            <path
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              d="M17 8l4 4m0 0l-4 4m4-4H3"
-            />
-          </svg>
-        </a>
-      </div>
-
-      <div
-        class="flex flex-col items-center bg-white rounded-2xl shadow-lg p-8 hover:shadow-2xl transition-all duration-300 border border-green-100 group"
-      >
-        <div
-          class="flex items-center justify-center w-20 h-20 mb-6 rounded-full bg-green-100 group-hover:bg-green-500 transition"
-        >
-          <font-awesome-icon
-            :icon="['fas', 'book']"
-            class="text-green-500 group-hover:text-white text-4xl transition"
-          />
-        </div>
-        <h6
-          class="mb-2 font-semibold leading-6 text-center text-green-700 text-lg"
-        >
-          Legal Audit
-        </h6>
-        <p class="mb-6 text-sm text-gray-600 text-center">
-          Legal audit or legal due diligence (LDD) is a thorough legal
-          examination activity carried out by legal consultants on companies or
-          transaction objects according to the objectives.
-        </p>
-        <a
-          href="/"
-          aria-label=""
-          class="inline-flex items-center font-semibold transition-colors duration-200 text-green-600 hover:text-green-800"
-          >Learn more
-          <svg
-            class="ml-2 w-4 h-4"
-            fill="none"
-            stroke="currentColor"
-            stroke-width="2"
-            viewBox="0 0 24 24"
-          >
-            <path
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              d="M17 8l4 4m0 0l-4 4m4-4H3"
-            />
-          </svg>
-        </a>
-      </div>
-
-      <div
-        class="flex flex-col items-center bg-white rounded-2xl shadow-lg p-8 hover:shadow-2xl transition-all duration-300 border border-green-100 group"
-      >
-        <div
-          class="flex items-center justify-center w-20 h-20 mb-6 rounded-full bg-green-100 group-hover:bg-green-500 transition"
-        >
-          <font-awesome-icon
-            :icon="['fas', 'scale-balanced']"
-            class="text-green-500 group-hover:text-white text-4xl transition"
-          />
-        </div>
-        <h6
-          class="mb-2 font-semibold leading-6 text-center text-green-700 text-lg"
-        >
-          Legal Consultant
-        </h6>
-        <p class="mb-6 text-sm text-gray-600 text-center">
-          Providing appropriate professional legal opinions for various legal
-          issues, along with the necessary analysis and solutions in solving
-          legal problems.
-        </p>
-        <a
-          href="/"
-          aria-label=""
-          class="inline-flex items-center font-semibold transition-colors duration-200 text-green-600 hover:text-green-800"
-          >Learn more
-          <svg
-            class="ml-2 w-4 h-4"
-            fill="none"
-            stroke="currentColor"
-            stroke-width="2"
-            viewBox="0 0 24 24"
-          >
-            <path
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              d="M17 8l4 4m0 0l-4 4m4-4H3"
-            />
-          </svg>
-        </a>
       </div>
     </div>
   </div>
-  <!-- End Services -->
 </template>
 
-<script></script>
-
-<style scoped></style>
+<script setup>
+const expertiseItems = [
+  {
+    title: "Slip and Fall Injuries",
+    description: "Securing compensation for slip and falls accidents",
+    image: "/src/assets/images/feris.jpg",
+  },
+  {
+    title: "Medical Malpractice",
+    description: "Ensuring accountability for medical malpractice",
+    image: "/src/assets/images/feris.jpg",
+  },
+  {
+    title: "Car Accidents",
+    description: "Seeking fair compensation for car accident injuries",
+    image: "/src/assets/images/feris.jpg",
+  },
+  {
+    title: "Catastrophic Injuries",
+    description: "Helping secure compensation for life-altering injuries.",
+    image: "/src/assets/images/feris.jpg",
+  },
+  {
+    title: "Workplace Injuries",
+    description: "Assisting in workers' injury and compensation claims",
+    image: "/src/assets/images/feris.jpg",
+  },
+  {
+    title: "20+",
+    description: "Another personal injury cases we can help for you",
+    image: "/src/assets/images/feris.jpg",
+  },
+];
+</script>

@@ -20,6 +20,8 @@ import {
 } from "@fortawesome/free-solid-svg-icons"; // Tambahkan faMagnifyingGlass
 
 import router from "./router";
+// web component from lottie(gak jadi)
+// import "https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js";
 
 // Tambahkan semua icon ke library
 library.add(faHeart, faGlobe, faMagnifyingGlass, faBook, faScaleBalanced);
