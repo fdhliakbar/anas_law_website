@@ -1,8 +1,8 @@
 <template>
-  <div class="px-35 py-8 space-y-8" id="about">
+  <div class="px-4 sm:px-8 md:px-20 py-8 space-y-8" id="about">
     <!-- Section Atas -->
     <div
-      class="bg-[#ECF0FF] rounded-2xl p-10 py-8 flex flex-col md:flex-row justify-between items-start gap-8"
+      class="bg-[#ECF0FF] rounded-2xl p-6 sm:p-10 flex flex-col md:flex-row justify-between items-start gap-8"
       data-aos="fade-right"
     >
       <!-- Kiri -->
@@ -16,7 +16,7 @@
       </div>
 
       <!-- Kanan -->
-      <div class="space-y-6">
+      <div class="space-y-6 w-full md:w-auto">
         <div>
           <p class="text-xl font-semibold">$350,000k</p>
           <p class="text-sm text-gray-600">Recovered for our clients</p>
@@ -33,7 +33,7 @@
     </div>
 
     <!-- Section Bawah -->
-    <div class="grid md:grid-cols-3 gap-4">
+    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
       <div
         class="bg-[#F5F8E0] p-6 rounded-xl flex items-start gap-4"
         data-aos="fade-up"
