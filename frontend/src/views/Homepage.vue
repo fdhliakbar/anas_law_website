@@ -6,7 +6,9 @@
   <Services />
   <Schedule />
   <Testimonials />
+  <OurTeam />
   <Blog />
+
   <Footer />
 </template>
 
@@ -20,6 +22,7 @@ import About from "../components/About.vue";
 import Services from "../components/Services.vue";
 import Testimonials from "../components/Testimonials.vue";
 import Blog from "../components/Blog.vue";
+import OurTeam from "../components/OurTeam.vue";
 import Footer from "../components/Footer.vue";
 
 const router = useRouter();
