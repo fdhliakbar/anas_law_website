@@ -6,7 +6,7 @@ export default defineEventHandler(async (event) => {
     const res = await pool.query('SELECT * FROM lawyers');
     return {
       success: true,
-      users: res.rows,
+      lawyers: res.rows,
     };
   } catch (error) {
     console.error('Database error:', error);
