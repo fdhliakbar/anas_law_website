@@ -4,10 +4,10 @@ import bcrypt from 'bcryptjs'
 export default defineEventHandler(async (event) => {
   const body = await readBody(event)
 
-  const { id, name, email, password, role } = body
+  const {name, email, password, role } = body
 
   // Validasi sederhana
-  if (!id || !name || !email || !password || !role) {
+  if (!name || !email || !password || !role) {
     return {
       statusCode: 400,
       message: 'Semua field wajib diisi.'
@@ -21,8 +21,8 @@ export default defineEventHandler(async (event) => {
 
 
     const result = await pool.query(
-      'INSERT INTO users (id, name, email, password, role) VALUES ($1, $2, $3, $4, $5) RETURNING *',
-      [id, name, email, hashedPassword, role]
+      'INSERT INTO users (name, email, password, role) VALUES ($1, $2, $3, $4,) RETURNING *',
+      [name, email, hashedPassword, role]
     )
 
     return {
