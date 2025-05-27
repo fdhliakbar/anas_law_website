@@ -3,7 +3,7 @@
     class="min-h-screen bg-gradient-to-br from-gray-100 to-slate-200 flex items-center justify-center p-4"
   >
     <div
-      class="bg-white shadow-xl rounded-xl overflow-hidden w-full max-w-4xl lg:flex"
+      class="bg-white shadow-xl rounded-2xl overflow-hidden w-full max-w-4xl lg:flex"
     >
       <div class="w-full lg:w-1/2 p-6 sm:p-8 md:p-10">
         <div class="flex items-center mb-8">
@@ -23,7 +23,6 @@
               />
             </svg>
           </button>
-          <h1 class="text-2xl font-bold text-gray-800 ml-4">Anas law</h1>
         </div>
 
         <h2 class="text-3xl font-bold text-gray-900 mb-6">
@@ -149,40 +148,51 @@
             </p>
           </div>
 
-          <div class="mb-6">
+          <div class="mb-4">
             <label
-              for="mobile"
+              for="repeatPassword"
               class="block text-sm font-medium text-gray-700 mb-1"
-              >Mobile number</label
+              >Repeat Password</label
             >
-            <div class="flex rounded-md shadow-sm">
-              <span
-                class="inline-flex items-center px-3 rounded-sm border border-r-0 border-gray-300 bg-gray-50 text-gray-500 sm:text-sm mr-2"
+            <div class="relative rounded-md shadow-sm">
+              <div
+                class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none"
               >
-                <select
-                  v-model="form.countryCode"
-                  class="bg-transparent focus:outline-none"
+                <svg
+                  class="h-5 w-5 text-gray-400"
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 20 20"
+                  fill="currentColor"
                 >
-                  <option value="+966">+966</option>
-                  <option value="+1">+1</option>
-                  <option value="+44">+44</option>
-                  <option value="+62">+62</option>
-                </select>
-              </span>
+                  <path
+                    fill-rule="evenodd"
+                    d="M18 8a6 6 0 01-7.743 5.743L10 14l-1 1-1 1H6v2H2v-4l4.257-4.257A6 6 0 1118 8zm-6-4a1 1 0 100 2 2 2 0 012 2 1 1 0 102 0 4 4 0 00-4-4z"
+                    clip-rule="evenodd"
+                  />
+                </svg>
+              </div>
               <input
-                type="tel"
-                id="mobile"
-                v-model="form.mobileNumber"
-                class="flex-1 min-w-0 block w-full px-3 py-3 rounded-sm rounded-r-md focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm border-gray-300"
-                placeholder="50XXXXXXX"
+                :type="showPassword ? 'text' : 'password'"
+                id="repeatPassword"
+                v-model="form.repeatPassword"
+                class="focus:ring-indigo-500 focus:border-indigo-500 block w-full pl-10 sm:text-sm border-gray-300 rounded-md py-3"
+                placeholder="Repeat your password"
                 required
               />
             </div>
+            <p
+              v-if="
+                form.repeatPassword && form.repeatPassword !== form.password
+              "
+              class="mt-1 text-xs text-red-600"
+            >
+              Passwords do not match.
+            </p>
           </div>
 
           <button
             type="submit"
-            class="w-full flex justify-center items-center py-3 px-4 border border-transparent rounded-full shadow-sm text-base font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 transition duration-150 ease-in-out group"
+            class="w-full flex justify-center items-center py-3 px-4 border border-transparent rounded-full shadow-sm text-base font-medium text-white bg-indigo-400 hover:bg-indigo-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 transition duration-150 ease-in-out group"
           >
             Sign Up
             <svg
@@ -206,7 +216,7 @@
             <a
               href="#"
               @click.prevent="goToLogin"
-              class="font-medium text-indigo-600 hover:text-indigo-500"
+              class="font-medium text-bold text-indigo-600 hover:text-indigo-500"
             >
               Log in
             </a>
@@ -216,31 +226,30 @@
         <div class="mt-8 text-center">
           <p class="text-xs text-gray-500">
             By continuing, you agree to
-            <a href="#" class="underline hover:text-gray-700"
+            <a
+              href="#"
+              class="text-indigo-600 hover:text-indigo-700 hover:underline"
               >Terms & Conditions</a
             >
             &
-            <a href="#" class="underline hover:text-gray-700">Privacy Policy</a
+            <a
+              href="#"
+              class="text-indigo-600 hover:text-indigo-700 hover:underline"
+              >Privacy Policy</a
             >.
           </p>
         </div>
       </div>
 
       <div
-        class="hidden lg:flex lg:w-1/2 bg-gradient-to-br from-indigo-600 to-purple-700 p-12 items-center justify-center relative"
+        class="hidden lg:flex lg:w-1/2 p-12 items-center justify-center relative"
       >
         <div class="text-center">
           <img
-            src="https://via.placeholder.com/300x300.png?text=Local+Business+Hero"
+            src="../assets/images/profile.jpg"
             alt="Boosting Local Businesses"
-            class="rounded-full w-48 h-48 mx-auto mb-8 shadow-lg object-cover"
+            class="rounded-xl w-88 h-120 mx-auto mb-8 shadow-lg object-cover"
           />
-          <h2 class="text-3xl font-bold text-white mb-4">
-            Boosting Local Businesses with Love
-          </h2>
-          <p class="text-indigo-100">
-            Join our community and grow your business like never before.
-          </p>
         </div>
         <button
           @click="changeLanguage"
@@ -274,41 +283,50 @@ export default {
       form: {
         email: "",
         password: "",
-        countryCode: "+966", // Default country code
-        mobileNumber: "",
+        repeatPassword: "",
       },
       showPassword: false,
     };
   },
   methods: {
-    handleRegister() {
+    async handleRegister() {
       if (this.form.password.length < 8) {
         alert("Password must be at least 8 characters long.");
         return;
       }
-      // Logika untuk proses registrasi
-      console.log("Form submitted:", this.form);
-      alert(
-        `Registrasi berhasil untuk ${this.form.email}! (Ini hanya simulasi)`
-      );
-      // Anda bisa menambahkan navigasi ke halaman lain atau memanggil API di sini
+      if (this.form.password !== this.form.repeatPassword) {
+        alert("Passwords do not match.");
+        return;
+      }
+      // Kirim ke backend
+      try {
+        const response = await fetch("http://localhost:3000/api/register", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            email: this.form.email,
+            password: this.form.password,
+            mobileNumber: this.form.mobileNumber,
+          }),
+        });
+        if (!response.ok) throw new Error("Registration failed");
+        alert("Registrasi berhasil!");
+        this.$router.push("/login");
+      } catch (err) {
+        alert("Registrasi gagal: " + err.message);
+      }
     },
     togglePasswordVisibility() {
       this.showPassword = !this.showPassword;
     },
     goBack() {
-      // Logika untuk kembali ke halaman sebelumnya
-      // Contoh: this.$router.go(-1); jika menggunakan Vue Router
-      alert("Tombol kembali diklik!");
+      this.$router.go(-1);
     },
     goToLogin() {
-      // Logika untuk navigasi ke halaman login
-      // Contoh: this.$router.push('/login'); jika menggunakan Vue Router
-      alert("Navigasi ke halaman Login!");
+      this.$router.push("/login");
     },
     changeLanguage() {
       alert("Tombol ganti bahasa diklik!");
-      // Implementasi logika ganti bahasa
     },
   },
 };
