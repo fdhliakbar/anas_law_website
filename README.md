@@ -37,15 +37,17 @@ It provides a number of features that make it easy to build fast, SEO-friendly, 
 
 ---
 
-## 🏢 What's Anas Law Firm
+## What's Anas Law Firm
 
 Anas Law Firm is a professional legal services provider dedicated to delivering high-quality legal solutions for individuals and businesses. Our team of experienced lawyers specializes in various areas of law, including corporate law, civil litigation, family law, and more. We are committed to upholding the highest standards of integrity, confidentiality, and client satisfaction.
+
+<img src="/frontend/src/assets/images/tactics-for-law-firm.webp">
 
 Whether you need legal advice, representation, or documentation, Anas Law Firm is here to help you navigate complex legal matters with confidence and clarity.
 
 ---
 
-## 🚀 Getting Started
+## Getting Started
 
 To get started with Nuxt, you can create a new project using the following command:
 
@@ -70,19 +72,19 @@ Your Nuxt application should now be running on `http://localhost:3000`.
 
 ---
 
-## 📖 Documentation
+## Documentation
 
 For detailed documentation on how to use Nuxt, please refer to the [Nuxt Documentation](https://nuxt.com/docs).
 
 ---
 
-## ❤️ Contribute
+## Contribute
 
 We welcome contributions to Nuxt! If you have suggestions or improvements, please submit a pull request on our [GitHub repository](https://github.com/nuxt/nuxt).
 
 ---
 
-## 🔗 Follow Us
+## Follow Us
 
 <div style="display: flex; align-items: center; gap: 10px;">
   <a href="https://github.com/fdhliakbar">
@@ -95,6 +97,8 @@ We welcome contributions to Nuxt! If you have suggestions or improvements, pleas
 
 ---
 
-## ⚖️ License
+## License
 
-Nuxt is open-source software licensed under the [MIT License](https://github.com/nuxt/nuxt/blob/main/LICENSE).
+Nuxt is open-source software licensed under the [MIT License](https://github.com/nuxt/nuxt/blob/main/LICENSE)..
+
+<img src="/frontend/src/assets/images/yui_banner.jpg">
