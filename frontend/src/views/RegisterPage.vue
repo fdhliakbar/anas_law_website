@@ -23,7 +23,7 @@
               />
             </svg>
           </button>
-          <h1 class="text-2xl font-bold text-gray-800 ml-4">Mahjoz</h1>
+          <h1 class="text-2xl font-bold text-gray-800 ml-4">Anas law</h1>
         </div>
 
         <h2 class="text-3xl font-bold text-gray-900 mb-6">
@@ -157,7 +157,7 @@
             >
             <div class="flex rounded-md shadow-sm">
               <span
-                class="inline-flex items-center px-3 rounded-l-md border border-r-0 border-gray-300 bg-gray-50 text-gray-500 sm:text-sm"
+                class="inline-flex items-center px-3 rounded-sm border border-r-0 border-gray-300 bg-gray-50 text-gray-500 sm:text-sm mr-2"
               >
                 <select
                   v-model="form.countryCode"
@@ -173,7 +173,7 @@
                 type="tel"
                 id="mobile"
                 v-model="form.mobileNumber"
-                class="flex-1 min-w-0 block w-full px-3 py-3 rounded-none rounded-r-md focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm border-gray-300"
+                class="flex-1 min-w-0 block w-full px-3 py-3 rounded-sm rounded-r-md focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm border-gray-300"
                 placeholder="50XXXXXXX"
                 required
               />
