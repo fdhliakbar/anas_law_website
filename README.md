@@ -1,150 +1,104 @@
-# ANAS Law Firm - Official Website
+<img src="/banner.svg">
 
-<!-- ![Website Hero Banner](https://via.placeholder.com/1200x600/0a2025/ffffff?text=ANAS+Law+Firm)   -->
+# Nuxt
 
-_Professional digital presence for Law Office ANAS & Partners_
+<p>
+  <a href="https://www.npmjs.com/package/nuxt"><img src="https://img.shields.io/npm/v/nuxt.svg?style=flat&colorA=18181B&colorB=28CF8D" alt="Version"></a>
+  <a href="https://www.npmjs.com/package/nuxt"><img src="https://img.shields.io/npm/dm/nuxt.svg?style=flat&colorA=18181B&colorB=28CF8D" alt="Downloads"></a>
+  <a href="https://github.com/nuxt/nuxt/tree/main/LICENSE"><img src="https://img.shields.io/github/license/nuxt/nuxt.svg?style=flat&colorA=18181B&colorB=28CF8D" alt="License"></a>
+  <a href="https://nuxt.com"><img src="https://img.shields.io/badge/Nuxt%20Docs-18181B?logo=nuxt" alt="Website"></a>
+  <a href="https://chat.nuxt.dev"><img src="https://img.shields.io/badge/Nuxt%20Discord-18181B?logo=discord" alt="Discord"></a>
+  <a href="https://securityscorecards.dev/"><img src="https://api.securityscorecards.dev/projects/github.com/nuxt/nuxt/badge" alt="Nuxt openssf scorecard score"></a>
+</p>
 
-## 📌 Table of Contents
+Nuxt is a free and open-source framework with an intuitive and extendable way to create type-safe, performant and production-grade full-stack web applications and websites with Vue.js.
 
-1. [Project Overview](#-project-overview)
-2. [Key Features](#-key-features)
-3. [Technology Stack](#-technology-stack)
-4. [Installation Guide](#-installation-guide)
-5. [Development Scripts](#-development-scripts)
-6. [Project Structure](#-project-structure)
-7. [Deployment](#-deployment)
-8. [Contributing](#-contributing)
-9. [License](#-license)
+It provides a number of features that make it easy to build fast, SEO-friendly, and scalable web applications, including:
 
----
+- Server-side rendering, Static Site Generation, Hybrid Rendering and Edge-Side Rendering
+- Automatic routing with code-splitting and pre-fetching
+- Data fetching and state management
+- SEO Optimization and Meta tags definition
+- Auto imports of components, composables and utils
+- TypeScript with zero configuration
+- Go fullstack with our server/ directory
+- Extensible with [200+ modules](https://nuxt.com/modules)
+- Deployment to a variety of [hosting platforms](https://nuxt.com/deploy)
+- ...[and much more](https://nuxt.com) 🚀
 
-## 🌟 Project Overview
+### Table of Contents
 
-The official website for **Law Office ANAS & Partners**, designed to:
-
-- Showcase legal services and expertise
-- Build client trust through professional presentation
-- Provide seamless contact and inquiry capabilities
-- Demonstrate firm achievements and case studies
-
-**Live Demo:** [Belum jadi bolo]()
-
----
-
-## ✨ Key Features
-
-### 💼 Professional Presentation
-
-- Attorney profiles with credentials
-- Practice area descriptions
-- Case study portfolio
-- Client testimonials
-
-### 🌐 User Experience
-
-- Fully responsive design
-- ADA-compliant accessibility
-- Dark/light mode toggle
-- Multilingual support (optional)
-
-### 📞 Client Tools
-
-- Secure contact forms
-- Consultation scheduler
-- Document upload portal
-- Live chat integration
+- 🏢 [What's Anas Law Firm](#whats-anas-law-firm)
+- 🚀 [Getting Started](#getting-started)
+- 📖 [Documentation](#documentation)
+- ❤️ [Contribute](#contribute)
+- 🔗 [Follow Us](#follow-us)
+- ⚖️ [License](#license)
 
 ---
 
-## 🛠️ Technology Stack
+## What's Anas Law Firm
 
-### Frontend
+Anas Law Firm is a professional legal services provider dedicated to delivering high-quality legal solutions for individuals and businesses. Our team of experienced lawyers specializes in various areas of law, including corporate law, civil litigation, family law, and more. We are committed to upholding the highest standards of integrity, confidentiality, and client satisfaction.
 
-| Technology   | Purpose                  |
-| ------------ | ------------------------ |
-| Vue 3        | Component framework      |
-| Tailwind CSS | Utility-first styling    |
-| HeadlessUI   | Accessible UI components |
-| Vue Router   | Navigation management    |
-| Pinia        | State management         |
+<img src="/frontend/src/assets/images/tactics-for-law-firm.webp">
 
-### Build Tools
-
-| Tool     | Usage                     |
-| -------- | ------------------------- |
-| Vite     | Next-gen frontend tooling |
-| ESLint   | JavaScript linting        |
-| Prettier | Code formatting           |
-| Husky    | Git hooks                 |
+Whether you need legal advice, representation, or documentation, Anas Law Firm is here to help you navigate complex legal matters with confidence and clarity.
 
 ---
 
-## 📥 Installation Guide
+## Getting Started
 
-### Prerequisites
-
-- Node.js v18+
-- npm v9+ or pnpm
-
-### Setup Instructions
+To get started with Nuxt, you can create a new project using the following command:
 
 ```bash
-# Clone the repository
-git clone https://github.com/anas-law/website.git
-cd website
+npx nuxi init <project-name>
+```
 
-# Install dependencies
+Then, navigate to your project directory and install the dependencies:
+
+```bash
+cd <project-name>
 npm install
-
-# Configure environment
-cp .env.example .env
 ```
 
-## Project Structure
+Finally, start the development server:
 
-```sql
-src/
-├── assets/               # Static assets
-│   ├── fonts/            # Custom fonts
-│   ├── images/           # Image resources
-│   └── styles/           # Global styles
-├── components/           # Reusable components
-│   ├── common/           # Generic components
-│   └── sections/         # Page sections
-├── composables/          # Composition API
-├── layouts/              # Page layouts
-├── middleware/           # Route middleware
-├── pages/                # Route pages
-├── plugins/              # Vue plugins
-├── public/               # Public assets
-├── stores/               # Pinia stores
-├── utils/                # Helper functions
-├── App.vue               # Root component
-└── main.js               # Application entry
+```bash
+npm run dev
 ```
 
-## Library
+Your Nuxt application should now be running on `http://localhost:3000`.
 
-- https://splidejs.com/
-- https://vueuse.org/
-- https://developers.lottiefiles.com/docs/dotlottie-player/dotlottie-vue/
+---
 
-## 🤝 Contributing
+## Documentation
 
-We welcome contributions! Please follow these steps:
+For detailed documentation on how to use Nuxt, please refer to the [Nuxt Documentation](https://nuxt.com/docs).
 
-- Fork the repository
-- Create a feature branch (git checkout -b feature/your-feature)
-- Commit your changes (git commit -m 'Add some feature')
-- Push to the branch (git push origin feature/your-feature)
-- Open a Pull Request
+---
 
-#### Before submitting:
+## Contribute
 
-✅ Run linter (npm run lint)
-✅ Test all functionality
-✅ Update documentation if needed
+We welcome contributions to Nuxt! If you have suggestions or improvements, please submit a pull request on our [GitHub repository](https://github.com/nuxt/nuxt).
 
-## 📜 License
+---
 
-This project is licensed under the MIT License - see the LICENSE.md file for details.
+## Follow Us
+
+<div style="display: flex; align-items: center; gap: 10px;">
+  <a href="https://github.com/fdhliakbar">
+    <img src="/frontend/src/assets/images/icons/github.png" width="42" height="42" alt="GitHub">
+  </a>
+  <a href="https://github.com/fdhliakbar">
+    <img src="/frontend/src/assets/images/icons/instagram.png" width="42" height="42" alt="Instagram">
+  </a>
+</div>
+
+---
+
+## License
+
+Nuxt is open-source software licensed under the [MIT License](https://github.com/nuxt/nuxt/blob/main/LICENSE)..
+
+<img src="/frontend/src/assets/images/yui_banner.jpg">

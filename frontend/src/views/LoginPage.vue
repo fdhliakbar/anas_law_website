@@ -23,7 +23,10 @@
             />
           </div>
           <div class="text-left text-sm mb-6">
-            Belum punya akun? <a href="#" class="font-semibold">Daftar dulu</a>
+            Belum punya akun?
+            <router-link to="/register" class="font-semibold"
+              >Daftar dulu</router-link
+            >
           </div>
           <button
             type="submit"

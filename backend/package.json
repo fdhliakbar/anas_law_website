@@ -15,5 +15,8 @@
     "pg": "^8.16.0",
     "vue": "^3.5.13",
     "vue-router": "^4.5.1"
+  },
+  "devDependencies": {
+    "@types/pg": "^8.15.2"
   }
 }
