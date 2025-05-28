@@ -1,3 +1,5 @@
+import dotenv from "dotenv";
+dotenv.config();
 import { Client } from "pg";
 
 export default defineEventHandler(async (event) => {
@@ -5,11 +7,11 @@ export default defineEventHandler(async (event) => {
 
   // Ini untuk connect ke PostgreSQL
   const client = new Client({
-    user: "postgres",
-    host: "localhost",
-    database: "postgres",
-    password: "admin123",
-    port: 5432,
+    user: process.env.PGUSER,
+    host: process.env.PGHOST,
+    database: process.env.PGDATABASE,
+    password: process.env.PGPASSWORD,
+    port: Number(process.env.PGPORT),
   });
 
   await client.connect();
