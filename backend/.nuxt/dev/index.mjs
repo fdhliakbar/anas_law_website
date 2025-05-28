@@ -1429,11 +1429,11 @@ async function getIslandContext(event) {
   return ctx;
 }
 
-const _lazy_OGCl4_ = () => Promise.resolve().then(function () { return _id_$2; });
+const _lazy_OGCl4_ = () => Promise.resolve().then(function () { return _id_$3; });
 const _lazy_o5oSas = () => Promise.resolve().then(function () { return index_get$5; });
 const _lazy_91DhPk = () => Promise.resolve().then(function () { return index_post$5; });
 const _lazy_Ce7XTX = () => Promise.resolve().then(function () { return index_update$2; });
-const _lazy_L0MgBS = () => Promise.resolve().then(function () { return index_delete; });
+const _lazy_Baul_j = () => Promise.resolve().then(function () { return _id_$2; });
 const _lazy_RpoRPQ = () => Promise.resolve().then(function () { return index_get$3; });
 const _lazy_0mbHrw = () => Promise.resolve().then(function () { return index_post$3; });
 const _lazy_SvqRon = () => Promise.resolve().then(function () { return index_update$1; });
@@ -1448,7 +1448,7 @@ const handlers = [
   { route: '/api/artikel', handler: _lazy_o5oSas, lazy: true, middleware: false, method: "get" },
   { route: '/api/artikel', handler: _lazy_91DhPk, lazy: true, middleware: false, method: "post" },
   { route: '/api/artikel/index.update', handler: _lazy_Ce7XTX, lazy: true, middleware: false, method: undefined },
-  { route: '/api/lawyers', handler: _lazy_L0MgBS, lazy: true, middleware: false, method: "delete" },
+  { route: '/api/lawyers/:id', handler: _lazy_Baul_j, lazy: true, middleware: false, method: undefined },
   { route: '/api/lawyers', handler: _lazy_RpoRPQ, lazy: true, middleware: false, method: "get" },
   { route: '/api/lawyers', handler: _lazy_0mbHrw, lazy: true, middleware: false, method: "post" },
   { route: '/api/lawyers/index.update', handler: _lazy_SvqRon, lazy: true, middleware: false, method: undefined },
@@ -1786,7 +1786,7 @@ const styles$1 = /*#__PURE__*/Object.freeze({
   default: styles
 });
 
-const _id_$2 = /*#__PURE__*/Object.freeze({
+const _id_$3 = /*#__PURE__*/Object.freeze({
   __proto__: null
 });
 
@@ -1859,7 +1859,7 @@ const index_update$2 = /*#__PURE__*/Object.freeze({
   __proto__: null
 });
 
-const index_delete = /*#__PURE__*/Object.freeze({
+const _id_$2 = /*#__PURE__*/Object.freeze({
   __proto__: null
 });
 

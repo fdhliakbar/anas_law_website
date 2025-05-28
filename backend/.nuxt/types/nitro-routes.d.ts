@@ -7,14 +7,16 @@ declare module "nitropack/types" {
       'default': Simplify<Serialize<Awaited<ReturnType<typeof import('../../server/api/artikel/[id]').default>>>>
     }
     '/api/artikel': {
-      'get': Simplify<Serialize<Awaited<ReturnType<typeof import('../.../../server/api/artikel/index.postfault>>>>
+      'get': Simplify<Serialize<Awaited<ReturnType<typeof import('../../server/api/artikel/index.get').default>>>>
       'post': Simplify<Serialize<Awaited<ReturnType<typeof import('../../server/api/artikel/index.post').default>>>>
     }
     '/api/artikel/index.update': {
       'default': Simplify<Serialize<Awaited<ReturnType<typeof import('../../server/api/artikel/index.update').default>>>>
     }
+    '/api/lawyers/:id': {
+      'default': Simplify<Serialize<Awaited<ReturnType<typeof import('../../server/api/lawyers/[id]').default>>>>
+    }
     '/api/lawyers': {
-      'delete': Simplify<Serialize<Awaited<ReturnType<typeof import('../../server/api/lawyers/index.delete').default>>>>
       'get': Simplify<Serialize<Awaited<ReturnType<typeof import('../../server/api/lawyers/index.get').default>>>>
       'post': Simplify<Serialize<Awaited<ReturnType<typeof import('../../server/api/lawyers/index.post').default>>>>
     }
