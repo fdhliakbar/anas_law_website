@@ -47,16 +47,16 @@ export default {
     return {
       team: [
         {
-          name: "Helen Ederson",
-          role: "Family Lawyer",
-          image: new URL("@/assets/images/cofounder.jpg", import.meta.url).href,
+          name: "Ahmad Nazarudin",
+          role: "Devil Lawyer",
+          image: new URL("@/assets/images/founder.jpg", import.meta.url).href,
           social: {
             twitter: "#",
             linkedin: "#",
           },
         },
         {
-          name: "Jonson Leo",
+          name: "Riko Simajuntak",
           role: "Criminal Lawyer",
           image: new URL("@/assets/images/cofounder.jpg", import.meta.url).href,
           social: {
@@ -65,9 +65,72 @@ export default {
           },
         },
         {
+          name: "Bryan Domani",
+          role: "Civil Lawyer",
+          image: new URL("@/assets/images/partner5.jpg", import.meta.url).href,
+          social: {
+            twitter: "#",
+            linkedin: "#",
+          },
+        },
+        {
+          name: "Riski Pratama",
+          role: "Civil Lawyer",
+          image: new URL("@/assets/images/Partner1.jpg", import.meta.url).href,
+          social: {
+            twitter: "#",
+            linkedin: "#",
+          },
+        },
+        {
           name: "Armor Byron",
           role: "Civil Lawyer",
-          image: new URL("@/assets/images/cofounder.jpg", import.meta.url).href,
+          image: new URL("@/assets/images/2.jpg", import.meta.url).href,
+          social: {
+            twitter: "#",
+            linkedin: "#",
+          },
+        },
+        {
+          name: "Armor Byron",
+          role: "Civil Lawyer",
+          image: new URL("@/assets/images/3.jpg", import.meta.url).href,
+          social: {
+            twitter: "#",
+            linkedin: "#",
+          },
+        },
+        {
+          name: "Armor Byron",
+          role: "Civil Lawyer",
+          image: new URL("@/assets/images/4.jpg", import.meta.url).href,
+          social: {
+            twitter: "#",
+            linkedin: "#",
+          },
+        },
+        {
+          name: "Armor Byron",
+          role: "Civil Lawyer",
+          image: new URL("@/assets/images/6.jpg", import.meta.url).href,
+          social: {
+            twitter: "#",
+            linkedin: "#",
+          },
+        },
+        {
+          name: "Armor Byron",
+          role: "Civil Lawyer",
+          image: new URL("@/assets/images/7.jpg", import.meta.url).href,
+          social: {
+            twitter: "#",
+            linkedin: "#",
+          },
+        },
+        {
+          name: "Armor Byron",
+          role: "Civil Lawyer",
+          image: new URL("@/assets/images/8.jpg", import.meta.url).href,
           social: {
             twitter: "#",
             linkedin: "#",
