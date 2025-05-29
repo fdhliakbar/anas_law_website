@@ -67,13 +67,19 @@
             >
           </li>
         </ul>
-        <!-- Login Button -->
+        <!-- Login & Chat Button -->
         <div class="hidden lg:flex flex-none">
           <router-link
             to="/login"
             class="border border-gray-300 px-6 py-2 rounded-lg hover:bg-gray-100 transition"
           >
             Login
+          </router-link>
+          <router-link
+            to="/chat"
+            class="ml-3 border border-blue-400 px-6 py-2 rounded-lg hover:bg-blue-100 transition text-blue-700"
+          >
+            Chat
           </router-link>
         </div>
         <!-- Mobile Menu Button -->
@@ -106,6 +112,18 @@
         <a href="#" class="block hover:underline">Our Team</a>
         <a href="#" class="block hover:underline">Reviews</a>
         <a href="#" class="block hover:underline">Contact</a>
+        <router-link
+          to="/login"
+          class="block border border-gray-300 px-6 py-2 rounded-lg hover:bg-gray-100 transition mt-2"
+        >
+          Login
+        </router-link>
+        <router-link
+          to="/chat"
+          class="block border border-blue-400 px-6 py-2 rounded-lg hover:bg-blue-100 transition text-blue-700 mt-2"
+        >
+          Chat
+        </router-link>
       </div>
     </nav>
   </header>
