@@ -30,47 +30,47 @@
 </template>
 
 <script setup>
-import { ref, onMounted, nextTick } from 'vue'
-import { io } from 'socket.io-client'
+import { ref, onMounted, nextTick } from "vue";
+import { io } from "socket.io-client";
 
-const socket = io('http://localhost:3000')
+const socket = io("http://localhost:3000");
 
-const messages = ref([])
-const messageText = ref('')
-const userCount = ref(0)
-const messageContainer = ref(null)
+const messages = ref([]);
+const messageText = ref("");
+const userCount = ref(0);
+const messageContainer = ref(null);
 
 const scrollToBottom = () => {
   nextTick(() => {
     if (messageContainer.value) {
-      messageContainer.value.scrollTop = messageContainer.value.scrollHeight
+      messageContainer.value.scrollTop = messageContainer.value.scrollHeight;
     }
-  })
-}
+  });
+};
 
 onMounted(() => {
-  socket.on('connect', () => {
-    console.log('Connected to server')
-  })
+  socket.on("connect", () => {
+    console.log("Connected to server");
+  });
 
-  socket.on('userCount', (count) => {
-    userCount.value = count
-  })
+  socket.on("userCount", (count) => {
+    userCount.value = count;
+  });
 
-  socket.on('receiveMessage', (msg) => {
-    messages.value.push({ sender: 'Friend', text: msg })
-    scrollToBottom()
-  })
-})
+  socket.on("receiveMessage", (msg) => {
+    messages.value.push({ sender: "Friend", text: msg });
+    scrollToBottom();
+  });
+});
 
 const sendMessage = () => {
-  if (messageText.value.trim() !== '') {
-    messages.value.push({ sender: 'You', text: messageText.value })
-    socket.emit('sendMessage', messageText.value)
-    messageText.value = ''
-    scrollToBottom()
+  if (messageText.value.trim() !== "") {
+    messages.value.push({ sender: "You", text: messageText.value });
+    socket.emit("sendMessage", messageText.value);
+    messageText.value = "";
+    scrollToBottom();
   }
-}
+};
 </script>
 
 <style scoped>
@@ -80,7 +80,7 @@ const sendMessage = () => {
   align-items: center;
   height: 100vh;
   background: #f4f4f4;
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
 }
 
 .chat-box {
