@@ -8,7 +8,6 @@
   <Testimonials />
   <OurTeam />
   <Blog />
-
   <Footer />
 </template>
 
