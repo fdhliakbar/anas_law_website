@@ -43,9 +43,9 @@
 <script setup>
 const expertiseItems = [
   {
-    title: "Slip and Fall Injuries",
+    title: "Booking Accidents",
     description: "Securing compensation for slip and falls accidents",
-    image: "/src/assets/images/feris.jpg",
+    image: "/src/assets/images/icons/fadhli.jpg",
   },
   {
     title: "Medical Malpractice",

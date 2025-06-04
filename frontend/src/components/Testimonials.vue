@@ -27,27 +27,31 @@
             data-aos="fade-zoom-in"
           >
             <p class="text-2xl leading-normal text-gray-700">
-              Share a
+              Their team was very
               <mark
                 class="mx-1 text-indigo-800 bg-indigo-100 rounded-md ring-indigo-100 ring-4"
-                >testimonial</mark
+                >professional</mark
               >
-              that hits some of your benefits from one of your popular
-              customers.
+              &
+              <mark
+                class="mx-1 text-indigo-800 bg-indigo-100 rounded-md ring-indigo-100 ring-4"
+                >experienced</mark
+              >
+              in handling my case.
             </p>
             <div class="flex items-center mt-8 space-x-3">
               <div class="flex-shrink-0 overflow-hidden rounded-full w-14 h-14">
                 <img
                   alt="Avatar"
-                  src="../assets/images/icons/Frieren.jpeg"
+                  src="../assets/images/icons/fadhli.jpg"
                   loading="lazy"
                 />
               </div>
               <div>
                 <div class="text-lg font-medium text-gray-800">
-                  Sarah Steiner
+                  Fadhli Akbar
                 </div>
-                <div class="text-gray-500">VP Sales at Google</div>
+                <div class="text-gray-500">CEO at Google</div>
               </div>
             </div>
           </div>
