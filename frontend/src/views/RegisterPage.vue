@@ -1,6 +1,7 @@
 <template>
   <div
     class="min-h-screen bg-gradient-to-br from-gray-100 to-slate-200 flex items-center justify-center p-4"
+    id="register"
   >
     <div
       class="bg-white shadow-xl rounded-2xl overflow-hidden w-full max-w-4xl lg:flex"

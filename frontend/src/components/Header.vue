@@ -10,7 +10,7 @@
       ]"
     >
       <div
-        class="max-w-screen-xl mx-auto flex items-center justify-between p-3"
+        class="max-w-screen-xl mx-auto flex items-center justify-between p-3 relative"
       >
         <!-- Logo -->
         <a href="#" class="flex items-center flex-none">
@@ -21,9 +21,10 @@
             width="200%"
           />
         </a>
-        <!-- Navigation Links -->
+        <!-- Navigation Links (centered) -->
         <ul
           class="hidden lg:flex flex-1 justify-center space-x-10 text-base text-gray-700 font-medium"
+          style="z-index: 1"
         >
           <li><a href="#" class="hover:text-[#B49F2B]">Home</a></li>
           <li>
@@ -42,14 +43,14 @@
               >Services</a
             >
           </li>
-          <li>
+          <!-- <li>
             <a
               href="#"
               class="hover:text-[#B49F2B]"
               @click.prevent="scrollTo('team')"
               >Our Team</a
             >
-          </li>
+          </li> -->
           <li>
             <a
               href="#"
@@ -67,31 +68,33 @@
             >
           </li>
         </ul>
-        <!-- Login Button -->
-        <div class="hidden lg:flex flex-none">
+        <!-- Login & Chat Button (absolutely right) -->
+        <div
+          class="hidden lg:flex flex-none absolute right-0 top-1/2 -translate-y-1/2 space-x-2"
+        >
           <router-link
             to="/login"
             class="border border-gray-300 px-6 py-2 rounded-lg hover:bg-gray-100 transition"
           >
             Login
           </router-link>
+          <router-link
+            to="/chat"
+            class="flex items-center gap-2 px-4 py-1 rounded-full hover:bg-blue-100 transition text-blue-700 shadow"
+            title="Chat with Customer Service"
+            style="border: none"
+          >
+            <img
+              src="../assets/images/helpdesk.gif"
+              alt="Chat Icon"
+              class="w-9 h-9 rounded-full"
+            />
+            <span class="hidden sm:inline">Chat</span>
+          </router-link>
         </div>
         <!-- Mobile Menu Button -->
         <button class="lg:hidden text-gray-800" @click="toggleMobileMenu">
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke-width="2"
-            stroke="currentColor"
-            class="w-6 h-6"
-          >
-            <path
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              d="M4 6h16M4 12h16m-7 6h7"
-            />
-          </svg>
+          <!-- ...existing code... -->
         </button>
       </div>
 
@@ -106,6 +109,18 @@
         <a href="#" class="block hover:underline">Our Team</a>
         <a href="#" class="block hover:underline">Reviews</a>
         <a href="#" class="block hover:underline">Contact</a>
+        <router-link
+          to="/login"
+          class="block border border-gray-300 px-6 py-2 rounded-lg hover:bg-gray-100 transition mt-2"
+        >
+          Login
+        </router-link>
+        <router-link
+          to="/chat"
+          class="block border border-blue-400 px-6 py-2 rounded-lg hover:bg-blue-100 transition text-blue-700 mt-2"
+        >
+          Chat
+        </router-link>
       </div>
     </nav>
   </header>
