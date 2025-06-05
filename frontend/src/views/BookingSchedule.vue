@@ -2,6 +2,8 @@
 import { ref, computed } from "vue";
 import Header from "../components/Header.vue";
 import Footer from "../components/Footer.vue";
+import ModalLogin from "../components/ModalLogin.vue";
+const showLoginModal = ref(false);
 
 // Dummy data for doctors/lawyers
 const doctors = [
@@ -91,20 +93,18 @@ const faqs = [
 <template>
   <Header />
   <div class="min-h-screen bg-gray-50 flex flex-col">
-    <div
-      class="flex flex-col md:flex-row max-w-6xl mx-auto w-full py-8 px-4 gap-8 flex-1 pt-16 md:pt-30"
-    >
+    <div class="flex p-8 md:pt-30">
       <!-- Left: Info & Why Choose -->
       <div
         class="md:w-1/2 w-full bg-white rounded-lg shadow p-6 flex flex-col justify-between"
       >
         <div>
           <h1 class="text-2xl md:text-3xl font-bold text-center mb-2">
-            Chat Dokter di Halodoc
+            Konsultasi Hukum di Anas Law
           </h1>
           <p class="text-center text-gray-500 mb-6">
-            Layanan telemedisin yang siap siaga untuk bantu kamu hidup lebih
-            sehat
+            Layanan konsultasi hukum online terpercaya untuk semua kebutuhan
+            hukum Anda.
           </p>
           <div class="flex justify-center mb-4">
             <div class="flex -space-x-4">
@@ -122,9 +122,10 @@ const faqs = [
             </div>
           </div>
           <p class="text-center font-medium mb-4">
-            Pilih dari ratusan dokter berpengalaman dan chat online sekarang
+            Pilih dari <span class="text-pink-600">100+</span> pengacara
+            berpengalaman di berbagai bidang hukum.
           </p>
-          <div class="flex justify-center mb-6">
+          <div class="flex justify-center mb-12">
             <span
               class="h-2 w-2 bg-pink-500 rounded-full mx-1 inline-block"
             ></span>
@@ -135,24 +136,22 @@ const faqs = [
               class="h-2 w-2 bg-pink-200 rounded-full mx-1 inline-block"
             ></span>
           </div>
-        </div>
-        <div>
           <h2 class="font-bold text-lg mb-2">
-            Mengapa Chat Dokter di Halodoc?
+            Mengapa Konsultasi Hukum di Anas Law?
           </h2>
           <ul class="space-y-3 text-gray-700">
             <li class="flex items-start gap-2">
               <span class="text-2xl">📱</span>
               <span>
-                Satu aplikasi untuk berbagai kebutuhan – periksa dokter, tes lab
-                hingga penebusan obat.
+                Satu platform untuk semua kebutuhan hukum Anda, mulai dari
+                konsultasi hingga pendampingan hukum.
               </span>
             </li>
             <li class="flex items-start gap-2">
               <span class="text-2xl">🏥</span>
               <span>
-                Dapatkan rujukan ke pemeriksaan offline di RS atau pemeriksaan
-                diagnostik jika diperlukan.
+                Dapatkan layanan konsultasi hukum dari pengacara terbaik di
+                bidangnya, siap membantu Anda kapan saja.
               </span>
             </li>
           </ul>
@@ -205,6 +204,7 @@ const faqs = [
               </div>
               <button
                 class="bg-pink-600 text-white px-4 py-2 rounded font-semibold hover:bg-pink-700 transition mt-2 md:mt-0 md:ml-4"
+                @click="showLoginModal = true"
               >
                 Chat
               </button>
@@ -230,6 +230,7 @@ const faqs = [
         </div>
       </div>
     </div>
+    <ModalLogin v-if="showLoginModal" @close="showLoginModal = false" />
   </div>
   <!-- FAQ for Counseling -->
 
