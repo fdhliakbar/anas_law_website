@@ -1,32 +1,34 @@
 <script setup lang="ts">
-import { ref, computed } from "vue";
+import { ref, computed, onMounted } from "vue";
 import Header from "../components/Header.vue";
 import Footer from "../components/Footer.vue";
 import ModalLogin from "../components/ModalLogin.vue";
+import { Splide, SplideSlide } from "@splidejs/vue-splide";
+
 const showLoginModal = ref(false);
 
 // Dummy data for doctors/lawyers
 const doctors = [
   {
     id: 1,
-    name: "Dr. Jessica Lepianda",
-    specialty: "Dokter Umum",
-    experience: 11,
+    name: "Anas Nazarudin",
+    specialty: "Lawyer",
+    experience: 5,
     rating: 97,
     fee: 25000,
     oldFee: 28000,
-    photo: "https://randomuser.me/api/portraits/women/44.jpg",
+    photo: "../src/assets/images/founder.jpg",
     available: true,
   },
   {
     id: 2,
-    name: "Dr. Albert Lim",
-    specialty: "Dokter Umum",
-    experience: 9,
+    name: "Andi Saputra",
+    specialty: "Lawyer",
+    experience: 4,
     rating: 94,
     fee: 25000,
     oldFee: 28000,
-    photo: "https://randomuser.me/api/portraits/men/46.jpg",
+    photo: "../src/assets/images/cofounder.jpg",
     available: true,
   },
 ];
@@ -88,15 +90,33 @@ const faqs = [
       "Ya, selain konsultasi, Anas Law juga menyediakan layanan pendampingan dan representasi hukum di pengadilan, mulai dari tahap mediasi, persidangan, hingga eksekusi putusan.",
   },
 ];
+
+// Import gambar slider
+import timeIcon from "../assets/images/icons/time.png";
+import scaleIcon from "../assets/images/icons/scale.png";
+import groupIcon from "../assets/images/icons/group.png";
+
+const sliderImages = [timeIcon, scaleIcon, groupIcon];
+
+// State untuk slider
+const activeSlide = ref(0);
+const splideRef = ref<any>(null);
+
+function goToSlide(idx: number) {
+  activeSlide.value = idx;
+  if (splideRef.value) {
+    splideRef.value.go(idx);
+  }
+}
 </script>
 
 <template>
   <Header />
   <div class="min-h-screen bg-gray-50 flex flex-col">
-    <div class="flex p-8 md:pt-30">
+    <div class="p-8 md:pt-30 flex flex-col gap-8">
       <!-- Left: Info & Why Choose -->
       <div
-        class="md:w-1/2 w-full bg-white rounded-lg shadow p-6 flex flex-col justify-between"
+        class="w-full bg-white rounded-lg shadow p-6 flex flex-col justify-between"
       >
         <div>
           <h1 class="text-2xl md:text-3xl font-bold text-center mb-2">
@@ -107,35 +127,49 @@ const faqs = [
             hukum Anda.
           </p>
           <div class="flex justify-center mb-4">
-            <div class="flex -space-x-4">
-              <img
-                v-for="n in 4"
-                :key="n"
-                :src="'https://randomuser.me/api/portraits/lego/' + n + '.jpg'"
-                class="w-12 h-12 rounded-full border-2 border-white shadow"
-              />
-              <div
-                class="w-16 h-16 rounded-full bg-blue-100 flex items-center justify-center border-2 border-white shadow text-3xl"
+            <div class="w-40 sm:w-56">
+              <Splide
+                :options="{
+                  perPage: 1,
+                  gap: '10px',
+                  pagination: false,
+                  arrows: false,
+                  autoplay: true,
+                  interval: 2000,
+                  type: 'loop',
+                  pauseOnHover: false,
+                  pauseOnFocus: false,
+                }"
+                v-model="activeSlide"
+                ref="splideRef"
+                @moved="activeSlide = $event"
+                class="w-full"
               >
-                <span>✔️</span>
-              </div>
+                <SplideSlide v-for="(img, i) in sliderImages" :key="i">
+                  <img
+                    :src="img"
+                    alt="icon"
+                    class="w-20 h-20 sm:w-28 sm:h-28 border-white shadow mx-auto object-cover"
+                  />
+                </SplideSlide>
+              </Splide>
             </div>
           </div>
-          <p class="text-center font-medium mb-4">
-            Pilih dari <span class="text-pink-600">100+</span> pengacara
-            berpengalaman di berbagai bidang hukum.
-          </p>
+          <!-- Titik navigasi slider -->
           <div class="flex justify-center mb-12">
             <span
-              class="h-2 w-2 bg-pink-500 rounded-full mx-1 inline-block"
-            ></span>
-            <span
-              class="h-2 w-2 bg-pink-200 rounded-full mx-1 inline-block"
-            ></span>
-            <span
-              class="h-2 w-2 bg-pink-200 rounded-full mx-1 inline-block"
+              v-for="(img, idx) in sliderImages"
+              :key="idx"
+              class="h-2 w-2 rounded-full mx-1 inline-block cursor-pointer"
+              :class="activeSlide === idx ? 'bg-indigo-500' : 'bg-indigo-200'"
+              @click="goToSlide(idx)"
             ></span>
           </div>
+          <p class="text-center font-medium mb-4">
+            Pilih dari <span class="text-indigo-500">100+</span> pengacara
+            berpengalaman di berbagai bidang hukum.
+          </p>
+
           <h2 class="font-bold text-lg mb-2">
             Mengapa Konsultasi Hukum di Anas Law?
           </h2>
@@ -159,14 +193,14 @@ const faqs = [
       </div>
 
       <!-- Right: Search & Doctor List -->
-      <div class="md:w-1/2 w-full flex flex-col gap-6">
+      <div class="w-full flex flex-col gap-6">
         <div class="bg-white rounded-lg shadow p-6">
           <div class="flex flex-col gap-2">
             <input
               v-model="search"
               type="text"
               placeholder="Cari dokter, spesialis atau gejala"
-              class="w-full border border-gray-300 rounded px-4 py-2 focus:outline-none focus:ring-2 focus:ring-pink-400"
+              class="w-full border border-gray-300 rounded px-4 py-2 focus:outline-none focus:ring-2 focus:ring-black"
             />
           </div>
         </div>
@@ -181,7 +215,7 @@ const faqs = [
               <img
                 :src="doctor.photo"
                 alt="doctor"
-                class="w-20 h-20 rounded-full object-cover mb-2 md:mb-0 md:mr-4 border-2 border-pink-200"
+                class="w-20 h-20 rounded-full object-cover mb-2 md:mb-0 md:mr-4 border-2 border-indigo-200"
               />
               <div class="flex-1">
                 <div class="font-semibold">{{ doctor.name }}</div>
@@ -194,7 +228,7 @@ const faqs = [
                   <span>{{ doctor.rating }}%</span>
                 </div>
                 <div class="flex items-center gap-2 mb-2">
-                  <span class="text-pink-600 font-bold text-lg"
+                  <span class="text-black font-bold text-lg"
                     >Rp {{ doctor.fee.toLocaleString() }}</span
                   >
                   <span class="line-through text-gray-400 text-sm"
@@ -203,7 +237,7 @@ const faqs = [
                 </div>
               </div>
               <button
-                class="bg-pink-600 text-white px-4 py-2 rounded font-semibold hover:bg-pink-700 transition mt-2 md:mt-0 md:ml-4"
+                class="bg-indigo-400 text-white px-4 py-2 rounded font-semibold hover:bg-indigo-500 transition mt-2 md:mt-0 md:ml-4"
                 @click="showLoginModal = true"
               >
                 Chat

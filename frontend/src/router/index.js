@@ -11,6 +11,11 @@ const routes = [
   { path: "/register", component: RegisterPage }, // tambahkan ini
   { path: "/chat", component: chat },
   { path: "/booking", component: BookingSchedule },
+  {
+    path: "/admin/dashboard",
+    name: "AdminDashboard",
+    component: () => import("@/views/admin/Dashboard.vue"),
+  },
 ];
 
 const router = createRouter({
