@@ -75,33 +75,6 @@ const blogPosts = [
     authorImage: "/src/assets/images/feris.jpg",
   },
   {
-    title: "How MyCase: Addresses Legal Challenges",
-    description:
-      "MyCase stands out through its unique features and user-centric design.",
-    image: "/src/assets/images/justice.jpg",
-    author: "Fadhli Akbar",
-    company: "Anas Law Office",
-    authorImage: "/src/assets/images/feris.jpg",
-  },
-  {
-    title: "MyCase: Transforming Legal Practice",
-    description:
-      "Embark on a journey through the innovation that is MyCase, redefining how legal...",
-    image: "/src/assets/images/lawyer01.jpg",
-    author: "Fadhli Akbar",
-    company: "Anas Law Office",
-    authorImage: "/src/assets/images/feris.jpg",
-  },
-  {
-    title: "MyCase: Transforming Legal Practice",
-    description:
-      "Embark on a journey through the innovation that is MyCase, redefining how legal...",
-    image: "/src/assets/images/lawyer01.jpg",
-    author: "Fadhli Akbar",
-    company: "Anas Law Office",
-    authorImage: "/src/assets/images/feris.jpg",
-  },
-  {
     title: "MyCase: Transforming Legal Practice",
     description:
       "Embark on a journey through the innovation that is MyCase, redefining how legal...",

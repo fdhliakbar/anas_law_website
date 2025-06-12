@@ -4,9 +4,11 @@
   <ImageSlider />
   <About />
   <Services />
+  <LegalConsultingTrends />
   <Schedule />
   <Testimonials />
-  <OurTeam />
+  <LegalAdvisorComparison />
+  <OurTeamSlider />
   <Blog />
   <Footer />
 </template>
@@ -18,11 +20,13 @@ import HeroSection from "../components/HeroSection.vue";
 import ImageSlider from "../components/ImageSlider.vue";
 import Schedule from "@/components/Schedule.vue";
 import About from "../components/About.vue";
+import LegalConsultingTrends from "../components/LegalConsultingTrends.vue";
 import Services from "../components/Services.vue";
 import Testimonials from "../components/Testimonials.vue";
+import OurTeamSlider from "@/components/OurTeamSlider.vue";
 import Blog from "../components/Blog.vue";
-import OurTeam from "../components/OurTeam.vue";
 import Footer from "../components/Footer.vue";
+import LegalAdvisorComparison from "@/components/LegalAdvisorComparison.vue";
 
 const router = useRouter();
 const goToLogin = () => {
