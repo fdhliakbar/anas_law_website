@@ -1,3 +1,12 @@
+<script setup>
+import { useRouter } from "vue-router";
+const router = useRouter();
+
+function goToBooking() {
+  router.push("/booking");
+}
+</script>
+
 <template>
   <section class="w-full bg-white py-16 px-4">
     <div
@@ -18,6 +27,7 @@
         </p>
         <button
           class="bg-black text-white px-8 py-4 rounded-lg text-lg font-semibold hover:bg-gray-900 transition"
+          @click="goToBooking"
         >
           Schedule now
         </button>

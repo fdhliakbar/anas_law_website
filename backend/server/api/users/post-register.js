@@ -5,7 +5,7 @@ import { Client } from "pg";
 export default defineEventHandler(async (event) => {
   const body = await readBody(event);
 
-  // Ini untuk connect ke PostgreSQL
+  // Koneksi ke PostgreSQL
   const client = new Client({
     user: process.env.PGUSER,
     host: process.env.PGHOST,
@@ -23,7 +23,7 @@ export default defineEventHandler(async (event) => {
       body.password,
     ]);
     return { message: "User registered successfully" };
-  } catch (error: any) {
+  } catch (error) {
     return { message: "Registration failed", error: error.message };
   } finally {
     await client.end();
