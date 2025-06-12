@@ -15,47 +15,58 @@
         </button>
         <div class="flex flex-col items-center">
           <div
-            class="bg-pink-500 rounded-full w-16 h-16 flex items-center justify-center -mt-12 mb-4 border-4 border-white shadow"
+            class="bg-indigo-500 rounded-full w-16 h-16 flex items-center justify-center -mt-12 mb-4 border-4 border-white shadow"
           >
             <span class="text-4xl">🩺</span>
           </div>
           <h2 class="text-xl font-bold mb-1 text-center">
-            Masukkan Nomor Ponsel
+            Masukkan Ke Akun Anda
           </h2>
           <p class="text-gray-600 text-center mb-4 text-sm">
-            Masukkan nomor ponsel untuk masuk ke Anas Law atau membuat
+            Silakan masukkan nama pengguna dan kata sandi Anda untuk melanjutkan
+            ke layanan
             <router-link
               to="/register"
-              class="no-underline hover:underline text-pink-600"
+              class="no-underline hover:underline text-black"
             >
-              akun baru
+              Anas Law
             </router-link>
           </p>
           <form @submit.prevent="handleSubmit" class="w-full">
-            <div class="flex items-center mb-4">
-              <select class="border rounded-l px-2 py-2 bg-gray-100" disabled>
-                <option>+62</option>
-              </select>
+            <div class="mb-4">
               <input
-                v-model="phone"
-                type="tel"
+                v-model="email"
+                type="email"
                 required
-                placeholder="08xxxxxxxxxx"
-                class="border-t border-b border-r rounded-r px-3 py-2 w-full focus:outline-none"
+                placeholder="Email"
+                class="border rounded px-3 py-2 w-full focus:outline-none"
+              />
+            </div>
+            <div class="mb-4">
+              <input
+                v-model="password"
+                type="password"
+                required
+                placeholder="Password"
+                class="border rounded px-3 py-2 w-full focus:outline-none"
               />
             </div>
             <button
               type="submit"
-              class="w-full bg-pink-600 text-white font-semibold py-2 rounded mb-2 hover:bg-pink-700 transition"
+              class="w-full bg-indigo-600 text-white font-semibold py-2 rounded mb-2 hover:bg-indigo-700 transition"
             >
               Lanjut
             </button>
           </form>
           <p class="text-xs text-gray-500 text-center mt-2">
-            Dengan masuk atau mendaftar, saya menyetujui
-            <a href="#" class="text-pink-600 underline">Ketentuan Penggunaan</a>
+            Belum punya akun?
+            <router-link to="/register" class="text-indigo-600 hover:underline">
+              Daftar Sekarang
+            </router-link>
+            <br />
+            <a href="#" class="text-black underline"> Ketentuan Pengunaan.</a>
             dan
-            <a href="#" class="text-pink-600 underline">Kebijakan Privasi</a>
+            <a href="#" class="text-black underline">Kebijakan Privasi</a>
             Anas Law
           </p>
         </div>
@@ -66,17 +77,34 @@
 
 <script setup>
 import { ref } from "vue";
-const phone = ref("");
+import { useRouter } from "vue-router";
+const email = ref("");
+const password = ref("");
+const router = useRouter();
 
-function handleSubmit() {
-  // Simulasi pengecekan akun
-  const registered = false; // Ganti dengan pengecekan ke backend
-  if (registered) {
-    alert("Login berhasil!"); // Ganti dengan proses login
-  } else {
-    alert("Nomor belum terdaftar, silakan registrasi."); // Ganti dengan redirect ke halaman registrasi
-    // Contoh redirect:
-    // window.location.href = '/register';
+async function handleSubmit() {
+  try {
+    const response = await fetch("/api/check-account", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ email: email.value, password: password.value }),
+    });
+    if (!response.ok) {
+      const text = await response.text();
+      console.error("HTTP Error:", response.status, text);
+      alert("Terjadi kesalahan pada server: " + response.status);
+      return;
+    }
+    const data = await response.json();
+    console.log("API Response:", data);
+    if (data.exists) {
+      router.push("/chat");
+    } else {
+      alert("Akun tidak ditemukan, silakan registrasi.");
+    }
+  } catch (e) {
+    console.error("Fetch error:", e);
+    alert("Terjadi kesalahan, silakan coba lagi.");
   }
 }
 </script>

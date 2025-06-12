@@ -2,13 +2,12 @@
 import { ref, computed, onMounted } from "vue";
 import Header from "../components/Header.vue";
 import Footer from "../components/Footer.vue";
-import ModalLogin from "../components/ModalLogin.vue";
 import { Splide, SplideSlide } from "@splidejs/vue-splide";
 
 const showLoginModal = ref(false);
 
-// Dummy data for doctors/lawyers
-const doctors = [
+// Dummy data for lawyers/lawyers
+const lawyers = [
   {
     id: 1,
     name: "Anas Nazarudin",
@@ -31,6 +30,50 @@ const doctors = [
     photo: "../src/assets/images/cofounder.jpg",
     available: true,
   },
+  {
+    id: 3,
+    name: "Rusdi Saputra",
+    specialty: "Lawyer",
+    experience: 4,
+    rating: 94,
+    fee: 25000,
+    oldFee: 28000,
+    photo: "../src/assets/images/2.jpg",
+    available: true,
+  },
+  {
+    id: 4,
+    name: "Riko Saputra",
+    specialty: "Lawyer",
+    experience: 4,
+    rating: 94,
+    fee: 25000,
+    oldFee: 28000,
+    photo: "../src/assets/images/4.jpg",
+    available: true,
+  },
+  {
+    id: 5,
+    name: "Andi Saputra",
+    specialty: "Lawyer",
+    experience: 4,
+    rating: 94,
+    fee: 25000,
+    oldFee: 28000,
+    photo: "../src/assets/images/cofounder.jpg",
+    available: true,
+  },
+  {
+    id: 6,
+    name: "Andi Saputra",
+    specialty: "Lawyer",
+    experience: 4,
+    rating: 94,
+    fee: 25000,
+    oldFee: 28000,
+    photo: "../src/assets/images/cofounder.jpg",
+    available: true,
+  },
 ];
 
 const specializations = [
@@ -42,9 +85,9 @@ const specializations = [
 ];
 
 const search = ref("");
-const filteredDoctors = computed(() => {
-  if (!search.value) return doctors;
-  return doctors.filter(
+const filteredlawyers = computed(() => {
+  if (!search.value) return lawyers;
+  return lawyers.filter(
     (d) =>
       d.name.toLowerCase().includes(search.value.toLowerCase()) ||
       d.specialty.toLowerCase().includes(search.value.toLowerCase())
@@ -53,11 +96,6 @@ const filteredDoctors = computed(() => {
 
 // Tambahkan FAQ ke dalam script setup
 const faqs = [
-  {
-    question: "Apa saja jenis konsultasi yang tersedia di Anas Law?",
-    answer:
-      "Anas Law menyediakan berbagai layanan konsultasi hukum, baik secara online maupun offline. Layanan meliputi konsultasi perdata, pidana, bisnis, keluarga, waris, pertanahan, dan bidang hukum lainnya. Setiap konsultasi dilakukan oleh advokat profesional yang berpengalaman di bidangnya.",
-  },
   {
     question: "Bagaimana cara melakukan konsultasi dengan Anas Law?",
     answer:
@@ -69,25 +107,9 @@ const faqs = [
       "Ya, seluruh proses konsultasi dan data klien dijamin kerahasiaannya sesuai dengan kode etik profesi advokat. Kami berkomitmen menjaga privasi dan keamanan informasi setiap klien.",
   },
   {
-    question: "Berapa biaya konsultasi di Anas Law?",
-    answer:
-      "Biaya konsultasi di Anas Law bervariasi tergantung pada jenis kasus, tingkat kesulitan, dan durasi konsultasi. Untuk informasi detail mengenai tarif, silakan hubungi customer service kami agar mendapatkan estimasi biaya yang sesuai kebutuhan Anda.",
-  },
-  {
     question: "Apakah bisa konsultasi tanpa harus datang ke kantor?",
     answer:
       "Tentu saja. Anda dapat melakukan konsultasi secara online melalui video call, telepon, atau chat. Layanan ini memudahkan Anda untuk mendapatkan bantuan hukum tanpa harus datang ke kantor, sehingga lebih fleksibel dan efisien.",
-  },
-  {
-    question: "Siapa saja yang dapat menggunakan layanan konsultasi Anas Law?",
-    answer:
-      "Layanan konsultasi hukum Anas Law terbuka untuk individu, perusahaan, organisasi, maupun komunitas yang membutuhkan bantuan atau pendampingan hukum.",
-  },
-  {
-    question:
-      "Apakah Anas Law menyediakan layanan pendampingan hukum di pengadilan?",
-    answer:
-      "Ya, selain konsultasi, Anas Law juga menyediakan layanan pendampingan dan representasi hukum di pengadilan, mulai dari tahap mediasi, persidangan, hingga eksekusi putusan.",
   },
 ];
 
@@ -205,12 +227,14 @@ function goToSlide(idx: number) {
           </div>
         </div>
         <div class="bg-white rounded-lg shadow p-6">
-          <h2 class="text-xl font-bold mb-4">Rekomendasi Dokter</h2>
-          <div class="flex flex-col md:flex-row gap-4">
+          <h2 class="text-xl font-bold mb-4">Rekomendasi Lawyer</h2>
+          <div
+            class="doctor-list grid grid-cols-1 md:grid-cols-2 gap-4 w-full max-h-96 overflow-y-auto"
+          >
             <div
-              v-for="doctor in filteredDoctors"
-              :key="doctor.id"
-              class="flex flex-col md:flex-row items-center md:items-start bg-gray-50 rounded-lg p-4 flex-1"
+              v-for="doctor in filteredlawyers"
+              :key="doctor.id + doctor.name"
+              class="flex flex-col md:flex-row items-center md:items-start bg-gray-50 rounded-lg p-4"
             >
               <img
                 :src="doctor.photo"
@@ -236,35 +260,17 @@ function goToSlide(idx: number) {
                   >
                 </div>
               </div>
-              <button
-                class="bg-indigo-400 text-white px-4 py-2 rounded font-semibold hover:bg-indigo-500 transition mt-2 md:mt-0 md:ml-4"
-                @click="showLoginModal = true"
+              <router-link
+                to="/chat"
+                class="bg-indigo-400 text-white px-4 py-2 rounded font-semibold hover:bg-indigo-500 transition mt-2 md:mt-0 md:ml-4 flex items-center justify-center"
               >
                 Chat
-              </button>
-            </div>
-          </div>
-        </div>
-        <div class="bg-white rounded-lg shadow p-6">
-          <h2 class="text-xl font-bold mb-4">Cari Dokter atau Spesialisasi</h2>
-          <div class="flex flex-wrap gap-4 justify-center">
-            <div
-              v-for="spec in specializations"
-              :key="spec.name"
-              class="flex flex-col items-center w-20"
-            >
-              <div
-                class="w-16 h-16 rounded-full bg-pink-100 flex items-center justify-center text-3xl mb-2"
-              >
-                {{ spec.icon }}
-              </div>
-              <span class="text-sm text-center">{{ spec.name }}</span>
+              </router-link>
             </div>
           </div>
         </div>
       </div>
     </div>
-    <ModalLogin v-if="showLoginModal" @close="showLoginModal = false" />
   </div>
   <!-- FAQ for Counseling -->
 

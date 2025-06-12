@@ -18,72 +18,7 @@
         challenging time.
       </p>
     </div>
-
-    <!-- Grid Items -->
-    <div class="grid md:grid-cols-2 gap-8">
-      <div
-        v-for="(post, index) in expertiseItems"
-        :key="index"
-        class="flex items-start gap-4"
-      >
-        <component
-          :is="post.title === 'Booking Schedules' ? 'router-link' : 'div'"
-          v-bind="
-            post.title === 'Booking Schedules'
-              ? {
-                  to: '/booking',
-                  class:
-                    'flex items-start gap-4 cursor-pointer hover:bg-gray-100 rounded-xl p-2 transition',
-                }
-              : {}
-          "
-        >
-          <img
-            :src="post.image"
-            alt=""
-            class="w-20 h-20 rounded-xl object-cover"
-          />
-          <div>
-            <h3 class="text-xl font-semibold">{{ post.title }}</h3>
-            <p class="text-gray-600 text-sm">{{ post.description }}</p>
-          </div>
-        </component>
-      </div>
-    </div>
   </div>
 </template>
 
-<script setup>
-const expertiseItems = [
-  {
-    title: "Booking Accidents",
-    description: "Securing compensation for slip and falls accidents",
-    image: "/src/assets/images/icons/fadhli.jpg",
-  },
-  {
-    title: "Booking Schedules",
-    description: "Assisting with booking schedules for personal injury cases",
-    image: "/src/assets/images/icons/Frieren.jpeg",
-  },
-  {
-    title: "Car Accidents",
-    description: "Seeking fair compensation for car accident injuries",
-    image: "/src/assets/images/feris.jpg",
-  },
-  {
-    title: "Catastrophic Injuries",
-    description: "Helping secure compensation for life-altering injuries.",
-    image: "/src/assets/images/feris.jpg",
-  },
-  {
-    title: "Workplace Injuries",
-    description: "Assisting in workers' injury and compensation claims",
-    image: "/src/assets/images/feris.jpg",
-  },
-  {
-    title: "20+",
-    description: "Another personal injury cases we can help for you",
-    image: "/src/assets/images/feris.jpg",
-  },
-];
-</script>
+<script setup></script>
