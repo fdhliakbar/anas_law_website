@@ -1,14 +1,13 @@
+// file: utils/db.js
+
 import pkg from "pg";
 const { Pool } = pkg;
 
 const config = useRuntimeConfig();
 
+// Membuat koneksi HANYA menggunakan connection string
 const pool = new Pool({
-  user: process.env.DB_USER, // Auto pakai nilai dari .env
-  host: process.env.DB_HOST,
-  database: process.env.DB_NAME,
-  password: process.env.DB_PASSWORD,
-  port: process.env.DB_PORT,
+  connectionString: config.databaseUrl, // 'databaseUrl' adalah camelCase dari 'DATABASE_URL'
 });
 
 export default pool;
