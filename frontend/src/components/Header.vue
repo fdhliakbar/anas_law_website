@@ -11,60 +11,72 @@
     >
       <div
         class="max-w-screen-xl mx-auto flex items-center justify-between p-3"
-      >
-        <!-- Logo -->
-        <a href="#" class="flex items-center flex-none">
+      >        <!-- Logo -->
+        <router-link to="/" class="flex items-center flex-none">
           <img
             src="../assets/images/logo.png"
             alt="Logo"
             class="h-10"
             width="200%"
           />
-        </a>
+        </router-link>
         <!-- Navigation Links -->
         <ul
           class="hidden lg:flex flex-1 justify-center space-x-10 text-base text-gray-700 font-medium"
         >
-          <li><a href="#" class="hover:text-[#B49F2B]">Home</a></li>
           <li>
-            <a
-              href="#"
-              class="hover:text-[#B49F2B]"
-              @click.prevent="scrollTo('about')"
-              >About</a
+            <router-link 
+              to="/" 
+              class="hover:text-[#B49F2B] transition-colors duration-300"
+              :class="{ 'text-[#B49F2B] font-semibold': $route.name === 'Home' }"
             >
+              Home
+            </router-link>
+          </li>
+          <li>
+            <router-link 
+              to="/about" 
+              class="hover:text-[#B49F2B] transition-colors duration-300"
+              :class="{ 'text-[#B49F2B] font-semibold': $route.name === 'About' }"
+            >
+              About
+            </router-link>
           </li>
           <li>
             <a
               href="#"
-              class="hover:text-[#B49F2B]"
-              @click.prevent="scrollTo('services')"
-              >Services</a
+              class="hover:text-[#B49F2B] transition-colors duration-300"
+              @click.prevent="handleServicesClick"
             >
+              Services
+            </a>
+          </li>
+          <li>
+            <router-link 
+              to="/pricing" 
+              class="hover:text-[#B49F2B] transition-colors duration-300"
+              :class="{ 'text-[#B49F2B] font-semibold': $route.name === 'Pricing' }"
+            >
+              Pricing
+            </router-link>
           </li>
           <li>
             <a
               href="#"
-              class="hover:text-[#B49F2B]"
-              @click.prevent="scrollTo('team')"
-              >Our Team</a
+              class="hover:text-[#B49F2B] transition-colors duration-300"
+              @click.prevent="handleTeamClick"
             >
+              Our Team
+            </a>
           </li>
           <li>
             <a
               href="#"
-              class="hover:text-[#B49F2B]"
-              @click.prevent="scrollTo('reviews')"
-              >Reviews</a
+              class="hover:text-[#B49F2B] transition-colors duration-300"
+              @click.prevent="handleContactClick"
             >
-          </li>
-          <li>
-            <a
-              href="#"
-              class="hover:text-[#B49F2B]"
-              @click.prevent="scrollTo('footer')"
-              >Contact</a
-            >
+              Contact
+            </a>
           </li>
         </ul>
         <!-- Login Button -->
@@ -93,19 +105,65 @@
             />
           </svg>
         </button>
-      </div>
-
-      <!-- Mobile Menu -->
+      </div>      <!-- Mobile Menu -->
       <div
         v-if="isMobileMenuOpen"
-        class="lg:hidden bg-white text-gray-900 p-4 space-y-4"
+        class="lg:hidden bg-white text-gray-900 p-4 space-y-4 shadow-lg"
       >
-        <a href="#" class="block hover:underline">Home</a>
-        <a href="#" class="block hover:underline">About</a>
-        <a href="#" class="block hover:underline">Services</a>
-        <a href="#" class="block hover:underline">Our Team</a>
-        <a href="#" class="block hover:underline">Reviews</a>
-        <a href="#" class="block hover:underline">Contact</a>
+        <router-link 
+          to="/" 
+          class="block hover:text-[#B49F2B] transition-colors duration-300"
+          :class="{ 'text-[#B49F2B] font-semibold': $route.name === 'Home' }"
+          @click="closeMobileMenu"
+        >
+          Home
+        </router-link>
+        <router-link 
+          to="/about" 
+          class="block hover:text-[#B49F2B] transition-colors duration-300"
+          :class="{ 'text-[#B49F2B] font-semibold': $route.name === 'About' }"
+          @click="closeMobileMenu"
+        >
+          About
+        </router-link>
+        <a 
+          href="#" 
+          class="block hover:text-[#B49F2B] transition-colors duration-300"
+          @click.prevent="handleServicesClick"
+        >
+          Services
+        </a>
+        <router-link 
+          to="/pricing" 
+          class="block hover:text-[#B49F2B] transition-colors duration-300"
+          :class="{ 'text-[#B49F2B] font-semibold': $route.name === 'Pricing' }"
+          @click="closeMobileMenu"
+        >
+          Pricing
+        </router-link>
+        <a 
+          href="#" 
+          class="block hover:text-[#B49F2B] transition-colors duration-300"
+          @click.prevent="handleTeamClick"
+        >
+          Our Team
+        </a>
+        <a 
+          href="#" 
+          class="block hover:text-[#B49F2B] transition-colors duration-300"
+          @click.prevent="handleContactClick"
+        >
+          Contact
+        </a>
+        <div class="pt-4 border-t border-gray-200">
+          <router-link 
+            to="/login" 
+            class="block bg-blue-600 text-white text-center py-2 px-4 rounded-lg hover:bg-blue-700 transition-colors duration-300"
+            @click="closeMobileMenu"
+          >
+            Login
+          </router-link>
+        </div>
       </div>
     </nav>
   </header>
@@ -119,13 +177,15 @@ export default {
       scrolled: false,
       isMobileMenuOpen: false,
     };
-  },
-  methods: {
+  },  methods: {
     handleScroll() {
       this.scrolled = window.scrollY > 10;
     },
     toggleMobileMenu() {
       this.isMobileMenuOpen = !this.isMobileMenuOpen;
+    },
+    closeMobileMenu() {
+      this.isMobileMenuOpen = false;
     },
     scrollTo(id) {
       const el = document.getElementById(id);
@@ -133,6 +193,48 @@ export default {
         el.scrollIntoView({ behavior: "smooth" });
       }
     },
+    handleServicesClick() {
+      if (this.$route.name === 'Home') {
+        this.scrollTo('services');
+      } else {
+        this.$router.push('/').then(() => {
+          this.$nextTick(() => {
+            setTimeout(() => {
+              this.scrollTo('services');
+            }, 100);
+          });
+        });
+      }
+      this.closeMobileMenu();
+    },
+    handleTeamClick() {
+      if (this.$route.name === 'Home') {
+        this.scrollTo('team');
+      } else {
+        this.$router.push('/').then(() => {
+          this.$nextTick(() => {
+            setTimeout(() => {
+              this.scrollTo('team');
+            }, 100);
+          });
+        });
+      }
+      this.closeMobileMenu();
+    },
+    handleContactClick() {
+      if (this.$route.name === 'Home') {
+        this.scrollTo('footer');
+      } else {
+        this.$router.push('/').then(() => {
+          this.$nextTick(() => {
+            setTimeout(() => {
+              this.scrollTo('footer');
+            }, 100);
+          });
+        });
+      }
+      this.closeMobileMenu();
+    }
   },
   mounted() {
     window.addEventListener("scroll", this.handleScroll);

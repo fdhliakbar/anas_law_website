@@ -5,12 +5,11 @@
     <div
       class="bg-white shadow-xl rounded-2xl overflow-hidden w-full max-w-4xl lg:flex"
     >
-      <div class="w-full lg:w-1/2 p-6 sm:p-8 md:p-10">
-        <div class="flex items-center mb-8">
-          <button @click="goBack" class="text-gray-600 hover:text-gray-800">
+      <div class="w-full lg:w-1/2 p-6 sm:p-8 md:p-10">        <div class="flex items-center justify-between mb-8">
+          <router-link to="/" class="text-gray-600 hover:text-gray-800 flex items-center">
             <svg
               xmlns="http://www.w3.org/2000/svg"
-              class="h-6 w-6"
+              class="h-6 w-6 mr-2"
               fill="none"
               viewBox="0 0 24 24"
               stroke="currentColor"
@@ -22,7 +21,8 @@
                 d="M10 19l-7-7m0 0l7-7m-7 7h18"
               />
             </svg>
-          </button>
+            Kembali ke Home
+          </router-link>
         </div>
 
         <h2 class="text-3xl font-bold text-gray-900 mb-6">
@@ -208,18 +208,15 @@
               />
             </svg>
           </button>
-        </form>
-
-        <div class="mt-6 text-center">
+        </form>        <div class="mt-6 text-center">
           <p class="text-sm text-gray-600">
             Already have an account?
-            <a
-              href="#"
-              @click.prevent="goToLogin"
+            <router-link
+              to="/login"
               class="font-medium text-bold text-indigo-600 hover:text-indigo-500"
             >
               Log in
-            </a>
+            </router-link>
           </p>
         </div>
 
@@ -287,8 +284,7 @@ export default {
       },
       showPassword: false,
     };
-  },
-  methods: {
+  },  methods: {
     async handleRegister() {
       if (this.form.password.length < 8) {
         alert("Password must be at least 8 characters long.");
@@ -298,22 +294,36 @@ export default {
         alert("Passwords do not match.");
         return;
       }
-      // Kirim ke backend
+      
+      // For demo purposes, we'll simulate a successful registration
+      // In a real app, you would send this to your backend
       try {
+        // Simulate API call
+        const userData = {
+          email: this.form.email,
+          password: this.form.password,
+        };
+        
+        // Simulate successful registration
+        setTimeout(() => {
+          alert("Registrasi berhasil! Silakan login dengan akun baru Anda.");
+          this.$router.push("/login");
+        }, 1000);
+        
+        // Uncomment this for real API integration
+        /*
         const response = await fetch(
           "http://localhost:3000/api/users/post-register",
           {
             method: "POST",
             headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({
-              email: this.form.email,
-              password: this.form.password,
-            }),
+            body: JSON.stringify(userData),
           }
         );
         if (!response.ok) throw new Error("Registration failed");
         alert("Registrasi berhasil!");
         this.$router.push("/login");
+        */
       } catch (err) {
         alert("Registrasi gagal: " + err.message);
       }
