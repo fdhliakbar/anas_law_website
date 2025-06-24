@@ -11,22 +11,23 @@
     >
       <div
         class="max-w-screen-xl mx-auto flex items-center justify-between p-3 relative"
-      >
-        <!-- Logo -->
-        <a href="#" class="flex items-center flex-none">
+      >        <!-- Logo -->
+        <router-link to="/" class="flex items-center flex-none">
           <img
             src="../assets/images/logo.png"
             alt="Logo"
             class="h-10"
             width="200%"
           />
-        </a>
+        </router-link>
         <!-- Navigation Links (centered) -->
         <ul
           class="hidden lg:flex flex-1 justify-center space-x-10 text-base text-gray-700 font-medium"
           style="z-index: 1"
         >
-          <li><a href="#" class="hover:text-[#B49F2B]">Home</a></li>
+          <li>
+            <router-link to="/" class="hover:text-[#B49F2B]">Home</router-link>
+          </li>
           <li>
             <a
               href="#"
@@ -43,14 +44,20 @@
               >Services</a
             >
           </li>
-          <!-- <li>
-            <a
-              href="#"
+          <li>
+            <router-link
+              to="/pricing"
               class="hover:text-[#B49F2B]"
-              @click.prevent="scrollTo('team')"
-              >Our Team</a
+              >Pricing</router-link
             >
-          </li> -->
+          </li>
+          <li>
+            <router-link
+              to="/booking"
+              class="hover:text-[#B49F2B]"
+              >Book Consultation</router-link
+            >
+          </li>
           <li>
             <a
               href="#"
@@ -96,28 +103,41 @@
         <button class="lg:hidden text-gray-800" @click="toggleMobileMenu">
           <!-- ...existing code... -->
         </button>
-      </div>
-
-      <!-- Mobile Menu -->
+      </div>      <!-- Mobile Menu -->
       <div
         v-if="isMobileMenuOpen"
         class="lg:hidden bg-white text-gray-900 p-4 space-y-4"
       >
-        <a href="#" class="block hover:underline">Home</a>
-        <a href="#" class="block hover:underline">About</a>
-        <a href="#" class="block hover:underline">Services</a>
-        <a href="#" class="block hover:underline">Our Team</a>
-        <a href="#" class="block hover:underline">Reviews</a>
-        <a href="#" class="block hover:underline">Contact</a>
+        <router-link to="/" class="block hover:underline" @click="closeMobileMenu">Home</router-link>
+        <a href="#" class="block hover:underline" @click.prevent="scrollTo('about')">About</a>
+        <a href="#" class="block hover:underline" @click.prevent="scrollTo('services')">Services</a>
+        <router-link
+          to="/pricing"
+          class="block hover:underline"
+          @click="closeMobileMenu"
+        >
+          Pricing
+        </router-link>
+        <router-link
+          to="/booking"
+          class="block hover:underline"
+          @click="closeMobileMenu"
+        >
+          Book Consultation
+        </router-link>
+        <a href="#" class="block hover:underline" @click.prevent="scrollTo('reviews')">Reviews</a>
+        <a href="#" class="block hover:underline" @click.prevent="scrollTo('footer')">Contact</a>
         <router-link
           to="/login"
           class="block border border-gray-300 px-6 py-2 rounded-lg hover:bg-gray-100 transition mt-2"
+          @click="closeMobileMenu"
         >
           Login
         </router-link>
         <router-link
           to="/chat"
           class="block border border-blue-400 px-6 py-2 rounded-lg hover:bg-blue-100 transition text-blue-700 mt-2"
+          @click="closeMobileMenu"
         >
           Chat
         </router-link>
@@ -134,8 +154,7 @@ export default {
       scrolled: false,
       isMobileMenuOpen: false,
     };
-  },
-  methods: {
+  },  methods: {
     handleScroll() {
       this.scrolled = window.scrollY > 10;
     },
@@ -143,10 +162,14 @@ export default {
       this.isMobileMenuOpen = !this.isMobileMenuOpen;
     },
     scrollTo(id) {
+      this.isMobileMenuOpen = false; // Close mobile menu when scrolling
       const el = document.getElementById(id);
       if (el) {
         el.scrollIntoView({ behavior: "smooth" });
       }
+    },
+    closeMobileMenu() {
+      this.isMobileMenuOpen = false;
     },
   },
   mounted() {
