@@ -3,10 +3,7 @@
     <!-- Navbar -->
     <nav
       :class="[
-        'fixed w-full z-50 transition-all duration-300 ease-in-out',
-        scrolled
-          ? 'bg-white/30 backdrop-blur-md shadow-md py-2'
-          : 'bg-transparent py-4',
+        'fixed w-full z-50 transition-all duration-300 ease-in-out bg-slate-300 py-2',
       ]"
     >
       <div

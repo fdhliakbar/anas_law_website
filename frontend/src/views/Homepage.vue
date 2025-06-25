@@ -6,12 +6,12 @@
   <Services />
   <LegalConsultingTrends />
   <Schedule />
-  <Testimonials />
   <LegalAdvisorComparison />
   <OurTeamSlider />
   <!-- <ConsultationForm /> -->
   <TaxConsultation/>
   <Blog />
+  <Testimonials />
   <Footer />
 </template>
 
