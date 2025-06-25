@@ -302,7 +302,7 @@ export default {
       // Kirim ke backend
       try {
         const response = await fetch(
-          "http://localhost:3000/api/users/post-register",
+          "http://localhost:3000/api/users/post-users",
           {
             method: "POST",
             headers: { "Content-Type": "application/json" },
@@ -312,11 +312,17 @@ export default {
             }),
           }
         );
-        if (!response.ok) throw new Error("Registration failed");
-        alert("Registrasi berhasil!");
+        
+        const data = await response.json();
+        
+        if (!response.ok) {
+          throw new Error(data.message || "Registration failed");
+        }
+        
+        alert("Registration successful!");
         this.$router.push("/login");
       } catch (err) {
-        alert("Registrasi gagal: " + err.message);
+        alert("Registration failed: " + err.message);
       }
     },
     togglePasswordVisibility() {
