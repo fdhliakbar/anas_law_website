@@ -78,19 +78,7 @@
           >
             Login
           </router-link>
-          <router-link
-            to="/chat"
-            class="flex items-center gap-2 px-4 py-1 rounded-full hover:bg-blue-100 transition text-blue-700 shadow"
-            title="Chat with Customer Service"
-            style="border: none"
-          >
-            <img
-              src="../assets/images/helpdesk.gif"
-              alt="Chat Icon"
-              class="w-9 h-9 rounded-full"
-            />
-            <span class="hidden sm:inline">Chat</span>
-          </router-link>
+          
         </div>
         <!-- Mobile Menu Button -->
         <button class="lg:hidden text-gray-800" @click="toggleMobileMenu">

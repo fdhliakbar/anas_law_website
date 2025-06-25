@@ -9,6 +9,7 @@
   <Testimonials />
   <LegalAdvisorComparison />
   <OurTeamSlider />
+  <!-- <ConsultationForm /> -->
   <TaxConsultation/>
   <Blog />
   <Footer />
@@ -26,6 +27,7 @@ import Services from "../components/Services.vue";
 import Testimonials from "../components/Testimonials.vue";
 import TaxConsultation from "@/components/TaxConsultation.vue";
 import OurTeamSlider from "@/components/OurTeamSlider.vue";
+import ConsultationForm from "@/components/ConsultationForm.vue";
 import Blog from "../components/Blog.vue";
 import Footer from "../components/Footer.vue";
 import LegalAdvisorComparison from "@/components/LegalAdvisorComparison.vue";
