@@ -11,7 +11,9 @@
           class="px-8 py-3 rounded-full font-semibold text-lg"
           :style="{ background: '#F5F8E0', color: '#222' }"
         >
-          Learn More
+          <RouterLink to="/team" class="text-black">
+            Meet Our Team
+          </RouterLink>
         </button>
       </div>
       <div class="relative flex items-center justify-center">

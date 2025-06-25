@@ -3,7 +3,7 @@
     <!-- Navbar -->
     <nav
       :class="[
-        'fixed w-full z-50 transition-all duration-300 ease-in-out bg-slate-300 py-2',
+        'fixed w-full z-50 transition-all duration-300 ease-in-out bg-blue-400 py-2',
       ]"
     >
       <div

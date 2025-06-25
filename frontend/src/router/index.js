@@ -5,6 +5,7 @@ import RegisterPage from "../views/RegisterPage.vue"; // tambahkan ini
 import BookingSchedule from "../views/BookingSchedule.vue";
 import chat from "../views/chat.vue";
 import PricingPage from "../views/PricingPage.vue";
+import OurTeamPage from "../views/OurTeamPage.vue";
 
 const routes = [
   { path: "/", component: HomePage },
@@ -18,6 +19,7 @@ const routes = [
     component: () => import("@/views/admin/Dashboard.vue"),
   },
   { path: "/pricing", component: PricingPage },
+  { path: "/team", component: OurTeamPage },
 ];
 
 const router = createRouter({
