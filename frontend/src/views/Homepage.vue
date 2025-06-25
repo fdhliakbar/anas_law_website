@@ -6,7 +6,7 @@
   <Services />
   <LegalConsultingTrends />
   <Schedule />
-  <LegalAdvisorComparison />
+  <!-- <LegalAdvisorComparison /> -->
   <OurTeamSlider />
   <!-- <ConsultationForm /> -->
   <TaxConsultation/>

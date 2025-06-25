@@ -10,14 +10,14 @@
         class="max-w-screen-xl mx-auto flex items-center justify-between p-3 relative"
       >
         <!-- Logo -->
-        <a href="#" class="flex items-center flex-none">
+        <router-link to="/" class="flex items-center fle">
           <img
             src="../assets/images/logo.png"
             alt="Logo"
             class="h-10"
             width="200%"
           />
-        </a>
+        </router-link>
         <!-- Navigation Links (centered) -->
         <ul
           class="hidden lg:flex flex-1 justify-center space-x-10 text-base text-gray-700 font-medium"
@@ -40,22 +40,6 @@
               >Services</a
             >
           </li>
-          <!-- <li>
-            <a
-              href="#"
-              class="hover:text-[#B49F2B]"
-              @click.prevent="scrollTo('team')"
-              >Our Team</a
-            >
-          </li> -->
-          <li>
-            <a
-              href="#"
-              class="hover:text-[#B49F2B]"
-              @click.prevent="scrollTo('reviews')"
-              >Reviews</a
-            >
-          </li>
           <li>
             <a
               href="#"
@@ -63,6 +47,9 @@
               @click.prevent="scrollTo('footer')"
               >Contact</a
             >
+          </li>
+          <li>
+             <router-link to="/pricing" class="hover:text-[#B49F2B]">Pricing</router-link>
           </li>
         </ul>
         <!-- Login & Chat Button (absolutely right) -->
@@ -92,7 +79,7 @@
         <a href="#" class="block hover:underline">About</a>
         <a href="#" class="block hover:underline">Services</a>
         <a href="#" class="block hover:underline">Our Team</a>
-        <a href="#" class="block hover:underline">Reviews</a>
+        <a href="#" class="block hover:underline">Pricing</a>
         <a href="#" class="block hover:underline">Contact</a>
         <router-link
           to="/login"
