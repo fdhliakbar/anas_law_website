@@ -9,13 +9,15 @@
       <!-- Logo kiri -->
       <div class="flex flex-col items-center mb-4 md:mb-0">
         <img src="../assets/images/logo.png" alt="Logo" class="h-8 mb-2" />
-        <div class="text-sm">{{ $t('footer.copyright') }}</div>
+        <div class="text-sm">© 2025 Anaas Law</div>
       </div>
-      
+      <!-- Copyright tengah -->
       <!-- Link kanan -->
       <div class="flex items-center space-x-6">
-        <a href="#" class="hover:text-white transition">{{ $t('footer.termsConditions') }}</a>
-        <a href="#" class="hover:text-white transition">{{ $t('footer.returnPolicy') }}</a>
+        <a href="#" class="hover:text-white transition">Syarat dan Ketentuan</a>
+        <a href="#" class="hover:text-white transition"
+          >Kebijakan Pengembalian</a
+        >
         <div class="flex space-x-2 ml-4">
           <a href="#" aria-label="Facebook" class="hover:text-white">
             <svg

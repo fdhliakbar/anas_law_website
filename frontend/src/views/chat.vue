@@ -1,152 +1,29 @@
 <template>
-  <div class="min-h-screen bg-white">
-    <!-- Header -->
-    <header class="border-b border-gray-200 bg-white px-6 py-4">
-      <div class="flex items-center justify-between">
-        <div class="flex items-center">
-          <button @click="goBack" class="text-gray-600 hover:text-black transition mr-4">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              class="h-6 w-6"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
-              stroke-width="2"
-            >
-              <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                d="M10 19l-7-7m0 0l7-7m-7 7h18"
-              />
-            </svg>
-          </button>
-          <h1 class="font-bold text-2xl text-black">{{ $t('chat.title') }}</h1>
-        </div>
-        <div class="flex items-center space-x-2">
-          <div class="w-2 h-2 bg-green-500 rounded-full"></div>
-          <span class="text-sm text-gray-600">{{ userCount }} {{ $t('chat.usersOnline') }}</span>
-        </div>
+  <div class="chat-container">
+    <div class="chat-box">
+      <div class="chat-header">
+        <h2>Live Chat</h2>
+        <span class="user-count">Users Online: {{ userCount }}</span>
       </div>
-    </header>
 
-    <!-- Chat Container -->
-    <div class="flex flex-col h-screen">
-      <!-- Welcome Section -->
-      <div class="bg-gray-50 border-b border-gray-200 p-6">
-        <div class="max-w-4xl mx-auto text-center">
-          <h2 class="font-bold text-3xl text-black mb-4">{{ $t('chat.subtitle') }}</h2>
-          <p class="text-lg text-gray-600">
-            {{ $t('chat.description') }}
-          </p>
+      <div class="chat-messages" ref="messageContainer">
+        <div
+          v-for="(msg, index) in messages"
+          :key="index"
+          :class="['message', msg.sender === 'You' ? 'me' : 'friend']"
+        >
+          <span class="sender">{{ msg.sender }}</span>
+          <span class="text">{{ msg.text }}</span>
         </div>
       </div>
 
-      <!-- Chat Messages -->
-      <div class="flex-1 overflow-hidden">
-        <div class="h-full flex flex-col max-w-4xl mx-auto">
-          <div class="flex-1 overflow-y-auto p-6" ref="messageContainer">
-            <div class="space-y-4">
-              <!-- Welcome Message -->
-              <div class="flex justify-start">
-                <div class="max-w-xs lg:max-w-md">
-                  <div class="bg-gray-100 rounded-2xl px-4 py-3">
-                    <p class="text-gray-800">
-                      {{ $t('chat.welcomeMessage') }}
-                    </p>
-                  </div>
-                  <p class="text-xs text-gray-500 mt-1 pl-3">Legal Assistant</p>
-                </div>
-              </div>
-
-              <!-- Chat Messages -->
-              <div
-                v-for="(msg, index) in messages"
-                :key="index"
-                :class="['flex', msg.sender === 'You' ? 'justify-end' : 'justify-start']"
-              >
-                <div class="max-w-xs lg:max-w-md">
-                  <div
-                    :class="[
-                      'rounded-2xl px-4 py-3',
-                      msg.sender === 'You'
-                        ? 'bg-black text-white'
-                        : 'bg-gray-100 text-gray-800'
-                    ]"
-                  >
-                    <p>{{ msg.text }}</p>
-                  </div>
-                  <p class="text-xs text-gray-500 mt-1 pl-3">
-                    {{ msg.sender === 'You' ? 'You' : msg.sender }}
-                  </p>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <!-- Chat Input -->
-          <div class="border-t border-gray-200 p-6 bg-white">
-            <div class="flex items-center space-x-4">
-              <div class="flex-1">
-                <input
-                  v-model="messageText"
-                  @keyup.enter="sendMessage"
-                  :placeholder="$t('chat.placeholder')"
-                  class="w-full border-2 border-gray-300 rounded-full px-6 py-3 text-lg focus:outline-none focus:border-black transition"
-                />
-              </div>
-              <button
-                @click="sendMessage"
-                :disabled="!messageText.trim()"
-                class="bg-black text-white p-3 rounded-full hover:bg-gray-800 transition disabled:opacity-50 disabled:cursor-not-allowed"
-              >
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  class="h-6 w-6"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke="currentColor"
-                  stroke-width="2"
-                >
-                  <path
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8"
-                  />
-                </svg>
-              </button>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- Quick Actions -->
-    <div class="bg-gray-50 border-t border-gray-200 p-6">
-      <div class="max-w-4xl mx-auto">
-        <h3 class="font-bold text-lg text-black mb-4">{{ $t('chat.quickActions') }}</h3>
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
-          <button
-            @click="sendQuickMessage('I need help with a contract review')"
-            class="text-left p-4 bg-white border border-gray-200 rounded-lg hover:border-black transition"
-          >
-            <div class="font-medium text-black">{{ $t('chat.contractReview') }}</div>
-            <div class="text-sm text-gray-600">{{ $t('chat.contractReviewDesc') }}</div>
-          </button>
-          <button
-            @click="sendQuickMessage('I want to schedule a consultation')"
-            class="text-left p-4 bg-white border border-gray-200 rounded-lg hover:border-black transition"
-          >
-            <div class="font-medium text-black">{{ $t('chat.scheduleConsultation') }}</div>
-            <div class="text-sm text-gray-600">{{ $t('chat.scheduleConsultationDesc') }}</div>
-          </button>
-          <button
-            @click="sendQuickMessage('I have a legal emergency')"
-            class="text-left p-4 bg-white border border-gray-200 rounded-lg hover:border-black transition"
-          >
-            <div class="font-medium text-black">{{ $t('chat.legalEmergency') }}</div>
-            <div class="text-sm text-gray-600">{{ $t('chat.legalEmergencyDesc') }}</div>
-          </button>
-        </div>
+      <div class="chat-input">
+        <input
+          v-model="messageText"
+          @keyup.enter="sendMessage"
+          placeholder="Type a message..."
+        />
+        <button @click="sendMessage">Send</button>
       </div>
     </div>
   </div>
@@ -154,14 +31,8 @@
 
 <script setup>
 import { ref, onMounted, nextTick } from 'vue'
-import { useRouter } from 'vue-router'
-import { useI18n } from 'vue-i18n'
 import { io } from 'socket.io-client'
 
-const router = useRouter()
-const { t } = useI18n()
-
-// Socket connection
 const socket = io('http://localhost:3000')
 
 const messages = ref([])
@@ -177,70 +48,136 @@ const scrollToBottom = () => {
   })
 }
 
+onMounted(() => {
+  socket.on('connect', () => {
+    console.log('Connected to server')
+  })
+
+  socket.on('userCount', (count) => {
+    userCount.value = count
+  })
+
+  socket.on('receiveMessage', (msg) => {
+    messages.value.push({ sender: 'Friend', text: msg })
+    scrollToBottom()
+  })
+})
+
 const sendMessage = () => {
-  if (messageText.value.trim()) {
-    const message = {
-      sender: 'You',
-      text: messageText.value,
-      timestamp: new Date()
-    }
-    
-    messages.value.push(message)
-    socket.emit('message', message)
+  if (messageText.value.trim() !== '') {
+    messages.value.push({ sender: 'You', text: messageText.value })
+    socket.emit('sendMessage', messageText.value)
     messageText.value = ''
     scrollToBottom()
   }
 }
-
-const sendQuickMessage = (text) => {
-  messageText.value = text
-  sendMessage()
-}
-
-const goBack = () => {
-  router.go(-1)
-}
-
-// Socket event listeners
-onMounted(() => {
-  socket.on('message', (msg) => {
-    if (msg.sender !== 'You') {
-      messages.value.push(msg)
-      scrollToBottom()
-    }
-  })
-
-  socket.on('user-count', (count) => {
-    userCount.value = count
-  })
-
-  socket.on('connect', () => {
-    console.log('Connected to chat server')
-  })
-
-  socket.on('disconnect', () => {
-    console.log('Disconnected from chat server')
-  })
-})
 </script>
 
 <style scoped>
-/* Custom scrollbar */
-.overflow-y-auto::-webkit-scrollbar {
-  width: 6px;
+.chat-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background: #f4f4f4;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
-.overflow-y-auto::-webkit-scrollbar-track {
-  background: #f1f1f1;
+.chat-box {
+  width: 400px;
+  height: 90vh; /* Container chat tinggi 90% viewport */
+  background: white;
   border-radius: 10px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
 }
 
-.overflow-y-auto::-webkit-scrollbar-thumb {
-  background: #888;
-  border-radius: 10px;
+.chat-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+  flex-shrink: 0; /* supaya header tidak mengecil */
 }
 
-.overflow-y-auto::-webkit-scrollbar-thumb:hover {
-  background: #555;
+.user-count {
+  font-size: 14px;
+  color: #555;
+}
+
+.chat-messages {
+  flex-grow: 1; /* agar pesan memenuhi ruang sisa */
+  overflow-y: auto;
+  padding: 10px;
+  border: 1px solid #eee;
+  border-radius: 5px;
+  background: #f9f9f9;
+  margin-bottom: 1rem;
+  display: flex;
+  flex-direction: column;
+}
+
+.message {
+  margin-bottom: 10px;
+  display: flex;
+  flex-direction: column;
+  max-width: 75%;
+  word-wrap: break-word;
+}
+
+.message.friend {
+  align-self: flex-start; /* kiri */
+  background: #e0f7fa;
+  border-radius: 12px 12px 12px 0;
+  padding: 8px 12px;
+  text-align: left;
+}
+
+.message.me {
+  align-self: flex-end; /* kanan */
+  background: #c8e6c9;
+  border-radius: 12px 12px 0 12px;
+  padding: 8px 12px;
+  text-align: right;
+}
+
+.sender {
+  font-weight: bold;
+  font-size: 12px;
+  margin-bottom: 2px;
+  color: #333;
+}
+
+.text {
+  font-size: 14px;
+}
+
+.chat-input {
+  display: flex;
+  gap: 10px;
+  flex-shrink: 0; /* supaya input tidak mengecil */
+}
+
+.chat-input input {
+  flex: 1;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+}
+
+.chat-input button {
+  padding: 10px 20px;
+  background-color: #1e88e5;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.chat-input button:hover {
+  background-color: #1565c0;
 }
 </style>

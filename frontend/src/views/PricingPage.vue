@@ -5,24 +5,25 @@
     <section class="w-full bg-white py-24 px-4">
       <div class="max-w-5xl mx-auto flex flex-col items-center text-center">
         <h1 class="font-bold text-5xl md:text-7xl text-black mb-8 leading-tight">
-          {{ $t('pricing.title') }}
+          Transparent Legal<br />
+          Pricing for Every Case
         </h1>
         <p class="text-lg md:text-xl text-black mb-12">
-          {{ $t('pricing.subtitle') }}<br />
-          {{ $t('pricing.chooseFrom') }}
+          Clear, upfront pricing for all legal services. Free initial consultation for all new clients.<br />
+          Choose from 15+ trusted legal services across various specializations.
         </p>
         <div class="flex flex-col md:flex-row gap-4">
           <button
             @click="goToBooking"
             class="border border-black bg-black text-white px-8 py-4 rounded-lg text-lg font-semibold transition hover:bg-gray-800"
           >
-            {{ $t('pricing.scheduleConsultation') }}
+            Schedule Consultation
           </button>
           <button
             @click="goToChat"
             class="border border-black text-black px-8 py-4 rounded-lg text-lg font-semibold bg-white hover:bg-black hover:text-white transition"
           >
-            {{ $t('pricing.getInTouch') }}
+            Get in Touch
           </button>
         </div>
       </div>
@@ -69,7 +70,7 @@
               <!-- Duration -->
               <div class="flex items-center text-gray-600 mb-6">
                 <i class="far fa-clock mr-2"></i>
-                <span>{{ $t('pricing.estimated') }}: {{ service.duration }}</span>
+                <span>Estimated: {{ service.duration }}</span>
               </div>
               
               <!-- Features -->
@@ -89,7 +90,7 @@
                 @click="contactForService(service)"
                 class="w-full border border-black bg-black text-white py-3 px-6 rounded-lg text-lg font-semibold transition hover:bg-gray-800"
               >
-                {{ $t('pricing.getStarted') }}
+                Get Started
               </button>
             </div>
           </div>
@@ -101,16 +102,16 @@
     <section class="py-16 px-4 bg-white">
       <div class="max-w-5xl mx-auto text-center">
         <h2 class="font-bold text-4xl md:text-5xl text-black mb-8">
-          {{ $t('pricing.whyChoose') }}
+          Why Choose Our Legal Services?
         </h2>
         <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mt-12">
           <div class="text-center">
             <div class="w-16 h-16 bg-black rounded-full flex items-center justify-center mx-auto mb-4">
               <i class="fas fa-comments text-white text-xl"></i>
             </div>
-            <h3 class="text-xl font-bold text-black mb-2">{{ $t('pricing.freeConsultation') }}</h3>
+            <h3 class="text-xl font-bold text-black mb-2">Free Consultation</h3>
             <p class="text-gray-600">
-              {{ $t('pricing.freeConsultationDesc') }}
+              30-minute free initial consultation for all new clients
             </p>
           </div>
           
@@ -118,9 +119,9 @@
             <div class="w-16 h-16 bg-black rounded-full flex items-center justify-center mx-auto mb-4">
               <i class="fas fa-credit-card text-white text-xl"></i>
             </div>
-            <h3 class="text-xl font-bold text-black mb-2">{{ $t('pricing.flexiblePayment') }}</h3>
+            <h3 class="text-xl font-bold text-black mb-2">Flexible Payment</h3>
             <p class="text-gray-600">
-              {{ $t('pricing.flexiblePaymentDesc') }}
+              Installment payment plans available for certain cases
             </p>
           </div>
           
@@ -128,9 +129,9 @@
             <div class="w-16 h-16 bg-black rounded-full flex items-center justify-center mx-auto mb-4">
               <i class="fas fa-award text-white text-xl"></i>
             </div>
-            <h3 class="text-xl font-bold text-black mb-2">{{ $t('pricing.experiencedTeam') }}</h3>
+            <h3 class="text-xl font-bold text-black mb-2">Experienced Team</h3>
             <p class="text-gray-600">
-              {{ $t('pricing.experiencedTeamDesc') }}
+              10+ years experience in various legal fields
             </p>
           </div>
         </div>
@@ -141,23 +142,23 @@
     <section class="py-16 px-4 bg-gray-900 text-white">
       <div class="max-w-5xl mx-auto text-center">
         <h2 class="font-bold text-4xl md:text-5xl mb-8">
-          {{ $t('pricing.customConsultation') }}
+          Need Custom Legal Consultation?
         </h2>
         <p class="text-xl text-gray-300 mb-12 max-w-3xl mx-auto">
-          {{ $t('pricing.customConsultationDesc') }}
+          Every case is unique. Contact us for a more accurate price estimate tailored to your specific legal needs.
         </p>
         <div class="flex flex-col md:flex-row gap-4 justify-center">
           <button
             @click="goToBooking"
             class="border border-white bg-white text-black px-8 py-4 rounded-lg text-lg font-semibold transition hover:bg-gray-100"
           >
-            {{ $t('pricing.scheduleConsultation') }}
+            Schedule Consultation
           </button>
           <button
             @click="goToChat"
             class="border border-white text-white px-8 py-4 rounded-lg text-lg font-semibold bg-transparent hover:bg-white hover:text-black transition"
           >
-            {{ $t('pricing.chatNow') }}
+            Chat Now
           </button>
         </div>
       </div>
@@ -169,23 +170,21 @@
 <script setup>
 import { ref, computed } from 'vue'
 import { useRouter } from 'vue-router'
-import { useI18n } from 'vue-i18n'
 import Header from '../components/Header.vue'
 import Footer from '../components/Footer.vue'
 
 const router = useRouter()
-const { t } = useI18n()
 
 // Active category
 const activeCategory = ref('civil')
 
 // Categories
-const categories = computed(() => [
-  { id: 'civil', name: t('pricing.categories.civilLaw') },
-  { id: 'criminal', name: t('pricing.categories.criminalLaw') },
-  { id: 'corporate', name: t('pricing.categories.corporateLaw') },
-  { id: 'family', name: t('pricing.categories.familyLaw') },
-  { id: 'property', name: t('pricing.categories.propertyLaw') }
+const categories = ref([
+  { id: 'civil', name: 'Civil Law' },
+  { id: 'criminal', name: 'Criminal Law' },
+  { id: 'corporate', name: 'Corporate Law' },
+  { id: 'family', name: 'Family Law' },
+  { id: 'property', name: 'Property Law' }
 ])
 
 // Services data
@@ -221,7 +220,209 @@ const services = ref([
       'Unlimited revisions'
     ]
   },
-  // Add more services as needed
+  {
+    id: 3,
+    category: 'civil',
+    name: 'Mediation Services',
+    description: 'Alternative dispute resolution through professional mediation',
+    price: '$7,500',
+    priceUnit: '- $12,000',
+    duration: '1-3 months',
+    features: [
+      'Negotiation strategy',
+      'Mediation assistance',
+      'Agreement drafting',
+      'Implementation follow-up'
+    ]
+  },
+
+  // Criminal Law
+  {
+    id: 4,
+    category: 'criminal',
+    name: 'Criminal Defense',
+    description: 'Comprehensive defense for general criminal charges',
+    price: '$20,000',
+    priceUnit: '- $50,000',
+    duration: '6-12 months',
+    features: [
+      'Investigation support',
+      'Court defense',
+      'Appeals & cassation',
+      'Family consultation'
+    ]
+  },
+  {
+    id: 5,
+    category: 'criminal',
+    name: 'White Collar Crime',
+    description: 'Specialized defense for corruption and white-collar crimes',
+    price: '$100,000',
+    priceUnit: '- $500,000',
+    duration: '1-3 years',
+    features: [
+      'Specialized legal team',
+      'Comprehensive defense strategy',
+      'Asset protection',
+      'Family support'
+    ]
+  },
+  {
+    id: 6,
+    category: 'criminal',
+    name: 'Police Reports',
+    description: 'Assistance with filing and following up police reports',
+    price: '$3,000',
+    priceUnit: '- $7,500',
+    duration: '2-4 weeks',
+    features: [
+      'Report drafting',
+      'Police station assistance',
+      'Case follow-up',
+      'Strategy consultation'
+    ]
+  },
+
+  // Corporate Law
+  {
+    id: 7,
+    category: 'corporate',
+    name: 'Company Formation',
+    description: 'Complete assistance in establishing business entities',
+    price: '$7,500',
+    priceUnit: '- $15,000',
+    duration: '2-4 weeks',
+    features: [
+      'Notarial deed processing',
+      'Ministry legalization',
+      'Business license',
+      'Tax consultation'
+    ]
+  },
+  {
+    id: 8,
+    category: 'corporate',
+    name: 'M&A Advisory',
+    description: 'Merger and acquisition legal support services',
+    price: '$75,000',
+    priceUnit: '- $200,000',
+    duration: '6-12 months',
+    features: [
+      'Legal due diligence',
+      'Transaction structuring',
+      'Complete documentation',
+      'Transaction closing'
+    ]
+  },
+  {
+    id: 9,
+    category: 'corporate',
+    name: 'Compliance Audit',
+    description: 'Corporate legal compliance auditing services',
+    price: '$25,000',
+    priceUnit: '- $50,000',
+    duration: '1-2 months',
+    features: [
+      'Corporate document review',
+      'Legal risk identification',
+      'Improvement recommendations',
+      'Compliance training'
+    ]
+  },
+
+  // Family Law
+  {
+    id: 10,
+    category: 'family',
+    name: 'Divorce Proceedings',
+    description: 'Complete divorce and asset division proceedings',
+    price: '$10,000',
+    priceUnit: '- $25,000',
+    duration: '3-8 months',
+    features: [
+      'Family mediation',
+      'Court representation',
+      'Asset division',
+      'Child custody'
+    ]
+  },
+  {
+    id: 11,
+    category: 'family',
+    name: 'Child Adoption',
+    description: 'Legal child adoption process',
+    price: '$12,500',
+    priceUnit: '- $20,000',
+    duration: '6-12 months',
+    features: [
+      'Document processing',
+      'Court proceedings',
+      'Psychological consultation',
+      'Legal follow-up'
+    ]
+  },
+  {
+    id: 12,
+    category: 'family',
+    name: 'Estate Planning',
+    description: 'Inheritance and estate planning services',
+    price: '$7,500',
+    priceUnit: '- $15,000',
+    duration: '2-6 months',
+    features: [
+      'Will preparation',
+      'Estate distribution',
+      'Gift certificates',
+      'Family mediation'
+    ]
+  },
+
+  // Property Law
+  {
+    id: 13,
+    category: 'property',
+    name: 'Property Transactions',
+    description: 'Real estate purchase and sale assistance',
+    price: '$5,000',
+    priceUnit: '- $10,000',
+    duration: '1-2 months',
+    features: [
+      'Property document review',
+      'Agreement drafting',
+      'Deed assistance',
+      'Title transfer'
+    ]
+  },
+  {
+    id: 14,
+    category: 'property',
+    name: 'Land Disputes',
+    description: 'Land ownership dispute resolution',
+    price: '$15,000',
+    priceUnit: '- $35,000',
+    duration: '6-18 months',
+    features: [
+      'Document research',
+      'Resolution strategy',
+      'Litigation if required',
+      'Judgment execution'
+    ]
+  },
+  {
+    id: 15,
+    category: 'property',
+    name: 'Property Permits',
+    description: 'Various property and building permit processing',
+    price: '$7,500',
+    priceUnit: '- $15,000',
+    duration: '2-4 months',
+    features: [
+      'Building permits & others',
+      'Regulatory consultation',
+      'Process follow-up',
+      'Permit maintenance'
+    ]
+  }
 ])
 
 // Computed property for filtered services
