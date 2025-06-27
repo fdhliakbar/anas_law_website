@@ -218,14 +218,18 @@ const aiModel = ref('FREE AI')
 const selectedModel = ref('meta-llama/llama-3.1-8b-instruct:free')
 
 // Konfigurasi OpenRouter dengan model GRATIS
+console.log('🔑 Checking API Key:', import.meta.env.VITE_OPENROUTER_API_KEY ? 'Found' : 'Missing')
+console.log('🔑 API Key starts with:', import.meta.env.VITE_OPENROUTER_API_KEY?.substring(0, 15) + '...')
+console.log('🔑 AI_CONFIG.OPENROUTER.token:', AI_CONFIG.OPENROUTER.token ? 'Found' : 'Missing')
+
 const OPENROUTER_API = {
   url: 'https://openrouter.ai/api/v1/chat/completions',
   token: AI_CONFIG.OPENROUTER.token,
   headers: {
     'Authorization': `Bearer ${AI_CONFIG.OPENROUTER.token}`,
     'Content-Type': 'application/json',
-    'HTTP-Referer': 'https://anaslaw.com',
-    'X-Title': 'Anas Law FREE AI Assistant'
+    'HTTP-Referer': import.meta.env.VITE_SITE_URL || 'https://anaslaw.com',
+    'X-Title': import.meta.env.VITE_SITE_NAME || 'Anas Law FREE AI Assistant'
   }
 }
 
@@ -350,15 +354,15 @@ const callFreeOpenRouterAPI = async (message) => {
   const requestBody = {
     model: selectedModel.value,
     messages: messages,
-    max_tokens: 100, // Lebih kecil untuk model gratis
-    temperature: 0.7,
-    top_p: 0.9,
-    stream: false
+    max_tokens: AI_CONFIG.OPENROUTER.config.max_tokens, // Menggunakan config dari AI_CONFIG
+    temperature: AI_CONFIG.OPENROUTER.config.temperature,
+    top_p: AI_CONFIG.OPENROUTER.config.top_p,
+    stream: AI_CONFIG.OPENROUTER.config.stream
   }
   
   console.log('📡 Calling FREE OpenRouter API...')
-  console.log('Model:', selectedModel.value)
-  console.log('Request:', requestBody)
+  console.log('🤖 Model:', selectedModel.value)
+  console.log('📦 Request body:', requestBody)
   
   const response = await fetch(OPENROUTER_API.url, {
     method: 'POST',
@@ -371,7 +375,17 @@ const callFreeOpenRouterAPI = async (message) => {
   if (!response.ok) {
     const errorText = await response.text()
     console.error('API Error:', errorText)
-    throw new Error(`HTTP ${response.status}: ${errorText}`)
+    
+    // Handle specific errors
+    if (response.status === 401) {
+      throw new Error(`🔑 API Key bermasalah! Silakan:\n1. Cek API key di file .env\n2. Buat API key baru di https://openrouter.ai/keys\n3. Pastikan account sudah diverifikasi`)
+    } else if (response.status === 429) {
+      throw new Error(`⏰ Rate limit exceeded! Tunggu beberapa menit sebelum mencoba lagi.`)
+    } else if (response.status === 402) {
+      throw new Error(`💳 Model tidak gratis! Pastikan menggunakan model dengan ":free" suffix.`)
+    }
+    
+    throw new Error(`❌ OpenRouter Error ${response.status}: ${errorText}`)
   }
   
   const data = await response.json()

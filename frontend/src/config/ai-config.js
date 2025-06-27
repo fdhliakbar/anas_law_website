@@ -1,87 +1,51 @@
-// Free AI API Configuration
-// Ganti dengan API keys yang sebenarnya
+// OpenRouter API Configuration - FREE MODELS ONLY
+// Menggunakan model AI gratis melalui OpenRouter
 
 export const AI_CONFIG = {
-  // Hugging Face (Free tier: 30,000 requests/month)
-  // Sign up at: https://huggingface.co/join
-  HUGGING_FACE: {
-    token: import.meta.env.VITE_HUGGING_FACE_TOKEN, // Token yang valid
-    models: {
-      chat: 'microsoft/DialoGPT-medium',
-      legal: 'microsoft/DialoGPT-large',
-      instruct: 'google/flan-t5-base'
-    }
-  },
-  
-  // Cohere (Free tier: 100 API calls/minute)
-  // Sign up at: https://cohere.ai/
-  COHERE: {
-    token: 'your-cohere-api-key-here', // Ganti dengan token asli
-    model: 'command-light' // Free model
-  },
-  
-  // OpenAI (Tidak gratis, tapi disediakan untuk referensi)
-  OPENAI: {
-    token: 'your-openai-api-key', // Membutuhkan pembayaran
-    model: 'gpt-3.5-turbo'
-  },
-  
-  // AI21 (Free tier tersedia)
-  // Sign up at: https://studio.ai21.com/
-  AI21: {
-    token: 'your-ai21-api-key',
-    model: 'j2-light'
-  },
-
-  // OpenRouter (Multiple AI models access)
-  // FREE MODELS ONLY - Zero cost AI models
+  // OpenRouter (Multiple AI models access) - 100% FREE MODELS
   OPENROUTER: {
     token: import.meta.env.VITE_OPENROUTER_API_KEY,
     baseUrl: 'https://openrouter.ai/api/v1',
     models: {
-      // 100% FREE MODELS
+      // 100% FREE MODELS - Tidak ada biaya sama sekali
       llama_free: 'meta-llama/llama-3.1-8b-instruct:free',
       qwen_free: 'qwen/qwen-2-7b-instruct:free', 
       gemma_free: 'google/gemma-2-9b-it:free',
       phi_free: 'microsoft/phi-3-mini-128k-instruct:free',
       mistral_free: 'mistralai/mistral-7b-instruct:free',
+      // Default model yang akan digunakan
       default: 'meta-llama/llama-3.1-8b-instruct:free'
+    },
+    // Konfigurasi untuk model gratis
+    config: {
+      max_tokens: 150, // Dibatasi untuk model gratis
+      temperature: 0.7,
+      top_p: 0.9,
+      stream: false
     }
   }
 }
 
-// Petunjuk mendapatkan API Keys GRATIS:
+/*
+PENTING - CARA MENDAPATKAN API KEY GRATIS:
+1. Daftar di https://openrouter.ai/
+2. Verifikasi email Anda
+3. Masuk ke dashboard dan buat API key
+4. Copy API key ke file .env ini
+5. Pastikan menggunakan model dengan ":free" di nama model
+6. Model gratis memiliki rate limit tapi tidak ada biaya
 
-/* 
-1. HUGGING FACE (RECOMMENDED - GRATIS):
-   - Daftar di https://huggingface.co/join
-   - Pergi ke Settings > Access Tokens
-   - Create New Token
-   - Copy token dan ganti di HUGGING_FACE.token
+MODEL GRATIS YANG TERSEDIA:
+- meta-llama/llama-3.1-8b-instruct:free (Recommended)
+- qwen/qwen-2-7b-instruct:free
+- google/gemma-2-9b-it:free
+- microsoft/phi-3-mini-128k-instruct:free
+- mistralai/mistral-7b-instruct:free
 
-2. COHERE (GRATIS dengan limit):
-   - Daftar di https://cohere.ai/
-   - Pergi ke Dashboard > API Keys
-   - Generate API Key
-   - Copy dan ganti di COHERE.token
-
-3. OPENROUTER (MULTIPLE AI MODELS):
-   - Daftar di https://openrouter.ai/
-   - Pergi ke Keys > Create Key  
-   - Akses ke GPT, Claude, Llama dan model lainnya
-   - Pay-per-use pricing yang sangat terjangkau
-   - Sudah dikonfigurasi dengan token yang valid
-
-4. AI21 (Free tier):
-   - Daftar di https://studio.ai21.com/
-   - Dapatkan API key dari dashboard
-   - Copy dan ganti di AI21.token
-
-5. Untuk produksi, simpan keys ini di environment variables:
-   - VITE_HUGGING_FACE_TOKEN
-   - VITE_COHERE_TOKEN
-   - VITE_AI21_TOKEN
-   - VITE_OPENROUTER_TOKEN
+RATE LIMITS:
+- Model gratis memiliki batasan request per menit
+- Biasanya 10-20 request per menit per model
+- Tidak ada biaya finansial
 */
 
 export default AI_CONFIG
