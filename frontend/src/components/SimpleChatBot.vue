@@ -1,174 +1,146 @@
 <template>
-  <!-- Professional Law Firm ChatBot -->
+  <!-- Kontainer utama. HANYA untuk positioning. BUKAN flex container. -->
   <div class="fixed bottom-6 right-6 z-[9999]">
-    <!-- Chat Button with Professional Design -->
-    <div class="relative">
-      <!-- Notification Badge -->
-      <div 
-        v-if="hasUnreadMessages && !isOpen" 
-        class="absolute -top-2 -right-2 w-6 h-6 bg-red-500 text-white text-xs rounded-full flex items-center justify-center font-semibold animate-pulse"
-      >
-        {{ unreadCount }}
-      </div>
-      
-      <!-- Main Chat Button -->
-      <button
-        @click="toggleChat"
-        class="w-16 h-16 bg-gradient-to-br from-amber-600 to-amber-700 hover:from-amber-700 hover:to-amber-800 text-white rounded-full shadow-xl hover:shadow-2xl transform hover:scale-105 transition-all duration-300 flex items-center justify-center group"
-        :class="{ 'animate-pulse': isTyping }"
-      >
-        <svg v-if="!isTyping" class="w-8 h-8 group-hover:scale-110 transition-transform" fill="currentColor" viewBox="0 0 24 24">
-          <path d="M20 2H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h4l4 4 4-4h4c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm-2 12H6v-2h12v2zm0-3H6V9h12v2zm0-3H6V6h12v2z"/>
-        </svg>
-        <div v-else class="flex space-x-1">
-          <div class="w-2 h-2 bg-white rounded-full animate-bounce"></div>
-          <div class="w-2 h-2 bg-white rounded-full animate-bounce" style="animation-delay: 0.1s"></div>
-          <div class="w-2 h-2 bg-white rounded-full animate-bounce" style="animation-delay: 0.2s"></div>
-        </div>
-      </button>
-      
-      <!-- Online Status Indicator -->
-      <div class="absolute bottom-0 right-0 w-5 h-5 rounded-full border-2 border-white" :class="hasApiKey ? 'bg-green-500' : 'bg-red-500'"></div>
-    </div>
     
-    <!-- Professional Chat Window -->
-    <div 
-      v-if="isOpen" 
-      class="mb-4 w-96 h-[600px] bg-white rounded-2xl shadow-2xl border border-gray-200 flex flex-col overflow-hidden backdrop-blur-sm transform transition-all duration-300 ease-out"
-      style="background: linear-gradient(135deg, #ffffff 0%, #f8fafc 100%); animation: slideInUp 0.3s ease-out;"
-    >
-      <!-- Header -->
-      <div class="bg-gradient-to-r from-amber-600 via-amber-700 to-amber-800 text-white p-6 flex justify-between items-center">
-        <div class="flex items-center space-x-3">
-          <!-- Logo/Avatar -->
-          <div class="w-12 h-12 bg-white/20 rounded-full flex items-center justify-center">
-            <svg class="w-7 h-7" fill="currentColor" viewBox="0 0 24 24">
-              <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/>
-            </svg>
-          </div>
-          <div>
-            <h3 class="font-bold text-lg">Anas Law</h3>
-            <p class="text-amber-100 text-sm flex items-center">
-              <span class="w-2 h-2 bg-green-400 rounded-full mr-2"></span>
-              Customer Service
-            </p>
-          </div>
-        </div>
-        <button @click="toggleChat" class="text-white/80 hover:text-white transition-colors">
-          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
-          </svg>
-        </button>
-      </div>
-      
-      <!-- Chat Messages Area -->
-      <div class="flex-1 p-4 overflow-y-auto space-y-4 bg-gray-50/30">
-        <!-- Welcome Message -->
-        <div class="flex items-start space-x-3">
-          <div class="w-8 h-8 bg-amber-600 rounded-full flex items-center justify-center text-white text-xs font-bold">
-            AL
-          </div>
-          <div class="bg-white rounded-2xl rounded-tl-md p-4 shadow-sm border max-w-xs">
-            <p class="text-gray-800 text-sm leading-relaxed">
-              Selamat datang di <strong>Anas Law</strong>! 👋
-              <br><br>
-              Saya siap membantu menjawab pertanyaan hukum Anda dan memberikan informasi tentang layanan kami.
-              <br><br>
-              <em>Konsultasi awal 30 menit gratis!</em> 🆓
-            </p>
-            <div class="text-xs text-gray-500 mt-2">
-              {{ new Date().toLocaleTimeString('id-ID', { hour: '2-digit', minute: '2-digit' }) }}
+    <!-- Jendela Chat Profesional -->
+    <!-- Dibungkus dengan <transition> dan diposisikan absolut di atas tombol. -->
+    <transition name="chat-window-fade">
+      <div 
+        v-if="isOpen" 
+        class="absolute right-0 bottom-20 w-96 h-[600px] bg-white rounded-2xl shadow-2xl border border-gray-200 flex flex-col overflow-hidden"
+        style="background: linear-gradient(135deg, #ffffff 0%, #f8fafc 100%);"
+      >
+        <!-- Header -->
+        <div class="bg-gradient-to-r from-green-600 to-teal-600 text-white p-6 flex justify-between items-center flex-shrink-0">
+          <div class="flex items-center space-x-3">
+            <div class="w-12 h-12 bg-white/20 rounded-full flex items-center justify-center">
+              <svg xmlns="http://www.w3.org/2000/svg" class="w-7 h-7" viewBox="0 0 24 24" fill="currentColor"><path d="M12.37,6.16a1,1,0,0,0-1.23.79l-1.48,6.07a1,1,0,0,0,.6,1.13,1,1,0,0,0,1.13-.6l1.48-6.07A1,1,0,0,0,12.37,6.16Z"/><path d="M19.14,4.24,12,1.06,4.86,4.24A2,2,0,0,0,3.5,6.15V11a9.17,9.17,0,0,0,8,9,1,1,0,0,0,.15,0,1,1,0,0,0,.15,0,9.17,9.17,0,0,0,8-9V6.15A2,2,0,0,0,19.14,4.24ZM12,18.5a7.17,7.17,0,0,1-6-7.5V6.8l6-2.9,6,2.9V11A7.17,7.17,0,0,1,12,18.5Z"/></svg>
+            </div>
+            <div>
+              <h3 class="font-bold text-lg">Anas Law</h3>
+              <p class="text-green-100 text-sm flex items-center">
+                <span class="w-2.5 h-2.5 bg-green-300 rounded-full mr-2"></span>
+                Customer Service
+              </p>
             </div>
           </div>
+          <button @click="toggleChat" class="text-white/80 hover:text-white transition-colors">
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+            </svg>
+          </button>
         </div>
         
-        <!-- User Messages (will be populated when user sends messages) -->
-        <div v-for="(message, index) in chatMessages" :key="index" class="flex" :class="message.isUser ? 'justify-end' : 'justify-start'">
-          <div v-if="!message.isUser" class="flex items-start space-x-3 max-w-sm">
-            <div class="w-8 h-8 bg-amber-600 rounded-full flex items-center justify-center text-white text-xs font-bold">
+        <!-- Area Pesan -->
+        <div class="flex-1 p-4 overflow-y-auto space-y-4 bg-gray-50/30">
+          <!-- Pesan Selamat Datang -->
+          <div class="flex items-start space-x-3">
+            <div class="w-8 h-8 bg-green-600 rounded-full flex items-center justify-center text-white text-sm font-bold flex-shrink-0">
               AL
             </div>
-            <div class="bg-white rounded-2xl rounded-tl-md p-4 shadow-sm border">
-              <div class="text-gray-800 text-sm leading-relaxed whitespace-pre-line">{{ message.text }}</div>
-              <div class="text-xs text-gray-500 mt-2">{{ message.time }}</div>
+            <div class="bg-white rounded-2xl rounded-tl-md p-4 shadow-sm border max-w-xs">
+              <p class="text-gray-800 text-sm leading-relaxed">
+                Selamat datang di <strong>Anas Law</strong>! 👋
+                <br><br>
+                Saya siap membantu menjawab pertanyaan hukum Anda dan memberikan informasi tentang layanan kami.
+                <br><br>
+                <em>Konsultasi awal 30 menit gratis!</em> 🆓
+              </p>
+              <div class="text-xs text-gray-500 mt-2">
+                {{ new Date().toLocaleTimeString('id-ID', { hour: '2-digit', minute: '2-digit' }) }}
+              </div>
             </div>
           </div>
-          <div v-else class="max-w-sm">
-            <div class="bg-amber-600 text-white rounded-2xl rounded-tr-md p-4 shadow-sm">
-              <div class="text-sm leading-relaxed">{{ message.text }}</div>
-              <div class="text-xs text-amber-100 mt-2">{{ message.time }}</div>
+          
+          <!-- Pesan Dinamis -->
+          <div v-for="(message, index) in chatMessages" :key="index" class="flex" :class="message.isUser ? 'justify-end' : 'justify-start'">
+            <div v-if="!message.isUser" class="flex items-start space-x-3 max-w-sm">
+              <div class="w-8 h-8 bg-green-600 rounded-full flex items-center justify-center text-white text-sm font-bold flex-shrink-0">
+                AL
+              </div>
+              <div class="bg-white rounded-2xl rounded-tl-md p-4 shadow-sm border">
+                <div class="text-gray-800 text-sm leading-relaxed whitespace-pre-line">{{ message.text }}</div>
+                <div class="text-xs text-gray-500 mt-2">{{ message.time }}</div>
+              </div>
+            </div>
+            <div v-else class="max-w-sm">
+              <div class="bg-gradient-to-r from-green-600 to-teal-500 text-white rounded-2xl rounded-tr-md p-4 shadow-sm">
+                <div class="text-sm leading-relaxed">{{ message.text }}</div>
+                <div class="text-xs text-green-100 mt-2">{{ message.time }}</div>
+              </div>
+            </div>
+          </div>
+          
+          <!-- Indikator Mengetik -->
+          <div v-if="isTyping" class="flex items-start space-x-3">
+            <div class="w-8 h-8 bg-green-600 rounded-full flex items-center justify-center text-white text-sm font-bold flex-shrink-0">
+              AL
+            </div>
+            <div class="bg-white rounded-2xl rounded-tl-md p-4 shadow-sm border max-w-xs">
+              <div class="flex space-x-1">
+                <div class="w-2 h-2 bg-gray-400 rounded-full animate-bounce"></div>
+                <div class="w-2 h-2 bg-gray-400 rounded-full animate-bounce" style="animation-delay: 0.1s"></div>
+                <div class="w-2 h-2 bg-gray-400 rounded-full animate-bounce" style="animation-delay: 0.2s"></div>
+              </div>
             </div>
           </div>
         </div>
         
-        <!-- Typing Indicator -->
-        <div v-if="isTyping" class="flex items-start space-x-3">
-          <div class="w-8 h-8 bg-amber-600 rounded-full flex items-center justify-center text-white text-xs font-bold">
-            AL
+        <!-- Area Input -->
+        <div class="p-4 bg-white border-t border-gray-200 flex-shrink-0">
+          <div class="flex flex-wrap gap-2 mb-3">
+            <button @click="sendQuickMessage('Saya ingin konsultasi gratis')" class="px-3 py-2 bg-green-50 text-green-800 rounded-lg text-xs hover:bg-green-100 transition-colors font-medium border border-green-200">
+              📞 Konsultasi Gratis
+            </button>
+            <button @click="sendQuickMessage('Apa saja layanan hukum yang tersedia?')" class="px-3 py-2 bg-blue-50 text-blue-800 rounded-lg text-xs hover:bg-blue-100 transition-colors font-medium border border-blue-200">
+              ⚖️ Layanan Hukum
+            </button>
+            <button @click="sendQuickMessage('Berapa biaya konsultasi?')" class="px-3 py-2 bg-teal-50 text-teal-800 rounded-lg text-xs hover:bg-teal-100 transition-colors font-medium border border-teal-200">
+              💰 Biaya
+            </button>
           </div>
-          <div class="bg-white rounded-2xl rounded-tl-md p-4 shadow-sm border max-w-xs">
-            <div class="flex space-x-1">
-              <div class="w-2 h-2 bg-gray-400 rounded-full animate-bounce"></div>
-              <div class="w-2 h-2 bg-gray-400 rounded-full animate-bounce" style="animation-delay: 0.1s"></div>
-              <div class="w-2 h-2 bg-gray-400 rounded-full animate-bounce" style="animation-delay: 0.2s"></div>
+          
+          <div class="flex items-center space-x-3">
+            <div class="flex-1 relative">
+              <input v-model="currentMessage" @keyup.enter="sendMessage" type="text" placeholder="Ketik pertanyaan Anda..." class="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-green-500 focus:border-transparent outline-none text-sm" :disabled="isTyping">
             </div>
+            <button @click="sendMessage" :disabled="!currentMessage.trim() || isTyping" class="w-12 h-12 bg-green-600 hover:bg-green-700 disabled:bg-gray-300 text-white rounded-xl flex items-center justify-center transition-colors">
+              <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8"></path>
+              </svg>
+            </button>
+          </div>
+          
+          <div class="text-center mt-3">
+            <p class="text-xs text-gray-500">Powered by <strong>Anas Law</strong> • Customer Service</p>
           </div>
         </div>
       </div>
-      
-      <!-- Input Area -->
-      <div class="p-4 bg-white border-t border-gray-200">
-        <!-- Quick Actions -->
-        <div class="flex flex-wrap gap-2 mb-3">
-          <button 
-            @click="sendQuickMessage('Saya ingin konsultasi gratis')"
-            class="px-3 py-2 bg-amber-50 text-amber-700 rounded-lg text-xs hover:bg-amber-100 transition-colors font-medium border border-amber-200"
-          >
-            📞 Konsultasi Gratis
-          </button>
-          <button 
-            @click="sendQuickMessage('Apa saja layanan hukum yang tersedia?')"
-            class="px-3 py-2 bg-blue-50 text-blue-700 rounded-lg text-xs hover:bg-blue-100 transition-colors font-medium border border-blue-200"
-          >
-            ⚖️ Layanan Hukum
-          </button>
-          <button 
-            @click="sendQuickMessage('Berapa biaya konsultasi?')"
-            class="px-3 py-2 bg-green-50 text-green-700 rounded-lg text-xs hover:bg-green-100 transition-colors font-medium border border-green-200"
-          >
-            � Biaya
-          </button>
+    </transition>
+
+    <!-- Tombol Chat -->
+    <!-- Diposisikan absolut di pojok, terisolasi dari jendela chat. -->
+    <div class="absolute bottom-0 right-0">
+      <div class="relative">
+        <div v-if="hasUnreadMessages && !isOpen" class="absolute -top-2 -right-2 w-6 h-6 bg-red-500 text-white text-xs rounded-full flex items-center justify-center font-semibold animate-pulse">
+          {{ unreadCount }}
         </div>
         
-        <!-- Message Input -->
-        <div class="flex items-center space-x-3">
-          <div class="flex-1 relative">
-            <input
-              v-model="currentMessage"
-              @keyup.enter="sendMessage"
-              type="text"
-              placeholder="Ketik pertanyaan Anda..."
-              class="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-amber-500 focus:border-transparent outline-none text-sm"
-              :disabled="isTyping"
-            >
-          </div>
-          <button
-            @click="sendMessage"
-            :disabled="!currentMessage.trim() || isTyping"
-            class="w-12 h-12 bg-amber-600 hover:bg-amber-700 disabled:bg-gray-300 text-white rounded-xl flex items-center justify-center transition-colors"
-          >
-            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8"></path>
+        <button
+          @click="toggleChat"
+          class="w-16 h-16 bg-gradient-to-br from-green-600 to-teal-600 hover:from-green-700 hover:to-teal-700 text-white rounded-full shadow-xl hover:shadow-2xl transform hover:scale-105 transition-all duration-300 flex items-center justify-center group"
+          :class="{ 'animate-pulse': isTyping && !isOpen }"
+        >
+          <!-- Ikon berubah berdasarkan status `isOpen` -->
+          <svg v-if="!isOpen" class="w-8 h-8 group-hover:scale-110 transition-transform" fill="currentColor" viewBox="0 0 24 24">
+            <path d="M20 2H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h4l4 4 4-4h4c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm-2 12H6v-2h12v2zm0-3H6V9h12v2zm0-3H6V6h12v2z"/>
+          </svg>
+           <svg v-else class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
             </svg>
-          </button>
-        </div>
+        </button>
         
-        <!-- Footer -->
-        <div class="text-center mt-3">
-          <p class="text-xs text-gray-500">
-            Powered by <strong>Anas Law</strong> • Customer Service
-          </p>
-        </div>
+        <div class="absolute bottom-0 right-0 w-5 h-5 rounded-full border-2 border-white" :class="hasApiKey ? 'bg-green-500' : 'bg-red-500'"></div>
       </div>
     </div>
   </div>
@@ -185,20 +157,20 @@ const hasUnreadMessages = ref(false)
 const unreadCount = ref(0)
 const chatMessages = ref([])
 
-// Check if AI config is available (hidden from UI)
+// Cek ketersediaan API Key
 const hasApiKey = computed(() => {
   try {
     const token = import.meta.env.VITE_OPENROUTER_API_KEY
     return !!(token && 
-             token !== 'your_openrouter_api_key_here' && 
-             token.startsWith('sk-or-v1-') && 
-             token.length > 30)
+              token !== 'your_openrouter_api_key_here' && 
+              token.startsWith('sk-or-v1-') && 
+              token.length > 30)
   } catch (error) {
     return false
   }
 })
 
-// Toggle Chat Window
+// Buka/tutup jendela chat
 const toggleChat = () => {
   isOpen.value = !isOpen.value
   
@@ -208,7 +180,7 @@ const toggleChat = () => {
   }
 }
 
-// Add message to chat
+// Tambah pesan ke chat
 const addMessage = (text, isUser = false) => {
   const message = {
     text,
@@ -226,7 +198,7 @@ const addMessage = (text, isUser = false) => {
   }, 100)
 }
 
-// Send Message Function
+// Kirim pesan
 const sendMessage = async () => {
   if (!currentMessage.value.trim() || isTyping.value) return
   
@@ -240,7 +212,7 @@ const sendMessage = async () => {
   await processMessage(message)
 }
 
-// Send Quick Message
+// Kirim pesan cepat
 const sendQuickMessage = async (message) => {
   if (isTyping.value) return
   
@@ -251,7 +223,7 @@ const sendQuickMessage = async (message) => {
   await processMessage(message)
 }
 
-// Process Message with AI or fallback
+// Proses pesan (AI atau fallback)
 const processMessage = async (message) => {
   isTyping.value = true
   
@@ -285,7 +257,7 @@ const processMessage = async (message) => {
   }
 }
 
-// Get AI Response
+// Panggil AI
 const getAIResponse = async (message) => {
   try {
     const response = await fetch('https://openrouter.ai/api/v1/chat/completions', {
@@ -332,7 +304,7 @@ Jawab dengan ramah, professional, dan jangan sebutkan bahwa Anda adalah AI.`
   }
 }
 
-// Generate Smart Response based on keywords (fallback)
+// Respons fallback
 const generateSmartResponse = (message) => {
   const lowerMessage = message.toLowerCase()
   
@@ -360,8 +332,7 @@ Apakah ada yang ingin Anda tanyakan tentang layanan kami?`
 🚔 **Hukum Pidana**
 Pembelaan kasus kriminal, narkoba, korupsi, KDRT
 
-📄 **Hukum Perdata**  
-Sengketa kontrak, properti, wanprestasi, ganti rugi
+📄 **Hukum Perdata** Sengketa kontrak, properti, wanprestasi, ganti rugi
 
 👨‍👩‍👧‍👦 **Hukum Keluarga**
 Perceraian, hak asuh anak, pembagian harta, warisan
@@ -419,7 +390,7 @@ Mau saya bantu booking sekarang?`
   if (lowerMessage.includes('kontak') || lowerMessage.includes('alamat') || lowerMessage.includes('lokasi')) {
     return `Kontak Anas Law:
 
-� **Alamat Kantor**
+📍 **Alamat Kantor**
 [Alamat lengkap kantor Anas Law]
 Jakarta, Indonesia
 
@@ -464,70 +435,31 @@ console.log('🏛️ Anas Law Customer Service loaded!')
 </script>
 
 <style scoped>
-/* Custom scrollbar for chat area */
+/* Transisi untuk Jendela Chat */
+.chat-window-fade-enter-active,
+.chat-window-fade-leave-active {
+  transition: opacity 0.3s ease-out, transform 0.3s ease-out;
+}
+
+.chat-window-fade-enter-from,
+.chat-window-fade-leave-to {
+  opacity: 0;
+  transform: translateY(20px);
+}
+
+/* Scrollbar Kustom */
 .overflow-y-auto::-webkit-scrollbar {
   width: 4px;
 }
-
 .overflow-y-auto::-webkit-scrollbar-track {
   background: #f1f5f9;
-  border-radius: 2px;
 }
-
 .overflow-y-auto::-webkit-scrollbar-thumb {
   background: #cbd5e1;
   border-radius: 2px;
 }
-
 .overflow-y-auto::-webkit-scrollbar-thumb:hover {
   background: #94a3b8;
 }
 
-/* Animation for message bubbles */
-@keyframes slideInUp {
-  from {
-    opacity: 0;
-    transform: translateY(20px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-.bg-white {
-  animation: slideInUp 0.3s ease-out;
-}
-
-/* Professional gradient backgrounds */
-.bg-gradient-to-br {
-  background-image: linear-gradient(to bottom right, var(--tw-gradient-stops));
-}
-
-.bg-gradient-to-r {
-  background-image: linear-gradient(to right, var(--tw-gradient-stops));
-}
-
-/* Hover effects */
-.group:hover .group-hover\:scale-110 {
-  transform: scale(1.1);
-}
-
-/* Professional shadows */
-.shadow-2xl {
-  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
-}
-
-/* Custom amber colors for law firm theme */
-.from-amber-600 {
-  --tw-gradient-from: #d97706;
-}
-
-.to-amber-700 {
-  --tw-gradient-to: #b45309;
-}
-
-.to-amber-800 {
-  --tw-gradient-to: #92400e;
-}
 </style>
