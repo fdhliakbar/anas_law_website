@@ -3,7 +3,18 @@
   <div class="min-h-screen bg-white">
     <!-- Hero Section -->
     <section class="w-full bg-white py-24 px-4">
-      <div class="max-w-5xl mx-auto flex flex-col items-center text-center">
+      <          <button
+            @click="goToBooking"
+            class="border border-white bg-white text-black px-8 py-4 rounded-lg text-lg font-semibold transition hover:bg-gray-100"
+          >
+            {{ $t('pricing.scheduleConsultation') }}
+          </button>
+          <button
+            @click="goToChat"
+            class="border border-white text-white px-8 py-4 rounded-lg text-lg font-semibold bg-transparent hover:bg-white hover:text-black transition"
+          >
+            {{ $t('pricing.chatNow') }}
+          </button>ax-w-5xl mx-auto flex flex-col items-center text-center">
         <h1 class="font-bold text-5xl md:text-7xl text-black mb-8 leading-tight">
           {{ $t('pricing.title') }}
         </h1>
@@ -69,7 +80,7 @@
               <!-- Duration -->
               <div class="flex items-center text-gray-600 mb-6">
                 <i class="far fa-clock mr-2"></i>
-                <span>{{ $t('pricing.estimated') }}: {{ service.duration }}</span>
+                <span>Estimated: {{ service.duration }}</span>
               </div>
               
               <!-- Features -->
@@ -89,7 +100,7 @@
                 @click="contactForService(service)"
                 class="w-full border border-black bg-black text-white py-3 px-6 rounded-lg text-lg font-semibold transition hover:bg-gray-800"
               >
-                {{ $t('pricing.getStarted') }}
+                Get Started
               </button>
             </div>
           </div>
@@ -151,13 +162,13 @@
             @click="goToBooking"
             class="border border-white bg-white text-black px-8 py-4 rounded-lg text-lg font-semibold transition hover:bg-gray-100"
           >
-            {{ $t('pricing.scheduleConsultation') }}
+            Schedule Consultation
           </button>
           <button
             @click="goToChat"
             class="border border-white text-white px-8 py-4 rounded-lg text-lg font-semibold bg-transparent hover:bg-white hover:text-black transition"
           >
-            {{ $t('pricing.chatNow') }}
+            Chat Now
           </button>
         </div>
       </div>
@@ -221,7 +232,209 @@ const services = ref([
       'Unlimited revisions'
     ]
   },
-  // Add more services as needed
+  {
+    id: 3,
+    category: 'civil',
+    name: 'Mediation Services',
+    description: 'Alternative dispute resolution through professional mediation',
+    price: '$7,500',
+    priceUnit: '- $12,000',
+    duration: '1-3 months',
+    features: [
+      'Negotiation strategy',
+      'Mediation assistance',
+      'Agreement drafting',
+      'Implementation follow-up'
+    ]
+  },
+
+  // Criminal Law
+  {
+    id: 4,
+    category: 'criminal',
+    name: 'Criminal Defense',
+    description: 'Comprehensive defense for general criminal charges',
+    price: '$20,000',
+    priceUnit: '- $50,000',
+    duration: '6-12 months',
+    features: [
+      'Investigation support',
+      'Court defense',
+      'Appeals & cassation',
+      'Family consultation'
+    ]
+  },
+  {
+    id: 5,
+    category: 'criminal',
+    name: 'White Collar Crime',
+    description: 'Specialized defense for corruption and white-collar crimes',
+    price: '$100,000',
+    priceUnit: '- $500,000',
+    duration: '1-3 years',
+    features: [
+      'Specialized legal team',
+      'Comprehensive defense strategy',
+      'Asset protection',
+      'Family support'
+    ]
+  },
+  {
+    id: 6,
+    category: 'criminal',
+    name: 'Police Reports',
+    description: 'Assistance with filing and following up police reports',
+    price: '$3,000',
+    priceUnit: '- $7,500',
+    duration: '2-4 weeks',
+    features: [
+      'Report drafting',
+      'Police station assistance',
+      'Case follow-up',
+      'Strategy consultation'
+    ]
+  },
+
+  // Corporate Law
+  {
+    id: 7,
+    category: 'corporate',
+    name: 'Company Formation',
+    description: 'Complete assistance in establishing business entities',
+    price: '$7,500',
+    priceUnit: '- $15,000',
+    duration: '2-4 weeks',
+    features: [
+      'Notarial deed processing',
+      'Ministry legalization',
+      'Business license',
+      'Tax consultation'
+    ]
+  },
+  {
+    id: 8,
+    category: 'corporate',
+    name: 'M&A Advisory',
+    description: 'Merger and acquisition legal support services',
+    price: '$75,000',
+    priceUnit: '- $200,000',
+    duration: '6-12 months',
+    features: [
+      'Legal due diligence',
+      'Transaction structuring',
+      'Complete documentation',
+      'Transaction closing'
+    ]
+  },
+  {
+    id: 9,
+    category: 'corporate',
+    name: 'Compliance Audit',
+    description: 'Corporate legal compliance auditing services',
+    price: '$25,000',
+    priceUnit: '- $50,000',
+    duration: '1-2 months',
+    features: [
+      'Corporate document review',
+      'Legal risk identification',
+      'Improvement recommendations',
+      'Compliance training'
+    ]
+  },
+
+  // Family Law
+  {
+    id: 10,
+    category: 'family',
+    name: 'Divorce Proceedings',
+    description: 'Complete divorce and asset division proceedings',
+    price: '$10,000',
+    priceUnit: '- $25,000',
+    duration: '3-8 months',
+    features: [
+      'Family mediation',
+      'Court representation',
+      'Asset division',
+      'Child custody'
+    ]
+  },
+  {
+    id: 11,
+    category: 'family',
+    name: 'Child Adoption',
+    description: 'Legal child adoption process',
+    price: '$12,500',
+    priceUnit: '- $20,000',
+    duration: '6-12 months',
+    features: [
+      'Document processing',
+      'Court proceedings',
+      'Psychological consultation',
+      'Legal follow-up'
+    ]
+  },
+  {
+    id: 12,
+    category: 'family',
+    name: 'Estate Planning',
+    description: 'Inheritance and estate planning services',
+    price: '$7,500',
+    priceUnit: '- $15,000',
+    duration: '2-6 months',
+    features: [
+      'Will preparation',
+      'Estate distribution',
+      'Gift certificates',
+      'Family mediation'
+    ]
+  },
+
+  // Property Law
+  {
+    id: 13,
+    category: 'property',
+    name: 'Property Transactions',
+    description: 'Real estate purchase and sale assistance',
+    price: '$5,000',
+    priceUnit: '- $10,000',
+    duration: '1-2 months',
+    features: [
+      'Property document review',
+      'Agreement drafting',
+      'Deed assistance',
+      'Title transfer'
+    ]
+  },
+  {
+    id: 14,
+    category: 'property',
+    name: 'Land Disputes',
+    description: 'Land ownership dispute resolution',
+    price: '$15,000',
+    priceUnit: '- $35,000',
+    duration: '6-18 months',
+    features: [
+      'Document research',
+      'Resolution strategy',
+      'Litigation if required',
+      'Judgment execution'
+    ]
+  },
+  {
+    id: 15,
+    category: 'property',
+    name: 'Property Permits',
+    description: 'Various property and building permit processing',
+    price: '$7,500',
+    priceUnit: '- $15,000',
+    duration: '2-4 months',
+    features: [
+      'Building permits & others',
+      'Regulatory consultation',
+      'Process follow-up',
+      'Permit maintenance'
+    ]
+  }
 ])
 
 // Computed property for filtered services

@@ -11,11 +11,9 @@
 
     <!-- Judul dan Deskripsi -->
     <div class="text-center">
-      <h2 class="text-4xl font-bold">Our Expertise in Personal Injury Cases</h2>
+      <h2 class="text-4xl font-bold">{{ $t('services.title') }}</h2>
       <p class="mt-2 text-gray-600 max-w-2xl mx-auto">
-        Discover how we specialize in personal injury cases, ranging from
-        accidents to medical malpractice. Let us guide you through this
-        challenging time.
+        {{ $t('services.description') }}
       </p>
     </div>
   </div>

@@ -1,14 +1,10 @@
 <template>
-  <div
-    class="min-h-screen bg-gradient-to-br from-gray-100 to-slate-200 flex items-center justify-center p-4"
-    id="login"
-  >
-    <div
-      class="bg-white shadow-xl rounded-2xl overflow-hidden w-full max-w-4xl lg:flex"
-    >
-      <div class="w-full lg:w-1/2 p-6 sm:p-8 md:p-10">
+  <div class="min-h-screen bg-white flex items-center justify-center p-4">
+    <div class="bg-white border border-gray-200 rounded-2xl overflow-hidden w-full max-w-4xl lg:flex shadow-lg">
+      <!-- Left Side - Form -->
+      <div class="w-full lg:w-1/2 p-8 md:p-12">
         <div class="flex items-center mb-8">
-          <button @click="goBack" class="text-gray-600 hover:text-gray-800">
+          <button @click="goBack" class="text-gray-600 hover:text-black transition">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               class="h-6 w-6"
@@ -26,163 +22,109 @@
           </button>
         </div>
 
-        <h2 class="text-3xl font-bold text-gray-900 mb-6">Welcome back</h2>
+        <h2 class="font-bold text-4xl text-black mb-2">{{ $t('auth.login.title') }}</h2>
+        <p class="text-gray-600 mb-8">{{ $t('auth.login.subtitle') }}</p>
 
         <form @submit.prevent="handleLogin">
-          <div class="mb-4">
-            <label
-              for="email"
-              class="block text-sm font-medium text-gray-700 mb-1"
-            >
-              Email address
+          <div class="mb-6">
+            <label for="email" class="block text-sm font-medium text-gray-700 mb-2">
+              {{ $t('auth.login.email') }}
             </label>
-            <div class="relative rounded-md shadow-sm">
-              <div
-                class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none"
-              >
-                <svg
-                  class="h-5 w-5 text-gray-400"
-                  xmlns="http://www.w3.org/2000/svg"
-                  fill="currentColor"
-                  viewBox="0 0 20 20"
-                >
-                  <path
-                    d="M2.003 5.884L10 9.882l7.997-3.998A2 2 0 0016 4H4a2 2 0 00-1.997 1.884z"
-                  />
-                  <path
-                    d="M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z"
-                  />
-                </svg>
-              </div>
-              <input
-                type="email"
-                id="email"
-                v-model="form.email"
-                class="focus:ring-indigo-500 focus:border-indigo-500 block w-full pl-10 sm:text-sm border-gray-300 rounded-md py-3"
-                placeholder="you@example.com"
-                required
-              />
-            </div>
+            <input
+              type="email"
+              id="email"
+              v-model="form.email"
+              class="w-full border-2 border-gray-300 rounded-lg px-4 py-3 text-lg focus:outline-none focus:border-black transition"
+              placeholder="you@example.com"
+              required
+            />
           </div>
 
-          <div class="mb-4">
-            <label
-              for="password"
-              class="block text-sm font-medium text-gray-700 mb-1"
-            >
-              Password
+          <div class="mb-6">
+            <label for="password" class="block text-sm font-medium text-gray-700 mb-2">
+              {{ $t('auth.login.password') }}
             </label>
-            <div class="relative rounded-md shadow-sm">
-              <div
-                class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none"
-              >
-                <svg
-                  class="h-5 w-5 text-gray-400"
-                  xmlns="http://www.w3.org/2000/svg"
-                  fill="currentColor"
-                  viewBox="0 0 20 20"
-                >
-                  <path
-                    fill-rule="evenodd"
-                    d="M18 8a6 6 0 01-7.743 5.743L10 14l-1 1-1 1H6v2H2v-4l4.257-4.257A6 6 0 1118 8zm-6-4a1 1 0 100 2 2 2 0 012 2 1 1 0 102 0 4 4 0 00-4-4z"
-                    clip-rule="evenodd"
-                  />
-                </svg>
-              </div>
+            <div class="relative">
               <input
                 :type="showPassword ? 'text' : 'password'"
                 id="password"
                 v-model="form.password"
-                class="focus:ring-indigo-500 focus:border-indigo-500 block w-full pl-10 sm:text-sm border-gray-300 rounded-md py-3"
+                class="w-full border-2 border-gray-300 rounded-lg px-4 py-3 text-lg focus:outline-none focus:border-black transition pr-12"
                 placeholder="••••••••"
                 required
               />
-              <div class="absolute inset-y-0 right-0 pr-3 flex items-center">
-                <button
-                  type="button"
-                  @click="togglePasswordVisibility"
-                  class="text-gray-500 hover:text-gray-700"
-                >
-                  <svg
-                    v-if="!showPassword"
-                    class="h-5 w-5"
-                    xmlns="http://www.w3.org/2000/svg"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    stroke="currentColor"
-                    stroke-width="2"
-                  >
-                    <path
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                      d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"
-                    />
-                    <path
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                      d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-.002.021-.002.042 0 .063C21.537 16.033 17.695 19 12 19c-4.478 0-8.268-2.943-9.542-7a24.392 24.392 0 010-.063z"
-                    />
-                  </svg>
-                  <svg
-                    v-else
-                    class="h-5 w-5"
-                    xmlns="http://www.w3.org/2000/svg"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    stroke="currentColor"
-                    stroke-width="2"
-                  >
-                    <path
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                      d="M13.875 18.825A10.05 10.05 0 0112 19c-4.478 0-8.268-2.943-9.543-7a9.97 9.97 0 011.563-3.029m5.858.908a3 3 0 114.243 4.243M9.878 9.878l4.242 4.242M3 3l3.59 3.59m0 0A9.953 9.953 0 0112 5c4.478 0 8.268 2.943 9.543 7a10.025 10.025 0 01-4.132 5.411m0 0L21 21"
-                    />
-                  </svg>
-                </button>
-              </div>
+              <button
+                type="button"
+                @click="showPassword = !showPassword"
+                class="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-500 hover:text-black"
+              >
+                <i :class="showPassword ? 'fas fa-eye-slash' : 'fas fa-eye'"></i>
+              </button>
             </div>
           </div>
 
-          <div class="mb-6 text-right">
-            <a href="#" class="text-sm text-indigo-600 hover:underline"
-              >Forgot password?</a
-            >
+          <div class="flex items-center justify-between mb-8">
+            <label class="flex items-center">
+              <input
+                type="checkbox"
+                v-model="form.rememberMe"
+                class="w-4 h-4 text-black bg-gray-100 border-gray-300 rounded focus:ring-black"
+              />
+              <span class="ml-2 text-sm text-gray-700">{{ $t('auth.login.rememberMe') }}</span>
+            </label>
+            <a href="#" class="text-sm text-black hover:underline font-medium">
+              {{ $t('auth.login.forgotPassword') }}
+            </a>
           </div>
 
           <button
             type="submit"
-            class="w-full flex justify-center items-center py-3 px-4 border border-transparent rounded-full shadow-sm text-base font-medium text-white bg-indigo-500 hover:bg-indigo-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 transition duration-150 ease-in-out group"
+            :disabled="isLoading"
+            class="w-full border border-black bg-black text-white py-3 px-6 rounded-lg text-lg font-semibold transition hover:bg-gray-800 disabled:opacity-50"
           >
-            Login
-            <svg
-              class="w-5 h-5 ml-2 -mr-1 transform group-hover:translate-x-1 transition-transform duration-150"
-              xmlns="http://www.w3.org/2000/svg"
-              viewBox="0 0 20 20"
-              fill="currentColor"
-            >
-              <path
-                fill-rule="evenodd"
-                d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z"
-                clip-rule="evenodd"
-              />
-            </svg>
+            <span v-if="!isLoading">{{ $t('auth.login.signIn') }}</span>
+            <span v-else>{{ $t('auth.login.signingIn') }}</span>
           </button>
         </form>
 
-        <div class="mt-6 text-center">
-          <p class="text-sm text-gray-600">
-            Don’t have an account?
-            <a href="/register" class="text-indigo-600 hover:underline"
-              >Sign up</a
-            >
+        <div class="mt-8 text-center">
+          <p class="text-gray-600">
+            {{ $t('auth.login.noAccount') }}
+            <router-link to="/register" class="text-black font-medium hover:underline">
+              {{ $t('auth.login.signUp') }}
+            </router-link>
           </p>
         </div>
       </div>
-      <div
-        class="hidden lg:block lg:w-1/2 bg-cover bg-center"
-        style="background-image: url('/images/anas_law_team.jpg')"
-      >
-        <!-- Optional: tambahkan gambar untuk sisi kanan -->
+
+      <!-- Right Side - Image/Info -->
+      <div class="hidden lg:block w-1/2 bg-gray-900 relative">
+        <div class="absolute inset-0 bg-black bg-opacity-50"></div>
+        <div class="relative z-10 h-full flex flex-col justify-center p-12 text-white">
+          <h3 class="font-bold text-3xl mb-4">Access Professional Legal Services</h3>
+          <p class="text-lg text-gray-300 mb-8">
+            Join thousands of clients who trust our experienced legal team for their legal needs.
+          </p>
+          <ul class="space-y-3">
+            <li class="flex items-center">
+              <i class="fas fa-check text-white mr-3"></i>
+              <span>Free initial consultation</span>
+            </li>
+            <li class="flex items-center">
+              <i class="fas fa-check text-white mr-3"></i>
+              <span>Expert legal representation</span>
+            </li>
+            <li class="flex items-center">
+              <i class="fas fa-check text-white mr-3"></i>
+              <span>24/7 legal support</span>
+            </li>
+          </ul>
+        </div>
+        <img
+          src="../assets/images/justice.jpg"
+          alt="Legal Services"
+          class="absolute inset-0 w-full h-full object-cover"
+        />
       </div>
     </div>
   </div>
@@ -190,31 +132,47 @@
 
 <script>
 export default {
+  name: "LoginPage",
   data() {
     return {
+      showPassword: false,
+      isLoading: false,
       form: {
         email: "",
         password: "",
+        rememberMe: false,
       },
-      showPassword: false,
     };
   },
   methods: {
     goBack() {
-      this.$router.back();
+      this.$router.go(-1);
     },
-    togglePasswordVisibility() {
-      this.showPassword = !this.showPassword;
-    },
-    handleLogin() {
-      // Contoh validasi sederhana, ganti sesuai kebutuhan
-      if (this.form.email && this.form.password) {
-        // Redirect ke homepage (pastikan route '/' mengarah ke Homepage.vue)
-        this.$router.push("/");
-      } else {
-        alert("Email dan password harus diisi!");
+    async handleLogin() {
+      this.isLoading = true;
+      try {
+        // Simulate API call
+        await new Promise(resolve => setTimeout(resolve, 1000));
+        
+        // Here you would typically make an API call to authenticate
+        console.log("Login attempt:", this.form);
+        
+        // Redirect to dashboard or home page
+        this.$router.push("/admin/dashboard");
+      } catch (error) {
+        console.error("Login error:", error);
+        alert("Login failed. Please try again.");
+      } finally {
+        this.isLoading = false;
       }
     },
   },
 };
 </script>
+
+<style scoped>
+/* Custom styles if needed */
+.transition {
+  transition: all 0.3s ease;
+}
+</style>

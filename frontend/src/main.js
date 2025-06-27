@@ -12,17 +12,31 @@ import {
   faMagnifyingGlass,
   faBook,
   faScaleBalanced,
-} from "@fortawesome/free-solid-svg-icons"; // Tambahkan faMagnifyingGlass
+} from "@fortawesome/free-solid-svg-icons";
 
 import router from "./router";
-// web component from lottie(gak jadi)
-// import "https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js";
+import i18n from "./i18n";
+import i18nWatcher from "./plugins/i18nWatcher";
 
-library.add(faHeart, faGlobe, faMagnifyingGlass, faBook, faScaleBalanced); // Tambahkan ke library
+library.add(faHeart, faGlobe, faMagnifyingGlass, faBook, faScaleBalanced);
 
 AOS.init();
 
 const app = createApp(App);
+
+// Mount the i18n instance first
+app.use(i18n);
+app.use(i18nWatcher, { i18n });
 app.use(router);
 app.component("font-awesome-icon", FontAwesomeIcon);
+
+// Global error handler for missing translations
+app.config.errorHandler = (err, instance, info) => {
+  if (err.message.includes('Not found')) {
+    console.warn('Translation missing:', err.message);
+  } else {
+    console.error('App error:', err, info);
+  }
+};
+
 app.mount("#app");

@@ -10,8 +10,7 @@
         <p class="text-lg md:text-xl text-black mb-12">
           {{ $t('booking.subtitle') }}<br />
           {{ $t('booking.chooseFrom') }}
-        </p>
-        <div class="flex flex-col md:flex-row gap-4">
+        </p>        <div class="flex flex-col md:flex-row gap-4">
           <button
             @click="scrollToLawyers"
             class="border border-black bg-black text-white px-8 py-4 rounded-lg text-lg font-semibold transition hover:bg-gray-800"
@@ -147,8 +146,7 @@
         </h2>
         <p class="text-xl text-gray-300 mb-12 max-w-3xl mx-auto">
           {{ $t('booking.readyToGetHelpDesc') }}
-        </p>
-        <div class="flex flex-col md:flex-row gap-4 justify-center">
+        </p>        <div class="flex flex-col md:flex-row gap-4 justify-center">
           <button
             @click="goToPricing"
             class="border border-white bg-white text-black px-8 py-4 rounded-lg text-lg font-semibold transition hover:bg-gray-100"
@@ -169,29 +167,14 @@
 </template>
 
 <script setup lang="ts">
-import { ref, computed, onMounted } from "vue";
+import { ref, computed } from "vue";
 import { useRouter } from "vue-router";
 import { useI18n } from "vue-i18n";
 import Header from "../components/Header.vue";
 import Footer from "../components/Footer.vue";
 
 const router = useRouter();
-const { t, locale } = useI18n();
-
-// Ensure i18n is properly initialized
-const isI18nReady = ref(false);
-
-onMounted(() => {
-  // Wait for i18n to be ready
-  if (locale.value) {
-    isI18nReady.value = true;
-  } else {
-    // Fallback initialization
-    setTimeout(() => {
-      isI18nReady.value = true;
-    }, 100);
-  }
-});
+const { t } = useI18n();
 
 // Active FAQ
 const activeFaq = ref<number | null>(null);
@@ -276,30 +259,21 @@ const filteredLawyers = computed(() => {
   );
 });
 
-// FAQ data - add safety check
-const faqs = computed(() => {
-  if (!isI18nReady.value) return [];
-  
-  try {
-    return [
-      {
-        question: t('booking.faqItems.q1'),
-        answer: t('booking.faqItems.a1'),
-      },
-      {
-        question: t('booking.faqItems.q2'),
-        answer: t('booking.faqItems.a2'),
-      },
-      {
-        question: t('booking.faqItems.q3'),
-        answer: t('booking.faqItems.a3'),
-      },
-    ];
-  } catch (error) {
-    console.warn('i18n not ready yet:', error);
-    return [];
-  }
-});
+// FAQ data
+const faqs = computed(() => [
+  {
+    question: t('booking.faqItems.q1'),
+    answer: t('booking.faqItems.a1'),
+  },
+  {
+    question: t('booking.faqItems.q2'),
+    answer: t('booking.faqItems.a2'),
+  },
+  {
+    question: t('booking.faqItems.q3'),
+    answer: t('booking.faqItems.a3'),
+  },
+]);
 
 // Methods
 const toggleFaq = (index: number) => {
