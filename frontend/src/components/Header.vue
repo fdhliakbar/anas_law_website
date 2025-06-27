@@ -88,18 +88,7 @@
           >
             {{ $t('header.login') }}
           </router-link>
-          <router-link
-            to="/chat"
-            class="flex items-center gap-2 px-3 py-2 rounded-full hover:bg-blue-100 transition text-blue-700 shadow text-sm"
-            title="Chat with Customer Service"
-          >
-            <img
-              src="../assets/images/helpdesk.gif"
-              alt="Chat Icon"
-              class="w-8 h-8 rounded-full"
-            />
-            <span class="hidden xl:inline">{{ $t('header.chat') }}</span>
-          </router-link>
+          
         </div>
 
         <!-- Mobile Menu Button -->
