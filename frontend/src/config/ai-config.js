@@ -5,7 +5,7 @@ export const AI_CONFIG = {
   // Hugging Face (Free tier: 30,000 requests/month)
   // Sign up at: https://huggingface.co/join
   HUGGING_FACE: {
-    token: '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', // Token yang valid
+    token: import.meta.env.VITE_HUGGING_FACE_TOKEN, // Token yang valid
     models: {
       chat: 'microsoft/DialoGPT-medium',
       legal: 'microsoft/DialoGPT-large',
@@ -36,7 +36,7 @@ export const AI_CONFIG = {
   // OpenRouter (Multiple AI models access)
   // FREE MODELS ONLY - Zero cost AI models
   OPENROUTER: {
-    token: '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',
+    token: import.meta.env.VITE_OPENROUTER_API_KEY,
     baseUrl: 'https://openrouter.ai/api/v1',
     models: {
       // 100% FREE MODELS
