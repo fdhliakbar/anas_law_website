@@ -1,11 +1,23 @@
 // OpenRouter API Configuration - FREE MODELS ONLY
-// Menggunakan model AI gratis melalui OpenRouter
+// SECURE: Menggunakan environment variables untuk kredensial
 
 export const AI_CONFIG = {
   // OpenRouter (Multiple AI models access) - 100% FREE MODELS
   OPENROUTER: {
+    // SECURE: Token dibaca dari environment variable
     token: import.meta.env.VITE_OPENROUTER_API_KEY,
     baseUrl: 'https://openrouter.ai/api/v1',
+    
+    // Validasi token
+    isValid() {
+      const token = this.token
+      return !!(token && 
+               token !== 'your_openrouter_api_key_here' && 
+               token.startsWith('sk-or-v1-') && 
+               token.length > 30)
+    },
+    
+    // Models gratis yang tersedia
     models: {
       // 100% FREE MODELS - Tidak ada biaya sama sekali
       llama_free: 'meta-llama/llama-3.1-8b-instruct:free',
@@ -16,6 +28,7 @@ export const AI_CONFIG = {
       // Default model yang akan digunakan
       default: 'meta-llama/llama-3.1-8b-instruct:free'
     },
+    
     // Konfigurasi untuk model gratis
     config: {
       max_tokens: 150, // Dibatasi untuk model gratis
@@ -27,13 +40,19 @@ export const AI_CONFIG = {
 }
 
 /*
-PENTING - CARA MENDAPATKAN API KEY GRATIS:
-1. Daftar di https://openrouter.ai/
-2. Verifikasi email Anda
-3. Masuk ke dashboard dan buat API key
-4. Copy API key ke file .env ini
-5. Pastikan menggunakan model dengan ":free" di nama model
-6. Model gratis memiliki rate limit tapi tidak ada biaya
+🔒 KEAMANAN API KEY:
+❌ JANGAN pernah hardcode API key di kode
+✅ GUNAKAN environment variables (.env file)
+✅ PASTIKAN .env ada di .gitignore
+✅ GUNAKAN .env.example sebagai template
+
+📋 SETUP INSTRUCTIONS:
+1. Copy .env.example menjadi .env
+2. Daftar di https://openrouter.ai/
+3. Verifikasi email Anda
+4. Masuk ke dashboard dan buat API key
+5. Copy API key ke file .env
+6. Restart development server
 
 MODEL GRATIS YANG TERSEDIA:
 - meta-llama/llama-3.1-8b-instruct:free (Recommended)
@@ -42,7 +61,7 @@ MODEL GRATIS YANG TERSEDIA:
 - microsoft/phi-3-mini-128k-instruct:free
 - mistralai/mistral-7b-instruct:free
 
-RATE LIMITS:
+⚠️ RATE LIMITS:
 - Model gratis memiliki batasan request per menit
 - Biasanya 10-20 request per menit per model
 - Tidak ada biaya finansial

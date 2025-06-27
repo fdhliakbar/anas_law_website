@@ -1,26 +1,173 @@
 <template>
-  <!-- Simple Chat Button Test -->
+  <!-- Professional Law Firm ChatBot -->
   <div class="fixed bottom-6 right-6 z-[9999]">
-    <button
-      @click="toggleChat"
-      class="w-16 h-16 bg-blue-600 text-white rounded-full shadow-lg flex items-center justify-center text-2xl animate-bounce"
-    >
-      💬
-    </button>
-    
-    <!-- Simple Chat Window -->
-    <div v-if="isOpen" class="mb-4 w-80 h-96 bg-white rounded-lg shadow-xl border">
-      <div class="bg-blue-600 text-white p-4 rounded-t-lg">
-        <h3>Test ChatBot</h3>
+    <!-- Chat Button with Professional Design -->
+    <div class="relative">
+      <!-- Notification Badge -->
+      <div 
+        v-if="hasUnreadMessages && !isOpen" 
+        class="absolute -top-2 -right-2 w-6 h-6 bg-red-500 text-white text-xs rounded-full flex items-center justify-center font-semibold animate-pulse"
+      >
+        {{ unreadCount }}
       </div>
-      <div class="p-4">
-        <p>ChatBot berhasil di load! 🎉</p>
-        <p>API Key tersedia: {{ hasApiKey ? '✅' : '❌' }}</p>
-        <button @click="testAPI" class="mt-2 bg-blue-500 text-white px-4 py-2 rounded">
-          Test API
+      
+      <!-- Main Chat Button -->
+      <button
+        @click="toggleChat"
+        class="w-16 h-16 bg-gradient-to-br from-amber-600 to-amber-700 hover:from-amber-700 hover:to-amber-800 text-white rounded-full shadow-xl hover:shadow-2xl transform hover:scale-105 transition-all duration-300 flex items-center justify-center group"
+        :class="{ 'animate-pulse': isTyping }"
+      >
+        <svg v-if="!isTyping" class="w-8 h-8 group-hover:scale-110 transition-transform" fill="currentColor" viewBox="0 0 24 24">
+          <path d="M20 2H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h4l4 4 4-4h4c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm-2 12H6v-2h12v2zm0-3H6V9h12v2zm0-3H6V6h12v2z"/>
+        </svg>
+        <div v-else class="flex space-x-1">
+          <div class="w-2 h-2 bg-white rounded-full animate-bounce"></div>
+          <div class="w-2 h-2 bg-white rounded-full animate-bounce" style="animation-delay: 0.1s"></div>
+          <div class="w-2 h-2 bg-white rounded-full animate-bounce" style="animation-delay: 0.2s"></div>
+        </div>
+      </button>
+      
+      <!-- Online Status Indicator -->
+      <div class="absolute bottom-0 right-0 w-5 h-5 rounded-full border-2 border-white" :class="hasApiKey ? 'bg-green-500' : 'bg-red-500'"></div>
+    </div>
+    
+    <!-- Professional Chat Window -->
+    <div 
+      v-if="isOpen" 
+      class="mb-4 w-96 h-[600px] bg-white rounded-2xl shadow-2xl border border-gray-200 flex flex-col overflow-hidden backdrop-blur-sm transform transition-all duration-300 ease-out"
+      style="background: linear-gradient(135deg, #ffffff 0%, #f8fafc 100%); animation: slideInUp 0.3s ease-out;"
+    >
+      <!-- Header -->
+      <div class="bg-gradient-to-r from-amber-600 via-amber-700 to-amber-800 text-white p-6 flex justify-between items-center">
+        <div class="flex items-center space-x-3">
+          <!-- Logo/Avatar -->
+          <div class="w-12 h-12 bg-white/20 rounded-full flex items-center justify-center">
+            <svg class="w-7 h-7" fill="currentColor" viewBox="0 0 24 24">
+              <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/>
+            </svg>
+          </div>
+          <div>
+            <h3 class="font-bold text-lg">Anas Law</h3>
+            <p class="text-amber-100 text-sm flex items-center">
+              <span class="w-2 h-2 bg-green-400 rounded-full mr-2"></span>
+              Customer Service
+            </p>
+          </div>
+        </div>
+        <button @click="toggleChat" class="text-white/80 hover:text-white transition-colors">
+          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+          </svg>
         </button>
-        <div v-if="apiResponse" class="mt-2 p-2 bg-gray-100 rounded text-sm">
-          {{ apiResponse }}
+      </div>
+      
+      <!-- Chat Messages Area -->
+      <div class="flex-1 p-4 overflow-y-auto space-y-4 bg-gray-50/30">
+        <!-- Welcome Message -->
+        <div class="flex items-start space-x-3">
+          <div class="w-8 h-8 bg-amber-600 rounded-full flex items-center justify-center text-white text-xs font-bold">
+            AL
+          </div>
+          <div class="bg-white rounded-2xl rounded-tl-md p-4 shadow-sm border max-w-xs">
+            <p class="text-gray-800 text-sm leading-relaxed">
+              Selamat datang di <strong>Anas Law</strong>! 👋
+              <br><br>
+              Saya siap membantu menjawab pertanyaan hukum Anda dan memberikan informasi tentang layanan kami.
+              <br><br>
+              <em>Konsultasi awal 30 menit gratis!</em> 🆓
+            </p>
+            <div class="text-xs text-gray-500 mt-2">
+              {{ new Date().toLocaleTimeString('id-ID', { hour: '2-digit', minute: '2-digit' }) }}
+            </div>
+          </div>
+        </div>
+        
+        <!-- User Messages (will be populated when user sends messages) -->
+        <div v-for="(message, index) in chatMessages" :key="index" class="flex" :class="message.isUser ? 'justify-end' : 'justify-start'">
+          <div v-if="!message.isUser" class="flex items-start space-x-3 max-w-sm">
+            <div class="w-8 h-8 bg-amber-600 rounded-full flex items-center justify-center text-white text-xs font-bold">
+              AL
+            </div>
+            <div class="bg-white rounded-2xl rounded-tl-md p-4 shadow-sm border">
+              <div class="text-gray-800 text-sm leading-relaxed whitespace-pre-line">{{ message.text }}</div>
+              <div class="text-xs text-gray-500 mt-2">{{ message.time }}</div>
+            </div>
+          </div>
+          <div v-else class="max-w-sm">
+            <div class="bg-amber-600 text-white rounded-2xl rounded-tr-md p-4 shadow-sm">
+              <div class="text-sm leading-relaxed">{{ message.text }}</div>
+              <div class="text-xs text-amber-100 mt-2">{{ message.time }}</div>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Typing Indicator -->
+        <div v-if="isTyping" class="flex items-start space-x-3">
+          <div class="w-8 h-8 bg-amber-600 rounded-full flex items-center justify-center text-white text-xs font-bold">
+            AL
+          </div>
+          <div class="bg-white rounded-2xl rounded-tl-md p-4 shadow-sm border max-w-xs">
+            <div class="flex space-x-1">
+              <div class="w-2 h-2 bg-gray-400 rounded-full animate-bounce"></div>
+              <div class="w-2 h-2 bg-gray-400 rounded-full animate-bounce" style="animation-delay: 0.1s"></div>
+              <div class="w-2 h-2 bg-gray-400 rounded-full animate-bounce" style="animation-delay: 0.2s"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Input Area -->
+      <div class="p-4 bg-white border-t border-gray-200">
+        <!-- Quick Actions -->
+        <div class="flex flex-wrap gap-2 mb-3">
+          <button 
+            @click="sendQuickMessage('Saya ingin konsultasi gratis')"
+            class="px-3 py-2 bg-amber-50 text-amber-700 rounded-lg text-xs hover:bg-amber-100 transition-colors font-medium border border-amber-200"
+          >
+            📞 Konsultasi Gratis
+          </button>
+          <button 
+            @click="sendQuickMessage('Apa saja layanan hukum yang tersedia?')"
+            class="px-3 py-2 bg-blue-50 text-blue-700 rounded-lg text-xs hover:bg-blue-100 transition-colors font-medium border border-blue-200"
+          >
+            ⚖️ Layanan Hukum
+          </button>
+          <button 
+            @click="sendQuickMessage('Berapa biaya konsultasi?')"
+            class="px-3 py-2 bg-green-50 text-green-700 rounded-lg text-xs hover:bg-green-100 transition-colors font-medium border border-green-200"
+          >
+            � Biaya
+          </button>
+        </div>
+        
+        <!-- Message Input -->
+        <div class="flex items-center space-x-3">
+          <div class="flex-1 relative">
+            <input
+              v-model="currentMessage"
+              @keyup.enter="sendMessage"
+              type="text"
+              placeholder="Ketik pertanyaan Anda..."
+              class="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-amber-500 focus:border-transparent outline-none text-sm"
+              :disabled="isTyping"
+            >
+          </div>
+          <button
+            @click="sendMessage"
+            :disabled="!currentMessage.trim() || isTyping"
+            class="w-12 h-12 bg-amber-600 hover:bg-amber-700 disabled:bg-gray-300 text-white rounded-xl flex items-center justify-center transition-colors"
+          >
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8"></path>
+            </svg>
+          </button>
+        </div>
+        
+        <!-- Footer -->
+        <div class="text-center mt-3">
+          <p class="text-xs text-gray-500">
+            Powered by <strong>Anas Law</strong> • Customer Service
+          </p>
         </div>
       </div>
     </div>
@@ -30,59 +177,357 @@
 <script setup>
 import { ref, computed } from 'vue'
 
+// State Management
 const isOpen = ref(false)
-const apiResponse = ref('')
+const currentMessage = ref('')
+const isTyping = ref(false)
+const hasUnreadMessages = ref(false)
+const unreadCount = ref(0)
+const chatMessages = ref([])
 
-// Check if AI config is available
+// Check if AI config is available (hidden from UI)
 const hasApiKey = computed(() => {
   try {
-    const AI_CONFIG = {
-      OPENROUTER: {
-        token: import.meta.env.VITE_OPENROUTER_API_KEY || 'YOUR_OPENROUTER_API_KEY_HERE'
-      }
-    }
-    return !!AI_CONFIG.OPENROUTER.token && AI_CONFIG.OPENROUTER.token !== 'YOUR_OPENROUTER_API_KEY_HERE'
+    const token = import.meta.env.VITE_OPENROUTER_API_KEY
+    return !!(token && 
+             token !== 'your_openrouter_api_key_here' && 
+             token.startsWith('sk-or-v1-') && 
+             token.length > 30)
   } catch (error) {
     return false
   }
 })
 
+// Toggle Chat Window
 const toggleChat = () => {
   isOpen.value = !isOpen.value
-  console.log('🎯 Simple ChatBot clicked! Open:', isOpen.value)
+  
+  if (isOpen.value) {
+    hasUnreadMessages.value = false
+    unreadCount.value = 0
+  }
 }
 
-const testAPI = async () => {
+// Add message to chat
+const addMessage = (text, isUser = false) => {
+  const message = {
+    text,
+    isUser,
+    time: new Date().toLocaleTimeString('id-ID', { hour: '2-digit', minute: '2-digit' })
+  }
+  chatMessages.value.push(message)
+  
+  // Auto scroll to bottom
+  setTimeout(() => {
+    const chatArea = document.querySelector('.overflow-y-auto')
+    if (chatArea) {
+      chatArea.scrollTop = chatArea.scrollHeight
+    }
+  }, 100)
+}
+
+// Send Message Function
+const sendMessage = async () => {
+  if (!currentMessage.value.trim() || isTyping.value) return
+  
+  const message = currentMessage.value.trim()
+  currentMessage.value = ''
+  
+  // Add user message
+  addMessage(message, true)
+  
+  // Process response
+  await processMessage(message)
+}
+
+// Send Quick Message
+const sendQuickMessage = async (message) => {
+  if (isTyping.value) return
+  
+  // Add user message
+  addMessage(message, true)
+  
+  // Process response
+  await processMessage(message)
+}
+
+// Process Message with AI or fallback
+const processMessage = async (message) => {
+  isTyping.value = true
+  
   try {
-    apiResponse.value = 'Testing API...'
+    let response
     
+    if (hasApiKey.value) {
+      // Try AI response
+      response = await getAIResponse(message)
+    } else {
+      // Use smart fallback
+      response = generateSmartResponse(message)
+    }
+    
+    // Simulate typing delay for natural feel
+    setTimeout(() => {
+      addMessage(response, false)
+      isTyping.value = false
+      
+      if (!isOpen.value) {
+        hasUnreadMessages.value = true
+        unreadCount.value++
+      }
+    }, 1500 + Math.random() * 1000) // Random delay 1.5-2.5s
+    
+  } catch (error) {
+    setTimeout(() => {
+      addMessage('Maaf, saya sedang mengalami kendala teknis. Silakan hubungi kami langsung di +62 8xx-xxxx-xxxx untuk bantuan segera.', false)
+      isTyping.value = false
+    }, 1000)
+  }
+}
+
+// Get AI Response
+const getAIResponse = async (message) => {
+  try {
     const response = await fetch('https://openrouter.ai/api/v1/chat/completions', {
       method: 'POST',
       headers: {
         'Authorization': `Bearer ${import.meta.env.VITE_OPENROUTER_API_KEY}`,
         'Content-Type': 'application/json',
         'HTTP-Referer': 'https://anaslaw.com',
-        'X-Title': 'Anas Law AI Assistant'
+        'X-Title': 'Anas Law Customer Service'
       },
       body: JSON.stringify({
-        model: 'openai/gpt-4o-mini',
+        model: 'meta-llama/llama-3.1-8b-instruct:free',
         messages: [
-          { role: 'user', content: 'Hi, just testing. Respond with "API works!"' }
+          {
+            role: 'system',
+            content: `Anda adalah customer service profesional dari Anas Law, firma hukum terpercaya di Indonesia. Berikan jawaban yang profesional, informatif, dan membantu. Fokus pada:
+
+- Layanan hukum: Pidana, Perdata, Keluarga, Bisnis
+- Konsultasi gratis 30 menit untuk klien baru
+- Biaya konsultasi: Rp 500.000/jam setelah sesi gratis
+- Jam operasional: Senin-Jumat 09:00-17:00
+- Kontak: WhatsApp dan telepon tersedia
+
+Jawab dengan ramah, professional, dan jangan sebutkan bahwa Anda adalah AI.`
+          },
+          {
+            role: 'user',
+            content: message
+          }
         ],
-        max_tokens: 50
+        max_tokens: 200,
+        temperature: 0.7
       })
     })
     
     if (response.ok) {
       const data = await response.json()
-      apiResponse.value = `✅ Success: ${data.choices[0].message.content}`
+      return data.choices[0]?.message?.content || generateSmartResponse(message)
     } else {
-      apiResponse.value = `❌ Error: ${response.status}`
+      throw new Error('AI service unavailable')
     }
   } catch (error) {
-    apiResponse.value = `❌ Error: ${error.message}`
+    return generateSmartResponse(message)
   }
 }
 
-console.log('🚀 Simple ChatBot component loaded!')
+// Generate Smart Response based on keywords (fallback)
+const generateSmartResponse = (message) => {
+  const lowerMessage = message.toLowerCase()
+  
+  if (lowerMessage.includes('konsultasi') || lowerMessage.includes('gratis')) {
+    return `Terima kasih atas minat Anda! 
+
+Kami menyediakan konsultasi gratis 30 menit untuk klien baru. Konsultasi ini mencakup:
+
+• Evaluasi awal kasus Anda
+• Penjelasan opsi hukum yang tersedia  
+• Estimasi biaya penanganan
+• Strategi terbaik untuk kasus Anda
+
+Untuk booking konsultasi gratis, silakan hubungi:
+📞 +62 8xx-xxxx-xxxx
+💬 WhatsApp tersedia
+⏰ Senin-Jumat: 09:00-17:00
+
+Apakah ada yang ingin Anda tanyakan tentang layanan kami?`
+  }
+  
+  if (lowerMessage.includes('layanan') || lowerMessage.includes('hukum')) {
+    return `Anas Law menyediakan layanan hukum lengkap:
+
+🚔 **Hukum Pidana**
+Pembelaan kasus kriminal, narkoba, korupsi, KDRT
+
+📄 **Hukum Perdata**  
+Sengketa kontrak, properti, wanprestasi, ganti rugi
+
+👨‍👩‍👧‍👦 **Hukum Keluarga**
+Perceraian, hak asuh anak, pembagian harta, warisan
+
+🏢 **Hukum Bisnis**
+Pendirian PT, kontrak bisnis, merger & akuisisi
+
+Dengan pengalaman 15+ tahun, kami siap membantu kasus Anda. Mau konsultasi gratis dulu?`
+  }
+  
+  if (lowerMessage.includes('biaya') || lowerMessage.includes('tarif') || lowerMessage.includes('harga')) {
+    return `Struktur biaya Anas Law transparan dan kompetitif:
+
+🆓 **Konsultasi Awal: GRATIS 30 menit**
+• Evaluasi kasus
+• Penjelasan opsi hukum
+• Estimasi biaya
+
+💼 **Konsultasi Lanjutan: Rp 500.000/jam**
+• Konsultasi mendalam
+• Persiapan dokumen
+• Strategi hukum
+
+⚖️ **Penanganan Kasus**
+Biaya disesuaikan dengan kompleksitas kasus. Estimasi akan diberikan setelah evaluasi awal.
+
+📋 **Layanan Dokumen**
+Mulai dari Rp 250.000 untuk dokumen standar.
+
+Ingin memanfaatkan konsultasi gratis dulu?`
+  }
+  
+  if (lowerMessage.includes('booking') || lowerMessage.includes('janji') || lowerMessage.includes('appointment')) {
+    return `Mudah booking konsultasi dengan Anas Law:
+
+📱 **Online Booking**
+1. Klik tombol "Book Consultation" di website
+2. Pilih tanggal & waktu yang tersedia
+3. Isi form detail kasus
+4. Konfirmasi via WhatsApp
+
+📞 **Telepon Langsung**
++62 8xx-xxxx-xxxx (jam operasional)
+
+💬 **WhatsApp**
+Tersedia 24/7 untuk booking dan pertanyaan
+
+⏰ **Jadwal Tersedia**
+• Senin-Jumat: 09:00-17:00
+• Sabtu: 09:00-13:00 (khusus appointment)
+
+Mau saya bantu booking sekarang?`
+  }
+  
+  if (lowerMessage.includes('kontak') || lowerMessage.includes('alamat') || lowerMessage.includes('lokasi')) {
+    return `Kontak Anas Law:
+
+� **Alamat Kantor**
+[Alamat lengkap kantor Anas Law]
+Jakarta, Indonesia
+
+📞 **Telepon**
++62 8xx-xxxx-xxxx
+
+💬 **WhatsApp**
++62 8xx-xxxx-xxxx (24/7)
+
+📧 **Email**
+info@anaslaw.com
+
+🌐 **Website**
+www.anaslaw.com
+
+⏰ **Jam Operasional**
+Senin-Jumat: 09:00-17:00
+Sabtu: 09:00-13:00 (appointment only)
+
+Ada yang bisa kami bantu hari ini?`
+  }
+  
+  // Default professional response
+  return `Terima kasih atas pertanyaan Anda.
+
+Untuk memberikan jawaban yang tepat dan sesuai dengan kebutuhan hukum Anda, saya merekomendasikan untuk konsultasi langsung dengan tim lawyer kami.
+
+🆓 **Konsultasi gratis 30 menit tersedia!**
+
+Silakan hubungi:
+📞 +62 8xx-xxxx-xxxx  
+💬 WhatsApp: tersedia 24/7
+🌐 Website: anaslaw.com
+
+Tim kami siap membantu dengan pertanyaan hukum Anda secara professional dan confidential.
+
+Ada yang bisa saya bantu lagi?`
+}
+
+// Lifecycle
+console.log('🏛️ Anas Law Customer Service loaded!')
 </script>
+
+<style scoped>
+/* Custom scrollbar for chat area */
+.overflow-y-auto::-webkit-scrollbar {
+  width: 4px;
+}
+
+.overflow-y-auto::-webkit-scrollbar-track {
+  background: #f1f5f9;
+  border-radius: 2px;
+}
+
+.overflow-y-auto::-webkit-scrollbar-thumb {
+  background: #cbd5e1;
+  border-radius: 2px;
+}
+
+.overflow-y-auto::-webkit-scrollbar-thumb:hover {
+  background: #94a3b8;
+}
+
+/* Animation for message bubbles */
+@keyframes slideInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.bg-white {
+  animation: slideInUp 0.3s ease-out;
+}
+
+/* Professional gradient backgrounds */
+.bg-gradient-to-br {
+  background-image: linear-gradient(to bottom right, var(--tw-gradient-stops));
+}
+
+.bg-gradient-to-r {
+  background-image: linear-gradient(to right, var(--tw-gradient-stops));
+}
+
+/* Hover effects */
+.group:hover .group-hover\:scale-110 {
+  transform: scale(1.1);
+}
+
+/* Professional shadows */
+.shadow-2xl {
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+}
+
+/* Custom amber colors for law firm theme */
+.from-amber-600 {
+  --tw-gradient-from: #d97706;
+}
+
+.to-amber-700 {
+  --tw-gradient-to: #b45309;
+}
+
+.to-amber-800 {
+  --tw-gradient-to: #92400e;
+}
+</style>
