@@ -169,29 +169,14 @@
 </template>
 
 <script setup lang="ts">
-import { ref, computed, onMounted } from "vue";
+import { ref, computed } from "vue";
 import { useRouter } from "vue-router";
 import { useI18n } from "vue-i18n";
 import Header from "../components/Header.vue";
 import Footer from "../components/Footer.vue";
 
 const router = useRouter();
-const { t, locale } = useI18n();
-
-// Ensure i18n is properly initialized
-const isI18nReady = ref(false);
-
-onMounted(() => {
-  // Wait for i18n to be ready
-  if (locale.value) {
-    isI18nReady.value = true;
-  } else {
-    // Fallback initialization
-    setTimeout(() => {
-      isI18nReady.value = true;
-    }, 100);
-  }
-});
+const { t } = useI18n();
 
 // Active FAQ
 const activeFaq = ref<number | null>(null);
@@ -276,30 +261,21 @@ const filteredLawyers = computed(() => {
   );
 });
 
-// FAQ data - add safety check
-const faqs = computed(() => {
-  if (!isI18nReady.value) return [];
-  
-  try {
-    return [
-      {
-        question: t('booking.faqItems.q1'),
-        answer: t('booking.faqItems.a1'),
-      },
-      {
-        question: t('booking.faqItems.q2'),
-        answer: t('booking.faqItems.a2'),
-      },
-      {
-        question: t('booking.faqItems.q3'),
-        answer: t('booking.faqItems.a3'),
-      },
-    ];
-  } catch (error) {
-    console.warn('i18n not ready yet:', error);
-    return [];
-  }
-});
+// FAQ data
+const faqs = computed(() => [
+  {
+    question: t('booking.faqItems.q1'),
+    answer: t('booking.faqItems.a1'),
+  },
+  {
+    question: t('booking.faqItems.q2'),
+    answer: t('booking.faqItems.a2'),
+  },
+  {
+    question: t('booking.faqItems.q3'),
+    answer: t('booking.faqItems.a3'),
+  },
+]);
 
 // Methods
 const toggleFaq = (index: number) => {

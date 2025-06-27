@@ -3,11 +3,10 @@
     <div class="text-center mb-12">
       <p class="text-[#B49F2B] font-semibold uppercase">Blog</p>
       <h2 class="text-4xl font-bold mt-2 mb-4">
-        Our Regular Updated Blog Posts
+        {{ $t('blog.title') }}
       </h2>
       <p class="text-gray-500 max-w-xl mx-auto">
-        Explore how MyCase is reshaping the legal landscape, providing attorneys
-        with powerful tools to streamline their practice.
+        {{ $t('blog.description') }}
       </p>
     </div>
 
@@ -28,11 +27,11 @@
           <div class="flex gap-2 mb-3">
             <span
               class="text-xs font-semibold bg-orange-100 text-orange-600 px-3 py-1 rounded-full"
-              >News</span
+              >{{ $t('blog.news') }}</span
             >
             <span
               class="text-xs font-semibold bg-purple-100 text-purple-600 px-3 py-1 rounded-full"
-              >Inspiration</span
+              >{{ $t('blog.inspiration') }}</span
             >
           </div>
           <h3 class="text-lg font-semibold mb-2">{{ post.title }}</h3>
@@ -57,42 +56,44 @@
       <button
         class="border border-black text-black px-6 py-2 rounded-lg text-lg font-semibold bg-white hover:bg-black hover:text-white transition"
       >
-        More Posts
+        {{ $t('blog.morePosts') }}
       </button>
     </div>
   </section>
 </template>
 
 <script setup>
-const blogPosts = [
+import { computed } from 'vue'
+import { useI18n } from 'vue-i18n'
+
+const { t } = useI18n()
+
+const blogPosts = computed(() => [
   {
-    title: "MyCase: Transforming Legal Practice",
-    description:
-      "Embark on a journey through the innovation that is MyCase, redefining how legal...",
+    title: t('blog.defaultTitle'),
+    description: t('blog.defaultDescription'),
     image: "/src/assets/images/lawyer01.jpg",
-    author: "Fadhli Akbar",
-    company: "Anas Law Office",
+    author: t('blog.defaultAuthor'),
+    company: t('blog.defaultCompany'),
     authorImage: "/src/assets/images/feris.jpg",
   },
   {
-    title: "MyCase: Transforming Legal Practice",
-    description:
-      "Embark on a journey through the innovation that is MyCase, redefining how legal...",
+    title: t('blog.defaultTitle'),
+    description: t('blog.defaultDescription'),
     image: "/src/assets/images/lawyer01.jpg",
-    author: "Fadhli Akbar",
-    company: "Anas Law Office",
+    author: t('blog.defaultAuthor'),
+    company: t('blog.defaultCompany'),
     authorImage: "/src/assets/images/feris.jpg",
   },
   {
-    title: "MyCase: Transforming Legal Practice",
-    description:
-      "Embark on a journey through the innovation that is MyCase, redefining how legal...",
+    title: t('blog.defaultTitle'),
+    description: t('blog.defaultDescription'),
     image: "/src/assets/images/lawyer01.jpg",
-    author: "Fadhli Akbar",
-    company: "Anas Law Office",
+    author: t('blog.defaultAuthor'),
+    company: t('blog.defaultCompany'),
     authorImage: "/src/assets/images/feris.jpg",
   },
-];
+])
 </script>
 
 <style scoped>

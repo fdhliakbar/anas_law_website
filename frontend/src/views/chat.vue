@@ -20,11 +20,11 @@
               />
             </svg>
           </button>
-          <h1 class="font-bold text-2xl text-black">Legal Chat Support</h1>
+          <h1 class="font-bold text-2xl text-black">{{ $t('chat.title') }}</h1>
         </div>
         <div class="flex items-center space-x-2">
           <div class="w-2 h-2 bg-green-500 rounded-full"></div>
-          <span class="text-sm text-gray-600">{{ userCount }} users online</span>
+          <span class="text-sm text-gray-600">{{ userCount }} {{ $t('chat.usersOnline') }}</span>
         </div>
       </div>
     </header>
@@ -34,9 +34,9 @@
       <!-- Welcome Section -->
       <div class="bg-gray-50 border-b border-gray-200 p-6">
         <div class="max-w-4xl mx-auto text-center">
-          <h2 class="font-bold text-3xl text-black mb-4">Get Instant Legal Help</h2>
+          <h2 class="font-bold text-3xl text-black mb-4">{{ $t('chat.subtitle') }}</h2>
           <p class="text-lg text-gray-600">
-            Connect with our legal experts for immediate assistance with your legal questions
+            {{ $t('chat.description') }}
           </p>
         </div>
       </div>
@@ -51,7 +51,7 @@
                 <div class="max-w-xs lg:max-w-md">
                   <div class="bg-gray-100 rounded-2xl px-4 py-3">
                     <p class="text-gray-800">
-                      👋 Welcome to Anas Law Chat Support! How can we help you with your legal needs today?
+                      {{ $t('chat.welcomeMessage') }}
                     </p>
                   </div>
                   <p class="text-xs text-gray-500 mt-1 pl-3">Legal Assistant</p>
@@ -90,7 +90,7 @@
                 <input
                   v-model="messageText"
                   @keyup.enter="sendMessage"
-                  placeholder="Type your legal question here..."
+                  :placeholder="$t('chat.placeholder')"
                   class="w-full border-2 border-gray-300 rounded-full px-6 py-3 text-lg focus:outline-none focus:border-black transition"
                 />
               </div>
@@ -123,28 +123,28 @@
     <!-- Quick Actions -->
     <div class="bg-gray-50 border-t border-gray-200 p-6">
       <div class="max-w-4xl mx-auto">
-        <h3 class="font-bold text-lg text-black mb-4">Common Legal Questions</h3>
+        <h3 class="font-bold text-lg text-black mb-4">{{ $t('chat.quickActions') }}</h3>
         <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
           <button
             @click="sendQuickMessage('I need help with a contract review')"
             class="text-left p-4 bg-white border border-gray-200 rounded-lg hover:border-black transition"
           >
-            <div class="font-medium text-black">Contract Review</div>
-            <div class="text-sm text-gray-600">Need help reviewing a legal document</div>
+            <div class="font-medium text-black">{{ $t('chat.contractReview') }}</div>
+            <div class="text-sm text-gray-600">{{ $t('chat.contractReviewDesc') }}</div>
           </button>
           <button
             @click="sendQuickMessage('I want to schedule a consultation')"
             class="text-left p-4 bg-white border border-gray-200 rounded-lg hover:border-black transition"
           >
-            <div class="font-medium text-black">Schedule Consultation</div>
-            <div class="text-sm text-gray-600">Book a meeting with our attorneys</div>
+            <div class="font-medium text-black">{{ $t('chat.scheduleConsultation') }}</div>
+            <div class="text-sm text-gray-600">{{ $t('chat.scheduleConsultationDesc') }}</div>
           </button>
           <button
             @click="sendQuickMessage('I have a legal emergency')"
             class="text-left p-4 bg-white border border-gray-200 rounded-lg hover:border-black transition"
           >
-            <div class="font-medium text-black">Legal Emergency</div>
-            <div class="text-sm text-gray-600">Urgent legal assistance needed</div>
+            <div class="font-medium text-black">{{ $t('chat.legalEmergency') }}</div>
+            <div class="text-sm text-gray-600">{{ $t('chat.legalEmergencyDesc') }}</div>
           </button>
         </div>
       </div>
@@ -155,9 +155,11 @@
 <script setup>
 import { ref, onMounted, nextTick } from 'vue'
 import { useRouter } from 'vue-router'
+import { useI18n } from 'vue-i18n'
 import { io } from 'socket.io-client'
 
 const router = useRouter()
+const { t } = useI18n()
 
 // Socket connection
 const socket = io('http://localhost:3000')

@@ -22,13 +22,13 @@
           </button>
         </div>
 
-        <h2 class="font-bold text-4xl text-black mb-2">Welcome back</h2>
-        <p class="text-gray-600 mb-8">Sign in to access your legal consultation account</p>
+        <h2 class="font-bold text-4xl text-black mb-2">{{ $t('auth.login.title') }}</h2>
+        <p class="text-gray-600 mb-8">{{ $t('auth.login.subtitle') }}</p>
 
         <form @submit.prevent="handleLogin">
           <div class="mb-6">
             <label for="email" class="block text-sm font-medium text-gray-700 mb-2">
-              Email address
+              {{ $t('auth.login.email') }}
             </label>
             <input
               type="email"
@@ -42,7 +42,7 @@
 
           <div class="mb-6">
             <label for="password" class="block text-sm font-medium text-gray-700 mb-2">
-              Password
+              {{ $t('auth.login.password') }}
             </label>
             <div class="relative">
               <input
@@ -70,10 +70,10 @@
                 v-model="form.rememberMe"
                 class="w-4 h-4 text-black bg-gray-100 border-gray-300 rounded focus:ring-black"
               />
-              <span class="ml-2 text-sm text-gray-700">Remember me</span>
+              <span class="ml-2 text-sm text-gray-700">{{ $t('auth.login.rememberMe') }}</span>
             </label>
             <a href="#" class="text-sm text-black hover:underline font-medium">
-              Forgot password?
+              {{ $t('auth.login.forgotPassword') }}
             </a>
           </div>
 
@@ -82,16 +82,16 @@
             :disabled="isLoading"
             class="w-full border border-black bg-black text-white py-3 px-6 rounded-lg text-lg font-semibold transition hover:bg-gray-800 disabled:opacity-50"
           >
-            <span v-if="!isLoading">Sign in</span>
-            <span v-else>Signing in...</span>
+            <span v-if="!isLoading">{{ $t('auth.login.signIn') }}</span>
+            <span v-else>{{ $t('auth.login.signingIn') }}</span>
           </button>
         </form>
 
         <div class="mt-8 text-center">
           <p class="text-gray-600">
-            Don't have an account?
+            {{ $t('auth.login.noAccount') }}
             <router-link to="/register" class="text-black font-medium hover:underline">
-              Sign up
+              {{ $t('auth.login.signUp') }}
             </router-link>
           </p>
         </div>
