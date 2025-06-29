@@ -33,6 +33,38 @@
         <form @submit.prevent="handleRegister">
           <div class="mb-4">
             <label
+              for="name"
+              class="block text-sm font-medium text-gray-700 mb-1"
+              >Name</label
+            >
+            <div class="relative rounded-md shadow-sm">
+              <div
+                class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none"
+              >
+                <svg
+                  class="h-5 w-5 text-gray-400"
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 20 20"
+                  fill="currentColor"
+                >
+                  <path
+                    d="M10 10a4 4 0 100-8 4 4 0 000 8zm0 2c-4.418 0-8 2.239-8 5v1a1 1 0 001 1h14a1 1 0 001-1v-1c0-2.761-3.582-5-8-5z"
+                  />
+                </svg>
+              </div>
+              <input
+                type="text"
+                id="name"
+                v-model="form.name"
+                class="focus:ring-indigo-500 focus:border-indigo-500 block w-full pl-10 sm:text-sm border-gray-300 rounded-md py-3"
+                placeholder="Your name"
+                required
+              />
+            </div>
+          </div>
+
+          <div class="mb-4">
+            <label
               for="email"
               class="block text-sm font-medium text-gray-700 mb-1"
               >Email address</label
@@ -285,6 +317,7 @@ export default {
         email: "",
         password: "",
         repeatPassword: "",
+        name: "",
       },
       showPassword: false,
     };
@@ -302,21 +335,30 @@ export default {
       // Kirim ke backend
       try {
         const response = await fetch(
-          "http://localhost:3000/api/users/post-register",
+          "http://localhost:3000/api/users/post-users",
           {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({
+              action: "register",
+              name: this.form.name,
               email: this.form.email,
               password: this.form.password,
+              confirmPassword: this.form.repeatPassword,
             }),
           }
         );
-        if (!response.ok) throw new Error("Registration failed");
-        alert("Registrasi berhasil!");
+
+        const data = await response.json();
+
+        if (!response.ok) {
+          throw new Error(data.message || "Registration failed");
+        }
+
+        alert("Registration successful!");
         this.$router.push("/login");
       } catch (err) {
-        alert("Registrasi gagal: " + err.message);
+        alert("Registration failed: " + err.message);
       }
     },
     togglePasswordVisibility() {
