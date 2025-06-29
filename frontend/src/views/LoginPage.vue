@@ -202,7 +202,7 @@ export default {
         if (data.role === "admin" || data.is_admin) {
           this.$router.push("/admin/dashboard");
         } else {
-          this.$router.push("/dashboard");
+          this.$router.push("/");
         }
       } catch (error) {
         console.error("Login error:", error);
