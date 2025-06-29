@@ -2,6 +2,7 @@
 
 import pool from "../../utils/db";
 import jwt from "jsonwebtoken";
+import bcrypt from "bcrypt";
 
 export default defineEventHandler(async (event) => {
   if (event.node.req.method !== "PUT") {
@@ -27,15 +28,16 @@ export default defineEventHandler(async (event) => {
 
   // --- LANGKAH 2: DAPATKAN DATA DARI BODY & TOKEN ---
   const body = await readBody(event);
-  const { name, email } = body; // HAPUS: Tidak perlu lagi id_to_update dari body
+  const { name, email, password, confirmPassword } = body; // HAPUS: Tidak perlu lagi id_to_update dari body
 
   // BARU: ID pengguna yang akan diupdate diambil langsung dari token yang sudah terverifikasi.
   const id_to_update = loggedInUser.users_id;
 
-  if (!name && !email) {
+  if (!name && !email && !password) {
     return {
       statusCode: 400,
-      message: "Minimal harus ada nama atau email yang akan diupdate.",
+      message:
+        "Minimal harus ada nama, email, atau password yang akan diupdate.",
     };
   }
 
@@ -49,7 +51,7 @@ export default defineEventHandler(async (event) => {
     if (email) {
       const emailCheck = await pool.query(
         `SELECT users_id FROM users WHERE email = $1 AND users_id != $2`,
-        [email, id_to_update],
+        [email, id_to_update]
       );
       if (emailCheck.rows.length > 0) {
         return {
@@ -59,24 +61,47 @@ export default defineEventHandler(async (event) => {
       }
     }
 
+    // Validasi password jika ingin diubah
+    let hashedPassword = null;
+    if (password) {
+      if (password.length < 8) {
+        return {
+          statusCode: 400,
+          message: "Password minimal 8 karakter.",
+        };
+      }
+      if (password !== confirmPassword) {
+        return {
+          statusCode: 400,
+          message: "Konfirmasi password tidak cocok.",
+        };
+      }
+      hashedPassword = await bcrypt.hash(password, 10);
+    }
+
     // Logika untuk membangun query update tetap sama
     const fields = [];
     const values = [];
-    let query_parts = [];
     let param_index = 1;
 
     if (name) {
-      query_parts.push(`name = $${param_index++}`);
+      fields.push(`name = $${param_index++}`);
       values.push(name);
     }
     if (email) {
-      query_parts.push(`email = $${param_index++}`);
+      fields.push(`email = $${param_index++}`);
       values.push(email);
+    }
+    if (hashedPassword) {
+      fields.push(`password = $${param_index++}`);
+      values.push(hashedPassword);
     }
 
     values.push(id_to_update); // ID untuk klausa WHERE
 
-    const updateQuery = `UPDATE users SET ${query_parts.join(", ")} WHERE users_id = $${param_index} RETURNING users_id, name, email, role`;
+    const updateQuery = `UPDATE users SET ${fields.join(
+      ", "
+    )} WHERE users_id = $${param_index} RETURNING users_id, name, email, role`;
 
     const result = await pool.query(updateQuery, values);
 

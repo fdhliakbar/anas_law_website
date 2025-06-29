@@ -5,6 +5,18 @@ import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 
 export default defineEventHandler(async (event) => {
+  // Tambahkan CORS headers
+  setResponseHeaders(event, {
+    "Access-Control-Allow-Origin": "*", // atau ganti * dengan http://localhost:5173 untuk lebih aman
+    "Access-Control-Allow-Methods": "GET,POST,PUT,DELETE,OPTIONS",
+    "Access-Control-Allow-Headers": "Content-Type, Authorization",
+  });
+
+  // Handle preflight OPTIONS
+  if (event.node.req.method === "OPTIONS") {
+    return "";
+  }
+
   const method = event.node.req.method;
   let body = {};
   try {
@@ -18,10 +30,9 @@ export default defineEventHandler(async (event) => {
 
   // REGISTER
   if (method === "POST" && body.action === "register") {
-    const { name, email, password, confirmPassword, role } = body;
+    const { name, email, password, confirmPassword } = body;
     const errors = [];
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    const allowedRoles = ["users", "admin"];
 
     if (!name) errors.push("Nama Wajib Diisi");
     if (!email) errors.push("Email wajib diisi");
@@ -30,8 +41,6 @@ export default defineEventHandler(async (event) => {
     else if (password.length < 8) errors.push("Password minimal 8 karakter");
     else if (password !== confirmPassword)
       errors.push("Konfirmasi password tidak cocok");
-    if (!role) errors.push("Role Wajib diisi");
-    else if (!allowedRoles.includes(role)) errors.push("Role tidak valid");
 
     if (errors.length > 0) {
       return {
@@ -54,12 +63,15 @@ export default defineEventHandler(async (event) => {
       }
 
       const hashedPassword = await bcrypt.hash(password, 10);
+      const role = body.role === "admin" ? "admin" : "users";
       const newUserResult = await pool.query(
         `INSERT INTO users(name, email, password, role) 
          VALUES($1, $2, $3, $4) 
          RETURNING users_id, name, email, role`,
         [name, email, hashedPassword, role]
       );
+
+      console.log("Insert result:", newUserResult.rows);
 
       return {
         statusCode: 201,
