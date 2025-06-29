@@ -1,10 +1,15 @@
 <template>
   <div class="min-h-screen bg-white flex items-center justify-center p-4">
-    <div class="bg-white border border-gray-200 rounded-2xl overflow-hidden w-full max-w-4xl lg:flex shadow-lg">
+    <div
+      class="bg-white border border-gray-200 rounded-2xl overflow-hidden w-full max-w-4xl lg:flex shadow-lg"
+    >
       <!-- Left Side - Form -->
       <div class="w-full lg:w-1/2 p-8 md:p-12">
         <div class="flex items-center mb-8">
-          <button @click="goBack" class="text-gray-600 hover:text-black transition">
+          <button
+            @click="goBack"
+            class="text-gray-600 hover:text-black transition"
+          >
             <svg
               xmlns="http://www.w3.org/2000/svg"
               class="h-6 w-6"
@@ -22,13 +27,18 @@
           </button>
         </div>
 
-        <h2 class="font-bold text-4xl text-black mb-2">{{ $t('auth.login.title') }}</h2>
-        <p class="text-gray-600 mb-8">{{ $t('auth.login.subtitle') }}</p>
+        <h2 class="font-bold text-4xl text-black mb-2">
+          {{ $t("auth.login.title") }}
+        </h2>
+        <p class="text-gray-600 mb-8">{{ $t("auth.login.subtitle") }}</p>
 
         <form @submit.prevent="handleLogin">
           <div class="mb-6">
-            <label for="email" class="block text-sm font-medium text-gray-700 mb-2">
-              {{ $t('auth.login.email') }}
+            <label
+              for="email"
+              class="block text-sm font-medium text-gray-700 mb-2"
+            >
+              {{ $t("auth.login.email") }}
             </label>
             <input
               type="email"
@@ -41,8 +51,11 @@
           </div>
 
           <div class="mb-6">
-            <label for="password" class="block text-sm font-medium text-gray-700 mb-2">
-              {{ $t('auth.login.password') }}
+            <label
+              for="password"
+              class="block text-sm font-medium text-gray-700 mb-2"
+            >
+              {{ $t("auth.login.password") }}
             </label>
             <div class="relative">
               <input
@@ -58,7 +71,9 @@
                 @click="showPassword = !showPassword"
                 class="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-500 hover:text-black"
               >
-                <i :class="showPassword ? 'fas fa-eye-slash' : 'fas fa-eye'"></i>
+                <i
+                  :class="showPassword ? 'fas fa-eye-slash' : 'fas fa-eye'"
+                ></i>
               </button>
             </div>
           </div>
@@ -70,10 +85,12 @@
                 v-model="form.rememberMe"
                 class="w-4 h-4 text-black bg-gray-100 border-gray-300 rounded focus:ring-black"
               />
-              <span class="ml-2 text-sm text-gray-700">{{ $t('auth.login.rememberMe') }}</span>
+              <span class="ml-2 text-sm text-gray-700">{{
+                $t("auth.login.rememberMe")
+              }}</span>
             </label>
             <a href="#" class="text-sm text-black hover:underline font-medium">
-              {{ $t('auth.login.forgotPassword') }}
+              {{ $t("auth.login.forgotPassword") }}
             </a>
           </div>
 
@@ -82,16 +99,19 @@
             :disabled="isLoading"
             class="w-full border border-black bg-black text-white py-3 px-6 rounded-lg text-lg font-semibold transition hover:bg-gray-800 disabled:opacity-50"
           >
-            <span v-if="!isLoading">{{ $t('auth.login.signIn') }}</span>
-            <span v-else>{{ $t('auth.login.signingIn') }}</span>
+            <span v-if="!isLoading">{{ $t("auth.login.signIn") }}</span>
+            <span v-else>{{ $t("auth.login.signingIn") }}</span>
           </button>
         </form>
 
         <div class="mt-8 text-center">
           <p class="text-gray-600">
-            {{ $t('auth.login.noAccount') }}
-            <router-link to="/register" class="text-black font-medium hover:underline">
-              {{ $t('auth.login.signUp') }}
+            {{ $t("auth.login.noAccount") }}
+            <router-link
+              to="/register"
+              class="text-black font-medium hover:underline"
+            >
+              {{ $t("auth.login.signUp") }}
             </router-link>
           </p>
         </div>
@@ -100,10 +120,15 @@
       <!-- Right Side - Image/Info -->
       <div class="hidden lg:block w-1/2 bg-gray-900 relative">
         <div class="absolute inset-0 bg-black bg-opacity-50"></div>
-        <div class="relative z-10 h-full flex flex-col justify-center p-12 text-white">
-          <h3 class="font-bold text-3xl mb-4">Access Professional Legal Services</h3>
+        <div
+          class="relative z-10 h-full flex flex-col justify-center p-12 text-white"
+        >
+          <h3 class="font-bold text-3xl mb-4">
+            Access Professional Legal Services
+          </h3>
           <p class="text-lg text-gray-300 mb-8">
-            Join thousands of clients who trust our experienced legal team for their legal needs.
+            Join thousands of clients who trust our experienced legal team for
+            their legal needs.
           </p>
           <ul class="space-y-3">
             <li class="flex items-center">
@@ -151,17 +176,37 @@ export default {
     async handleLogin() {
       this.isLoading = true;
       try {
-        // Simulate API call
-        await new Promise(resolve => setTimeout(resolve, 1000));
-        
-        // Here you would typically make an API call to authenticate
-        console.log("Login attempt:", this.form);
-        
-        // Redirect to dashboard or home page
-        this.$router.push("/admin/dashboard");
+        const response = await fetch(
+          "http://localhost:3000/api/users/post-users",
+          {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({
+              action: "login",
+              email: this.form.email,
+              password: this.form.password,
+            }),
+          }
+        );
+
+        const data = await response.json();
+
+        if (!response.ok) {
+          throw new Error(data.message || "Login failed");
+        }
+
+        // Simpan token jika perlu
+        localStorage.setItem("token", data.token);
+
+        // Redirect sesuai role
+        if (data.role === "admin" || data.is_admin) {
+          this.$router.push("/admin/dashboard");
+        } else {
+          this.$router.push("/dashboard");
+        }
       } catch (error) {
         console.error("Login error:", error);
-        alert("Login failed. Please try again.");
+        alert(error.message || "Login failed. Please try again.");
       } finally {
         this.isLoading = false;
       }
