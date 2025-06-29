@@ -56,7 +56,7 @@
       <button
         class="border border-black text-black px-6 py-2 rounded-lg text-lg font-semibold bg-white hover:bg-black hover:text-white transition"
       >
-        {{ $t('blog.morePosts') }}
+        <router-link to="/article">More Post</router-link>
       </button>
     </div>
   </section>
