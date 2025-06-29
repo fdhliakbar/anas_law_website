@@ -198,11 +198,12 @@ export default {
         // Simpan token jika perlu
         localStorage.setItem("token", data.token);
 
-        // Redirect sesuai role
-        if (data.role === "admin" || data.is_admin) {
+        // Ambil role dan isAdmin dari data.user
+        const user = data.user || {};
+        if (user.role === "admin" || user.isAdmin === true) {
           this.$router.push("/admin/dashboard");
         } else {
-          this.$router.push("/dashboard");
+          this.$router.push("/");
         }
       } catch (error) {
         console.error("Login error:", error);

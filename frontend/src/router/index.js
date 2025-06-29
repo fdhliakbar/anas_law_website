@@ -20,6 +20,16 @@ const routes = [
     name: "AdminDashboard",
     component: () => import("@/views/admin/Dashboard.vue"),
   },
+  {
+    path: "/articles",
+    name: "PublicArticlesList",
+    component: () => import("@/views/PublicArticlesList.vue"),
+  },
+  {
+    path: "/admin/article-management",
+    name: "ArticleManagement",
+    component: () => import("@/views/admin/ArticleManagement.vue"),
+  },
 ];
 
 const router = createRouter({

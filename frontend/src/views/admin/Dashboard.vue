@@ -12,16 +12,20 @@
                 <a
                   @click="currentTab = 'dashboard'"
                   :class="[
-                    currentTab === 'dashboard' ? 'bg-indigo-700' : 'hover:bg-indigo-500',
+                    currentTab === 'dashboard'
+                      ? 'bg-indigo-700'
+                      : 'hover:bg-indigo-500',
                     'px-3 py-2 rounded-md text-sm font-medium cursor-pointer',
                   ]"
                 >
                   Dashboard
                 </a>
                 <a
-                  @click="currentTab = 'articles'"
+                  @click="goToArticles"
                   :class="[
-                    currentTab === 'articles' ? 'bg-indigo-700' : 'hover:bg-indigo-500',
+                    currentTab === 'articles'
+                      ? 'bg-indigo-700'
+                      : 'hover:bg-indigo-500',
                     'px-3 py-2 rounded-md text-sm font-medium cursor-pointer',
                   ]"
                 >
@@ -30,7 +34,9 @@
                 <a
                   @click="currentTab = 'users'"
                   :class="[
-                    currentTab === 'users' ? 'bg-indigo-700' : 'hover:bg-indigo-500',
+                    currentTab === 'users'
+                      ? 'bg-indigo-700'
+                      : 'hover:bg-indigo-500',
                     'px-3 py-2 rounded-md text-sm font-medium cursor-pointer',
                   ]"
                 >
@@ -39,7 +45,9 @@
                 <a
                   @click="currentTab = 'settings'"
                   :class="[
-                    currentTab === 'settings' ? 'bg-indigo-700' : 'hover:bg-indigo-500',
+                    currentTab === 'settings'
+                      ? 'bg-indigo-700'
+                      : 'hover:bg-indigo-500',
                     'px-3 py-2 rounded-md text-sm font-medium cursor-pointer',
                   ]"
                 >
@@ -246,16 +254,16 @@
 </template>
 
 <script>
-import ArticleManagement from './ArticleManagement.vue';
+import ArticleManagement from "./ArticleManagement.vue";
 
 export default {
-  name: 'AdminDashboard',
+  name: "AdminDashboard",
   components: {
     ArticleManagement,
   },
   data() {
     return {
-      currentTab: 'dashboard',
+      currentTab: "dashboard",
       stats: {
         totalArticles: 0,
         totalUsers: 0,
@@ -263,20 +271,20 @@ export default {
       },
       recentActivities: [
         {
-          title: 'New article published',
+          title: "New article published",
           description:
-            'Corporate Law Update: Recent Changes in Business Regulations',
-          time: '2 hours ago',
+            "Corporate Law Update: Recent Changes in Business Regulations",
+          time: "2 hours ago",
         },
         {
-          title: 'User registration',
-          description: 'New user registered: john.doe@example.com',
-          time: '5 hours ago',
+          title: "User registration",
+          description: "New user registered: john.doe@example.com",
+          time: "5 hours ago",
         },
         {
-          title: 'Article updated',
-          description: 'Family Law: Child Custody Guidelines updated',
-          time: '1 day ago',
+          title: "Article updated",
+          description: "Family Law: Child Custody Guidelines updated",
+          time: "1 day ago",
         },
       ],
     };
@@ -299,19 +307,22 @@ export default {
           totalViews: 1250,
         };
       } catch (error) {
-        console.error('Error fetching dashboard stats:', error);
+        console.error("Error fetching dashboard stats:", error);
       }
     },
     logout() {
       // Clear auth token
-      localStorage.removeItem('token');
+      localStorage.removeItem("token");
       // Redirect to login page
-      this.$router.push('/login');
+      this.$router.push("/login");
+    },
+    goToArticles() {
+      this.$router.push({ name: "PublicArticlesList" });
     },
   },
 };
 </script>
 
 <style>
-@import url('https://fonts.googleapis.com/icon?family=Material+Icons');
+@import url("https://fonts.googleapis.com/icon?family=Material+Icons");
 </style>

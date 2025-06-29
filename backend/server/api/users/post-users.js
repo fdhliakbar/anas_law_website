@@ -124,8 +124,13 @@ export default defineEventHandler(async (event) => {
       return {
         message: "Login berhasil",
         token: token,
-        role: user.role, // tambahkan ini agar frontend tahu role user
-        is_admin: user.role === "admin", // opsional, boolean untuk kemudahan frontend
+        user: {
+          users_id: user.users_id,
+          name: user.name,
+          email: user.email,
+          role: user.role,
+          isAdmin: user.role === "admin",
+        },
       };
     } catch (error) {
       console.error(error);

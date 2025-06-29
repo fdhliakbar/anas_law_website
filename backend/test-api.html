@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Test Backend API</title>
+  </head>
+  <body>
+    <h1>Backend API Test</h1>
+
+    <div>
+      <h2>Test Database Connection</h2>
+      <button onclick="testDatabase()">Test DB</button>
+      <div id="dbResult"></div>
+    </div>
+
+    <div>
+      <h2>Test Uploads Directory</h2>
+      <button onclick="testUploads()">Test Uploads</button>
+      <div id="uploadsResult"></div>
+    </div>
+
+    <div>
+      <h2>Test Get Articles</h2>
+      <button onclick="testArticles()">Get Articles</button>
+      <div id="articlesResult"></div>
+    </div>
+
+    <div>
+      <h2>Test Direct Image Access</h2>
+      <div id="imageTest"></div>
+    </div>
+
+    <script>
+      const BASE_URL = "http://localhost:3000";
+
+      async function testDatabase() {
+        try {
+          const response = await fetch(`${BASE_URL}/api/test-db`);
+          const data = await response.json();
+          document.getElementById(
+            "dbResult"
+          ).innerHTML = `<pre>${JSON.stringify(data, null, 2)}</pre>`;
+        } catch (error) {
+          document.getElementById(
+            "dbResult"
+          ).innerHTML = `<p style="color: red;">Error: ${error.message}</p>`;
+        }
+      }
+
+      async function testUploads() {
+        try {
+          const response = await fetch(`${BASE_URL}/api/test-uploads`);
+          const data = await response.json();
+          document.getElementById(
+            "uploadsResult"
+          ).innerHTML = `<pre>${JSON.stringify(data, null, 2)}</pre>`;
+
+          // Show image test
+          if (data.files && data.files.length > 0) {
+            const imageHtml = data.files
+              .map(
+                (file) =>
+                  `<div>
+                            <p>Testing: ${file.name}</p>
+                            <p>URL: <a href="${file.url}" target="_blank">${file.url}</a></p>
+                            <img src="${file.url}" alt="${file.name}" style="max-width: 200px; border: 1px solid #ccc;" 
+                                 onerror="this.style.border='2px solid red'; this.alt='Failed to load';" />
+                        </div>`
+              )
+              .join("");
+            document.getElementById("imageTest").innerHTML = imageHtml;
+          }
+        } catch (error) {
+          document.getElementById(
+            "uploadsResult"
+          ).innerHTML = `<p style="color: red;">Error: ${error.message}</p>`;
+        }
+      }
+
+      async function testArticles() {
+        try {
+          const response = await fetch(`${BASE_URL}/api/article/get-articles`);
+          const data = await response.json();
+          document.getElementById(
+            "articlesResult"
+          ).innerHTML = `<pre>${JSON.stringify(data, null, 2)}</pre>`;
+        } catch (error) {
+          document.getElementById(
+            "articlesResult"
+          ).innerHTML = `<p style="color: red;">Error: ${error.message}</p>`;
+        }
+      }
+    </script>
+
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        padding: 20px;
+      }
+      div {
+        margin: 20px 0;
+        padding: 10px;
+        border: 1px solid #ccc;
+      }
+      button {
+        padding: 10px 20px;
+        background: #007bff;
+        color: white;
+        border: none;
+        cursor: pointer;
+      }
+      pre {
+        background: #f5f5f5;
+        padding: 10px;
+        overflow-x: auto;
+      }
+    </style>
+  </body>
+</html>

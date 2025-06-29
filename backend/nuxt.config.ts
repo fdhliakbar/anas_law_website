@@ -17,4 +17,15 @@ export default defineNuxtConfig({
         process.env.NUXT_PUBLIC_STACK_PUBLISHABLE_CLIENT_KEY,
     },
   },
+
+  nitro: {
+    publicAssets: [
+      {
+        dir: "public/uploads",
+        baseURL: "/uploads",
+        maxAge: 60 * 60 * 24 * 365, // 1 year
+      },
+    ],
+    serveStatic: true,
+  },
 });
