@@ -12,6 +12,9 @@
   <TaxConsultation/>
   <Blog />
   <Footer />
+  
+  <!-- �️ Professional Anas Law AI ChatBot -->
+  <SimpleChatBot />
 </template>
 
 <script setup>
@@ -29,6 +32,7 @@ import OurTeamSlider from "@/components/OurTeamSlider.vue";
 import Blog from "../components/Blog.vue";
 import Footer from "../components/Footer.vue";
 import LegalAdvisorComparison from "@/components/LegalAdvisorComparison.vue";
+import SimpleChatBot from "@/components/SimpleChatBot.vue";
 
 const router = useRouter();
 const goToLogin = () => {

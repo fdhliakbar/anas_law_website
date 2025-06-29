@@ -13,3 +13,13 @@ npm-debug.log
 # Ignore compiled files
 *.log
 *.cache
+
+# Environment variables
+.env
+.env.local
+.env.development
+.env.production
+frontend/.env
+frontend/.env.local
+frontend/.env.development
+frontend/.env.production
