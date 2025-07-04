@@ -1,12 +1,23 @@
 import pool from "../../utils/db.js";
 
 export default defineEventHandler(async (event) => {
+  // Add CORS headers
+  setResponseHeaders(event, {
+    "Access-Control-Allow-Origin": "*",
+    "Access-Control-Allow-Methods": "DELETE,OPTIONS",
+    "Access-Control-Allow-Headers": "Content-Type, Authorization",
+  });
+
+  if (event.node.req.method === "OPTIONS") {
+    return "";
+  }
+
   try {
     // Hanya terima method DELETE
-    if (event.node.req.method !== 'DELETE') {
+    if (event.node.req.method !== "DELETE") {
       throw createError({
         statusCode: 405,
-        statusMessage: 'Method Not Allowed'
+        statusMessage: "Method Not Allowed",
       });
     }
 
@@ -24,55 +35,56 @@ export default defineEventHandler(async (event) => {
     if (!artikel_id) {
       throw createError({
         statusCode: 400,
-        statusMessage: 'artikel_id wajib diisi'
+        statusMessage: "artikel_id wajib diisi",
       });
     }
 
     // Cek apakah artikel ada sebelum menghapus
-    const checkQuery = 'SELECT artikel_id, judul FROM artikel WHERE artikel_id = $1';
+    const checkQuery =
+      "SELECT artikel_id, judul FROM artikel WHERE artikel_id = $1";
     const checkResult = await pool.query(checkQuery, [artikel_id]);
-    
+
     if (checkResult.rows.length === 0) {
       throw createError({
         statusCode: 404,
-        statusMessage: 'Artikel tidak ditemukan'
+        statusMessage: "Artikel tidak ditemukan",
       });
     }
 
     const articleToDelete = checkResult.rows[0];
 
     // Execute delete query
-    const deleteQuery = 'DELETE FROM artikel WHERE artikel_id = $1';
+    const deleteQuery = "DELETE FROM artikel WHERE artikel_id = $1";
     await pool.query(deleteQuery, [artikel_id]);
 
     return {
       success: true,
-      message: 'Artikel berhasil dihapus',
+      message: "Artikel berhasil dihapus",
       data: {
         artikel_id: articleToDelete.artikel_id,
         judul: articleToDelete.judul,
-        deleted_at: new Date().toISOString()
-      }
+        deleted_at: new Date().toISOString(),
+      },
     };
-
   } catch (error) {
-    console.error('Error deleting article:', error);
-    
+    console.error("Error deleting article:", error);
+
     if (error.statusCode) {
       throw error;
     }
 
     // Handle foreign key constraint violations
-    if (error.code === '23503') {
+    if (error.code === "23503") {
       throw createError({
         statusCode: 409,
-        statusMessage: 'Artikel tidak dapat dihapus karena masih digunakan oleh data lain'
+        statusMessage:
+          "Artikel tidak dapat dihapus karena masih digunakan oleh data lain",
       });
     }
 
     throw createError({
       statusCode: 500,
-      statusMessage: 'Terjadi kesalahan server internal'
+      statusMessage: "Terjadi kesalahan server internal",
     });
   }
 });

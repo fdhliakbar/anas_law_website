@@ -198,6 +198,9 @@ export default {
         // Simpan token jika perlu
         localStorage.setItem("token", data.token);
 
+        // Trigger auth status update in other components
+        window.dispatchEvent(new Event("storage"));
+
         // Ambil role dan isAdmin dari data.user
         const user = data.user || {};
         if (user.role === "admin" || user.isAdmin === true) {

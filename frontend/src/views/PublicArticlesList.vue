@@ -1,6 +1,29 @@
 <template>
   <div class="bg-gray-50 min-h-screen">
     <div class="max-w-7xl mx-auto px-4 py-12 sm:px-6 lg:px-8">
+      <!-- Back to Dashboard Button -->
+      <div class="mb-8">
+        <button
+          @click="goToDashboard"
+          class="inline-flex items-center px-4 py-2 bg-indigo-600 text-white rounded-md hover:bg-indigo-700 transition-colors duration-200"
+        >
+          <svg
+            class="w-5 h-5 mr-2"
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"
+            />
+          </svg>
+          Dashboard Admin
+        </button>
+      </div>
+
       <div class="text-center mb-12">
         <h1 class="text-3xl font-extrabold text-gray-900 sm:text-4xl">
           Legal Publications
@@ -10,11 +33,11 @@
         </p>
       </div>
 
-      <!-- Add Article Button -->
-      <div class="flex justify-end mb-6">
+      <!-- Header Actions -->
+      <div class="flex justify-end items-center mb-6">
         <button
           @click="goToAddArticle"
-          class="inline-flex items-center px-4 py-2 bg-indigo-600 text-white rounded-md hover:bg-indigo-700 transition-colors duration-200"
+          class="inline-flex items-center px-4 py-2 bg-green-600 text-white rounded-md hover:bg-green-700 transition-colors duration-200"
         >
           <svg
             class="w-5 h-5 mr-2"
@@ -118,28 +141,73 @@
               {{ article.deskripsi }}
             </p>
 
-            <a
-              v-if="article.link_artikel"
-              :href="article.link_artikel"
-              target="_blank"
-              class="inline-flex items-center text-indigo-600 hover:text-indigo-800 font-medium"
-            >
-              Baca Artikel
-              <svg
-                class="ml-1 w-4 h-4"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-                xmlns="http://www.w3.org/2000/svg"
+            <div class="flex justify-between items-center">
+              <a
+                v-if="article.link_artikel"
+                :href="article.link_artikel"
+                target="_blank"
+                class="inline-flex items-center text-indigo-600 hover:text-indigo-800 font-medium"
               >
-                <path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="2"
-                  d="M14 5l7 7m0 0l-7 7m7-7H3"
-                ></path>
-              </svg>
-            </a>
+                Baca Artikel
+                <svg
+                  class="ml-1 w-4 h-4"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M14 5l7 7m0 0l-7 7m7-7H3"
+                  ></path>
+                </svg>
+              </a>
+
+              <!-- Admin Actions -->
+              <div class="flex space-x-2">
+                <button
+                  @click="editArticle(article)"
+                  class="p-2 text-blue-600 hover:text-blue-800 hover:bg-blue-50 rounded-full transition-colors"
+                  title="Edit Artikel"
+                >
+                  <svg
+                    class="w-4 h-4"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                      d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"
+                    />
+                  </svg>
+                </button>
+
+                <button
+                  @click="deleteArticle(article)"
+                  class="p-2 text-red-600 hover:text-red-800 hover:bg-red-50 rounded-full transition-colors"
+                  title="Hapus Artikel"
+                >
+                  <svg
+                    class="w-4 h-4"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                      d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"
+                    />
+                  </svg>
+                </button>
+              </div>
+            </div>
           </div>
         </div>
       </div>
@@ -258,6 +326,60 @@ export default {
 
     goToAddArticle() {
       this.$router.push("/admin/article-management");
+    },
+
+    goToDashboard() {
+      this.$router.push("/admin/dashboard");
+    },
+
+    editArticle(article) {
+      // Navigate to edit page with article data
+      this.$router.push({
+        path: "/admin/article-management",
+        query: {
+          mode: "edit",
+          id: article.artikel_id,
+        },
+      });
+    },
+
+    async deleteArticle(article) {
+      if (
+        !confirm(
+          `Apakah Anda yakin ingin menghapus artikel "${article.judul}"?`
+        )
+      ) {
+        return;
+      }
+
+      try {
+        const response = await fetch(
+          `http://localhost:3000/api/article/delete-article?artikel_id=${article.artikel_id}`,
+          {
+            method: "DELETE",
+            headers: {
+              "Content-Type": "application/json",
+            },
+          }
+        );
+
+        const data = await response.json();
+
+        if (!response.ok) {
+          throw new Error(data.message || "Gagal menghapus artikel");
+        }
+
+        // Remove article from local array
+        this.articles = this.articles.filter(
+          (a) => a.artikel_id !== article.artikel_id
+        );
+
+        // Show success message (you can use a toast library instead)
+        alert("Artikel berhasil dihapus!");
+      } catch (error) {
+        console.error("Error deleting article:", error);
+        alert("Gagal menghapus artikel: " + error.message);
+      }
     },
   },
 };
