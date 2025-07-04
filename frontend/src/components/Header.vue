@@ -3,7 +3,7 @@
     <!-- Navbar -->
     <nav
       :class=" [
-        'fixed w-full z-50 transition-all duration-300 ease-in-out bg-gray-400',
+        'fixed w-full z-50 transition-all duration-300 ease-in-out bg-[#2C323B]',
         scrolled
           
       ]"
@@ -17,40 +17,37 @@
             src="../assets/images/logo.png"
             alt="Logo"
             class="h-10"
-            width="200%"
+            width="100%"
           />
         </router-link>
 
         <!-- Navigation Links (centered) -->
         <ul
-          class="hidden lg:flex items-center space-x-8 text-base text-gray-700 font-medium mx-8"
+          class="hidden lg:flex items-center space-x-8 text-base text-[#f5f5f5] font-medium mx-8"
         >
           <li>
-            <router-link to="/" class="hover:text-[#B49F2B]"
+            <router-link to="/" class="hover:text-indigo-500"
               >{{ $t('header.home') }}</router-link
             >
           </li>
           <li>
             <router-link
               to="/pricing"
-              class="hover:text-[#B49F2B]"
+              class="hover:text-indigo-500"
               >{{ $t('header.pricing') }}</router-link
             >
           </li>
           <li>
             <router-link
               to="/booking"
-              class="hover:text-[#B49F2B]"
+              class="hover:text-indigo-500"
               >{{ $t('header.bookConsultation') }}</router-link
             >
           </li>
           <li>
-            <a
-              href="#"
-              class="hover:text-[#B49F2B]"
-              @click.prevent="scrollTo('reviews')"
-              >{{ $t('header.reviews') }}</a
-            >
+            <a href="https://wa.me/6281394879411">
+              <span class="bg-gray-100 px-4 py-2 rounded-lg text-[#121212] hover:text-indigo-500">Consultation</span>
+            </a>
           </li>
         </ul>
 
@@ -59,14 +56,14 @@
           <LanguageSwitcher />
           <router-link
             to="/login"
-            class="border border-gray-300 px-4 py-2 rounded-lg hover:bg-gray-100 transition text-sm"
+            class="bg-gray-100 font-semibold px-4 py-2 rounded-lg text-sm text-[#121212]"
           >
             {{ $t('header.login') }}
           </router-link>
         </div>
 
         <!-- Mobile Menu Button -->
-        <button class="lg:hidden text-gray-800 p-2" @click="toggleMobileMenu">
+        <button class="lg:hidden text-[#f5f5f5] p-2" @click="toggleMobileMenu">
           <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
           </svg>
@@ -132,13 +129,7 @@
         >
           {{ $t('header.login') }}
         </router-link>
-        <router-link
-          to="/chat"
-          class="block border border-blue-400 px-6 py-2 rounded-lg hover:bg-blue-100 transition text-blue-700 mt-2"
-          @click="closeMobileMenu"
-        >
-          {{ $t('header.chat') }}
-        </router-link>
+        
       </div>
     </nav>
   </header>

@@ -183,6 +183,34 @@
     "salary": "Gaji",
     "bonus": "Bonus"
   },
+  "articles": {
+    "title": "Artikel & Wawasan Hukum",
+    "subtitle": "Tetap terinformasi dengan perkembangan hukum terkini dan wawasan ahli",
+    "searchPlaceholder": "Cari artikel...",
+    "loading": "Memuat artikel...",
+    "noResults": "Artikel tidak ditemukan",
+    "noResultsDesc": "Coba sesuaikan pencarian atau kriteria filter Anda",
+    "readMore": "Baca Selengkapnya",
+    "previous": "Sebelumnya",
+    "next": "Selanjutnya",
+    "categories": {
+      "all": "Semua Kategori",
+      "corporate": "Hukum Perusahaan",
+      "criminal": "Hukum Pidana",
+      "family": "Hukum Keluarga",
+      "property": "Hukum Properti",
+      "employment": "Hukum Ketenagakerjaan"
+    },
+    "newsletter": {
+      "title": "Tetap Terhubung",
+      "subtitle": "Berlangganan newsletter kami untuk wawasan hukum dan update terbaru",
+      "placeholder": "Masukkan email Anda",
+      "subscribe": "Berlangganan",
+      "subscribing": "Memproses...",
+      "success": "Terima kasih telah berlangganan!",
+      "error": "Terjadi kesalahan. Silakan coba lagi."
+    }
+  },
   "footer": {
     "copyright": "© 2025 Anas Law",
     "termsConditions": "Syarat dan Ketentuan",
