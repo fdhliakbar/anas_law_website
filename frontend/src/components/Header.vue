@@ -45,12 +45,9 @@
             >
           </li>
           <li>
-            <a
-              href="#"
-              class="hover:text-indigo-500"
-              @click.prevent="scrollTo('reviews')"
-              >{{ $t('header.reviews') }}</a
-            >
+            <a href="https://wa.me/6281394879411">
+              <span class="bg-gray-100 px-4 py-2 rounded-lg text-[#121212] hover:text-indigo-500">Consultation</span>
+            </a>
           </li>
         </ul>
 

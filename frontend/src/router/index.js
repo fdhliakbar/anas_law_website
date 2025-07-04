@@ -3,6 +3,7 @@ import HomePage from "../views/Homepage.vue";
 import LoginPage from "../views/LoginPage.vue";
 import RegisterPage from "../views/RegisterPage.vue"; // tambahkan ini
 import BookingSchedule from "../views/BookingSchedule.vue";
+import BookingForm from "../views/BookingForm.vue";
 import chat from "../views/chat.vue";
 import PricingPage from "../views/PricingPage.vue";
 import FreeChatBotTest from "../views/FreeChatBotTest.vue";
@@ -14,6 +15,7 @@ const routes = [
   { path: "/register", component: RegisterPage }, // tambahkan ini
   { path: "/chat", component: chat },
   { path: "/booking", component: BookingSchedule },
+  { path: "/booking-form/:id?", component: BookingForm, name: "BookingForm" },
   { path: "/pricing", component: PricingPage },
   { path: "/article", component: ArticlePage },
   { path: "/free-ai-test", component: FreeChatBotTest },

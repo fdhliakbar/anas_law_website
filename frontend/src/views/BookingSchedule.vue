@@ -98,6 +98,7 @@
                 <span class="text-gray-500 line-through ml-2">${{ lawyer.oldFee.toLocaleString() }}</span>
               </div>
               <button
+                @click="goToBookingForm(lawyer.id)"
                 class="w-full border border-black bg-black text-white py-3 px-6 rounded-lg font-semibold transition hover:bg-gray-800"
               >
                 {{ $t('booking.bookConsultation') }}
@@ -211,7 +212,7 @@ const lawyers = [
   },
   {
     id: 2,
-    name: "Andi Saputra",
+    name: "Andika Suyandra",
     specialty: "Corporate Law Attorney",
     experience: 4,
     rating: 94,
@@ -319,6 +320,10 @@ const goToChat = () => {
 
 const goToPricing = () => {
   router.push('/pricing');
+};
+
+const goToBookingForm = (lawyerId: number) => {
+  router.push({ name: 'BookingForm', params: { id: lawyerId } });
 };
 </script>
 
