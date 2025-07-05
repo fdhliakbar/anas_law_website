@@ -48,7 +48,7 @@
             <a href="https://wa.me/6281394879411">
               <span class="bg-gray-100 px-4 py-2 rounded-lg text-[#121212] hover:text-blue-300">Consultation</span>
             </a>
-          </li> -->
+          </li>
         </ul>
 
         <!-- Right Side: Language Switcher, Login & Chat -->
