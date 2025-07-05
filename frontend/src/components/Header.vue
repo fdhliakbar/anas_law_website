@@ -24,18 +24,18 @@
         <!-- Navigation Links (centered) -->
         <ul
           class="hidden lg:flex items-center space-x-8 text-base text-[#f5f5f5] font-medium mx-8"
-        >
+          >
           <li>
             <router-link to="/" class="hover:text-blue-300"
-              >{{ $t('header.home') }}</router-link
+            >{{ $t('header.home') }}</router-link
             >
           </li>
           <li>
             <router-link
-              to="/pricing"
-              class="hover:text-blue-300"
+            to="/pricing"
+            class="hover:text-blue-300"
               >{{ $t('header.pricing') }}</router-link
-            >
+              >
           </li>
           <li>
             <router-link
@@ -44,6 +44,7 @@
               >{{ $t('header.bookConsultation') }}</router-link
             >
           </li>
+        </ul>
           <!-- <li>
             <a href="https://wa.me/6281394879411">
               <span class="bg-gray-100 px-4 py-2 rounded-lg text-[#121212] hover:text-blue-300">Consultation</span>
