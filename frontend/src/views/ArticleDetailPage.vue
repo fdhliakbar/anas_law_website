@@ -251,6 +251,9 @@ export default {
 
         this.article = await response.json();
 
+        // Track article view using the actual artikel_id from the response
+        await this.trackArticleView(this.article.artikel_id || articleId);
+
         // Update page title
         document.title = `${this.article.title} | Law Firm`;
       } catch (err) {
@@ -308,6 +311,23 @@ export default {
 
     goToDashboard() {
       this.$router.push("/admin/dashboard");
+    },
+
+    async trackArticleView(articleId) {
+      try {
+        await fetch("http://localhost:3000/api/admin/track-view", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            articleId: articleId,
+          }),
+        });
+      } catch (error) {
+        // Silent fail - view tracking shouldn't break the user experience
+        console.log("View tracking failed:", error);
+      }
     },
   },
 };

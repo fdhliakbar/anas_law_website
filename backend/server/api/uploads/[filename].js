@@ -1,4 +1,4 @@
-gimport fs from "fs";
+import fs from "fs";
 import path from "path";
 import { createReadStream } from "fs";
 

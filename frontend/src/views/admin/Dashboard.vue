@@ -215,7 +215,7 @@
           <h1 class="text-2xl font-semibold text-gray-900 mb-6">
             Dashboard Overview
           </h1>
-          <div class="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3">
+          <div class="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-4">
             <!-- Stats Cards -->
             <div class="bg-white overflow-hidden shadow rounded-lg">
               <div class="px-4 py-5 sm:p-6">
@@ -327,6 +327,42 @@
                 </div>
               </div>
             </div>
+
+            <!-- Unique Visitors Card -->
+            <div class="bg-white overflow-hidden shadow rounded-lg">
+              <div class="px-4 py-5 sm:p-6">
+                <div class="flex items-center">
+                  <div class="flex-shrink-0 bg-purple-500 rounded-md p-3">
+                    <svg
+                      class="h-6 w-6 text-white"
+                      xmlns="http://www.w3.org/2000/svg"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      stroke="currentColor"
+                    >
+                      <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        stroke-width="2"
+                        d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197m13.5-9a2.5 2.5 0 11-5 0 2.5 2.5 0 015 0z"
+                      />
+                    </svg>
+                  </div>
+                  <div class="ml-5 w-0 flex-1">
+                    <dl>
+                      <dt class="text-sm font-medium text-gray-500 truncate">
+                        Unique Visitors
+                      </dt>
+                      <dd>
+                        <div class="text-lg font-medium text-gray-900">
+                          {{ stats.uniqueVisitors || 0 }}
+                        </div>
+                      </dd>
+                    </dl>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
 
           <!-- Recent Activities -->
@@ -403,10 +439,12 @@ export default {
     return {
       currentTab: "dashboard",
       showMobileMenu: false,
+      statsInterval: null,
       stats: {
         totalArticles: 0,
         totalUsers: 0,
         totalViews: 0,
+        uniqueVisitors: 0,
       },
       recentActivities: [
         {
@@ -430,23 +468,69 @@ export default {
   },
   created() {
     this.fetchDashboardStats();
+
+    // Refresh stats every 30 seconds when dashboard tab is active
+    this.statsInterval = setInterval(() => {
+      if (this.currentTab === "dashboard") {
+        this.fetchDashboardStats();
+      }
+    }, 30000);
+  },
+
+  beforeDestroy() {
+    if (this.statsInterval) {
+      clearInterval(this.statsInterval);
+    }
   },
   methods: {
     async fetchDashboardStats() {
       try {
-        // This would be replaced with an actual API call
-        // const response = await fetch('http://localhost:3000/api/admin/stats');
-        // const data = await response.json();
-        // this.stats = data;
+        const response = await fetch("http://localhost:3000/api/admin/stats");
 
-        // For now, using dummy data
-        this.stats = {
-          totalArticles: 12,
-          totalUsers: 45,
-          totalViews: 1250,
-        };
+        if (!response.ok) {
+          throw new Error(`HTTP error! status: ${response.status}`);
+        }
+
+        const result = await response.json();
+
+        if (result.success) {
+          this.stats = result.data;
+          this.recentActivities = result.data.recentActivities;
+        } else {
+          // Handle API response with success: false
+          console.warn("API returned error:", result.error);
+          this.stats = result.data || {
+            totalArticles: 0,
+            totalUsers: 0,
+            totalViews: 0,
+            uniqueVisitors: 0,
+          };
+          this.recentActivities = result.data?.recentActivities || [
+            {
+              title: "Data Error",
+              description: result.error || "Unable to fetch some data",
+              time: "Just now",
+            },
+          ];
+        }
       } catch (error) {
         console.error("Error fetching dashboard stats:", error);
+
+        // Fallback to dummy data if API fails
+        this.stats = {
+          totalArticles: 0,
+          totalUsers: 0,
+          totalViews: 0,
+          uniqueVisitors: 0,
+        };
+        this.recentActivities = [
+          {
+            title: "Connection Error",
+            description:
+              "Unable to connect to server. Please check backend connection.",
+            time: "Just now",
+          },
+        ];
       }
     },
     logout() {
