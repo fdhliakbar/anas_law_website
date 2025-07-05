@@ -11,15 +11,15 @@
         style="background: linear-gradient(135deg, #ffffff 0%, #f8fafc 100%);"
       >
         <!-- Header -->
-        <div class="bg-gradient-to-r from-green-600 to-teal-600 text-white p-6 flex justify-between items-center flex-shrink-0">
+        <div class="bg-gradient-to-r from-blue-600 to-cyan-600 text-white p-6 flex justify-between items-center flex-shrink-0">
           <div class="flex items-center space-x-3">
             <div class="w-12 h-12 bg-white/20 rounded-full flex items-center justify-center">
               <svg xmlns="http://www.w3.org/2000/svg" class="w-7 h-7" viewBox="0 0 24 24" fill="currentColor"><path d="M12.37,6.16a1,1,0,0,0-1.23.79l-1.48,6.07a1,1,0,0,0,.6,1.13,1,1,0,0,0,1.13-.6l1.48-6.07A1,1,0,0,0,12.37,6.16Z"/><path d="M19.14,4.24,12,1.06,4.86,4.24A2,2,0,0,0,3.5,6.15V11a9.17,9.17,0,0,0,8,9,1,1,0,0,0,.15,0,1,1,0,0,0,.15,0,9.17,9.17,0,0,0,8-9V6.15A2,2,0,0,0,19.14,4.24ZM12,18.5a7.17,7.17,0,0,1-6-7.5V6.8l6-2.9,6,2.9V11A7.17,7.17,0,0,1,12,18.5Z"/></svg>
             </div>
             <div>
               <h3 class="font-bold text-lg">Anas Law</h3>
-              <p class="text-green-100 text-sm flex items-center">
-                <span class="w-2.5 h-2.5 bg-green-300 rounded-full mr-2"></span>
+              <p class="text-blue-100 text-sm flex items-center">
+                <span class="w-2.5 h-2.5 bg-blue-300 rounded-full mr-2"></span>
                 Customer Service
               </p>
             </div>
@@ -35,7 +35,7 @@
         <div class="flex-1 p-4 overflow-y-auto space-y-4 bg-gray-50/30">
           <!-- Pesan Selamat Datang -->
           <div class="flex items-start space-x-3">
-            <div class="w-8 h-8 bg-green-600 rounded-full flex items-center justify-center text-white text-sm font-bold flex-shrink-0">
+            <div class="w-8 h-8 bg-blue-600 rounded-full flex items-center justify-center text-white text-sm font-bold flex-shrink-0">
               AL
             </div>
             <div class="bg-white rounded-2xl rounded-tl-md p-4 shadow-sm border max-w-xs">
@@ -55,7 +55,7 @@
           <!-- Pesan Dinamis -->
           <div v-for="(message, index) in chatMessages" :key="index" class="flex" :class="message.isUser ? 'justify-end' : 'justify-start'">
             <div v-if="!message.isUser" class="flex items-start space-x-3 max-w-sm">
-              <div class="w-8 h-8 bg-green-600 rounded-full flex items-center justify-center text-white text-sm font-bold flex-shrink-0">
+              <div class="w-8 h-8 bg-blue-600 rounded-full flex items-center justify-center text-white text-sm font-bold flex-shrink-0">
                 AL
               </div>
               <div class="bg-white rounded-2xl rounded-tl-md p-4 shadow-sm border">
@@ -64,16 +64,16 @@
               </div>
             </div>
             <div v-else class="max-w-sm">
-              <div class="bg-gradient-to-r from-green-600 to-teal-500 text-white rounded-2xl rounded-tr-md p-4 shadow-sm">
+              <div class="bg-gradient-to-r from-blue-600 to-cyan-500 text-white rounded-2xl rounded-tr-md p-4 shadow-sm">
                 <div class="text-sm leading-relaxed">{{ message.text }}</div>
-                <div class="text-xs text-green-100 mt-2">{{ message.time }}</div>
+                <div class="text-xs text-blue-100 mt-2">{{ message.time }}</div>
               </div>
             </div>
           </div>
           
           <!-- Indikator Mengetik -->
           <div v-if="isTyping" class="flex items-start space-x-3">
-            <div class="w-8 h-8 bg-green-600 rounded-full flex items-center justify-center text-white text-sm font-bold flex-shrink-0">
+            <div class="w-8 h-8 bg-blue-600 rounded-full flex items-center justify-center text-white text-sm font-bold flex-shrink-0">
               AL
             </div>
             <div class="bg-white rounded-2xl rounded-tl-md p-4 shadow-sm border max-w-xs">
@@ -89,22 +89,22 @@
         <!-- Area Input -->
         <div class="p-4 bg-white border-t border-gray-200 flex-shrink-0">
           <div class="flex flex-wrap gap-2 mb-3">
-            <button @click="sendQuickMessage('Saya ingin konsultasi gratis')" class="px-3 py-2 bg-green-50 text-green-800 rounded-lg text-xs hover:bg-green-100 transition-colors font-medium border border-green-200">
+            <button @click="sendQuickMessage('Saya ingin konsultasi gratis')" class="px-3 py-2 bg-blue-50 text-blue-800 rounded-lg text-xs hover:bg-blue-100 transition-colors font-medium border border-blue-200">
               📞 Konsultasi Gratis
             </button>
             <button @click="sendQuickMessage('Apa saja layanan hukum yang tersedia?')" class="px-3 py-2 bg-blue-50 text-blue-800 rounded-lg text-xs hover:bg-blue-100 transition-colors font-medium border border-blue-200">
               ⚖️ Layanan Hukum
             </button>
-            <button @click="sendQuickMessage('Berapa biaya konsultasi?')" class="px-3 py-2 bg-teal-50 text-teal-800 rounded-lg text-xs hover:bg-teal-100 transition-colors font-medium border border-teal-200">
+            <button @click="sendQuickMessage('Berapa biaya konsultasi?')" class="px-3 py-2 bg-cyan-50 text-cyan-800 rounded-lg text-xs hover:bg-cyan-100 transition-colors font-medium border border-cyan-200">
               💰 Biaya
             </button>
           </div>
           
           <div class="flex items-center space-x-3">
             <div class="flex-1 relative">
-              <input v-model="currentMessage" @keyup.enter="sendMessage" type="text" placeholder="Ketik pertanyaan Anda..." class="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-green-500 focus:border-transparent outline-none text-sm" :disabled="isTyping">
+              <input v-model="currentMessage" @keyup.enter="sendMessage" type="text" placeholder="Ketik pertanyaan Anda..." class="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none text-sm" :disabled="isTyping">
             </div>
-            <button @click="sendMessage" :disabled="!currentMessage.trim() || isTyping" class="w-12 h-12 bg-green-600 hover:bg-green-700 disabled:bg-gray-300 text-white rounded-xl flex items-center justify-center transition-colors">
+            <button @click="sendMessage" :disabled="!currentMessage.trim() || isTyping" class="w-12 h-12 bg-blue-600 hover:bg-blue-700 disabled:bg-gray-300 text-white rounded-xl flex items-center justify-center transition-colors">
               <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8"></path>
               </svg>
@@ -128,7 +128,7 @@
         
         <button
           @click="toggleChat"
-          class="w-16 h-16 bg-gradient-to-br from-green-600 to-teal-600 hover:from-green-700 hover:to-teal-700 text-white rounded-full shadow-xl hover:shadow-2xl transform hover:scale-105 transition-all duration-300 flex items-center justify-center group"
+          class="w-16 h-16 bg-gradient-to-br from-blue-600 to-cyan-600 hover:from-blue-700 hover:to-cyan-700 text-white rounded-full shadow-xl hover:shadow-2xl transform hover:scale-105 transition-all duration-300 flex items-center justify-center group"
           :class="{ 'animate-pulse': isTyping && !isOpen }"
         >
           <!-- Ikon berubah berdasarkan status `isOpen` -->
@@ -140,7 +140,7 @@
             </svg>
         </button>
         
-        <div class="absolute bottom-0 right-0 w-5 h-5 rounded-full border-2 border-white" :class="hasApiKey ? 'bg-green-500' : 'bg-red-500'"></div>
+        <div class="absolute bottom-0 right-0 w-5 h-5 rounded-full border-2 border-white" :class="hasApiKey ? 'bg-blue-500' : 'bg-sky-500'"></div>
       </div>
     </div>
   </div>
