@@ -30,6 +30,17 @@ const routes = [
     name: "ArticleManagement",
     component: () => import("@/views/admin/ArticleManagement.vue"),
   },
+  {
+    path: "/booking/:lawyerId",
+    name: "BookingForm",
+    component: () => import("../views/BookingForm.vue"),
+    meta: { requiresAuth: false }, // Allow guest booking
+  },
+  {
+    path: "/booking-success",
+    name: "BookingSuccess",
+    component: () => import("../views/BookingSuccess.vue"),
+  },
 ];
 
 const router = createRouter({

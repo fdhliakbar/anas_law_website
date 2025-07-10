@@ -14,6 +14,10 @@ export default defineEventHandler(async (event) => {
 
   // Handle preflight OPTIONS
   if (event.node.req.method === "OPTIONS") {
+        // Tambahkan header di sini juga!
+    event.node.res.setHeader("Access-Control-Allow-Origin", "*");
+    event.node.res.setHeader("Access-Control-Allow-Methods", "GET,POST,PUT,DELETE,OPTIONS");
+    event.node.res.setHeader("Access-Control-Allow-Headers", "Content-Type, Authorization");
     return "";
   }
 
@@ -117,9 +121,18 @@ export default defineEventHandler(async (event) => {
         role: user.role,
       };
 
-      const token = jwt.sign(payload, process.env.JWT_SECRET, {
-        expiresIn: "1d",
-      });
+      
+
+   const token = jwt.sign(
+    { 
+          userId: user.users_id,   // ✅ BENAR: user.users_id (bukan result.rows[0].user_id)
+          name: user.name,         // ✅ TAMBAHKAN: untuk decoding di frontend
+          email: user.email,       // ✅ TAMBAHKAN: untuk decoding di frontend
+          role: user.role          // ✅ BENAR: user.role (bukan result.rows[0].role)
+    },
+    process.env.JWT_SECRET, // pastikan ini ada
+  { expiresIn: "24h" }
+);
 
       return {
         message: "Login berhasil",

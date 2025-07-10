@@ -174,13 +174,14 @@ export default {
       this.$router.go(-1);
     },
     async handleLogin() {
-      this.isLoading = true;
       try {
         const response = await fetch(
           "http://localhost:3000/api/users/post-users",
           {
             method: "POST",
-            headers: { "Content-Type": "application/json" },
+            headers: {
+              "Content-Type": "application/json",
+            },
             body: JSON.stringify({
               action: "login",
               email: this.form.email,
@@ -192,27 +193,24 @@ export default {
         const data = await response.json();
 
         if (!response.ok) {
-          throw new Error(data.message || "Login failed");
+          throw new Error(data.message || "Login gagal");
         }
 
-        // Simpan token jika perlu
+        // Simpan token
         localStorage.setItem("token", data.token);
 
-        // Trigger auth status update in other components
+        // Trigger header update
         window.dispatchEvent(new Event("storage"));
 
-        // Ambil role dan isAdmin dari data.user
-        const user = data.user || {};
-        if (user.role === "admin" || user.isAdmin === true) {
+        // Redirect berdasarkan role
+        if (data.user.role === "admin") {
           this.$router.push("/admin/dashboard");
         } else {
           this.$router.push("/");
         }
       } catch (error) {
         console.error("Login error:", error);
-        alert(error.message || "Login failed. Please try again.");
-      } finally {
-        this.isLoading = false;
+        this.error = error.message;
       }
     },
   },

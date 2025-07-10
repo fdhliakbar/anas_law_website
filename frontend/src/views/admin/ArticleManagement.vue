@@ -94,6 +94,16 @@
         ></textarea>
       </div>
       <div>
+        <label class="block mb-1 font-medium">Content Artikel</label>
+        <textarea
+          v-model="form.content_artikel"
+          class="w-full border px-3 py-2 rounded"
+          required
+          rows="6"
+          placeholder="Tulis konten lengkap artikel di sini..."
+        ></textarea>
+      </div>
+      <div>
         <label class="block mb-1 font-medium">Link Artikel</label>
         <input
           v-model="form.link_artikel"
@@ -157,6 +167,7 @@ export default {
         judul: "",
         deskripsi: "",
         link_artikel: "",
+        content_artikel: "", // TAMBAHKAN INI
       },
       imageFile: null,
       imagePreview: null,
@@ -204,6 +215,7 @@ export default {
         this.form.judul = this.currentArticle.judul;
         this.form.deskripsi = this.currentArticle.deskripsi;
         this.form.link_artikel = this.currentArticle.link_artikel || "";
+        this.form.content_artikel = this.currentArticle.content_artikel; // TAMBAHKAN INI
       } catch (error) {
         console.error("Error loading article:", error);
         this.error = "Gagal memuat artikel untuk diedit";
@@ -232,6 +244,7 @@ export default {
       const formData = new FormData();
       formData.append("judul", this.form.judul);
       formData.append("deskripsi", this.form.deskripsi);
+      formData.append('content_artikel', this.form.content_artikel); // PASTIKAN INI ADA
       formData.append("link_artikel", this.form.link_artikel);
       formData.append("gambar", this.imageFile);
 
@@ -262,6 +275,7 @@ export default {
         const formData = new FormData();
         formData.append("judul", this.form.judul);
         formData.append("deskripsi", this.form.deskripsi);
+        formData.append('content_artikel', this.form.content_artikel); // PASTIKAN INI ADA
         formData.append("link_artikel", this.form.link_artikel);
         formData.append("gambar", this.imageFile);
 
@@ -333,6 +347,7 @@ export default {
       this.form.judul = "";
       this.form.deskripsi = "";
       this.form.link_artikel = "";
+      this.form.content_artikel = ""; // TAMBAHKAN INI
       this.imageFile = null;
       this.imagePreview = null;
     },
