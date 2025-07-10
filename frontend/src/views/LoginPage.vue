@@ -179,9 +179,7 @@ export default {
           "http://localhost:3000/api/users/post-users",
           {
             method: "POST",
-            headers: {
-              "Content-Type": "application/json",
-            },
+            headers: { "Content-Type": "application/json" },
             body: JSON.stringify({
               action: "login",
               email: this.form.email,
@@ -193,17 +191,18 @@ export default {
         const data = await response.json();
 
         if (!response.ok) {
-          throw new Error(data.message || "Login gagal");
+          throw new Error(data.message || "Login failed");
         }
 
-        // Simpan token
+        // Simpan token jika perlu
         localStorage.setItem("token", data.token);
 
-        // Trigger header update
+        // Trigger auth status update in other components
         window.dispatchEvent(new Event("storage"));
 
-        // Redirect berdasarkan role
-        if (data.user.role === "admin") {
+        // Ambil role dan isAdmin dari data.user
+        const user = data.user || {};
+        if (user.role === "admin" || user.isAdmin === true) {
           this.$router.push("/admin/dashboard");
         } else {
           this.$router.push("/");

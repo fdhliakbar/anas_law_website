@@ -27,9 +27,8 @@ function goToBooking() {
         </p>
         <button
           class="bg-black text-white px-8 py-4 rounded-lg text-lg font-semibold hover:bg-gray-900 transition"
-          @click="goToBooking"
         >
-          Schedule now
+          <a href="https://wa.me/6281394879411">Schedule Now</a>
         </button>
       </div>
       <!-- Right: Video -->

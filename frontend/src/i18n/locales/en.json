@@ -183,6 +183,34 @@
     "salary": "Salary",
     "bonus": "Bonus"
   },
+  "articles": {
+    "title": "Legal Articles & Insights",
+    "subtitle": "Stay informed with the latest legal developments and expert insights",
+    "searchPlaceholder": "Search articles...",
+    "loading": "Loading articles...",
+    "noResults": "No articles found",
+    "noResultsDesc": "Try adjusting your search or filter criteria",
+    "readMore": "Read More",
+    "previous": "Previous",
+    "next": "Next",
+    "categories": {
+      "all": "All Categories",
+      "corporate": "Corporate Law",
+      "criminal": "Criminal Law",
+      "family": "Family Law",
+      "property": "Property Law",
+      "employment": "Employment Law"
+    },
+    "newsletter": {
+      "title": "Stay Updated",
+      "subtitle": "Subscribe to our newsletter for the latest legal insights and updates",
+      "placeholder": "Enter your email",
+      "subscribe": "Subscribe",
+      "subscribing": "Subscribing...",
+      "success": "Thank you for subscribing!",
+      "error": "Something went wrong. Please try again."
+    }
+  },
   "footer": {
     "copyright": "© 2025 Anas Law",
     "termsConditions": "Terms and Conditions",

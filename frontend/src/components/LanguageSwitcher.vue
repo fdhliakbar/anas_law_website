@@ -2,7 +2,7 @@
   <div class="relative">
     <button
       @click="toggleDropdown"
-      class="flex items-center gap-2 px-3 py-2 rounded-lg hover:bg-gray-100 transition"
+      class="flex items-center gap-2 px-3 py-2 rounded-lg bg-gray-100 "
     >
       <font-awesome-icon icon="globe" class="text-gray-600" />
       <span class="text-sm font-medium">{{ currentLanguage.name }}</span>
