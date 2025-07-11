@@ -25,11 +25,7 @@
         <ul
           class="hidden lg:flex items-center space-x-8 text-base text-[#f5f5f5] font-medium mx-8"
           >
-          <li>
-            <router-link to="/" class="hover:text-[#B49F2B]"
-              >{{ $t('header.home') }}</router-link
-            >
-          </li>
+          
           <li>
             <router-link
               to="/pricing"

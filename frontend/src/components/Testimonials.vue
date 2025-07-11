@@ -5,18 +5,17 @@
       class="container flex flex-col items-center justify-center w-full p-6 mx-auto text-center xl:px-0"
     >
       <div class="text-sm font-bold tracking-wider text-indigo-600 uppercase">
-        Testimoni
+        {{ $t('testimonials.badge') }}
       </div>
       <h2
         class="max-w-2xl mt-3 text-3xl font-bold leading-snug tracking-tight text-gray-800 lg:leading-tight lg:text-4xl"
       >
-        Kata Klien Kami
+        {{ $t('testimonials.title') }}
       </h2>
       <p
         class="max-w-2xl py-4 text-lg leading-normal text-gray-500 lg:text-xl xl:text-xl"
       >
-        Testimonials is a great way to increase brand trust and awareness. Use
-        this section to highlight your popular customers.
+        {{ $t('testimonials.description') }}
       </p>
     </div>
     <div class="container p-6 mx-auto mb-10 xl:px-0">
@@ -27,17 +26,17 @@
             data-aos="fade-zoom-in"
           >
             <p class="text-2xl leading-normal text-gray-700">
-              Their team was very
+              {{ $t('testimonials.clients.fadhli.review').split($t('testimonials.clients.fadhli.highlight1'))[0] }}
               <mark
                 class="mx-1 text-indigo-800 bg-indigo-100 rounded-md ring-indigo-100 ring-4"
-                >professional</mark
+                >{{ $t('testimonials.clients.fadhli.highlight1') }}</mark
               >
-              &
+              {{ $t('testimonials.clients.fadhli.review').split($t('testimonials.clients.fadhli.highlight1'))[1].split($t('testimonials.clients.fadhli.highlight2'))[0] }}
               <mark
                 class="mx-1 text-indigo-800 bg-indigo-100 rounded-md ring-indigo-100 ring-4"
-                >experienced</mark
+                >{{ $t('testimonials.clients.fadhli.highlight2') }}</mark
               >
-              in handling my case.
+              {{ $t('testimonials.clients.fadhli.review').split($t('testimonials.clients.fadhli.highlight2'))[1] }}
             </p>
             <div class="flex items-center mt-8 space-x-3">
               <div class="flex-shrink-0 overflow-hidden rounded-full w-14 h-14">
@@ -49,9 +48,9 @@
               </div>
               <div>
                 <div class="text-lg font-medium text-gray-800">
-                  Fadhli Akbar
+                  {{ $t('testimonials.clients.fadhli.name') }}
                 </div>
-                <div class="text-gray-500">CEO at Google</div>
+                <div class="text-gray-500">{{ $t('testimonials.clients.fadhli.position') }}</div>
               </div>
             </div>
           </div>
@@ -62,12 +61,12 @@
             data-aos="fade-zoom-in"
           >
             <p class="text-2xl leading-normal text-gray-700">
-              Make sure you only pick the
+              {{ $t('testimonials.clients.dylan.review').split($t('testimonials.clients.dylan.highlight1'))[0] }}
               <mark
                 class="mx-1 text-indigo-800 bg-indigo-100 rounded-md ring-indigo-100 ring-4"
-                >right sentence</mark
+                >{{ $t('testimonials.clients.dylan.highlight1') }}</mark
               >
-              to keep it short and simple.
+              {{ $t('testimonials.clients.dylan.review').split($t('testimonials.clients.dylan.highlight1'))[1] }}
             </p>
             <div class="flex items-center mt-8 space-x-3">
               <div class="flex-shrink-0 overflow-hidden rounded-full w-14 h-14">
@@ -79,9 +78,9 @@
               </div>
               <div>
                 <div class="text-lg font-medium text-gray-800">
-                  Dylan Ambrose
+                  {{ $t('testimonials.clients.dylan.name') }}
                 </div>
-                <div class="text-gray-500">Lead marketer at Netflix</div>
+                <div class="text-gray-500">{{ $t('testimonials.clients.dylan.position') }}</div>
               </div>
             </div>
           </div>
@@ -92,12 +91,12 @@
             data-aos="fade-zoom-in"
           >
             <p class="text-2xl leading-normal text-gray-700">
-              This is an
+              {{ $t('testimonials.clients.gabrielle.review').split($t('testimonials.clients.gabrielle.highlight1'))[0] }}
               <mark
                 class="mx-1 text-indigo-800 bg-indigo-100 rounded-md ring-indigo-100 ring-4"
-                >awesome</mark
+                >{{ $t('testimonials.clients.gabrielle.highlight1') }}</mark
               >
-              landing page template I've seen. I would use this for anything.
+              {{ $t('testimonials.clients.gabrielle.review').split($t('testimonials.clients.gabrielle.highlight1'))[1] }}
             </p>
             <div class="flex items-center mt-8 space-x-3">
               <div class="flex-shrink-0 overflow-hidden rounded-full w-14 h-14">
@@ -109,9 +108,9 @@
               </div>
               <div>
                 <div class="text-lg font-medium text-gray-800">
-                  Gabrielle Winn
+                  {{ $t('testimonials.clients.gabrielle.name') }}
                 </div>
-                <div class="text-gray-500">Co-founder of Acme Inc</div>
+                <div class="text-gray-500">{{ $t('testimonials.clients.gabrielle.position') }}</div>
               </div>
             </div>
           </div>

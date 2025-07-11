@@ -194,12 +194,10 @@
     <!-- Success Modal -->
     <div 
       v-if="showSuccessModal" 
-      class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4"
-      @click="closeSuccessModal"
+      class="fixed inset-0 flex items-center justify-center z-50 p-4"
     >
       <div 
-        class="bg-white rounded-xl p-8 max-w-md w-full text-center"
-        @click.stop
+        class="bg-white rounded-xl p-8 max-w-md w-full text-center shadow-2xl border"
       >
         <div class="text-green-500 text-6xl mb-4">✓</div>
         <h3 class="text-2xl font-bold text-gray-900 mb-4">Booking Berhasil!</h3>
