@@ -13,33 +13,63 @@ export default defineEventHandler(async (event) => {
 
   try {
     const query = getQuery(event);
-    const lawyer_id = query.lawyer_id;
+    const search = query.search || '';
+    const limit = parseInt(query.limit) || 50;
+    const offset = parseInt(query.offset) || 0;
 
-    if (!lawyer_id) {
-      throw createError({
-        statusCode: 400,
-        statusMessage: "Lawyer ID is required"
-      });
+    let sqlQuery;
+    let queryParams;
+
+    if (search) {
+      // Search by name or specialty
+      sqlQuery = `
+        SELECT lawyer_id, name, specialty, experience, rating, fee, old_fee, photo, available, created_at
+        FROM lawyers 
+        WHERE available = true 
+        AND (name ILIKE $1 OR specialty ILIKE $1)
+        ORDER BY rating DESC, experience DESC
+        LIMIT $2 OFFSET $3
+      `;
+      queryParams = [`%${search}%`, limit, offset];
+    } else {
+      // Get all available lawyers
+      sqlQuery = `
+        SELECT lawyer_id, name, specialty, experience, rating, fee, old_fee, photo, available, created_at
+        FROM lawyers 
+        WHERE available = true
+        ORDER BY rating DESC, experience DESC
+        LIMIT $1 OFFSET $2
+      `;
+      queryParams = [limit, offset];
     }
 
-    const result = await pool.query(
-      "SELECT * FROM lawyers WHERE lawyer_id = $1 AND available = true",
-      [lawyer_id]
-    );
+    const result = await pool.query(sqlQuery, queryParams);
 
-    if (result.rows.length === 0) {
-      throw createError({
-        statusCode: 404,
-        statusMessage: "Lawyer not found or not available"
-      });
-    }
+    // Get total count for pagination
+    const countQuery = search 
+      ? `SELECT COUNT(*) FROM lawyers WHERE available = true AND (name ILIKE $1 OR specialty ILIKE $1)`
+      : `SELECT COUNT(*) FROM lawyers WHERE available = true`;
+    
+    const countParams = search ? [`%${search}%`] : [];
+    const countResult = await pool.query(countQuery, countParams);
+    const totalCount = parseInt(countResult.rows[0].count);
 
     return {
       success: true,
-      lawyer: result.rows[0]
+      lawyers: result.rows,
+      pagination: {
+        total: totalCount,
+        limit,
+        offset,
+        hasMore: (offset + limit) < totalCount
+      }
     };
+
   } catch (error) {
-    console.error("Error getting lawyer:", error);
-    throw error;
+    console.error("Error getting lawyers:", error);
+    throw createError({
+      statusCode: 500,
+      statusMessage: "Internal server error"
+    });
   }
 });

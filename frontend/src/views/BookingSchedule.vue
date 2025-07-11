@@ -64,46 +64,85 @@
         <div class="max-w-2xl mx-auto mb-12">
           <input
             v-model="search"
+            @input="handleSearch"
             type="text"
             :placeholder="$t('booking.searchPlaceholder')"
             class="w-full border-2 border-gray-300 rounded-lg px-6 py-4 text-lg focus:outline-none focus:border-black transition"
           />
         </div>
 
-        <!-- Lawyers Grid -->
-        <h2 class="font-bold text-4xl text-black text-center mb-12">{{ $t('booking.recommendedAttorneys') }}</h2>
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          <div
-            v-for="lawyer in filteredLawyers"
-            :key="lawyer.id"
-            class="bg-white border border-gray-200 rounded-xl p-6 hover:border-black transition-all duration-300"
+        <!-- Loading State -->
+        <div v-if="loading" class="text-center py-12">
+          <div class="inline-block animate-spin rounded-full h-8 w-8 border-b-2 border-black"></div>
+          <p class="mt-4 text-gray-600">Loading lawyers...</p>
+        </div>
+
+        <!-- Error State -->
+        <div v-else-if="error" class="text-center py-12">
+          <p class="text-red-600 mb-4">{{ error }}</p>
+          <button 
+            @click="loadLawyers"
+            class="bg-black text-white px-6 py-2 rounded-lg hover:bg-gray-800 transition"
           >
-            <div class="text-center mb-4">
-              <img
-                :src="lawyer.photo"
-                :alt="lawyer.name"
-                class="w-20 h-20 rounded-full object-cover mx-auto mb-4 border-2 border-gray-200"
-              />
-              <h3 class="font-bold text-xl text-black">{{ lawyer.name }}</h3>
-              <p class="text-gray-600 mb-2">{{ lawyer.specialty }}</p>
-              <div class="flex items-center justify-center gap-4 text-sm text-gray-600 mb-4">
-                <span>{{ lawyer.experience }} {{ $t('booking.years') }}</span>
-                <span>{{ lawyer.rating }}% {{ $t('booking.successRate') }}</span>
+            Retry
+          </button>
+        </div>
+
+        <!-- Lawyers Grid -->
+        <div v-else>
+          <h2 class="font-bold text-4xl text-black text-center mb-12">{{ $t('booking.recommendedAttorneys') }}</h2>
+          
+          <!-- No Results -->
+          <div v-if="lawyers.length === 0" class="text-center py-12">
+            <p class="text-gray-600 text-lg">No lawyers found matching your search.</p>
+          </div>
+
+          <!-- Lawyers Cards -->
+          <div v-else class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <div
+              v-for="lawyer in lawyers"
+              :key="lawyer.lawyer_id"
+              class="bg-white border border-gray-200 rounded-xl p-6 hover:border-black transition-all duration-300"
+            >
+              <div class="text-center mb-4">
+                <img
+                  :src="getPhotoUrl(lawyer.photo)"
+                  :alt="lawyer.name"
+                  class="w-20 h-20 rounded-full object-cover mx-auto mb-4 border-2 border-gray-200"
+                  @error="handleImageError"
+                />
+                <h3 class="font-bold text-xl text-black">{{ lawyer.name }}</h3>
+                <p class="text-gray-600 mb-2">{{ lawyer.specialty }}</p>
+                <div class="flex items-center justify-center gap-4 text-sm text-gray-600 mb-4">
+                  <span>{{ lawyer.experience }} {{ $t('booking.years') }}</span>
+                  <span>{{ lawyer.rating }}% {{ $t('booking.successRate') }}</span>
+                </div>
+              </div>
+              
+              <div class="text-center">
+                <div class="mb-4">
+                  <span class="text-2xl font-bold text-black">${{ lawyer.fee?.toLocaleString() || 'N/A' }}</span>
+                  <span v-if="lawyer.old_fee" class="text-gray-500 line-through ml-2">${{ lawyer.old_fee.toLocaleString() }}</span>
+                </div>
+                <button
+                  @click="goToBookingForm(lawyer.lawyer_id)"
+                  class="w-full border border-black bg-black text-white py-3 px-6 rounded-lg font-semibold transition hover:bg-gray-800"
+                >
+                  {{ $t('booking.bookConsultation') }}
+                </button>
               </div>
             </div>
-            
-            <div class="text-center">
-              <div class="mb-4">
-                <span class="text-2xl font-bold text-black">${{ lawyer.fee.toLocaleString() }}</span>
-                <span class="text-gray-500 line-through ml-2">${{ lawyer.oldFee.toLocaleString() }}</span>
-              </div>
-              <button
-                @click="goToBookingForm(lawyer.id)"
-                class="w-full border border-black bg-black text-white py-3 px-6 rounded-lg font-semibold transition hover:bg-gray-800"
-              >
-                {{ $t('booking.bookConsultation') }}
-              </button>
-            </div>
+          </div>
+
+          <!-- Load More Button -->
+          <div v-if="pagination.hasMore" class="text-center mt-12">
+            <button
+              @click="loadMoreLawyers"
+              :disabled="loadingMore"
+              class="bg-black text-white px-8 py-3 rounded-lg font-semibold hover:bg-gray-800 transition disabled:opacity-50"
+            >
+              {{ loadingMore ? 'Loading...' : 'Load More Lawyers' }}
+            </button>
           </div>
         </div>
       </div>
@@ -179,6 +218,22 @@ import Footer from "../components/Footer.vue";
 const router = useRouter();
 const { t, locale } = useI18n();
 
+// Reactive data
+const lawyers = ref([]);
+const loading = ref(false);
+const loadingMore = ref(false);
+const error = ref('');
+const search = ref('');
+const pagination = ref({
+  total: 0,
+  limit: 12,
+  offset: 0,
+  hasMore: false
+});
+
+// Active FAQ
+const activeFaq = ref<number | null>(null);
+
 // Ensure i18n is properly initialized
 const isI18nReady = ref(false);
 
@@ -187,97 +242,105 @@ onMounted(() => {
   if (locale.value) {
     isI18nReady.value = true;
   } else {
-    // Fallback initialization
     setTimeout(() => {
       isI18nReady.value = true;
     }, 100);
   }
+  
+  // Load lawyers on mount
+  loadLawyers();
 });
 
-// Active FAQ
-const activeFaq = ref<number | null>(null);
+// Methods
+const loadLawyers = async (isLoadMore = false) => {
+  if (isLoadMore) {
+    loadingMore.value = true;
+  } else {
+    loading.value = true;
+    lawyers.value = [];
+    pagination.value.offset = 0;
+  }
+  
+  error.value = '';
 
-// Dummy data for lawyers
-const lawyers = [
-  {
-    id: 1,
-    name: "Anas Nazarudin",
-    specialty: "Criminal Defense Attorney",
-    experience: 5,
-    rating: 97,
-    fee: 25000,
-    oldFee: 28000,
-    photo: "../src/assets/images/founder.jpg",
-    available: true,
-  },
-  {
-    id: 2,
-    name: "Andika Suyandra",
-    specialty: "Corporate Law Attorney",
-    experience: 4,
-    rating: 94,
-    fee: 25000,
-    oldFee: 28000,
-    photo: "../src/assets/images/cofounder.jpg",
-    available: true,
-  },
-  {
-    id: 3,
-    name: "Rusdi Saputra",
-    specialty: "Family Law Attorney",
-    experience: 4,
-    rating: 94,
-    fee: 25000,
-    oldFee: 28000,
-    photo: "../src/assets/images/2.jpg",
-    available: true,
-  },
-  {
-    id: 4,
-    name: "Riko Saputra",
-    specialty: "Civil Rights Attorney",
-    experience: 4,
-    rating: 94,
-    fee: 25000,
-    oldFee: 28000,
-    photo: "../src/assets/images/4.jpg",
-    available: true,
-  },
-  {
-    id: 5,
-    name: "Ahmad Yusuf",
-    specialty: "Property Law Attorney",
-    experience: 6,
-    rating: 96,
-    fee: 28000,
-    oldFee: 32000,
-    photo: "../src/assets/images/cofounder.jpg",
-    available: true,
-  },
-  {
-    id: 6,
-    name: "Sari Indah",
-    specialty: "Employment Law Attorney",
-    experience: 3,
-    rating: 92,
-    fee: 22000,
-    oldFee: 25000,
-    photo: "../src/assets/images/cofounder.jpg",
-    available: true,
-  },
-];
+  try {
+    const params = new URLSearchParams({
+      limit: pagination.value.limit.toString(),
+      offset: pagination.value.offset.toString(),
+    });
 
-const search = ref("");
-const filteredLawyers = computed(() => {
-  if (!search.value) return lawyers;
-  return lawyers.filter(
-    (lawyer) =>
-      lawyer.name.toLowerCase().indexOf(search.value.toLowerCase()) !== -1 ||
-      lawyer.specialty.toLowerCase().indexOf(search.value.toLowerCase()) !== -1
-  );
-});
+    if (search.value.trim()) {
+      params.append('search', search.value.trim());
+    }
 
-// FAQ data - add safety check
+    const response = await fetch(`http://localhost:3000/api/lawyers/get-lawyers?${params}`);
+    const data = await response.json();
+
+    if (response.ok) {
+      if (isLoadMore) {
+        lawyers.value = [...lawyers.value, ...data.lawyers];
+      } else {
+        lawyers.value = data.lawyers;
+      }
+      
+      pagination.value = {
+        ...data.pagination,
+        offset: pagination.value.offset + data.pagination.limit
+      };
+    } else {
+      error.value = data.message || 'Failed to load lawyers';
+    }
+  } catch (err) {
+    console.error('Error loading lawyers:', err);
+    error.value = 'Network error. Please try again.';
+  } finally {
+    loading.value = false;
+    loadingMore.value = false;
+  }
+};
+
+const loadMoreLawyers = (event?: MouseEvent) => {
+  loadLawyers(true);
+};
+
+const handleSearch = () => {
+  // Debounce search
+  clearTimeout(searchTimeout);
+  const searchTimeout = setTimeout(() => {
+    loadLawyers();
+  }, 500);
+};
+
+const getPhotoUrl = (photo: string) => {
+  if (!photo) return '/src/assets/images/default-lawyer.jpg';
+  
+  // If it's already a full URL, return as is
+  if (photo.startsWith('http') || photo.startsWith('/uploads/')) {
+    return photo;
+  }
+  
+  // If it's a relative path, convert to absolute
+  return photo.replace('../src/assets/', '/src/assets/');
+};
+
+const handleImageError = (event: Event) => {
+  const target = event.target as HTMLImageElement;
+  target.src = '/src/assets/images/default-lawyer.jpg';
+};
+
+const goToBookingForm = (lawyerId: number) => {
+  // Check if user is logged in
+  const token = localStorage.getItem('token');
+  if (!token) {
+    router.push(`/login?redirect=/booking/${lawyerId}`);
+    return;
+  }
+  
+  // Go to booking form
+  router.push(`/booking/${lawyerId}`);
+};
+
+// FAQ data
 const faqs = computed(() => {
   if (!isI18nReady.value) return [];
   
@@ -302,7 +365,6 @@ const faqs = computed(() => {
   }
 });
 
-// Methods
 const toggleFaq = (index: number) => {
   activeFaq.value = activeFaq.value === index ? null : index;
 };
@@ -321,15 +383,23 @@ const goToChat = () => {
 const goToPricing = () => {
   router.push('/pricing');
 };
-
-const goToBookingForm = (lawyerId: number) => {
-  router.push({ name: 'BookingForm', params: { id: lawyerId } });
-};
 </script>
 
 <style scoped>
-/* Custom styles if needed */
 .transition-all {
   transition: all 0.3s ease;
+}
+
+.animate-spin {
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
 }
 </style>

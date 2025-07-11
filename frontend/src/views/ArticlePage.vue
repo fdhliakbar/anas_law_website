@@ -62,6 +62,20 @@
         <p class="mt-2 text-gray-600">{{ $t('articles.loading') }}</p>
       </div>
 
+      <!-- Error State -->
+      <div v-else-if="error" class="text-center py-12">
+        <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded mx-auto max-w-md mb-4">
+          <p class="font-bold">Error!</p>
+          <p class="text-sm">{{ error }}</p>
+        </div>
+        <button 
+          @click="loadArticles(true)" 
+          class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 transition"
+        >
+          Coba Lagi
+        </button>
+      </div>
+
       <!-- No Results -->
       <div v-else-if="filteredArticles.length === 0" class="text-center py-12">
         <svg class="mx-auto h-16 w-16 text-gray-400 mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -84,6 +98,7 @@
               :src="article.image"
               :alt="article.title"
               class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
+              @error="handleImageError"
             />
             <div class="absolute top-4 left-4">
               <span class="bg-blue-600 text-white px-3 py-1 rounded-full text-xs font-medium">
@@ -127,8 +142,9 @@
               </div>
 
               <router-link
-                :to="`/article/${article.slug}`"
+                :to="article.link ? { path: article.link } : `/article/${article.id}`"
                 class="inline-flex items-center text-blue-600 hover:text-blue-800 font-medium text-sm"
+                :target="article.link ? '_blank' : '_self'"
               >
                 {{ $t('articles.readMore') }}
                 <svg class="ml-1 h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -200,6 +216,8 @@ const currentPage = ref(1)
 const articlesPerPage = 9
 const emailSubscription = ref('')
 const subscribing = ref(false)
+const error = ref('')
+const totalArticles = ref(0)
 
 // Categories
 const categories = ref([
@@ -211,7 +229,75 @@ const categories = ref([
   { id: 'employment', name: t('articles.categories.employment') }
 ])
 
-// Sample articles data
+// Fetch articles from API
+const loadArticles = async (reset = false) => {
+  loading.value = true
+  error.value = ''
+  
+  try {
+    // Calculate offset for pagination
+    const offset = reset ? 0 : (currentPage.value - 1) * articlesPerPage
+    const limit = articlesPerPage
+    
+    const response = await fetch(`http://localhost:3000/api/article/get-articles?limit=${limit}&offset=${offset}`)
+    const data = await response.json()
+    
+    if (response.ok && data.success) {
+      const apiArticles = data.articles || data.data || []
+      
+      // Transform API data to match component structure
+      const transformedArticles = apiArticles.map(article => ({
+        id: article.artikel_id,
+        title: article.judul,
+        excerpt: article.deskripsi,
+        image: article.gambar || 'https://images.unsplash.com/photo-1589829545856-d10d557cf95f?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
+        categoryId: 'corporate', // Default category, bisa disesuaikan dengan data dari backend
+        publishedAt: article.created_at,
+        readTime: Math.ceil((article.content_artikel?.length || 500) / 200), // Estimate reading time
+        slug: `article-${article.artikel_id}`,
+        content: article.content_artikel,
+        link: article.link_artikel,
+        author: {
+          name: 'Admin Anas Law',
+          avatar: 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-4.0.3&auto=format&fit=crop&w=100&q=80'
+        }
+      }))
+      
+      if (reset) {
+        articles.value = transformedArticles
+      } else {
+        articles.value = [...articles.value, ...transformedArticles]
+      }
+      
+      // Set total from pagination info if available
+      if (data.pagination && data.pagination.total) {
+        totalArticles.value = data.pagination.total
+      }
+      
+      console.log('Articles loaded:', transformedArticles)
+    } else {
+      console.error('Failed to load articles:', data.message)
+      error.value = 'Gagal memuat artikel'
+      
+      // Fallback to sample data if API fails
+      if (articles.value.length === 0) {
+        articles.value = sampleArticles
+      }
+    }
+  } catch (err) {
+    console.error('Error fetching articles:', err)
+    error.value = 'Terjadi kesalahan saat memuat artikel'
+    
+    // Fallback to sample data if API fails
+    if (articles.value.length === 0) {
+      articles.value = sampleArticles
+    }
+  } finally {
+    loading.value = false
+  }
+}
+
+// Sample articles data as fallback
 const sampleArticles = [
   {
     id: 1,
@@ -254,48 +340,6 @@ const sampleArticles = [
       name: 'Budi Santoso, S.H., M.H.',
       avatar: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&auto=format&fit=crop&w=100&q=80'
     }
-  },
-  {
-    id: 4,
-    title: 'Jual Beli Properti: Aspek Hukum yang Perlu Diperhatikan',
-    excerpt: 'Tips dan panduan lengkap mengenai aspek hukum dalam transaksi jual beli properti, termasuk pengecekan sertifikat dan proses balik nama.',
-    image: 'https://images.unsplash.com/photo-1560518883-ce09059eeffa?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
-    categoryId: 'property',
-    publishedAt: '2024-01-01',
-    readTime: 7,
-    slug: 'aspek-hukum-jual-beli-properti',
-    author: {
-      name: 'Rina Melati, S.H.',
-      avatar: 'https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixlib=rb-4.0.3&auto=format&fit=crop&w=100&q=80'
-    }
-  },
-  {
-    id: 5,
-    title: 'Hukum Ketenagakerjaan: Hak Pekerja dan Pengusaha',
-    excerpt: 'Panduan lengkap tentang hak dan kewajiban pekerja serta pengusaha menurut Undang-Undang Ketenagakerjaan Indonesia.',
-    image: 'https://images.unsplash.com/photo-1521737604893-d14cc237f11d?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
-    categoryId: 'employment',
-    publishedAt: '2023-12-28',
-    readTime: 9,
-    slug: 'hukum-ketenagakerjaan-indonesia',
-    author: {
-      name: 'Dr. Ahmad Veritas',
-      avatar: 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-4.0.3&auto=format&fit=crop&w=100&q=80'
-    }
-  },
-  {
-    id: 6,
-    title: 'Pendirian PT: Syarat dan Prosedur Lengkap',
-    excerpt: 'Langkah-langkah detail dalam pendirian Perseroan Terbatas (PT) di Indonesia, termasuk persyaratan dokumen dan biaya yang diperlukan.',
-    image: 'https://images.unsplash.com/photo-1554224155-6726b3ff858f?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
-    categoryId: 'corporate',
-    publishedAt: '2023-12-25',
-    readTime: 8,
-    slug: 'pendirian-pt-syarat-prosedur',
-    author: {
-      name: 'Siti Nurhaliza, S.H.',
-      avatar: 'https://images.unsplash.com/photo-1494790108755-2616b612b098?ixlib=rb-4.0.3&auto=format&fit=crop&w=100&q=80'
-    }
   }
 ]
 
@@ -321,13 +365,22 @@ const filteredArticles = computed(() => {
 })
 
 const totalPages = computed(() => {
+  // Use total from API if available, otherwise calculate from filtered articles
+  if (totalArticles.value > 0) {
+    return Math.ceil(totalArticles.value / articlesPerPage)
+  }
   return Math.ceil(filteredArticles.value.length / articlesPerPage)
 })
 
 const paginatedArticles = computed(() => {
-  const start = (currentPage.value - 1) * articlesPerPage
-  const end = start + articlesPerPage
-  return filteredArticles.value.slice(start, end)
+  // For API pagination, we already get the right articles
+  // For client-side filtering, we need to slice
+  if (searchQuery.value || selectedCategory.value !== 'all') {
+    const start = (currentPage.value - 1) * articlesPerPage
+    const end = start + articlesPerPage
+    return filteredArticles.value.slice(start, end)
+  }
+  return articles.value
 })
 
 const visiblePages = computed(() => {
@@ -369,11 +422,15 @@ const visiblePages = computed(() => {
 // Methods
 const filterArticles = () => {
   currentPage.value = 1
+  // For search, we'll use client-side filtering for now
+  // In production, you might want to implement server-side search
 }
 
 const filterByCategory = (categoryId) => {
   selectedCategory.value = categoryId
   currentPage.value = 1
+  // For category filtering, we'll use client-side filtering for now
+  // In production, you might want to implement server-side filtering
 }
 
 const getCategoryName = (categoryId) => {
@@ -382,12 +439,17 @@ const getCategoryName = (categoryId) => {
 }
 
 const formatDate = (dateString) => {
+  if (!dateString) return ''
   const date = new Date(dateString)
   return date.toLocaleDateString('id-ID', {
     year: 'numeric',
     month: 'long',
     day: 'numeric'
   })
+}
+
+const handleImageError = (event) => {
+  event.target.src = 'https://images.unsplash.com/photo-1589829545856-d10d557cf95f?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80'
 }
 
 const subscribeNewsletter = async () => {
@@ -406,22 +468,9 @@ const subscribeNewsletter = async () => {
   }
 }
 
-const loadArticles = async () => {
-  loading.value = true
-  try {
-    // Simulate API call
-    await new Promise(resolve => setTimeout(resolve, 1000))
-    articles.value = sampleArticles
-  } catch (error) {
-    console.error('Error loading articles:', error)
-  } finally {
-    loading.value = false
-  }
-}
-
 // Lifecycle
 onMounted(() => {
-  loadArticles()
+  loadArticles(true)
 })
 </script>
 
