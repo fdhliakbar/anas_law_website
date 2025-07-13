@@ -7,9 +7,8 @@
   <LegalConsultingTrends />
   <Schedule />
   <Testimonials />
-  <LegalAdvisorComparison />
-  <OurTeamSlider />
   <TaxConsultation/>
+  <OurTeamSlider />
   <Blog />
   <Footer />
   
@@ -31,7 +30,6 @@ import TaxConsultation from "@/components/TaxConsultation.vue";
 import OurTeamSlider from "@/components/OurTeamSlider.vue";
 import Blog from "../components/Blog.vue";
 import Footer from "../components/Footer.vue";
-import LegalAdvisorComparison from "@/components/LegalAdvisorComparison.vue";
 import SimpleChatBot from "@/components/SimpleChatBot.vue";
 
 const router = useRouter();
