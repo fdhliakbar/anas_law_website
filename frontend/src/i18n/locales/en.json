@@ -211,6 +211,93 @@
       "error": "Something went wrong. Please try again."
     }
   },
+  "taxConsultation": {
+    "tagline": "We Are Here For Your Tax Relief.",
+    "title": "We offer best cost effective tax consultation solution.",
+    "monthly": "Monthly",
+    "yearly": "Yearly",
+    "yearlyDiscount": "(Save 20%)",
+    "plans": {
+      "basic": {
+        "name": "Basic",
+        "description": "Create interactive forms that connect to your workflow.",
+        "featuresTitle": "Everything you get with Basic"
+      },
+      "plus": {
+        "name": "Plus", 
+        "description": "Make your forms more beautiful and on-brand & analyze.",
+        "featuresTitle": "Everything in Basic, Plus:"
+      },
+      "business": {
+        "name": "Business",
+        "description": "Make your forms more beautiful and on-brand & analyze.",
+        "featuresTitle": "Everything in Plus, Business:"
+      }
+    },
+    "billedMonthly": "Billed Monthly",
+    "billedYearly": "Billed Yearly",
+    "getConsultation": "Get a Free Consultation",
+    "features": {
+      "advancedSegmentation": "Advanced Segmentation",
+      "comparativeReporting": "Comparative Reporting", 
+      "unlimitedSeats": "Unlimited Seats & Role Access",
+      "multivariateTest": "Multivariate Testing",
+      "dynamicContent": "Dynamic Content"
+    }
+  },
+  "schedule": {
+    "title": "How Our Legal Team Can Assist You",
+    "description": "Learn about our personalized approach to every case. We provide expert legal counsel, negotiate with insurance companies, and fight for your rightful compensation",
+    "scheduleNow": "Schedule Now",
+    "altText": "Legal Team"
+  },
+  "testimonials": {
+    "badge": "Testimonials",
+    "title": "What Our Clients Say", 
+    "description": "Testimonials is a great way to increase brand trust and awareness. Use this section to highlight your popular customers.",
+    "clients": {
+      "fadhli": {
+        "review": "Their team was very professional & experienced in handling my case.",
+        "name": "Fadhli Akbar",
+        "position": "CEO at Google",
+        "highlight1": "professional",
+        "highlight2": "experienced"
+      },
+      "dylan": {
+        "review": "Make sure you only pick the right sentence to keep it short and simple.",
+        "name": "Dylan Ambrose", 
+        "position": "Lead marketer at Netflix",
+        "highlight1": "right sentence"
+      },
+      "gabrielle": {
+        "review": "This is an awesome landing page template I've seen. I would use this for anything.",
+        "name": "Gabrielle Winn",
+        "position": "Co-founder of Acme Inc",
+        "highlight1": "awesome"
+      }
+    }
+  },
+  "legalTrends": {
+    "title": "Legal Consulting Market Trends: What You Should Know",
+    "description": "Our commitment is to provide expert legal consulting tailored to your business and personal needs. We deliver strategic advice, risk management, and compliance solutions for clients seeking trusted legal guidance. Discover how our services set a new standard in legal consulting and client representation.",
+    "stats": {
+      "compliance": {
+        "percentage": "75%",
+        "title": "of businesses",
+        "description": "seek legal consulting for regulatory compliance"
+      },
+      "resolution": {
+        "percentage": "60%",
+        "title": "of legal issues",
+        "description": "are resolved faster with professional consultants"
+      },
+      "savings": {
+        "percentage": "$2M+",
+        "title": "saved annually",
+        "description": "by organizations using legal consulting services"
+      }
+    }
+  },
   "footer": {
     "copyright": "© 2025 Anas Law",
     "termsConditions": "Terms and Conditions",

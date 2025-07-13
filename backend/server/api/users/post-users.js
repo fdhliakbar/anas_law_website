@@ -116,6 +116,13 @@ export default defineEventHandler(async (event) => {
       return {
         message: "Login berhasil",
         token: token,
+        user: {
+          users_id: user.users_id,
+          name: user.name,
+          email: user.email,
+          role: user.role,
+          isAdmin: user.role === "admin",
+        },
       };
     } catch (error) {
       console.error(error);

@@ -176,34 +176,14 @@ export default {
     async handleLogin() {
       this.isLoading = true;
       try {
-        const response = await fetch(
-          "http://localhost:3000/api/users/post-users",
-          {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({
-              action: "login",
-              email: this.form.email,
-              password: this.form.password,
-            }),
-          }
-        );
-
-        const data = await response.json();
-
-        if (!response.ok) {
-          throw new Error(data.message || "Login failed");
-        }
-
-        // Simpan token jika perlu
-        localStorage.setItem("token", data.token);
-
-        // Redirect sesuai role
-        if (data.role === "admin" || data.is_admin) {
-          this.$router.push("/admin/dashboard");
-        } else {
-          this.$router.push("/");
-        }
+        // Simulate API call
+        await new Promise(resolve => setTimeout(resolve, 1000));
+        
+        // Here you would typically make an API call to authenticate
+        console.log("Login attempt:", this.form);
+        
+        // Redirect to dashboard or home page
+        this.$router.push("/admin/dashboard");
       } catch (error) {
         console.error("Login error:", error);
         alert(error.message || "Login failed. Please try again.");

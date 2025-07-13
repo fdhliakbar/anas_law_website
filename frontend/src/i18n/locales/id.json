@@ -211,6 +211,93 @@
       "error": "Terjadi kesalahan. Silakan coba lagi."
     }
   },
+  "taxConsultation": {
+    "tagline": "Kami Siap Membantu Masalah Pajak Anda.",
+    "title": "Kami menawarkan solusi konsultasi pajak yang efektif dan terjangkau.",
+    "monthly": "Bulanan",
+    "yearly": "Tahunan",
+    "yearlyDiscount": "(Hemat 20%)",
+    "plans": {
+      "basic": {
+        "name": "Dasar",
+        "description": "Buat formulir interaktif yang terhubung dengan alur kerja Anda.",
+        "featuresTitle": "Semua yang Anda dapatkan dengan Dasar"
+      },
+      "plus": {
+        "name": "Plus",
+        "description": "Buat formulir Anda lebih indah dan sesuai merek serta analisis.",
+        "featuresTitle": "Semua dalam Dasar, Plus:"
+      },
+      "business": {
+        "name": "Bisnis",
+        "description": "Buat formulir Anda lebih indah dan sesuai merek serta analisis.",
+        "featuresTitle": "Semua dalam Plus, Bisnis:"
+      }
+    },
+    "billedMonthly": "Ditagih Bulanan",
+    "billedYearly": "Ditagih Tahunan", 
+    "getConsultation": "Dapatkan Konsultasi Gratis",
+    "features": {
+      "advancedSegmentation": "Segmentasi Lanjutan",
+      "comparativeReporting": "Pelaporan Komparatif",
+      "unlimitedSeats": "Akses Kursi & Peran Tidak Terbatas",
+      "multivariateTest": "Pengujian Multivariat",
+      "dynamicContent": "Konten Dinamis"
+    }
+  },
+  "schedule": {
+    "title": "Bagaimana Tim Hukum Kami Dapat Membantu Anda",
+    "description": "Pelajari tentang pendekatan personal kami untuk setiap kasus. Kami menyediakan konsultasi hukum ahli, bernegosiasi dengan perusahaan asuransi, dan berjuang untuk kompensasi yang layak untuk Anda",
+    "scheduleNow": "Jadwalkan Sekarang",
+    "altText": "Tim Hukum"
+  },
+  "testimonials": {
+    "badge": "Testimoni",
+    "title": "Kata Klien Kami",
+    "description": "Testimoni adalah cara yang bagus untuk meningkatkan kepercayaan dan kesadaran merek. Gunakan bagian ini untuk menyoroti pelanggan populer Anda.",
+    "clients": {
+      "fadhli": {
+        "review": "Tim mereka sangat profesional & berpengalaman dalam menangani kasus saya.",
+        "name": "Fadhli Akbar",
+        "position": "CEO di Google",
+        "highlight1": "profesional",
+        "highlight2": "berpengalaman"
+      },
+      "dylan": {
+        "review": "Pastikan Anda hanya memilih kalimat yang tepat untuk membuatnya singkat dan sederhana.",
+        "name": "Dylan Ambrose",
+        "position": "Lead marketer di Netflix", 
+        "highlight1": "kalimat yang tepat"
+      },
+      "gabrielle": {
+        "review": "Ini adalah template halaman landing yang luar biasa yang pernah saya lihat. Saya akan menggunakannya untuk apa pun.",
+        "name": "Gabrielle Winn",
+        "position": "Co-founder Acme Inc",
+        "highlight1": "luar biasa"
+      }
+    }
+  },
+  "legalTrends": {
+    "title": "Tren Pasar Konsultasi Hukum: Yang Perlu Anda Ketahui",
+    "description": "Komitmen kami adalah menyediakan konsultasi hukum ahli yang disesuaikan dengan kebutuhan bisnis dan pribadi Anda. Kami memberikan nasihat strategis, manajemen risiko, dan solusi kepatuhan untuk klien yang mencari bimbingan hukum terpercaya. Temukan bagaimana layanan kami menetapkan standar baru dalam konsultasi hukum dan representasi klien.",
+    "stats": {
+      "compliance": {
+        "percentage": "75%",
+        "title": "bisnis",
+        "description": "mencari konsultasi hukum untuk kepatuhan regulasi"
+      },
+      "resolution": {
+        "percentage": "60%",
+        "title": "masalah hukum",
+        "description": "diselesaikan lebih cepat dengan konsultan profesional"
+      },
+      "savings": {
+        "percentage": "$2M+",
+        "title": "dihemat setiap tahun",
+        "description": "oleh organisasi yang menggunakan layanan konsultasi hukum"
+      }
+    }
+  },
   "footer": {
     "copyright": "© 2025 Anas Law",
     "termsConditions": "Syarat dan Ketentuan",
