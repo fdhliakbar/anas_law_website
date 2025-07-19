@@ -97,16 +97,6 @@
           </li>
           <li>
             <a
-              @click="goToLawyerManagement"
-              href="#"
-              class="flex items-center px-4 py-2 text-gray-700 hover:bg-gray-100 rounded-lg"
-            >
-              <span class="material-icons mr-3"></span>
-              Manajemen Lawyers
-            </a>
-          </li>
-          <li>
-            <a
               href="#"
               class="flex items-center px-4 py-2 text-gray-700 hover:bg-gray-100 rounded-lg"
             >
@@ -115,7 +105,23 @@
             </a>
           </li>
         </ul>
-        
+        <div class="mt-10">
+          <h4 class="text-xs text-gray-400 uppercase mb-2">Tim Legal</h4>
+          <ul class="space-y-1">
+            <li>
+              <span class="flex items-center text-sm text-gray-700">
+                <span class="w-2 h-2 bg-blue-400 rounded-full mr-2"></span>
+                Pengacara Senior
+              </span>
+            </li>
+            <li>
+              <span class="flex items-center text-sm text-gray-700">
+                <span class="w-2 h-2 bg-green-400 rounded-full mr-2"></span>
+                Paralegal
+              </span>
+            </li>
+          </ul>
+        </div>
       </nav>
       <div class="px-4 py-4 border-t">
         <button
@@ -569,7 +575,7 @@ const createNewArticle = () => {
 };
 
 const goToBookingManagement = () => {
-  router.push('/admin/booking-management');
+  alert('Halaman manajemen booking segera hadir! Fitur ini akan memungkinkan admin untuk melihat, menyetujui, atau menolak booking dari klien.');
 };
 
 const approveBooking = (bookingId) => {
@@ -584,10 +590,6 @@ const rejectBooking = (bookingId) => {
 
 const goToUsers = () => {
   alert('Halaman manajemen klien segera hadir!');
-};
-
-const goToLawyerManagement = () => {
-  router.push('/admin/lawyer-management');
 };
 
 const goToArticleDetail = (articleId) => {

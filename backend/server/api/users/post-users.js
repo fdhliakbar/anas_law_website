@@ -125,10 +125,10 @@ export default defineEventHandler(async (event) => {
 
    const token = jwt.sign(
     { 
-          userId: user.users_id,   
-          name: user.name,         
-          email: user.email,      
-          role: user.role         
+          userId: user.users_id,   // ✅ BENAR: user.users_id (bukan result.rows[0].user_id)
+          name: user.name,         // ✅ TAMBAHKAN: untuk decoding di frontend
+          email: user.email,       // ✅ TAMBAHKAN: untuk decoding di frontend
+          role: user.role          // ✅ BENAR: user.role (bukan result.rows[0].role)
     },
     process.env.JWT_SECRET, // pastikan ini ada
   { expiresIn: "24h" }
