@@ -37,9 +37,9 @@
         <p class="text-gray-500 mb-4 text-center">{{ $t(`taxConsultation.plans.${plan.key}.description`) }}</p>
         <div class="flex items-end mb-4">
           <span class="text-3xl font-bold text-gray-900">
-            ${{ yearly ? Math.round(plan.yearly) : plan.monthly }}
+            {{ formatRupiah(yearly ? plan.yearly : plan.monthly) }}
           </span>
-          <span class="text-gray-500 ml-1 mb-1">/mo</span>
+          <span class="text-gray-500 ml-1 mb-1">/{{ yearly ? 'tahun' : 'bulan' }}</span>
         </div>
         <span class="text-xs text-gray-400 mb-4">{{ yearly ? $t('taxConsultation.billedYearly') : $t('taxConsultation.billedMonthly') }}</span>
         <button class="bg-indigo-900 text-white px-6 py-2 rounded-lg font-semibold shadow hover:bg-indigo-700 transition-colors duration-300 mb-6">
@@ -67,13 +67,14 @@
 import { ref } from 'vue'
 
 const yearly = ref(true)
+
 const plans = [
   {
     key: "basic",
     name: "Basic",
     description: "Create interactive forms that connect to your workflow.",
-    monthly: 29,
-    yearly: 29 * 12 * 0.8,
+    monthly: 25000,        // ✅ IDR 25,000
+    yearly: 250000,        // ✅ IDR 250,000 (hemat ~15%)
     features: [
       "advancedSegmentation",
       "comparativeReporting", 
@@ -84,10 +85,10 @@ const plans = [
   },
   {
     key: "plus",
-    name: "Plus",
+    name: "Plus", 
     description: "Make your forms more beautiful and on-brand & analyze.",
-    monthly: 199,
-    yearly: 199 * 12 * 0.8,
+    monthly: 150000,       // ✅ IDR 150,000
+    yearly: 1500000,       // ✅ IDR 1,500,000 (hemat ~17%)
     features: [
       "advancedSegmentation",
       "comparativeReporting",
@@ -100,8 +101,8 @@ const plans = [
     key: "business",
     name: "Business",
     description: "Make your forms more beautiful and on-brand & analyze.",
-    monthly: 399,
-    yearly: 399 * 12 * 0.8,
+    monthly: 300000,       // ✅ IDR 300,000
+    yearly: 3000000,       // ✅ IDR 3,000,000 (hemat ~17%)
     features: [
       "advancedSegmentation",
       "comparativeReporting",
@@ -111,4 +112,14 @@ const plans = [
     ],
   },
 ]
+
+// ✅ Function untuk format Rupiah
+const formatRupiah = (amount) => {
+  return new Intl.NumberFormat('id-ID', {
+    style: 'currency',
+    currency: 'IDR',
+    minimumFractionDigits: 0,
+    maximumFractionDigits: 0
+  }).format(amount)
+}
 </script>

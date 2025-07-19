@@ -93,10 +93,6 @@
             </div>
             
             <div class="text-center">
-              <div class="mb-4">
-                <span class="text-2xl font-bold text-black">${{ lawyer.fee.toLocaleString() }}</span>
-                <span class="text-gray-500 line-through ml-2">${{ lawyer.oldFee.toLocaleString() }}</span>
-              </div>
               <button
                 @click="goToBookingForm(lawyer.id)"
                 class="w-full border border-black bg-black text-white py-3 px-6 rounded-lg font-semibold transition hover:bg-gray-800"
@@ -136,32 +132,6 @@
               {{ faq.answer }}
             </div>
           </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- Contact CTA -->
-    <section class="py-16 px-4 bg-gray-900 text-white">
-      <div class="max-w-5xl mx-auto text-center">
-        <h2 class="font-bold text-4xl md:text-5xl mb-8">
-          {{ $t('booking.readyToGetHelp') }}
-        </h2>
-        <p class="text-xl text-gray-300 mb-12 max-w-3xl mx-auto">
-          {{ $t('booking.readyToGetHelpDesc') }}
-        </p>
-        <div class="flex flex-col md:flex-row gap-4 justify-center">
-          <button
-            @click="goToPricing"
-            class="border border-white bg-white text-black px-8 py-4 rounded-lg text-lg font-semibold transition hover:bg-gray-100"
-          >
-            {{ $t('booking.viewPricing') }}
-          </button>
-          <button
-            @click="goToChat"
-            class="border border-white text-white px-8 py-4 rounded-lg text-lg font-semibold bg-transparent hover:bg-white hover:text-black transition"
-          >
-            {{ $t('booking.chatNow') }}
-          </button>
         </div>
       </div>
     </section>
@@ -205,9 +175,7 @@ const lawyers = [
     specialty: "Founder & Managing Partner",
     experience: 5,
     rating: 97,
-    fee: 25000,
-    oldFee: 28000,
-    photo: "../src/assets/images/founder.jpg",
+    photo: "/images/founder.jpg",
     available: true,
   },
   {
@@ -216,9 +184,7 @@ const lawyers = [
     specialty: "Founder and Managing Partner",
     experience: 4,
     rating: 94,
-    fee: 25000,
-    oldFee: 28000,
-    photo: "../src/assets/images/cofounder.jpg",
+    photo: "/images/cofounder.jpg",
     available: true,
   },
   {
@@ -227,9 +193,7 @@ const lawyers = [
     specialty: "Senior Partner",
     experience: 4,
     rating: 94,
-    fee: 25000,
-    oldFee: 28000,
-    photo: "../src/assets/images/2.jpg",
+    photo: "/images/2.jpg",
     available: true,
   },
   {
@@ -238,9 +202,7 @@ const lawyers = [
     specialty: "Partner",
     experience: 4,
     rating: 94,
-    fee: 25000,
-    oldFee: 28000,
-    photo: "../src/assets/images/4.jpg",
+    photo: "/images/4.jpg",
     available: true,
   },
   {
@@ -249,9 +211,7 @@ const lawyers = [
     specialty: "Partner",
     experience: 6,
     rating: 96,
-    fee: 28000,
-    oldFee: 32000,
-    photo: "../src/assets/images/3.jpg",
+    photo: "/images/3.jpg",
     available: true,
   },
   {
@@ -260,9 +220,7 @@ const lawyers = [
     specialty: "Partner",
     experience: 3,
     rating: 92,
-    fee: 22000,
-    oldFee: 25000,
-    photo: "../src/assets/images/6.jpg",
+    photo: "/images/6.jpg",
     available: true,
   },
   {
@@ -271,9 +229,7 @@ const lawyers = [
     specialty: "Employment Law Attorney",
     experience: 3,
     rating: 92,
-    fee: 22000,
-    oldFee: 25000,
-    photo: "../src/assets/images/7.jpg",
+    photo: "/images/7.jpg",
     available: true,
   },
   {
@@ -282,9 +238,7 @@ const lawyers = [
     specialty: "Employment Law Attorney",
     experience: 3,
     rating: 92,
-    fee: 22000,
-    oldFee: 25000,
-    photo: "../src/assets/images/8.jpg",
+    photo: "/images/8.jpg",
     available: true,
   },
   {
@@ -293,9 +247,7 @@ const lawyers = [
     specialty: "Partner",
     experience: 3,
     rating: 92,
-    fee: 22000,
-    oldFee: 25000,
-    photo: "../src/assets/images/partner5.jpg",
+    photo: "/images/partner5.jpg",
     available: true,
   },
   {
@@ -304,9 +256,7 @@ const lawyers = [
     specialty: "Partner",
     experience: 3,
     rating: 92,
-    fee: 22000,
-    oldFee: 25000,
-    photo: "../src/assets/images/Partner1.jpg",
+    photo: "/images/Partner1.jpg",
     available: true,
   },
 ];
@@ -360,10 +310,6 @@ const scrollToLawyers = () => {
 
 const goToChat = () => {
   router.push('/chat');
-};
-
-const goToPricing = () => {
-  router.push('/pricing');
 };
 
 const goToBookingForm = (lawyerId: number) => {

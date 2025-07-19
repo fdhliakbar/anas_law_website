@@ -5,6 +5,7 @@
     "services": "Services",
     "pricing": "Pricing",
     "bookConsultation": "Book Consultation",
+    "articles": "Articles",
     "reviews": "Reviews",
     "contact": "Contact",
     "login": "Login",
@@ -256,23 +257,23 @@
     "title": "What Our Clients Say", 
     "description": "Testimonials is a great way to increase brand trust and awareness. Use this section to highlight your popular customers.",
     "clients": {
-      "fadhli": {
+      "andika": {
         "review": "Their team was very professional & experienced in handling my case.",
-        "name": "Fadhli Akbar",
-        "position": "CEO at Google",
+        "name": "Andika Septian",
+        "position": "Coconut Entrepreneur",
         "highlight1": "professional",
         "highlight2": "experienced"
       },
-      "dylan": {
+      "supriyadi": {
         "review": "Make sure you only pick the right sentence to keep it short and simple.",
-        "name": "Dylan Ambrose", 
-        "position": "Lead marketer at Netflix",
+        "name": "Supriyadi", 
+        "position": "Head of Indramayu Village",
         "highlight1": "right sentence"
       },
-      "gabrielle": {
+      "tarisya": {
         "review": "This is an awesome landing page template I've seen. I would use this for anything.",
-        "name": "Gabrielle Winn",
-        "position": "Co-founder of Acme Inc",
+        "name": "Tarisya Ramayani",
+        "position": "Eye Doctor",
         "highlight1": "awesome"
       }
     }

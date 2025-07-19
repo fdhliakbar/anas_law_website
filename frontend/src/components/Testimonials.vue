@@ -40,17 +40,17 @@
             <div class="w-full flex-shrink-0">
               <div class="bg-white shadow-lg px-8 py-12 md:px-16 md:py-16">
                 <p class="text-2xl md:text-3xl leading-relaxed text-gray-700 text-center mb-8">
-                  "{{ $t('testimonials.clients.fadhli.review').split($t('testimonials.clients.fadhli.highlight1'))[0] }}
-                  <mark class="mx-1 text-indigo-800 bg-indigo-100 rounded-md ring-indigo-100 ring-4">{{ $t('testimonials.clients.fadhli.highlight1') }}</mark>
-                  {{ $t('testimonials.clients.fadhli.review').split($t('testimonials.clients.fadhli.highlight1'))[1].split($t('testimonials.clients.fadhli.highlight2'))[0] }}
-                  <mark class="mx-1 text-indigo-800 bg-indigo-100 rounded-md ring-indigo-100 ring-4">{{ $t('testimonials.clients.fadhli.highlight2') }}</mark>
-                  {{ $t('testimonials.clients.fadhli.review').split($t('testimonials.clients.fadhli.highlight2'))[1] }}"
+                  "{{ $t('testimonials.clients.andika.review').split($t('testimonials.clients.andika.highlight1'))[0] }}
+                  <mark class="mx-1 text-indigo-800 bg-indigo-100 rounded-md ring-indigo-100 ring-4">{{ $t('testimonials.clients.andika.highlight1') }}</mark>
+                  {{ $t('testimonials.clients.andika.review').split($t('testimonials.clients.andika.highlight1'))[1].split($t('testimonials.clients.andika.highlight2'))[0] }}
+                  <mark class="mx-1 text-indigo-800 bg-indigo-100 rounded-md ring-indigo-100 ring-4">{{ $t('testimonials.clients.andika.highlight2') }}</mark>
+                  {{ $t('testimonials.clients.andika.review').split($t('testimonials.clients.andika.highlight2'))[1] }}"
                 </p>
                 <div class="text-center">
                   <div class="text-xl font-medium text-gray-800">
-                    {{ $t('testimonials.clients.fadhli.name') }}
+                    {{ $t('testimonials.clients.andika.name') }}
                   </div>
-                  <div class="text-gray-500 mt-1">{{ $t('testimonials.clients.fadhli.position') }}</div>
+                  <div class="text-gray-500 mt-1">{{ $t('testimonials.clients.andika.position') }}</div>
                 </div>
               </div>
             </div>
@@ -59,32 +59,32 @@
             <div class="w-full flex-shrink-0">
               <div class="bg-white shadow-lg px-8 py-12 md:px-16 md:py-16">
                 <p class="text-2xl md:text-3xl leading-relaxed text-gray-700 text-center mb-8">
-                  "{{ $t('testimonials.clients.dylan.review').split($t('testimonials.clients.dylan.highlight1'))[0] }}
-                  <mark class="mx-1 text-indigo-800 bg-indigo-100 rounded-md ring-indigo-100 ring-4">{{ $t('testimonials.clients.dylan.highlight1') }}</mark>
-                  {{ $t('testimonials.clients.dylan.review').split($t('testimonials.clients.dylan.highlight1'))[1] }}"
+                  "{{ $t('testimonials.clients.supriyadi.review').split($t('testimonials.clients.supriyadi.highlight1'))[0] }}
+                  <mark class="mx-1 text-indigo-800 bg-indigo-100 rounded-md ring-indigo-100 ring-4">{{ $t('testimonials.clients.supriyadi.highlight1') }}</mark>
+                  {{ $t('testimonials.clients.supriyadi.review').split($t('testimonials.clients.supriyadi.highlight1'))[1] }}"
                 </p>
                 <div class="text-center">
                   <div class="text-xl font-medium text-gray-800">
-                    {{ $t('testimonials.clients.dylan.name') }}
+                    {{ $t('testimonials.clients.supriyadi.name') }}
                   </div>
-                  <div class="text-gray-500 mt-1">{{ $t('testimonials.clients.dylan.position') }}</div>
+                  <div class="text-gray-500 mt-1">{{ $t('testimonials.clients.supriyadi.position') }}</div>
                 </div>
               </div>
             </div>
 
-            <!-- Gabrielle Testimonial -->
+            <!-- tarisya Testimonial -->
             <div class="w-full flex-shrink-0">
               <div class="bg-white shadow-lg px-8 py-12 md:px-16 md:py-16">
                 <p class="text-2xl md:text-3xl leading-relaxed text-gray-700 text-center mb-8">
-                  "{{ $t('testimonials.clients.gabrielle.review').split($t('testimonials.clients.gabrielle.highlight1'))[0] }}
-                  <mark class="mx-1 text-indigo-800 bg-indigo-100 rounded-md ring-indigo-100 ring-4">{{ $t('testimonials.clients.gabrielle.highlight1') }}</mark>
-                  {{ $t('testimonials.clients.gabrielle.review').split($t('testimonials.clients.gabrielle.highlight1'))[1] }}"
+                  "{{ $t('testimonials.clients.tarisya.review').split($t('testimonials.clients.tarisya.highlight1'))[0] }}
+                  <mark class="mx-1 text-indigo-800 bg-indigo-100 rounded-md ring-indigo-100 ring-4">{{ $t('testimonials.clients.tarisya.highlight1') }}</mark>
+                  {{ $t('testimonials.clients.tarisya.review').split($t('testimonials.clients.tarisya.highlight1'))[1] }}"
                 </p>
                 <div class="text-center">
                   <div class="text-xl font-medium text-gray-800">
-                    {{ $t('testimonials.clients.gabrielle.name') }}
+                    {{ $t('testimonials.clients.tarisya.name') }}
                   </div>
-                  <div class="text-gray-500 mt-1">{{ $t('testimonials.clients.gabrielle.position') }}</div>
+                  <div class="text-gray-500 mt-1">{{ $t('testimonials.clients.tarisya.position') }}</div>
                 </div>
               </div>
             </div>

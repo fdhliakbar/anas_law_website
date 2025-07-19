@@ -7,13 +7,13 @@
       <div class="bg-white rounded-lg shadow-sm p-6 mb-6">
         <div class="flex items-center gap-4">
           <img
-            :src="selectedLawyer?.photo || '/src/assets/images/founder.jpg'"
+            :src="selectedLawyer?.photo || '/images/founder.jpg'"
             :alt="selectedLawyer?.name || 'Lawyer'"
             class="w-16 h-16 rounded-full object-cover"
           />
           <div>
-            <h1 class="text-2xl font-bold text-gray-900">{{ selectedLawyer?.name || 'Anas Nazarudin' }}</h1>
-            <p class="text-gray-600">{{ selectedLawyer?.specialty || 'Software Engineer' }}</p>
+            <h1 class="text-2xl font-bold text-gray-900">{{ selectedLawyer?.name || 'Muhammad Ainun Najib Surahman, S.H., LLM' }}</h1>
+            <p class="text-gray-600">{{ selectedLawyer?.specialty || 'Founder & Managing Partner' }}</p>
             <p class="text-sm text-gray-500">{{ selectedLawyer?.experience || '5' }} tahun pengalaman</p>
           </div>
         </div>
@@ -368,24 +368,108 @@ onMounted(() => {
   // Get lawyer data from route params or query
   const lawyerId = route.params.id || route.query.lawyerId;
   
-  // Mock lawyer data - in real app, fetch from API
+  // Mock lawyer data - sesuaikan dengan data di BookingSchedule.vue
   const lawyers = [
     {
       id: 1,
-      name: "Anas Nazarudin",
-      specialty: "Pengacara Pidana",
+      name: "Muhammad Ainun Najib Surahman, S.H., LLM",
+      specialty: "Founder & Managing Partner",
       experience: 5,
-      photo: "/src/assets/images/founder.jpg",
-      description: "Pengacara berpengalaman dengan latar belakang yang kuat dalam bidang hukum pidana, perdata, dan korporat. Berpengalaman menangani berbagai kasus hukum kompleks dan memberikan konsultasi profesional kepada klien dari berbagai kalangan."
+      rating: 97,
+      photo: "/images/founder.jpg",
+      description: "Pengacara berpengalaman dengan latar belakang yang kuat dalam bidang hukum pidana, perdata, dan korporat. Berpengalaman menangani berbagai kasus hukum kompleks dan memberikan konsultasi profesional kepada klien dari berbagai kalangan.",
+      available: true,
     },
     {
       id: 2,
-      name: "Andika Suyandra",
-      specialty: "Pengacara Korporat",
+      name: "Anggi Saputra, S.H., LLM.",
+      specialty: "Founder and Managing Partner",
       experience: 4,
-      photo: "/src/assets/images/cofounder.jpg",
-      description: "Spesialis hukum korporat dengan pengalaman dalam merger, akuisisi, dan kepatuhan perusahaan."
-    }
+      rating: 94,
+      photo: "/images/cofounder.jpg",
+      description: "Spesialis hukum korporat dengan pengalaman dalam merger, akuisisi, dan kepatuhan perusahaan.",
+      available: true,
+    },
+    {
+      id: 3,
+      name: "Wahyudi, S.H., M.H. Kes",
+      specialty: "Senior Partner",
+      experience: 4,
+      rating: 94,
+      photo: "/images/2.jpg",
+      description: "Ahli hukum kesehatan dengan pengalaman menangani kasus-kasus medis dan malpraktik.",
+      available: true,
+    },
+    {
+      id: 4,
+      name: "Dewi Indri Lestari, S.H.",
+      specialty: "Partner",
+      experience: 4,
+      rating: 94,
+      photo: "/images/4.jpg",
+      description: "Spesialis hukum keluarga dan perdata dengan pendekatan yang komprehensif.",
+      available: true,
+    },
+    {
+      id: 5,
+      name: "Durohim Amnan, S.H., M.H.",
+      specialty: "Partner",
+      experience: 6,
+      rating: 96,
+      photo: "/images/3.jpg",
+      description: "Senior partner dengan keahlian khusus dalam hukum bisnis dan investasi.",
+      available: true,
+    },
+    {
+      id: 6,
+      name: "Lalu Hartawan Mandala Putra, S.H., C.me.",
+      specialty: "Partner",
+      experience: 3,
+      rating: 92,
+      photo: "/images/6.jpg",
+      description: "Ahli hukum media dan teknologi informasi dengan sertifikasi internasional.",
+      available: true,
+    },
+    {
+      id: 7,
+      name: "Raspan Afandi, S.H.",
+      specialty: "Employment Law Attorney",
+      experience: 3,
+      rating: 92,
+      photo: "/images/7.jpg",
+      description: "Spesialis hukum ketenagakerjaan dengan fokus pada hubungan industrial.",
+      available: true,
+    },
+    {
+      id: 8,
+      name: "Gilang Wahyudin, S.H",
+      specialty: "Employment Law Attorney",
+      experience: 3,
+      rating: 92,
+      photo: "/images/8.jpg",
+      description: "Pengacara ketenagakerjaan dengan pengalaman menangani sengketa buruh.",
+      available: true,
+    },
+    {
+      id: 9,
+      name: "Rezky Panji Perdana Martua Hasibuan",
+      specialty: "Partner",
+      experience: 3,
+      rating: 92,
+      photo: "/images/partner5.jpg",
+      description: "Partner muda dengan keahlian dalam hukum startup dan teknologi.",
+      available: true,
+    },
+    {
+      id: 10,
+      name: "Yusuf Agung Purnama, S.H., M.H.",
+      specialty: "Partner",
+      experience: 3,
+      rating: 92,
+      photo: "/images/Partner1.jpg",
+      description: "Master hukum dengan spesialisasi dalam hukum tata negara dan administrasi.",
+      available: true,
+    },
   ];
   
   selectedLawyer.value = lawyers.find(l => l.id === Number(lawyerId)) || lawyers[0];

@@ -30,12 +30,12 @@
             >{{ $t('header.home') }}</router-link
             >
           </li>
-          <li>
+          <!-- <li>
             <router-link
               to="/pricing"
               >{{ $t('header.pricing') }}</router-link
             >
-          </li>
+          </li> -->
           <li>
             <router-link
               to="/booking"
@@ -43,11 +43,9 @@
             >
           </li>
           <li>
-            <a
-              href="#"
-              @click.prevent="scrollTo('reviews')"
-              >{{ $t('header.reviews') }}</a
-            >
+            <router-link
+              to="/article"
+              >{{ $t('header.articles') }}</router-link>
           </li>
         </ul>
 
@@ -130,18 +128,6 @@
           @click="closeMobileMenu"
           >{{ $t("header.home") }}</router-link
         >
-        <a
-          href="#"
-          class="block hover:underline"
-          @click.prevent="scrollTo('about')"
-          >{{ $t("header.about") }}</a
-        >
-        <a
-          href="#"
-          class="block hover:underline"
-          @click.prevent="scrollTo('services')"
-          >{{ $t("header.services") }}</a
-        >
         <router-link
           to="/pricing"
           class="block hover:underline"
@@ -156,18 +142,12 @@
         >
           {{ $t("header.bookConsultation") }}
         </router-link>
-        <a
-          href="#"
+        <router-link
+          to="/article"
           class="block hover:underline"
-          @click.prevent="scrollTo('reviews')"
-          >{{ $t("header.reviews") }}</a
-        >
-        <a
-          href="#"
-          class="block hover:underline"
-          @click.prevent="scrollTo('footer')"
-          >{{ $t("header.contact") }}</a
-        >
+          @click="closeMobileMenu"
+          >{{ $t("header.articles") }}
+          </router-link>
         <div class="pt-2">
           <LanguageSwitcher />
         </div>
@@ -311,8 +291,3 @@ export default {
   },
 };
 </script>
-
-<style scoped>
-/* Add any additional styles if needed */
-</style>
-/* Add any additional styles if needed */
