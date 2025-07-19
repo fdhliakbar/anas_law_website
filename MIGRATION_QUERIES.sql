@@ -10,6 +10,83 @@
 --
 -- ===================================================================
 
+-- SKENARIO UTAMA: FRESH INSTALL/SETUP DARI AWAL (RECOMMENDED)
+-- ===================================================================
+-- Jalankan bagian ini jika ingin setup database dari awal (kosong)
+-- Pastikan sudah membuat database: CREATE DATABASE db_mpti;
+-- Pastikan sudah mengaktifkan extension UUID: CREATE EXTENSION IF NOT EXISTS "pgcrypto";
+
+-- DROP TABLES (jika ingin reset total, hati-hati!)
+DROP TABLE IF EXISTS bookings CASCADE;
+DROP TABLE IF EXISTS artikel CASCADE;
+DROP TABLE IF EXISTS lawyers CASCADE;
+DROP TABLE IF EXISTS users CASCADE;
+
+-- USERS TABLE
+CREATE TABLE IF NOT EXISTS users (
+    users_id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+    name VARCHAR(255) NOT NULL,
+    email VARCHAR(255) UNIQUE NOT NULL,
+    password VARCHAR(255) NOT NULL,
+    role VARCHAR(20) NOT NULL DEFAULT 'users',
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+-- LAWYERS TABLE
+CREATE TABLE IF NOT EXISTS lawyers (
+    lawyer_id SERIAL PRIMARY KEY,
+    name VARCHAR(255) NOT NULL,
+    specialty VARCHAR(255) NOT NULL,
+    experience INTEGER NOT NULL DEFAULT 0,
+    rating INTEGER NOT NULL DEFAULT 0,
+    fee INTEGER NOT NULL,
+    old_fee INTEGER,
+    photo VARCHAR(255),
+    available BOOLEAN DEFAULT TRUE,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+-- ARTIKEL TABLE
+CREATE TABLE IF NOT EXISTS artikel (
+    artikel_id SERIAL PRIMARY KEY,
+    judul VARCHAR(255) NOT NULL,
+    deskripsi TEXT NOT NULL,
+    content_artikel TEXT NOT NULL,
+    gambar VARCHAR(255) NOT NULL,
+    link_artikel VARCHAR(255),
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+-- BOOKINGS TABLE
+CREATE TABLE IF NOT EXISTS bookings (
+    booking_id SERIAL PRIMARY KEY,
+    lawyer_id INTEGER NOT NULL REFERENCES lawyers(lawyer_id) ON DELETE CASCADE,
+    user_id UUID REFERENCES users(users_id) ON DELETE CASCADE,
+    nama_pembooking VARCHAR(255) NOT NULL,
+    email VARCHAR(255) NOT NULL,
+    nomor_handphone VARCHAR(20) NOT NULL,
+    tanggal_booking DATE NOT NULL,
+    waktu_booking TIME WITHOUT TIME ZONE NOT NULL,
+    pesan TEXT,
+    status VARCHAR(50) NOT NULL DEFAULT 'pending',
+    reschedule_reason TEXT,
+    reschedule_date DATE,
+    reschedule_time TIME WITHOUT TIME ZONE,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+-- INDEXES
+CREATE INDEX IF NOT EXISTS idx_bookings_lawyer_id ON bookings(lawyer_id);
+CREATE INDEX IF NOT EXISTS idx_bookings_status ON bookings(status);
+CREATE INDEX IF NOT EXISTS idx_bookings_tanggal ON bookings(tanggal_booking);
+CREATE INDEX IF NOT EXISTS idx_bookings_user_id ON bookings(user_id);
+
+-- ===================================================================
+-- END FRESH INSTALL BLOCK
+-- ===================================================================
+
 -- SKENARIO 1: SETUP DARI SCRATCH (RECOMMENDED)
 -- ===================================================================
 
