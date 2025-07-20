@@ -2,17 +2,26 @@
   <header class="sticky top-0 z-50">
     <!-- Navbar -->
     <nav
+<<<<<<< HEAD
       :class=" [
         'fixed w-full z-50 transition-all duration-300 ease-in-out bg-[#2C323B]',
         scrolled
           
+=======
+      :class="[
+        'fixed w-full z-50 transition-all duration-300 ease-in-out bg-slate-300 py-2',
+>>>>>>> 0cd1d6d16123eb354a5b776bd68e96c7b6759af9
       ]"
     >
       <div
         class="max-w-screen-xl mx-auto flex items-center justify-between p-3"
       >
         <!-- Logo -->
+<<<<<<< HEAD
         <router-link to="/" class="flex items-center flex-shrink-0">
+=======
+        <router-link to="/" class="flex items-center fle">
+>>>>>>> 0cd1d6d16123eb354a5b776bd68e96c7b6759af9
           <img
             src="../assets/images/logo.png"
             alt="Logo"
@@ -20,7 +29,10 @@
             width="100%"
           />
         </router-link>
+<<<<<<< HEAD
 
+=======
+>>>>>>> 0cd1d6d16123eb354a5b776bd68e96c7b6759af9
         <!-- Navigation Links (centered) -->
         <ul
           class="hidden lg:flex items-center space-x-8 text-base text-[#f5f5f5] font-medium mx-8"
@@ -47,10 +59,27 @@
           <li>
             <a
               href="#"
+<<<<<<< HEAD
               class="hover:text-indigo-500"
               @click.prevent="scrollTo('reviews')"
               >{{ $t('header.reviews') }}</a
+=======
+              class="hover:text-[#B49F2B]"
+              @click.prevent="scrollTo('services')"
+              >Services</a
             >
+          </li>
+          <li>
+            <a
+              href="#"
+              class="hover:text-[#B49F2B]"
+              @click.prevent="scrollTo('footer')"
+              >Contact</a
+>>>>>>> 0cd1d6d16123eb354a5b776bd68e96c7b6759af9
+            >
+          </li>
+          <li>
+             <router-link to="/pricing" class="hover:text-[#B49F2B]">Pricing</router-link>
           </li>
         </ul>
 
@@ -61,8 +90,14 @@
             to="/login"
             class="bg-gray-100 font-semibold px-4 py-2 rounded-lg text-sm text-[#121212]"
           >
+<<<<<<< HEAD
             {{ $t('header.login') }}
           </router-link>
+=======
+            Login
+          </router-link>
+          
+>>>>>>> 0cd1d6d16123eb354a5b776bd68e96c7b6759af9
         </div>
 
         <!-- Mobile Menu Button -->
@@ -78,6 +113,7 @@
         v-if="isMobileMenuOpen"
         class="lg:hidden bg-white text-gray-900 p-4 space-y-4"
       >
+<<<<<<< HEAD
         <router-link
           to="/"
           class="block hover:underline"
@@ -125,6 +161,14 @@
         <div class="pt-2">
           <LanguageSwitcher />
         </div>
+=======
+        <a href="#" class="block hover:underline">Home</a>
+        <a href="#" class="block hover:underline">About</a>
+        <a href="#" class="block hover:underline">Services</a>
+        <a href="#" class="block hover:underline">Our Team</a>
+        <a href="#" class="block hover:underline">Pricing</a>
+        <a href="#" class="block hover:underline">Contact</a>
+>>>>>>> 0cd1d6d16123eb354a5b776bd68e96c7b6759af9
         <router-link
           to="/login"
           class="block border border-gray-300 px-6 py-2 rounded-lg hover:bg-gray-100 transition mt-2"

@@ -6,11 +6,12 @@
   <Services />
   <LegalConsultingTrends />
   <Schedule />
-  <Testimonials />
-  <LegalAdvisorComparison />
+  <!-- <LegalAdvisorComparison /> -->
   <OurTeamSlider />
+  <!-- <ConsultationForm /> -->
   <TaxConsultation/>
   <Blog />
+  <Testimonials />
   <Footer />
   
   <!-- �️ Professional Anas Law AI ChatBot -->
@@ -29,6 +30,7 @@ import Services from "../components/Services.vue";
 import Testimonials from "../components/Testimonials.vue";
 import TaxConsultation from "@/components/TaxConsultation.vue";
 import OurTeamSlider from "@/components/OurTeamSlider.vue";
+import ConsultationForm from "@/components/ConsultationForm.vue";
 import Blog from "../components/Blog.vue";
 import Footer from "../components/Footer.vue";
 import LegalAdvisorComparison from "@/components/LegalAdvisorComparison.vue";
