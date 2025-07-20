@@ -513,11 +513,20 @@ const loadLawyers = async () => {
       }
       
       lawyers.value = filteredLawyers;
-      pagination.value = {
-        ...pagination.value,
-        total: data.pagination.total,
-        hasMore: data.pagination.hasMore
-      };
+      if (data.pagination) {
+        pagination.value = {
+          ...pagination.value,
+          total: data.pagination.total,
+          hasMore: data.pagination.hasMore
+        };
+      } else {
+        // fallback jika pagination tidak ada
+        pagination.value = {
+          ...pagination.value,
+          total: filteredLawyers.length,
+          hasMore: false
+        };
+      }
     } else {
       console.error('Failed to load lawyers:', data.message);
     }
@@ -609,9 +618,10 @@ const saveLawyer = async () => {
       const response = await fetch(`http://localhost:3000/api/lawyers/post-lawyers`, {
         method: 'POST',
         headers: {
-          'Authorization': `Bearer ${token}`
+          'Authorization': `Bearer ${token}`,
+          'Content-Type': 'application/json'
         },
-        body: formData
+        body: JSON.stringify(form.value)
       });
 
       const data = await response.json();
@@ -708,13 +718,16 @@ const loadNextPage = () => {
 };
 
 const getPhotoUrl = (photo) => {
-  if (!photo) return '/src/assets/images/default-lawyer.svg';
+  if (!photo) return '/images/feris.jpg';
   if (photo.startsWith('http')) return photo;
-  return `http://localhost:3000${photo}`;
+  if (photo.startsWith('/src/assets/images/')) {
+    return photo.replace('/src/assets/images/', '/images/');
+  }
+  return photo;
 };
 
 const handleImageError = (event) => {
-  event.target.src = '/src/assets/images/default-lawyer.svg';
+  event.target.src = '/src/assets/images/feris.jpg';
 };
 
 const formatCurrency = (amount) => {
