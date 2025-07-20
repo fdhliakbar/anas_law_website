@@ -1,6 +1,6 @@
 // filepath: [post-users.js](http://_vscodecontentref_/0)
 import { readBody } from "h3";
-import pool from "../../utils/db";
+import database from "../../utils/database.js";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 
@@ -51,10 +51,7 @@ export default defineEventHandler(async (event) => {
     }
 
     try {
-      const existingUser = await pool.query(
-        "SELECT users_id FROM users WHERE email = $1",
-        [email]
-      );
+      const existingUser = await database.checkEmailExists(email);
       if (existingUser.rows.length > 0) {
         return {
           statusCode: 409,
@@ -64,12 +61,7 @@ export default defineEventHandler(async (event) => {
 
       const hashedPassword = await bcrypt.hash(password, 10);
       const role = body.role === "admin" ? "admin" : "users";
-      const newUserResult = await pool.query(
-        `INSERT INTO users(name, email, password, role) 
-         VALUES($1, $2, $3, $4) 
-         RETURNING users_id, name, email, role`,
-        [name, email, hashedPassword, role]
-      );
+      const newUserResult = await database.createUser(name, email, hashedPassword, role);
 
       console.log("Insert result:", newUserResult.rows);
 
@@ -95,10 +87,7 @@ export default defineEventHandler(async (event) => {
       return { statusCode: 400, message: "Email dan password wajib diisi" };
     }
     try {
-      const userResult = await pool.query(
-        "SELECT users_id, name, email, password, role FROM users WHERE email = $1",
-        [email]
-      );
+      const userResult = await database.getUserByEmail(email);
       if (userResult.rows.length === 0) {
         return { statusCode: 401, message: "Email atau password salah" };
       }

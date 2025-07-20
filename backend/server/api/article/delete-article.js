@@ -1,4 +1,4 @@
-import pool from "../../utils/db.js";
+import database from "../../utils/database.js";
 
 export default defineEventHandler(async (event) => {
   try {
@@ -29,8 +29,7 @@ export default defineEventHandler(async (event) => {
     }
 
     // Cek apakah artikel ada sebelum menghapus
-    const checkQuery = 'SELECT artikel_id, judul FROM artikel WHERE artikel_id = $1';
-    const checkResult = await pool.query(checkQuery, [artikel_id]);
+    const checkResult = await database.getArticleById(artikel_id);
     
     if (checkResult.rows.length === 0) {
       throw createError({
@@ -41,9 +40,8 @@ export default defineEventHandler(async (event) => {
 
     const articleToDelete = checkResult.rows[0];
 
-    // Execute delete query
-    const deleteQuery = 'DELETE FROM artikel WHERE artikel_id = $1';
-    await pool.query(deleteQuery, [artikel_id]);
+    // Execute delete menggunakan database service
+    await database.deleteArticle(artikel_id);
 
     return {
       success: true,

@@ -1,4 +1,4 @@
-import pool from "../../utils/db.js";
+import database from "../../utils/database.js";
 
 export default defineEventHandler(async (event) => {
   try {
@@ -69,53 +69,31 @@ export default defineEventHandler(async (event) => {
       }
     }
 
-    // Query untuk insert artikel baru dengan timestamp
-    const query = `
-      INSERT INTO artikel (judul, link_artikel, content_artikel, created_at, updated_at)
-      VALUES ($1, $2, $3, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP)
-      RETURNING artikel_id, judul, link_artikel, content_artikel, created_at, updated_at
-    `;
+    // Simpan artikel baru menggunakan database service
+    const result = await database.createArticle(judul, link_artikel, content_artikel);
 
-    const values = [judul, link_artikel, content_artikel];
-
-    // Eksekusi query dalam transaksi
-    const client = await pool.connect();
-
-    try {
-      await client.query("BEGIN");
-
-      const result = await client.query(query, values);
-
-      if (result.rows.length === 0) {
-        throw createError({
-          statusCode: 500,
-          statusMessage: "Gagal menyimpan artikel",
-        });
-      }
-
-      await client.query("COMMIT");
-
-      const newArticle = result.rows[0];
-
-      // Return response sukses
-      return {
-        success: true,
-        message: "Artikel berhasil disimpan",
-        data: {
-          artikel_id: newArticle.artikel_id,
-          judul: newArticle.judul,
-          link_artikel: newArticle.link_artikel,
-          content_artikel: newArticle.content_artikel,
-          created_at: newArticle.created_at,
-          updated_at: newArticle.updated_at,
-        },
-      };
-    } catch (dbError) {
-      await client.query("ROLLBACK");
-      throw dbError;
-    } finally {
-      client.release();
+    if (result.rows.length === 0) {
+      throw createError({
+        statusCode: 500,
+        statusMessage: "Gagal menyimpan artikel",
+      });
     }
+
+    const newArticle = result.rows[0];
+
+    // Return response sukses
+    return {
+      success: true,
+      message: "Artikel berhasil disimpan",
+      data: {
+        artikel_id: newArticle.artikel_id,
+        judul: newArticle.judul,
+        link_artikel: newArticle.link_artikel,
+        content_artikel: newArticle.content_artikel,
+        created_at: newArticle.created_at || new Date().toISOString(),
+        updated_at: newArticle.updated_at || new Date().toISOString(),
+      },
+    };
   } catch (error) {
     console.error("Error posting article:", error);
 

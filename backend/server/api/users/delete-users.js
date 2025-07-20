@@ -1,6 +1,6 @@
 // file: server/api/users/delete-users.js
 
-import pool from "../../utils/db";
+import database from "../../utils/database.js";
 import jwt from "jsonwebtoken";
 
 export default defineEventHandler(async (event) => {
@@ -31,10 +31,13 @@ export default defineEventHandler(async (event) => {
 
   // --- LANGKAH 3: PROSES KE DATABASE ---
   try {
-    const result = await pool.query(
-      `DELETE FROM users WHERE users_id = $1 RETURNING name`,
-      [id_to_delete],
-    );
+    // Ambil nama user sebelum dihapus
+    const userInfo = await database.getUserById(id_to_delete);
+    if (userInfo.rows.length === 0) {
+      return { statusCode: 404, message: "Pengguna tidak ditemukan." };
+    }
+
+    const result = await database.deleteUser(id_to_delete);
 
     // Cek apakah ada baris yang terhapus
     if (result.rowCount === 0) {
@@ -44,7 +47,7 @@ export default defineEventHandler(async (event) => {
 
     return {
       statusCode: 200,
-      message: `Akun untuk pengguna '${result.rows[0].name}' berhasil dihapus.`,
+      message: `Akun untuk pengguna '${userInfo.rows[0].name}' berhasil dihapus.`,
     };
   } catch (error) {
     console.error("Delete user error:", error);

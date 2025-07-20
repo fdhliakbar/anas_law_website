@@ -1,4 +1,4 @@
-import pool from "../../utils/db.js";
+import database from "../../utils/database.js";
 
 export default defineEventHandler(async (event) => {
   try {
@@ -6,41 +6,27 @@ export default defineEventHandler(async (event) => {
     const query = getQuery(event);
     const { artikel_id, limit = 10, offset = 0 } = query;
 
-    let sqlQuery;
-    let values = [];
+    let result;
 
     if (artikel_id) {
       // Get artikel by ID
-      sqlQuery = `
-        SELECT artikel_id, judul, link_artikel, content_artikel
-        FROM artikel 
-        WHERE artikel_id = $1
-      `;
-      values = [artikel_id];
+      result = await database.getArticleById(artikel_id);
+      
+      if (result.rows.length === 0) {
+        throw createError({
+          statusCode: 404,
+          statusMessage: 'Artikel tidak ditemukan'
+        });
+      }
     } else {
       // Get all artikel with pagination
-      sqlQuery = `
-        SELECT artikel_id, judul, link_artikel, content_artikel
-        FROM artikel 
-        ORDER BY artikel_id DESC
-        LIMIT $1 OFFSET $2
-      `;
-      values = [parseInt(limit), parseInt(offset)];
+      result = await database.getArticles(parseInt(limit), parseInt(offset));
     }
 
-    const result = await pool.query(sqlQuery, values);
-
-    if (artikel_id && result.rows.length === 0) {
-      throw createError({
-        statusCode: 404,
-        statusMessage: 'Artikel tidak ditemukan'
-      });
-    }
-
-    // Get total count for pagination
+    // Get total count for pagination (hanya jika tidak mencari artikel spesifik)
     let totalCount = 0;
     if (!artikel_id) {
-      const countResult = await pool.query('SELECT COUNT(*) FROM artikel');
+      const countResult = await database.getArticleCount();
       totalCount = parseInt(countResult.rows[0].count);
     }
 

@@ -1,4 +1,4 @@
-import pool from "../../utils/db";
+import database from "../../utils/database.js";
 
 export default defineEventHandler(async (event) => {
   // Set CORS headers agar endpoint bisa diakses dari frontend
@@ -13,7 +13,7 @@ export default defineEventHandler(async (event) => {
     return "";
   }
 
-  // Ambil semua data user dari database
-  const res = await pool.query("SELECT * FROM users");
+  // Ambil semua data user dari database menggunakan database service
+  const res = await database.getUsers();
   return { users: res.rows };
 });

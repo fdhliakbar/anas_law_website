@@ -7,9 +7,11 @@
     "dev": "nuxt dev",
     "generate": "nuxt generate",
     "preview": "nuxt preview",
-    "postinstall": "nuxt prepare"
+    "postinstall": "nuxt prepare",
+    "test:db": "node ../test-database.js"
   },
   "dependencies": {
+    "@supabase/supabase-js": "^2.50.2",
     "bcrypt": "^6.0.0",
     "dotenv": "^16.5.0",
     "jsonwebtoken": "^9.0.2",
@@ -20,6 +22,7 @@
     "vue-router": "^4.5.1"
   },
   "devDependencies": {
-    "@types/pg": "^8.15.2"
+    "@types/pg": "^8.15.2",
+    "formidable": "^3.5.4"
   }
 }

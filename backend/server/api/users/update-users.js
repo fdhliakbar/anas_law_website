@@ -1,6 +1,6 @@
 // file: server/api/users/update-users.js
 
-import pool from "../../utils/db";
+import database from "../../utils/database.js";
 import jwt from "jsonwebtoken";
 import bcrypt from "bcrypt";
 
@@ -49,10 +49,7 @@ export default defineEventHandler(async (event) => {
   try {
     // Validasi email baru jika ada
     if (email) {
-      const emailCheck = await pool.query(
-        `SELECT users_id FROM users WHERE email = $1 AND users_id != $2`,
-        [email, id_to_update]
-      );
+      const emailCheck = await database.checkEmailExists(email, id_to_update);
       if (emailCheck.rows.length > 0) {
         return {
           statusCode: 409,
@@ -79,31 +76,12 @@ export default defineEventHandler(async (event) => {
       hashedPassword = await bcrypt.hash(password, 10);
     }
 
-    // Logika untuk membangun query update tetap sama
-    const fields = [];
-    const values = [];
-    let param_index = 1;
-
-    if (name) {
-      fields.push(`name = $${param_index++}`);
-      values.push(name);
-    }
-    if (email) {
-      fields.push(`email = $${param_index++}`);
-      values.push(email);
-    }
-    if (hashedPassword) {
-      fields.push(`password = $${param_index++}`);
-      values.push(hashedPassword);
-    }
-
-    values.push(id_to_update); // ID untuk klausa WHERE
-
-    const updateQuery = `UPDATE users SET ${fields.join(
-      ", "
-    )} WHERE users_id = $${param_index} RETURNING users_id, name, email, role`;
-
-    const result = await pool.query(updateQuery, values);
+    // Update user menggunakan database service
+    const result = await database.updateUser(id_to_update, {
+      name,
+      email,
+      password: hashedPassword
+    });
 
     return {
       statusCode: 200,
