@@ -53,6 +53,54 @@ const routes = [
     meta: { requiresAuth: true, requiresAdmin: true },
   },
   {
+    path: "/admin/booking-management",
+    name: "BookingManagement",
+    component: () => import("../views/admin/BookingManagement.vue"),
+    meta: { requiresAuth: true, requiresAdmin: true },
+    beforeEnter: (to, from, next) => {
+      const token = localStorage.getItem("token");
+      if (!token) {
+        next('/login');
+        return;
+      }
+      
+      try {
+        const payload = JSON.parse(atob(token.split('.')[1]));
+        if (payload.role === 'admin') {
+          next();
+        } else {
+          next('/'); // Redirect non-admin users
+        }
+      } catch (error) {
+        next('/login');
+      }
+    }
+  },
+  {
+    path: "/admin/lawyer-management",
+    name: "LawyerManagement",
+    component: () => import("../views/admin/LawyerManagement.vue"),
+    meta: { requiresAuth: true, requiresAdmin: true },
+    beforeEnter: (to, from, next) => {
+      const token = localStorage.getItem("token");
+      if (!token) {
+        next('/login');
+        return;
+      }
+      
+      try {
+        const payload = JSON.parse(atob(token.split('.')[1]));
+        if (payload.role === 'admin') {
+          next();
+        } else {
+          next('/'); // Redirect non-admin users
+        }
+      } catch (error) {
+        next('/login');
+      }
+    }
+  },
+  {
     path: "/booking/:lawyerId",
     name: "BookingForm",
     component: () => import("../views/BookingForm.vue"),

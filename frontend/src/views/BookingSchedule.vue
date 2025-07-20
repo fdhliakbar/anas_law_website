@@ -118,12 +118,7 @@
                   <span>{{ lawyer.rating }}% {{ $t('booking.successRate') }}</span>
                 </div>
               </div>
-              
               <div class="text-center">
-                <div class="mb-4">
-                  <span class="text-2xl font-bold text-black">${{ lawyer.fee?.toLocaleString() || 'N/A' }}</span>
-                  <span v-if="lawyer.old_fee" class="text-gray-500 line-through ml-2">${{ lawyer.old_fee.toLocaleString() }}</span>
-                </div>
                 <button
                   @click="goToBookingForm(lawyer.lawyer_id)"
                   class="w-full border border-black bg-black text-white py-3 px-6 rounded-lg font-semibold transition hover:bg-gray-800"
@@ -251,85 +246,94 @@ onMounted(() => {
   loadLawyers();
 });
 
-// Dummy data for lawyers
-const lawyers = [
-  {
-    id: 1,
-    name: "Anas Nazarudin",
-    specialty: "Criminal Defense Attorney",
-    experience: 5,
-    rating: 97,
-    fee: 25000,
-    oldFee: 28000,
-    photo: "../src/assets/images/founder.jpg",
-    available: true,
-  },
-  {
-    id: 2,
-    name: "Andika Suyandra",
-    specialty: "Corporate Law Attorney",
-    experience: 4,
-    rating: 94,
-    fee: 25000,
-    oldFee: 28000,
-    photo: "../src/assets/images/cofounder.jpg",
-    available: true,
-  },
-  {
-    id: 3,
-    name: "Rusdi Saputra",
-    specialty: "Family Law Attorney",
-    experience: 4,
-    rating: 94,
-    fee: 25000,
-    oldFee: 28000,
-    photo: "../src/assets/images/2.jpg",
-    available: true,
-  },
-  {
-    id: 4,
-    name: "Riko Saputra",
-    specialty: "Civil Rights Attorney",
-    experience: 4,
-    rating: 94,
-    fee: 25000,
-    oldFee: 28000,
-    photo: "../src/assets/images/4.jpg",
-    available: true,
-  },
-  {
-    id: 5,
-    name: "Ahmad Yusuf",
-    specialty: "Property Law Attorney",
-    experience: 6,
-    rating: 96,
-    fee: 28000,
-    oldFee: 32000,
-    photo: "../src/assets/images/cofounder.jpg",
-    available: true,
-  },
-  {
-    id: 6,
-    name: "Sari Indah",
-    specialty: "Employment Law Attorney",
-    experience: 3,
-    rating: 92,
-    fee: 22000,
-    oldFee: 25000,
-    photo: "../src/assets/images/cofounder.jpg",
-    available: true,
-  },
-];
+// Methods
+const loadLawyers = async (isLoadMore = false) => {
+  if (isLoadMore) {
+    loadingMore.value = true;
+  } else {
+    loading.value = true;
+    lawyers.value = [];
+    pagination.value.offset = 0;
+  }
+  
+  error.value = '';
 
-const search = ref("");
-const filteredLawyers = computed(() => {
-  if (!search.value) return lawyers;
-  return lawyers.filter(
-    (lawyer) =>
-      lawyer.name.toLowerCase().indexOf(search.value.toLowerCase()) !== -1 ||
-      lawyer.specialty.toLowerCase().indexOf(search.value.toLowerCase()) !== -1
-  );
-});
+  try {
+    const params = new URLSearchParams({
+      limit: pagination.value.limit.toString(),
+      offset: pagination.value.offset.toString(),
+    });
+
+    if (search.value.trim()) {
+      params.append('search', search.value.trim());
+    }
+
+    const response = await fetch(`http://localhost:3000/api/lawyers/get-lawyers?${params}`);
+    const data = await response.json();
+
+    if (response.ok) {
+      if (isLoadMore) {
+        lawyers.value = [...lawyers.value, ...data.lawyers];
+      } else {
+        lawyers.value = data.lawyers;
+      }
+      
+      pagination.value = {
+        ...data.pagination,
+        offset: pagination.value.offset + data.pagination.limit
+      };
+    } else {
+      error.value = data.message || 'Failed to load lawyers';
+    }
+  } catch (err) {
+    console.error('Error loading lawyers:', err);
+    error.value = 'Network error. Please try again.';
+  } finally {
+    loading.value = false;
+    loadingMore.value = false;
+  }
+};
+
+const loadMoreLawyers = (event?: MouseEvent) => {
+  loadLawyers(true);
+};
+
+const handleSearch = () => {
+  // Debounce search
+  clearTimeout(searchTimeout);
+  const searchTimeout = setTimeout(() => {
+    loadLawyers();
+  }, 500);
+};
+
+const getPhotoUrl = (photo: string) => {
+  if (!photo) return '/src/assets/images/default-lawyer.jpg';
+  
+  // If it's already a full URL, return as is
+  if (photo.startsWith('http') || photo.startsWith('/uploads/')) {
+    return photo;
+  }
+  
+  // If it's a relative path, convert to absolute
+  return photo.replace('../src/assets/', '/src/assets/');
+};
+
+const handleImageError = (event: Event) => {
+  const target = event.target as HTMLImageElement;
+  target.src = '/src/assets/images/default-lawyer.jpg';
+};
+
+const goToBookingForm = (lawyerId: number) => {
+  // Check if user is logged in
+  const token = localStorage.getItem('token');
+  if (!token) {
+    router.push(`/login?redirect=/booking/${lawyerId}`);
+    return;
+  }
+  
+  // Go to booking form
+  router.push(`/booking/${lawyerId}`);
+};
 
 // FAQ data
 const faqs = computed(() => {
