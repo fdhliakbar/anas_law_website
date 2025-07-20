@@ -38,7 +38,6 @@
             <h1 class="text-2xl font-bold text-gray-900">{{ selectedLawyer.name }}</h1>
             <p class="text-gray-600">{{ selectedLawyer.specialty }}</p>
             <p class="text-sm text-gray-500">{{ selectedLawyer.experience }} tahun pengalaman</p>
-            <p class="text-lg font-bold text-blue-600 mt-1">${{ selectedLawyer.fee?.toLocaleString() }}</p>
           </div>
         </div>
       </div>
