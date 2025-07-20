@@ -17,25 +17,22 @@ function goToBooking() {
         <h2
           class="font-bold text-4xl md:text-6xl text-black mb-8 leading-tight"
         >
-          How Our Legal Team Can<br />
-          Assist You
+          {{ $t('schedule.title') }}
         </h2>
         <p class="text-lg md:text-xl text-gray-800 mb-10 max-w-xl">
-          Learn about our personalized approach to every case. We provide expert
-          legal counsel, negotiate with insurance companies, and fight for your
-          rightful compensation
+          {{ $t('schedule.description') }}
         </p>
         <button
           class="bg-black text-white px-8 py-4 rounded-lg text-lg font-semibold hover:bg-gray-900 transition"
         >
-        <a href="https://wa.me/+6282179972653" target="_blank">Schedule now</a>
+          Schedule now
         </button>
       </div>
       <!-- Right: Video -->
       <div class="flex-1 flex justify-center">
         <img
           src="../assets/images/founder.jpg"
-          alt="Legal Team"
+          :alt="$t('schedule.altText')"
           class="rounded-3xl w-full max-w-xl object-cover"
         />
       </div>

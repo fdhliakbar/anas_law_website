@@ -11,15 +11,15 @@
         style="background: linear-gradient(135deg, #ffffff 0%, #f8fafc 100%);"
       >
         <!-- Header -->
-        <div class="bg-gradient-to-r from-green-600 to-teal-600 text-white p-6 flex justify-between items-center flex-shrink-0">
+        <div class="bg-gradient-to-r from-blue-600 to-cyan-600 text-white p-6 flex justify-between items-center flex-shrink-0">
           <div class="flex items-center space-x-3">
             <div class="w-12 h-12 bg-white/20 rounded-full flex items-center justify-center">
               <svg xmlns="http://www.w3.org/2000/svg" class="w-7 h-7" viewBox="0 0 24 24" fill="currentColor"><path d="M12.37,6.16a1,1,0,0,0-1.23.79l-1.48,6.07a1,1,0,0,0,.6,1.13,1,1,0,0,0,1.13-.6l1.48-6.07A1,1,0,0,0,12.37,6.16Z"/><path d="M19.14,4.24,12,1.06,4.86,4.24A2,2,0,0,0,3.5,6.15V11a9.17,9.17,0,0,0,8,9,1,1,0,0,0,.15,0,1,1,0,0,0,.15,0,9.17,9.17,0,0,0,8-9V6.15A2,2,0,0,0,19.14,4.24ZM12,18.5a7.17,7.17,0,0,1-6-7.5V6.8l6-2.9,6,2.9V11A7.17,7.17,0,0,1,12,18.5Z"/></svg>
             </div>
             <div>
               <h3 class="font-bold text-lg">Anas Law</h3>
-              <p class="text-green-100 text-sm flex items-center">
-                <span class="w-2.5 h-2.5 bg-green-300 rounded-full mr-2"></span>
+              <p class="text-blue-100 text-sm flex items-center">
+                <span class="w-2.5 h-2.5 bg-blue-300 rounded-full mr-2"></span>
                 Customer Service
               </p>
             </div>
@@ -35,7 +35,7 @@
         <div class="flex-1 p-4 overflow-y-auto space-y-4 bg-gray-50/30">
           <!-- Pesan Selamat Datang -->
           <div class="flex items-start space-x-3">
-            <div class="w-8 h-8 bg-green-600 rounded-full flex items-center justify-center text-white text-sm font-bold flex-shrink-0">
+            <div class="w-8 h-8 bg-blue-600 rounded-full flex items-center justify-center text-white text-sm font-bold flex-shrink-0">
               AL
             </div>
             <div class="bg-white rounded-2xl rounded-tl-md p-4 shadow-sm border max-w-xs">
@@ -55,7 +55,7 @@
           <!-- Pesan Dinamis -->
           <div v-for="(message, index) in chatMessages" :key="index" class="flex" :class="message.isUser ? 'justify-end' : 'justify-start'">
             <div v-if="!message.isUser" class="flex items-start space-x-3 max-w-sm">
-              <div class="w-8 h-8 bg-green-600 rounded-full flex items-center justify-center text-white text-sm font-bold flex-shrink-0">
+              <div class="w-8 h-8 bg-blue-600 rounded-full flex items-center justify-center text-white text-sm font-bold flex-shrink-0">
                 AL
               </div>
               <div class="bg-white rounded-2xl rounded-tl-md p-4 shadow-sm border">
@@ -64,16 +64,16 @@
               </div>
             </div>
             <div v-else class="max-w-sm">
-              <div class="bg-gradient-to-r from-green-600 to-teal-500 text-white rounded-2xl rounded-tr-md p-4 shadow-sm">
+              <div class="bg-gradient-to-r from-blue-600 to-cyan-500 text-white rounded-2xl rounded-tr-md p-4 shadow-sm">
                 <div class="text-sm leading-relaxed">{{ message.text }}</div>
-                <div class="text-xs text-green-100 mt-2">{{ message.time }}</div>
+                <div class="text-xs text-blue-100 mt-2">{{ message.time }}</div>
               </div>
             </div>
           </div>
           
           <!-- Indikator Mengetik -->
           <div v-if="isTyping" class="flex items-start space-x-3">
-            <div class="w-8 h-8 bg-green-600 rounded-full flex items-center justify-center text-white text-sm font-bold flex-shrink-0">
+            <div class="w-8 h-8 bg-blue-600 rounded-full flex items-center justify-center text-white text-sm font-bold flex-shrink-0">
               AL
             </div>
             <div class="bg-white rounded-2xl rounded-tl-md p-4 shadow-sm border max-w-xs">
@@ -89,22 +89,22 @@
         <!-- Area Input -->
         <div class="p-4 bg-white border-t border-gray-200 flex-shrink-0">
           <div class="flex flex-wrap gap-2 mb-3">
-            <button @click="sendQuickMessage('Saya ingin konsultasi gratis')" class="px-3 py-2 bg-green-50 text-green-800 rounded-lg text-xs hover:bg-green-100 transition-colors font-medium border border-green-200">
+            <button @click="sendQuickMessage('Saya ingin konsultasi gratis')" class="px-3 py-2 bg-blue-50 text-blue-800 rounded-lg text-xs hover:bg-blue-100 transition-colors font-medium border border-blue-200">
               📞 Konsultasi Gratis
             </button>
             <button @click="sendQuickMessage('Apa saja layanan hukum yang tersedia?')" class="px-3 py-2 bg-blue-50 text-blue-800 rounded-lg text-xs hover:bg-blue-100 transition-colors font-medium border border-blue-200">
               ⚖️ Layanan Hukum
             </button>
-            <button @click="sendQuickMessage('Berapa biaya konsultasi?')" class="px-3 py-2 bg-teal-50 text-teal-800 rounded-lg text-xs hover:bg-teal-100 transition-colors font-medium border border-teal-200">
+            <button @click="sendQuickMessage('Berapa biaya konsultasi?')" class="px-3 py-2 bg-cyan-50 text-cyan-800 rounded-lg text-xs hover:bg-cyan-100 transition-colors font-medium border border-cyan-200">
               💰 Biaya
             </button>
           </div>
           
           <div class="flex items-center space-x-3">
             <div class="flex-1 relative">
-              <input v-model="currentMessage" @keyup.enter="sendMessage" type="text" placeholder="Ketik pertanyaan Anda..." class="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-green-500 focus:border-transparent outline-none text-sm" :disabled="isTyping">
+              <input v-model="currentMessage" @keyup.enter="sendMessage" type="text" placeholder="Ketik pertanyaan Anda..." class="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none text-sm" :disabled="isTyping">
             </div>
-            <button @click="sendMessage" :disabled="!currentMessage.trim() || isTyping" class="w-12 h-12 bg-green-600 hover:bg-green-700 disabled:bg-gray-300 text-white rounded-xl flex items-center justify-center transition-colors">
+            <button @click="sendMessage" :disabled="!currentMessage.trim() || isTyping" class="w-12 h-12 bg-blue-600 hover:bg-blue-700 disabled:bg-gray-300 text-white rounded-xl flex items-center justify-center transition-colors">
               <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8"></path>
               </svg>
@@ -128,7 +128,7 @@
         
         <button
           @click="toggleChat"
-          class="w-16 h-16 bg-gradient-to-br from-green-600 to-teal-600 hover:from-green-700 hover:to-teal-700 text-white rounded-full shadow-xl hover:shadow-2xl transform hover:scale-105 transition-all duration-300 flex items-center justify-center group"
+          class="w-16 h-16 bg-gradient-to-br from-blue-600 to-cyan-600 hover:from-blue-700 hover:to-cyan-700 text-white rounded-full shadow-xl hover:shadow-2xl transform hover:scale-105 transition-all duration-300 flex items-center justify-center group"
           :class="{ 'animate-pulse': isTyping && !isOpen }"
         >
           <!-- Ikon berubah berdasarkan status `isOpen` -->
@@ -140,14 +140,14 @@
             </svg>
         </button>
         
-        <div class="absolute bottom-0 right-0 w-5 h-5 rounded-full border-2 border-white" :class="hasApiKey ? 'bg-green-500' : 'bg-red-500'"></div>
+        <div class="absolute bottom-0 right-0 w-5 h-5 rounded-full border-2 border-white" :class="hasApiKey ? 'bg-blue-500' : 'bg-sky-500'"></div>
       </div>
     </div>
   </div>
 </template>
 
 <script setup>
-import { ref, computed } from 'vue'
+import { ref, computed, onMounted } from 'vue'
 
 // State Management
 const isOpen = ref(false)
@@ -160,12 +160,33 @@ const chatMessages = ref([])
 // Cek ketersediaan API Key
 const hasApiKey = computed(() => {
   try {
-    const token = import.meta.env.VITE_OPENROUTER_API_KEY
-    return !!(token && 
-              token !== 'your_openrouter_api_key_here' && 
-              token.startsWith('sk-or-v1-') && 
-              token.length > 30)
+    const openrouterToken = import.meta.env.VITE_OPENROUTER_API_KEY
+    const geminiToken = import.meta.env.VITE_GEMINI_API_KEY
+    const isDebug = import.meta.env.VITE_CHATBOT_DEBUG === 'true'
+    
+    if (isDebug) {
+      console.log('🔍 API Key Check:')
+      console.log('- OpenRouter:', openrouterToken ? `${openrouterToken.substring(0, 20)}...` : 'NOT SET')
+      console.log('- Gemini:', geminiToken ? `${geminiToken.substring(0, 20)}...` : 'NOT SET')
+    }
+    
+    const hasOpenRouter = !!(openrouterToken && 
+                            openrouterToken !== 'your_openrouter_api_key_here' && 
+                            openrouterToken.startsWith('sk-or-v1-'))
+    
+    const hasGemini = !!(geminiToken && 
+                        geminiToken !== 'your_gemini_api_key_here' && 
+                        geminiToken.length > 20)
+    
+    if (isDebug) {
+      console.log('- OpenRouter Valid:', hasOpenRouter)
+      console.log('- Gemini Valid:', hasGemini)
+      console.log('- Any API Available:', hasOpenRouter || hasGemini)
+    }
+    
+    return hasOpenRouter || hasGemini
   } catch (error) {
+    console.error('❌ Error checking API keys:', error)
     return false
   }
 })
@@ -223,7 +244,7 @@ const sendQuickMessage = async (message) => {
   await processMessage(message)
 }
 
-// Proses pesan (AI atau fallback)
+// Proses pesan dengan multiple AI providers
 const processMessage = async (message) => {
   isTyping.value = true
   
@@ -231,8 +252,8 @@ const processMessage = async (message) => {
     let response
     
     if (hasApiKey.value) {
-      // Try AI response
-      response = await getAIResponse(message)
+      // Try AI response with fallback chain
+      response = await getAIResponseWithFallback(message)
     } else {
       // Use smart fallback
       response = generateSmartResponse(message)
@@ -251,187 +272,192 @@ const processMessage = async (message) => {
     
   } catch (error) {
     setTimeout(() => {
-      addMessage('Maaf, saya sedang mengalami kendala teknis. Silakan hubungi kami langsung di +62 8xx-xxxx-xxxx untuk bantuan segera.', false)
+      addMessage('Maaf, saya sedang mengalami kendala teknis. Silakan hubungi kami langsung di +62 813-9487-9411 untuk bantuan segera.', false)
       isTyping.value = false
     }, 1000)
   }
 }
 
-// Panggil AI
-const getAIResponse = async (message) => {
-  try {
-    const response = await fetch('https://openrouter.ai/api/v1/chat/completions', {
-      method: 'POST',
-      headers: {
-        'Authorization': `Bearer ${import.meta.env.VITE_OPENROUTER_API_KEY}`,
-        'Content-Type': 'application/json',
-        'HTTP-Referer': 'https://anaslaw.com',
-        'X-Title': 'Anas Law Customer Service'
-      },
-      body: JSON.stringify({
-        model: 'meta-llama/llama-3.1-8b-instruct:free',
-        messages: [
-          {
-            role: 'system',
-            content: `Anda adalah customer service profesional dari Anas Law, firma hukum terpercaya di Indonesia. Berikan jawaban yang profesional, informatif, dan membantu. Fokus pada:
+// AI Response dengan multiple providers (OpenRouter -> Gemini -> Fallback)
+const getAIResponseWithFallback = async (message) => {
+  console.log('🤖 Trying AI providers...')
+  
+  // Try OpenRouter first (if available)
+  if (import.meta.env.VITE_OPENROUTER_API_KEY && 
+      import.meta.env.VITE_OPENROUTER_API_KEY !== 'your_openrouter_api_key_here' &&
+      import.meta.env.VITE_OPENROUTER_API_KEY.startsWith('sk-or-v1-')) {
+    try {
+      console.log('🔄 Trying OpenRouter...')
+      const response = await getOpenRouterResponse(message)
+      if (response) {
+        console.log('✅ OpenRouter success!')
+        return response
+      }
+    } catch (error) {
+      console.log('❌ OpenRouter failed:', error.message)
+    }
+  }
+  
+  // Try Gemini as backup (if available)
+  if (import.meta.env.VITE_GEMINI_API_KEY && 
+      import.meta.env.VITE_GEMINI_API_KEY !== 'your_gemini_api_key_here' &&
+      import.meta.env.VITE_GEMINI_API_KEY.length > 20) {
+    try {
+      console.log('🔄 Trying Gemini...')
+      const response = await getGeminiResponse(message)
+      if (response) {
+        console.log('✅ Gemini success!')
+        return response
+      }
+    } catch (error) {
+      console.log('❌ Gemini failed:', error.message)
+    }
+  }
+  
+  // If all AI providers fail, use smart fallback
+  console.log('🛡️ Using smart fallback response')
+  return generateSmartResponse(message)
+}
 
+// OpenRouter API
+const getOpenRouterResponse = async (message) => {
+  const response = await fetch('https://openrouter.ai/api/v1/chat/completions', {
+    method: 'POST',
+    headers: {
+      'Authorization': `Bearer ${import.meta.env.VITE_OPENROUTER_API_KEY}`,
+      'Content-Type': 'application/json',
+      'HTTP-Referer': 'https://anaslaw.com',
+      'X-Title': 'Anas Law Customer Service'
+    },
+    body: JSON.stringify({
+      model: 'google/gemma-2-9b-it:free',
+      messages: [
+        {
+          role: 'system',
+          content: `Anda adalah customer service profesional dari Anas Law, firma hukum terpercaya di Indonesia. 
+
+PENTING: Jawab pertanyaan sesuai dengan konteks yang tepat. Jika ditanya tentang topik di luar layanan hukum, berikan jawaban yang benar lalu arahkan ke layanan kami.
+
+Informasi Anas Law:
 - Layanan hukum: Pidana, Perdata, Keluarga, Bisnis
 - Konsultasi gratis 30 menit untuk klien baru
 - Biaya konsultasi: Rp 500.000/jam setelah sesi gratis
 - Jam operasional: Senin-Jumat 09:00-17:00
-- Kontak: WhatsApp dan telepon tersedia
+- Kontak: WhatsApp +62 813-9487-9411
 
-Jawab dengan ramah, professional, dan jangan sebutkan bahwa Anda adalah AI.`
-          },
-          {
-            role: 'user',
-            content: message
-          }
-        ],
-        max_tokens: 200,
-        temperature: 0.7
-      })
+Jawab dengan ramah, professional dalam bahasa Indonesia, maksimal 150 kata. Jangan sebutkan bahwa Anda adalah AI.`
+        },
+        {
+          role: 'user',
+          content: message
+        }
+      ],
+      max_tokens: 200,
+      temperature: 0.7
     })
-    
-    if (response.ok) {
-      const data = await response.json()
-      return data.choices[0]?.message?.content || generateSmartResponse(message)
-    } else {
-      throw new Error('AI service unavailable')
-    }
-  } catch (error) {
-    return generateSmartResponse(message)
+  })
+  
+  if (response.ok) {
+    const data = await response.json()
+    return data.choices[0]?.message?.content
   }
+  throw new Error(`OpenRouter API failed with status: ${response.status}`)
 }
 
-// Respons fallback
+// Gemini API
+const getGeminiResponse = async (message) => {
+  const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${import.meta.env.VITE_GEMINI_API_KEY}`, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({
+      contents: [{
+        parts: [{
+          text: `Anda adalah customer service profesional dari Anas Law, firma hukum terpercaya di Indonesia. 
+
+PENTING: Jawab pertanyaan dengan benar dan akurat. Jika ditanya tentang hal di luar layanan hukum, berikan jawaban yang tepat terlebih dahulu, kemudian arahkan ke layanan kami.
+
+Informasi Anas Law:
+- Layanan: Hukum Pidana, Perdata, Keluarga, Bisnis
+- Konsultasi gratis 30 menit untuk klien baru
+- Biaya: Rp 500.000/jam setelah sesi gratis
+- Jam operasional: Senin-Jumat 09:00-17:00
+- Kontak: WhatsApp +62 813-9487-9411
+
+Pertanyaan: ${message}
+
+Instruksi: Jawab dengan akurat, ramah, professional dalam bahasa Indonesia, maksimal 150 kata. Jangan sebutkan bahwa Anda adalah AI.`
+        }]
+      }],
+      generationConfig: {
+        maxOutputTokens: 200,
+        temperature: 0.7
+      }
+    })
+  })
+  
+  if (response.ok) {
+    const data = await response.json()
+    return data.candidates[0]?.content?.parts[0]?.text
+  }
+  throw new Error(`Gemini API failed with status: ${response.status}`)
+}
+
+// Smart fallback response generator
 const generateSmartResponse = (message) => {
-  const lowerMessage = message.toLowerCase()
+  const msg = message.toLowerCase()
   
-  if (lowerMessage.includes('konsultasi') || lowerMessage.includes('gratis')) {
-    return `Terima kasih atas minat Anda! 
-
-Kami menyediakan konsultasi gratis 30 menit untuk klien baru. Konsultasi ini mencakup:
-
-• Evaluasi awal kasus Anda
-• Penjelasan opsi hukum yang tersedia  
-• Estimasi biaya penanganan
-• Strategi terbaik untuk kasus Anda
-
-Untuk booking konsultasi gratis, silakan hubungi:
-📞 +62 8xx-xxxx-xxxx
-💬 WhatsApp tersedia
-⏰ Senin-Jumat: 09:00-17:00
-
-Apakah ada yang ingin Anda tanyakan tentang layanan kami?`
+  // General knowledge questions with accurate answers + redirect to services
+  if (msg.includes('facebook') || msg.includes('zuckerberg')) {
+    return 'Mark Zuckerberg adalah pendiri Facebook yang didirikan pada tahun 2004.\n\nApakah Anda memerlukan bantuan hukum terkait teknologi, media sosial, atau hak kekayaan intelektual? Kami menyediakan konsultasi gratis 30 menit!'
   }
   
-  if (lowerMessage.includes('layanan') || lowerMessage.includes('hukum')) {
-    return `Anas Law menyediakan layanan hukum lengkap:
-
-🚔 **Hukum Pidana**
-Pembelaan kasus kriminal, narkoba, korupsi, KDRT
-
-📄 **Hukum Perdata** Sengketa kontrak, properti, wanprestasi, ganti rugi
-
-👨‍👩‍👧‍👦 **Hukum Keluarga**
-Perceraian, hak asuh anak, pembagian harta, warisan
-
-🏢 **Hukum Bisnis**
-Pendirian PT, kontrak bisnis, merger & akuisisi
-
-Dengan pengalaman 15+ tahun, kami siap membantu kasus Anda. Mau konsultasi gratis dulu?`
+  if (msg.includes('presiden pertama') || msg.includes('soekarno')) {
+    return 'Ir. Soekarno adalah Presiden pertama Republik Indonesia (1945-1967).\n\nBtw, apakah Anda memerlukan bantuan hukum? Tim Anas Law siap membantu dengan konsultasi gratis 30 menit!'
   }
   
-  if (lowerMessage.includes('biaya') || lowerMessage.includes('tarif') || lowerMessage.includes('harga')) {
-    return `Struktur biaya Anas Law transparan dan kompetitif:
-
-🆓 **Konsultasi Awal: GRATIS 30 menit**
-• Evaluasi kasus
-• Penjelasan opsi hukum
-• Estimasi biaya
-
-💼 **Konsultasi Lanjutan: Rp 500.000/jam**
-• Konsultasi mendalam
-• Persiapan dokumen
-• Strategi hukum
-
-⚖️ **Penanganan Kasus**
-Biaya disesuaikan dengan kompleksitas kasus. Estimasi akan diberikan setelah evaluasi awal.
-
-📋 **Layanan Dokumen**
-Mulai dari Rp 250.000 untuk dokumen standar.
-
-Ingin memanfaatkan konsultasi gratis dulu?`
+  // Legal-related responses
+  if (msg.includes('gratis') || msg.includes('free') || msg.includes('konsultasi')) {
+    return 'Ya! Kami menyediakan konsultasi gratis 30 menit untuk klien baru. Setelah itu Rp 500.000/jam. Hubungi kami di WhatsApp +62 813-9487-9411 untuk jadwalkan konsultasi Anda!'
   }
   
-  if (lowerMessage.includes('booking') || lowerMessage.includes('janji') || lowerMessage.includes('appointment')) {
-    return `Mudah booking konsultasi dengan Anas Law:
-
-📱 **Online Booking**
-1. Klik tombol "Book Consultation" di website
-2. Pilih tanggal & waktu yang tersedia
-3. Isi form detail kasus
-4. Konfirmasi via WhatsApp
-
-📞 **Telepon Langsung**
-+62 8xx-xxxx-xxxx (jam operasional)
-
-💬 **WhatsApp**
-Tersedia 24/7 untuk booking dan pertanyaan
-
-⏰ **Jadwal Tersedia**
-• Senin-Jumat: 09:00-17:00
-• Sabtu: 09:00-13:00 (khusus appointment)
-
-Mau saya bantu booking sekarang?`
+  if (msg.includes('biaya') || msg.includes('tarif') || msg.includes('harga')) {
+    return 'Biaya konsultasi kami:\n\n• 30 menit pertama: GRATIS untuk klien baru\n• Selanjutnya: Rp 500.000/jam\n• Jam kerja: Senin-Jumat 09:00-17:00\n\nHubungi kami di +62 813-9487-9411!'
   }
   
-  if (lowerMessage.includes('kontak') || lowerMessage.includes('alamat') || lowerMessage.includes('lokasi')) {
-    return `Kontak Anas Law:
-
-📍 **Alamat Kantor**
-[Alamat lengkap kantor Anas Law]
-Jakarta, Indonesia
-
-📞 **Telepon**
-+62 8xx-xxxx-xxxx
-
-💬 **WhatsApp**
-+62 8xx-xxxx-xxxx (24/7)
-
-📧 **Email**
-info@anaslaw.com
-
-🌐 **Website**
-www.anaslaw.com
-
-⏰ **Jam Operasional**
-Senin-Jumat: 09:00-17:00
-Sabtu: 09:00-13:00 (appointment only)
-
-Ada yang bisa kami bantu hari ini?`
+  if (msg.includes('layanan') || msg.includes('service') || msg.includes('bantuan hukum')) {
+    return 'Layanan hukum Anas Law:\n\n⚖️ Hukum Pidana\n📋 Hukum Perdata\n👨‍👩‍👧‍👦 Hukum Keluarga\n🏢 Hukum Bisnis\n\nKonsultasi gratis 30 menit! WhatsApp: +62 813-9487-9411'
+  }
+  
+  if (msg.includes('jam') || msg.includes('buka') || msg.includes('operasional')) {
+    return 'Jam operasional Anas Law:\n📅 Senin - Jumat: 09:00 - 17:00\n📞 Emergency konsultasi bisa via WhatsApp: +62 813-9487-9411\n\nSilakan hubungi kami!'
   }
   
   // Default professional response
-  return `Terima kasih atas pertanyaan Anda.
-
-Untuk memberikan jawaban yang tepat dan sesuai dengan kebutuhan hukum Anda, saya merekomendasikan untuk konsultasi langsung dengan tim lawyer kami.
-
-🆓 **Konsultasi gratis 30 menit tersedia!**
-
-Silakan hubungi:
-📞 +62 8xx-xxxx-xxxx  
-💬 WhatsApp: tersedia 24/7
-🌐 Website: anaslaw.com
-
-Tim kami siap membantu dengan pertanyaan hukum Anda secara professional dan confidential.
-
-Ada yang bisa saya bantu lagi?`
+  return 'Terima kasih atas pertanyaan Anda. Untuk mendapatkan jawaban yang lebih detail dan akurat, silakan hubungi tim legal kami:\n\n📞 WhatsApp: +62 813-9487-9411\n🆓 Konsultasi gratis 30 menit untuk klien baru\n⏰ Senin-Jumat 09:00-17:00\n\nTim Anas Law siap membantu!'
 }
 
-// Lifecycle
-console.log('🏛️ Anas Law Customer Service loaded!')
+// Panggil AI (keep existing method name for compatibility)
+const getAIResponse = getOpenRouterResponse
+
+// Lifecycle and Debug
+onMounted(() => {
+  console.log('🏛️ Anas Law Customer Service loaded!')
+  
+  // Debug info
+  setTimeout(() => {
+    const isDebug = import.meta.env.VITE_CHATBOT_DEBUG === 'true'
+    if (isDebug) {
+      console.log('🤖 Chatbot Debug Info:')
+      console.log('- Environment:', import.meta.env.MODE)
+      console.log('- API Available:', hasApiKey.value)
+      console.log('- All Env Vars:', Object.keys(import.meta.env).filter(key => key.startsWith('VITE_')))
+    }
+    
+    console.log(`💡 Chatbot Status: ${hasApiKey.value ? '✅ AI Ready' : '⚠️ Using Fallback Only'}`)
+  }, 1000)
+})
 </script>
 
 <style scoped>

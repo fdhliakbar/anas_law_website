@@ -11,17 +11,17 @@
           class="rounded-2xl w-full h-40 object-cover"
         />
         <img
-          src="/src/assets/images/consultant_banner.jpg"
+          src="/src/assets/images/lawfirm-01.jpg"
           alt="Meeting"
           class="rounded-2xl w-full h-40 object-cover"
         />
         <img
-          src="/src/assets/images/consultant_banner.jpg"
+          src="/src/assets/images/lawfirm-02.jpg"
           alt="Agreement"
           class="rounded-2xl w-full h-40 object-cover"
         />
         <img
-          src="/src/assets/images/consultant_banner.jpg"
+          src="/src/assets/images/lawfirm-03.jpg"
           alt="Teamwork"
           class="rounded-2xl w-full h-40 object-cover"
         />
@@ -29,35 +29,31 @@
       <!-- Content -->
       <div class="flex-1">
         <h2 class="text-4xl font-bold mb-4 text-gray-900">
-          Legal Consulting Market Trends: What You Should Know
+          {{ $t('legalTrends.title') }}
         </h2>
         <p class="mb-6 text-gray-700">
-          Our commitment is to provide expert legal consulting tailored to your
-          business and personal needs. We deliver strategic advice, risk
-          management, and compliance solutions for clients seeking trusted legal
-          guidance. Discover how our services set a new standard in legal
-          consulting and client representation.
+          {{ $t('legalTrends.description') }}
         </p>
         <div class="grid grid-cols-1 sm:grid-cols-3 gap-6">
           <div>
-            <p class="text-3xl font-bold text-[#B49F2B]">75%</p>
-            <p class="font-semibold text-gray-800 mt-1">of businesses</p>
+            <p class="text-3xl font-bold text-[#B49F2B]">{{ $t('legalTrends.stats.compliance.percentage') }}</p>
+            <p class="font-semibold text-gray-800 mt-1">{{ $t('legalTrends.stats.compliance.title') }}</p>
             <p class="text-gray-500 text-sm">
-              seek legal consulting for regulatory compliance
+              {{ $t('legalTrends.stats.compliance.description') }}
             </p>
           </div>
           <div>
-            <p class="text-3xl font-bold text-[#B49F2B]">60%</p>
-            <p class="font-semibold text-gray-800 mt-1">of legal issues</p>
+            <p class="text-3xl font-bold text-[#B49F2B]">{{ $t('legalTrends.stats.resolution.percentage') }}</p>
+            <p class="font-semibold text-gray-800 mt-1">{{ $t('legalTrends.stats.resolution.title') }}</p>
             <p class="text-gray-500 text-sm">
-              are resolved faster with professional consultants
+              {{ $t('legalTrends.stats.resolution.description') }}
             </p>
           </div>
           <div>
-            <p class="text-3xl font-bold text-[#B49F2B]">$2M+</p>
-            <p class="font-semibold text-gray-800 mt-1">saved annually</p>
+            <p class="text-3xl font-bold text-[#B49F2B]">{{ $t('legalTrends.stats.savings.percentage') }}</p>
+            <p class="font-semibold text-gray-800 mt-1">{{ $t('legalTrends.stats.savings.title') }}</p>
             <p class="text-gray-500 text-sm">
-              by organizations using legal consulting services
+              {{ $t('legalTrends.stats.savings.description') }}
             </p>
           </div>
         </div>

@@ -6,10 +6,11 @@
   <Services />
   <LegalConsultingTrends />
   <Schedule />
-  <!-- <LegalAdvisorComparison /> -->
+  <Testimonials />
+  <LegalAdvisorComparison />
   <OurTeamSlider />
-  <!-- <ConsultationForm /> -->
   <TaxConsultation/>
+  <OurTeamSlider />
   <Blog />
   <Testimonials />
   <Footer />
@@ -33,7 +34,6 @@ import OurTeamSlider from "@/components/OurTeamSlider.vue";
 import ConsultationForm from "@/components/ConsultationForm.vue";
 import Blog from "../components/Blog.vue";
 import Footer from "../components/Footer.vue";
-import LegalAdvisorComparison from "@/components/LegalAdvisorComparison.vue";
 import SimpleChatBot from "@/components/SimpleChatBot.vue";
 
 const router = useRouter();

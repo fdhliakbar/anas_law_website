@@ -98,6 +98,7 @@
                 <span class="text-gray-500 line-through ml-2">${{ lawyer.oldFee.toLocaleString() }}</span>
               </div>
               <button
+                @click="goToBookingForm(lawyer.id)"
                 class="w-full border border-black bg-black text-white py-3 px-6 rounded-lg font-semibold transition hover:bg-gray-800"
               >
                 {{ $t('booking.bookConsultation') }}
@@ -200,8 +201,8 @@ const activeFaq = ref<number | null>(null);
 const lawyers = [
   {
     id: 1,
-    name: "Anas Nazarudin",
-    specialty: "Criminal Defense Attorney",
+    name: "Muhammad Ainun Najib Surahman, S.H., LLM",
+    specialty: "Founder & Managing Partner",
     experience: 5,
     rating: 97,
     fee: 25000,
@@ -211,8 +212,8 @@ const lawyers = [
   },
   {
     id: 2,
-    name: "Andi Saputra",
-    specialty: "Corporate Law Attorney",
+    name: "Anggi Saputra, S.H., LLM.",
+    specialty: "Founder and Managing Partner",
     experience: 4,
     rating: 94,
     fee: 25000,
@@ -222,8 +223,8 @@ const lawyers = [
   },
   {
     id: 3,
-    name: "Rusdi Saputra",
-    specialty: "Family Law Attorney",
+    name: "Wahyudi, S.H., M.H. Kes",
+    specialty: "Senior Partner",
     experience: 4,
     rating: 94,
     fee: 25000,
@@ -233,8 +234,8 @@ const lawyers = [
   },
   {
     id: 4,
-    name: "Riko Saputra",
-    specialty: "Civil Rights Attorney",
+    name: "Dewi Indri Lestari, S.H.",
+    specialty: "Partner",
     experience: 4,
     rating: 94,
     fee: 25000,
@@ -244,24 +245,68 @@ const lawyers = [
   },
   {
     id: 5,
-    name: "Ahmad Yusuf",
-    specialty: "Property Law Attorney",
+    name: "Durohim Amnan, S.H., M.H.",
+    specialty: "Partner",
     experience: 6,
     rating: 96,
     fee: 28000,
     oldFee: 32000,
-    photo: "../src/assets/images/cofounder.jpg",
+    photo: "../src/assets/images/3.jpg",
     available: true,
   },
   {
     id: 6,
-    name: "Sari Indah",
+    name: "Lalu Hartawan Mandala Putra, S.H., C.me.",
+    specialty: "Partner",
+    experience: 3,
+    rating: 92,
+    fee: 22000,
+    oldFee: 25000,
+    photo: "../src/assets/images/6.jpg",
+    available: true,
+  },
+  {
+    id: 7,
+    name: "Raspan Afandi, S.H.",
     specialty: "Employment Law Attorney",
     experience: 3,
     rating: 92,
     fee: 22000,
     oldFee: 25000,
-    photo: "../src/assets/images/cofounder.jpg",
+    photo: "../src/assets/images/7.jpg",
+    available: true,
+  },
+  {
+    id: 8,
+    name: "Gilang Wahyudin, S.H",
+    specialty: "Employment Law Attorney",
+    experience: 3,
+    rating: 92,
+    fee: 22000,
+    oldFee: 25000,
+    photo: "../src/assets/images/8.jpg",
+    available: true,
+  },
+  {
+    id: 9,
+    name: "Rezky Panji Perdana Martua Hasibuan",
+    specialty: "Partner",
+    experience: 3,
+    rating: 92,
+    fee: 22000,
+    oldFee: 25000,
+    photo: "../src/assets/images/partner5.jpg",
+    available: true,
+  },
+  {
+    id: 10,
+    name: "Yusuf Agung Purnama, S.H., M.H.",
+    specialty: "Partner",
+    experience: 3,
+    rating: 92,
+    fee: 22000,
+    oldFee: 25000,
+    photo: "../src/assets/images/Partner1.jpg",
     available: true,
   },
 ];
@@ -319,6 +364,10 @@ const goToChat = () => {
 
 const goToPricing = () => {
   router.push('/pricing');
+};
+
+const goToBookingForm = (lawyerId: number) => {
+  router.push({ name: 'BookingForm', params: { id: lawyerId } });
 };
 </script>
 
