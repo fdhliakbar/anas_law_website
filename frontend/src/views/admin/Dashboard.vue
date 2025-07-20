@@ -3,423 +3,566 @@
     <!-- Sidebar -->
     <aside class="w-64 bg-white shadow-lg flex flex-col">
       <div class="h-20 flex items-center justify-center border-b">
-        <span class="text-2xl font-bold text-indigo-700">Veritas</span>
+        <span class="text-2xl font-bold text-indigo-700">Anas Law Firm</span>
       </div>
       <nav class="flex-1 px-4 py-6">
         <ul class="space-y-2">
           <li>
-            <a
-              href="#"
+            <router-link
+              to="/admin/dashboard"
               class="flex items-center px-4 py-2 bg-indigo-100 text-indigo-700 rounded-lg font-semibold"
             >
               <span class="material-icons mr-3">dashboard</span>
               Dashboard
-            </a>
+            </router-link>
           </li>
           <li>
-            <a
-              href="#"
+            <router-link
+              to="/admin/article-management"
               class="flex items-center px-4 py-2 text-gray-700 hover:bg-gray-100 rounded-lg"
+            >
+              <span class="material-icons mr-3">article</span>
+              Article Management
+            </router-link>
+          </li>
+          <li>
+            <button
+              @click="openUserModal"
+              class="flex items-center px-4 py-2 text-gray-700 hover:bg-gray-100 rounded-lg w-full text-left"
             >
               <span class="material-icons mr-3">people</span>
-              Users
-            </a>
+              User Management
+            </button>
+          </li>
+          <li>
+            <button
+              @click="openProfileModal"
+              class="flex items-center px-4 py-2 text-gray-700 hover:bg-gray-100 rounded-lg w-full text-left"
+            >
+              <span class="material-icons mr-3">account_circle</span>
+              Profile Settings
+            </button>
           </li>
           <li>
             <a
-              href="#"
+              href="/"
               class="flex items-center px-4 py-2 text-gray-700 hover:bg-gray-100 rounded-lg"
             >
-              <span class="material-icons mr-3">account_balance</span>
-              Accounts
-            </a>
-          </li>
-          <li>
-            <a
-              href="#"
-              class="flex items-center px-4 py-2 text-gray-700 hover:bg-gray-100 rounded-lg"
-            >
-              <span class="material-icons mr-3">bar_chart</span>
-              Statistics
+              <span class="material-icons mr-3">home</span>
+              Back to Website
             </a>
           </li>
         </ul>
         <div class="mt-10">
-          <h4 class="text-xs text-gray-400 uppercase mb-2">Teams</h4>
+          <h4 class="text-xs text-gray-400 uppercase mb-2">Account</h4>
           <ul class="space-y-1">
             <li>
-              <span class="flex items-center text-sm text-gray-700">
-                <span class="w-2 h-2 bg-orange-400 rounded-full mr-2"></span>
-                Marketing
-              </span>
-            </li>
-            <li>
-              <span class="flex items-center text-sm text-gray-700">
-                <span class="w-2 h-2 bg-blue-400 rounded-full mr-2"></span>
-                Development
-              </span>
+              <button
+                @click="logout"
+                class="flex items-center px-4 py-2 text-red-600 hover:bg-red-50 rounded-lg w-full text-left"
+              >
+                <span class="material-icons mr-3">logout</span>
+                Logout
+              </button>
             </li>
           </ul>
         </div>
       </nav>
-      <div class="px-4 py-4 border-t">
-        <button
-          class="w-full flex items-center px-4 py-2 text-gray-700 hover:bg-gray-100 rounded-lg"
-        >
-          <span class="material-icons mr-3">logout</span>
-          Log Out
-        </button>
-      </div>
     </aside>
+    
     <!-- Main Content -->
     <div class="flex-1 flex flex-col">
       <!-- Header -->
-      <header
-        class="flex items-center justify-between bg-white px-8 py-6 shadow"
-      >
-        <h1 class="text-2xl font-bold text-gray-800">Analytics</h1>
+      <header class="flex items-center justify-between bg-white px-8 py-6 shadow">
+        <div>
+          <h1 class="text-2xl font-bold text-gray-800">Admin Dashboard</h1>
+          <p class="text-gray-600">Welcome back, {{ currentUser.name || 'Admin' }}</p>
+        </div>
         <div class="flex items-center space-x-4">
-          <button
-            class="bg-indigo-100 text-indigo-700 px-4 py-2 rounded-lg font-semibold"
-          >
-            Full Statistics
-          </button>
-          <button
-            class="bg-gray-100 text-gray-700 px-4 py-2 rounded-lg font-semibold"
-          >
-            Results Summary
-          </button>
-          <img
-            src="https://randomuser.me/api/portraits/women/44.jpg"
-            alt="Profile"
-            class="w-10 h-10 rounded-full border-2 border-indigo-500"
-          />
+          <span class="text-sm text-gray-500">{{ currentDate }}</span>
+          <div class="w-10 h-10 bg-indigo-500 rounded-full flex items-center justify-center text-white font-semibold">
+            {{ currentUser.name ? currentUser.name.charAt(0).toUpperCase() : 'A' }}
+          </div>
         </div>
       </header>
-      <!-- Analytics Cards -->
+      
+      <!-- Dashboard Content -->
       <main class="flex-1 p-8 overflow-y-auto">
+        <!-- Stats Cards -->
         <div class="grid grid-cols-1 md:grid-cols-4 gap-6 mb-8">
-          <div class="bg-white rounded-xl shadow p-6 flex flex-col">
-            <div class="flex items-center justify-between mb-2">
-              <span class="font-semibold text-gray-700">Team Payments</span>
-              <span class="material-icons text-gray-400">notifications</span>
-            </div>
-            <div class="flex items-center mt-2">
-              <div class="flex -space-x-2">
-                <img
-                  class="w-8 h-8 rounded-full border-2 border-white"
-                  src="https://randomuser.me/api/portraits/men/32.jpg"
-                />
-                <img
-                  class="w-8 h-8 rounded-full border-2 border-white"
-                  src="https://randomuser.me/api/portraits/women/33.jpg"
-                />
-                <img
-                  class="w-8 h-8 rounded-full border-2 border-white"
-                  src="https://randomuser.me/api/portraits/men/34.jpg"
-                />
-                <span
-                  class="w-8 h-8 flex items-center justify-center bg-indigo-100 text-indigo-700 rounded-full border-2 border-white text-xs font-bold"
-                  >+25</span
-                >
-              </div>
-            </div>
-          </div>
-          <div class="bg-white rounded-xl shadow p-6 flex flex-col">
-            <span class="font-semibold text-gray-700 mb-2">Savings</span>
-            <div class="flex items-end justify-between mt-2">
-              <span class="text-2xl font-bold text-indigo-700">$5,839</span>
-              <span class="text-xs text-red-500">-11% last week</span>
-            </div>
-            <div class="mt-4">
-              <div class="w-full h-12 bg-indigo-50 rounded"></div>
-            </div>
-          </div>
-          <div class="bg-white rounded-xl shadow p-6 flex flex-col">
-            <span class="font-semibold text-gray-700 mb-2"
-              >Income statistics</span
-            >
-            <div class="flex items-end justify-between mt-2">
-              <span class="text-xs text-green-500">+8%</span>
-            </div>
-            <div class="flex items-end space-x-1 mt-4 h-16">
-              <div class="w-4 bg-indigo-100 rounded-t h-6"></div>
-              <div class="w-4 bg-indigo-200 rounded-t h-10"></div>
-              <div class="w-4 bg-indigo-300 rounded-t h-12"></div>
-              <div class="w-4 bg-orange-400 rounded-t h-16"></div>
-            </div>
-            <div class="flex justify-between text-xs text-gray-400 mt-2">
-              <span>15%</span>
-              <span>21%</span>
-              <span>32%</span>
-            </div>
-          </div>
-          <div
-            class="bg-teal-400 rounded-xl shadow p-6 flex flex-col text-white justify-between"
-          >
-            <div>
-              <div class="text-lg font-bold">$95.9</div>
-              <div class="text-xs">Per Month</div>
-            </div>
-            <div class="mt-4">
-              <div class="text-sm">Choose Best Plan For You!</div>
-            </div>
-            <div class="flex mt-4 space-x-2">
-              <button
-                class="bg-white text-teal-500 px-3 py-1 rounded font-semibold"
-              >
-                Details
-              </button>
-              <button class="bg-teal-600 px-3 py-1 rounded font-semibold">
-                Upgrade
-              </button>
-            </div>
-          </div>
-
-          <!-- Mobile menu button -->
-          <div class="md:hidden">
-            <button
-              @click="toggleMobileMenu"
-              class="inline-flex items-center justify-center p-2 rounded-md text-indigo-200 hover:text-white hover:bg-indigo-500 focus:outline-none focus:ring-2 focus:ring-white"
-            >
-              <svg
-                class="h-6 w-6"
-                stroke="currentColor"
-                fill="none"
-                viewBox="0 0 24 24"
-              >
-                <path
-                  v-if="!showMobileMenu"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="2"
-                  d="M4 6h16M4 12h16M4 18h16"
-                />
-                <path
-                  v-else
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="2"
-                  d="M6 18L18 6M6 6l12 12"
-                />
-              </svg>
-            </button>
-          </div>
-        </div>
-        <!-- Recently Payments -->
-        <div class="mb-8">
-          <h2 class="text-lg font-bold mb-4">Recently Payments</h2>
-          <div class="flex space-x-4">
-            <div
-              class="bg-white rounded-xl shadow p-4 flex-1 flex items-center justify-between"
-            >
-              <div class="flex items-center">
-                <img
-                  class="w-10 h-10 rounded-full mr-4"
-                  src="https://randomuser.me/api/portraits/women/44.jpg"
-                />
-                <div>
-                  <div class="font-semibold">Emma Ryan Jr.</div>
-                  <div class="text-xs text-gray-400">Mar 9, 2023</div>
-                </div>
-              </div>
-            </div>
-
-            <div class="bg-white overflow-hidden shadow rounded-lg">
-              <div class="px-4 py-5 sm:p-6">
-                <div class="flex items-center">
-                  <div class="flex-shrink-0 bg-green-500 rounded-md p-3">
-                    <svg
-                      class="h-6 w-6 text-white"
-                      xmlns="http://www.w3.org/2000/svg"
-                      fill="none"
-                      viewBox="0 0 24 24"
-                      stroke="currentColor"
-                    >
-                      <path
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                        stroke-width="2"
-                        d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"
-                      />
-                    </svg>
-                  </div>
-                  <div class="ml-5 w-0 flex-1">
-                    <dl>
-                      <dt class="text-sm font-medium text-gray-500 truncate">
-                        Registered Users
-                      </dt>
-                      <dd>
-                        <div class="text-lg font-medium text-gray-900">
-                          {{ stats.totalUsers }}
-                        </div>
-                      </dd>
-                    </dl>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <div class="bg-white overflow-hidden shadow rounded-lg">
-              <div class="px-4 py-5 sm:p-6">
-                <div class="flex items-center">
-                  <div class="flex-shrink-0 bg-blue-500 rounded-md p-3">
-                    <svg
-                      class="h-6 w-6 text-white"
-                      xmlns="http://www.w3.org/2000/svg"
-                      fill="none"
-                      viewBox="0 0 24 24"
-                      stroke="currentColor"
-                    >
-                      <path
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                        stroke-width="2"
-                        d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"
-                      />
-                      <path
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                        stroke-width="2"
-                        d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"
-                      />
-                    </svg>
-                  </div>
-                  <div class="ml-5 w-0 flex-1">
-                    <dl>
-                      <dt class="text-sm font-medium text-gray-500 truncate">
-                        Total Views
-                      </dt>
-                      <dd>
-                        <div class="text-lg font-medium text-gray-900">
-                          {{ stats.totalViews }}
-                        </div>
-                      </dd>
-                    </dl>
-                  </div>
-                </div>
-              </div>
+          <div class="bg-white rounded-xl shadow p-6">
+            <div class="flex items-center justify-between">
               <div>
-                <span class="font-bold text-gray-700">$3,937</span>
-                <span
-                  class="ml-2 bg-yellow-100 text-yellow-700 px-2 py-1 rounded text-xs"
-                  >Pending</span
-                >
+                <p class="text-sm text-gray-600 mb-1">Total Articles</p>
+                <p class="text-2xl font-bold text-gray-800">{{ stats.totalArticles }}</p>
+              </div>
+              <div class="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center">
+                <span class="material-icons text-blue-600">article</span>
+              </div>
+            </div>
+          </div>
+          
+          <div class="bg-white rounded-xl shadow p-6">
+            <div class="flex items-center justify-between">
+              <div>
+                <p class="text-sm text-gray-600 mb-1">Total Users</p>
+                <p class="text-2xl font-bold text-gray-800">{{ stats.totalUsers }}</p>
+              </div>
+              <div class="w-12 h-12 bg-green-100 rounded-lg flex items-center justify-center">
+                <span class="material-icons text-green-600">people</span>
+              </div>
+            </div>
+          </div>
+          
+          <div class="bg-white rounded-xl shadow p-6">
+            <div class="flex items-center justify-between">
+              <div>
+                <p class="text-sm text-gray-600 mb-1">This Month</p>
+                <p class="text-2xl font-bold text-gray-800">{{ stats.thisMonth }}</p>
+              </div>
+              <div class="w-12 h-12 bg-purple-100 rounded-lg flex items-center justify-center">
+                <span class="material-icons text-purple-600">trending_up</span>
+              </div>
+            </div>
+          </div>
+          
+          <div class="bg-white rounded-xl shadow p-6">
+            <div class="flex items-center justify-between">
+              <div>
+                <p class="text-sm text-gray-600 mb-1">Active Today</p>
+                <p class="text-2xl font-bold text-gray-800">{{ stats.activeToday }}</p>
+              </div>
+              <div class="w-12 h-12 bg-orange-100 rounded-lg flex items-center justify-center">
+                <span class="material-icons text-orange-600">today</span>
               </div>
             </div>
           </div>
         </div>
-        <!-- Transactions Table -->
-        <div class="bg-white rounded-xl shadow p-6">
-          <div class="flex items-center justify-between mb-4">
-            <h2 class="text-lg font-bold">Transactions</h2>
-            <input
-              type="text"
-              placeholder="Search"
-              class="border rounded px-3 py-1 text-sm"
-            />
+
+        <!-- Recent Articles -->
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+          <div class="bg-white rounded-xl shadow p-6">
+            <div class="flex items-center justify-between mb-4">
+              <h2 class="text-lg font-semibold text-gray-800">Recent Articles</h2>
+              <router-link 
+                to="/admin/article-management" 
+                class="text-indigo-600 hover:text-indigo-700 text-sm font-medium"
+              >
+                View All
+              </router-link>
+            </div>
+            <div class="space-y-3">
+              <div v-if="recentArticles.length === 0" class="text-gray-500 text-center py-4">
+                No articles yet
+              </div>
+              <div 
+                v-for="article in recentArticles" 
+                :key="article.artikel_id"
+                class="flex items-center justify-between p-3 bg-gray-50 rounded-lg"
+              >
+                <div>
+                  <h3 class="font-medium text-gray-800">{{ article.judul }}</h3>
+                  <p class="text-sm text-gray-600">{{ formatDate(article.created_at) }}</p>
+                </div>
+                <span class="text-green-600 text-sm">Published</span>
+              </div>
+            </div>
           </div>
-          <div class="overflow-x-auto">
-            <table class="min-w-full text-sm">
-              <thead>
-                <tr class="text-left text-gray-500">
-                  <th class="py-2 px-4">Receiver</th>
-                  <th class="py-2 px-4">Type</th>
-                  <th class="py-2 px-4">Status</th>
-                  <th class="py-2 px-4">Date</th>
-                  <th class="py-2 px-4">Amount</th>
-                  <th class="py-2 px-4"></th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td class="py-2 px-4 flex items-center">
-                    <img
-                      class="w-8 h-8 rounded-full mr-2"
-                      src="https://randomuser.me/api/portraits/women/44.jpg"
-                    />
-                    Emma Ryan Jr.
-                  </td>
-                  <td class="py-2 px-4">Salary</td>
-                  <td class="py-2 px-4">
-                    <span
-                      class="bg-yellow-100 text-yellow-700 px-2 py-1 rounded text-xs"
-                      >Pending</span
-                    >
-                  </td>
-                  <td class="py-2 px-4">Feb 19th, 2023</td>
-                  <td class="py-2 px-4 font-bold">$3,892</td>
-                  <td class="py-2 px-4">
-                    <button
-                      class="bg-indigo-100 text-indigo-700 px-3 py-1 rounded"
-                    >
-                      Details
-                    </button>
-                  </td>
-                </tr>
-                <tr>
-                  <td class="py-2 px-4 flex items-center">
-                    <img
-                      class="w-8 h-8 rounded-full mr-2"
-                      src="https://randomuser.me/api/portraits/men/46.jpg"
-                    />
-                    Adrian Daren
-                  </td>
-                  <td class="py-2 px-4">Bonus</td>
-                  <td class="py-2 px-4">
-                    <span
-                      class="bg-green-100 text-green-700 px-2 py-1 rounded text-xs"
-                      >Done</span
-                    >
-                  </td>
-                  <td class="py-2 px-4">Feb 18th, 2023</td>
-                  <td class="py-2 px-4 font-bold">$1,073</td>
-                  <td class="py-2 px-4">
-                    <button
-                      class="bg-indigo-100 text-indigo-700 px-3 py-1 rounded"
-                    >
-                      Details
-                    </button>
-                  </td>
-                </tr>
-                <tr>
-                  <td class="py-2 px-4 flex items-center">
-                    <img
-                      class="w-8 h-8 rounded-full mr-2"
-                      src="https://randomuser.me/api/portraits/women/47.jpg"
-                    />
-                    Roxanne Hills
-                  </td>
-                  <td class="py-2 px-4">Salary</td>
-                  <td class="py-2 px-4">
-                    <span
-                      class="bg-green-100 text-green-700 px-2 py-1 rounded text-xs"
-                      >Done</span
-                    >
-                  </td>
-                  <td class="py-2 px-4">Apr 16th, 2023</td>
-                  <td class="py-2 px-4 font-bold">$2,790</td>
-                  <td class="py-2 px-4">
-                    <button
-                      class="bg-indigo-100 text-indigo-700 px-3 py-1 rounded"
-                    >
-                      Details
-                    </button>
-                  </td>
-                </tr>
-              </tbody>
-            </table>
+
+          <!-- Quick Actions -->
+          <div class="bg-white rounded-xl shadow p-6">
+            <h2 class="text-lg font-semibold text-gray-800 mb-4">Quick Actions</h2>
+            <div class="space-y-3">
+              <router-link 
+                to="/admin/article-management"
+                class="w-full flex items-center justify-between p-4 bg-indigo-50 hover:bg-indigo-100 rounded-lg transition-colors"
+              >
+                <div class="flex items-center">
+                  <span class="material-icons text-indigo-600 mr-3">add_circle</span>
+                  <span class="font-medium text-indigo-700">Create New Article</span>
+                </div>
+                <span class="material-icons text-indigo-600">arrow_forward</span>
+              </router-link>
+              
+              <a 
+                href="/"
+                class="w-full flex items-center justify-between p-4 bg-green-50 hover:bg-green-100 rounded-lg transition-colors"
+              >
+                <div class="flex items-center">
+                  <span class="material-icons text-green-600 mr-3">visibility</span>
+                  <span class="font-medium text-green-700">View Website</span>
+                </div>
+                <span class="material-icons text-green-600">arrow_forward</span>
+              </a>
+              
+              <button 
+                @click="refreshStats"
+                class="w-full flex items-center justify-between p-4 bg-orange-50 hover:bg-orange-100 rounded-lg transition-colors"
+              >
+                <div class="flex items-center">
+                  <span class="material-icons text-orange-600 mr-3">refresh</span>
+                  <span class="font-medium text-orange-700">Refresh Data</span>
+                </div>
+                <span class="material-icons text-orange-600">arrow_forward</span>
+              </button>
+            </div>
           </div>
         </div>
       </main>
     </div>
+
+    <!-- Profile Settings Modal -->
+    <div v-if="showProfileModal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+      <div class="bg-white rounded-lg p-6 w-full max-w-md">
+        <div class="flex justify-between items-center mb-4">
+          <h3 class="text-lg font-semibold">Profile Settings</h3>
+          <button @click="showProfileModal = false" class="text-gray-400 hover:text-gray-600">
+            <span class="material-icons">close</span>
+          </button>
+        </div>
+        <form @submit.prevent="updateProfile">
+          <div class="mb-4">
+            <label class="block text-sm font-medium text-gray-700 mb-2">Name</label>
+            <input 
+              v-model="profileForm.name" 
+              type="text" 
+              class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500"
+              required
+            >
+          </div>
+          <div class="mb-4">
+            <label class="block text-sm font-medium text-gray-700 mb-2">Email</label>
+            <input 
+              v-model="profileForm.email" 
+              type="email" 
+              class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500"
+              required
+            >
+          </div>
+          <div class="mb-4">
+            <label class="block text-sm font-medium text-gray-700 mb-2">New Password (optional)</label>
+            <input 
+              v-model="profileForm.password" 
+              type="password" 
+              class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500"
+              placeholder="Leave blank to keep current password"
+            >
+          </div>
+          <div class="flex justify-end space-x-3">
+            <button 
+              type="button" 
+              @click="showProfileModal = false"
+              class="px-4 py-2 text-gray-600 border border-gray-300 rounded-md hover:bg-gray-50"
+            >
+              Cancel
+            </button>
+            <button 
+              type="submit"
+              class="px-4 py-2 bg-indigo-600 text-white rounded-md hover:bg-indigo-700"
+            >
+              Update Profile
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <!-- User Management Modal -->
+    <div v-if="showUserModal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+      <div class="bg-white rounded-lg p-6 w-full max-w-4xl max-h-[80vh] overflow-y-auto">
+        <div class="flex justify-between items-center mb-4">
+          <h3 class="text-lg font-semibold">User Management</h3>
+          <button @click="showUserModal = false" class="text-gray-400 hover:text-gray-600">
+            <span class="material-icons">close</span>
+          </button>
+        </div>
+        
+        <!-- Users Table -->
+        <div class="overflow-x-auto">
+          <table class="min-w-full divide-y divide-gray-200">
+            <thead class="bg-gray-50">
+              <tr>
+                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">User</th>
+                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Role</th>
+                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Created</th>
+                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Actions</th>
+              </tr>
+            </thead>
+            <tbody class="bg-white divide-y divide-gray-200">
+              <tr v-for="user in allUsers" :key="user.users_id">
+                <td class="px-6 py-4 whitespace-nowrap">
+                  <div>
+                    <div class="text-sm font-medium text-gray-900">{{ user.name }}</div>
+                    <div class="text-sm text-gray-500">{{ user.email }}</div>
+                  </div>
+                </td>
+                <td class="px-6 py-4 whitespace-nowrap">
+                  <span :class="user.role === 'admin' ? 'bg-purple-100 text-purple-800' : 'bg-green-100 text-green-800'" 
+                        class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full">
+                    {{ user.role }}
+                  </span>
+                </td>
+                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                  {{ formatDate(user.created_at) }}
+                </td>
+                <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">
+                  <button 
+                    v-if="user.users_id !== currentUser.id"
+                    @click="deleteUser(user.users_id)" 
+                    class="text-red-600 hover:text-red-900"
+                  >
+                    Delete
+                  </button>
+                  <span v-else class="text-gray-400">Current User</span>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        
+        <div v-if="allUsers.length === 0" class="text-center py-4 text-gray-500">
+          No users found
+        </div>
+      </div>
+    </div>
   </div>
 </template>
 
-<script setup>
-// Tidak ada logic khusus, data dummy
+<script>
+import { ref, onMounted, computed } from 'vue'
+import { useRouter } from 'vue-router'
+
+export default {
+  name: 'AdminDashboard',
+  setup() {
+    const router = useRouter()
+    const stats = ref({
+      totalArticles: 0,
+      totalUsers: 0,
+      thisMonth: 0,
+      activeToday: 0
+    })
+    const recentArticles = ref([])
+    const currentUser = ref({})
+    const allUsers = ref([])
+    
+    // Modal states
+    const showProfileModal = ref(false)
+    const showUserModal = ref(false)
+    
+    // Profile form
+    const profileForm = ref({
+      name: '',
+      email: '',
+      password: ''
+    })
+
+    const currentDate = computed(() => {
+      return new Date().toLocaleDateString('id-ID', {
+        weekday: 'long',
+        year: 'numeric',
+        month: 'long',
+        day: 'numeric'
+      })
+    })
+
+    const formatDate = (dateString) => {
+      return new Date(dateString).toLocaleDateString('id-ID', {
+        year: 'numeric',
+        month: 'short',
+        day: 'numeric'
+      })
+    }
+
+    const loadUserData = () => {
+      const userData = localStorage.getItem('user')
+      if (userData) {
+        currentUser.value = JSON.parse(userData)
+      }
+    }
+
+    const loadStats = async () => {
+      try {
+        // Load articles stats
+        const articlesResponse = await fetch(`${import.meta.env.VITE_API_BASE_URL}/articles`)
+        if (articlesResponse.ok) {
+          const articlesData = await articlesResponse.json()
+          stats.value.totalArticles = articlesData.data?.length || 0
+          
+          // Get recent articles (last 5)
+          recentArticles.value = articlesData.data?.slice(0, 5) || []
+          
+          // Calculate this month articles
+          const thisMonth = new Date().getMonth()
+          const thisYear = new Date().getFullYear()
+          stats.value.thisMonth = articlesData.data?.filter(article => {
+            const articleDate = new Date(article.created_at)
+            return articleDate.getMonth() === thisMonth && articleDate.getFullYear() === thisYear
+          }).length || 0
+        }
+
+        // Load users stats (only if admin)
+        const token = localStorage.getItem('authToken')
+        if (token && currentUser.value.role === 'admin') {
+          const usersResponse = await fetch(`${import.meta.env.VITE_API_BASE_URL}/users`, {
+            headers: {
+              'Authorization': `Bearer ${token}`
+            }
+          })
+          if (usersResponse.ok) {
+            const usersData = await usersResponse.json()
+            stats.value.totalUsers = usersData.data?.length || 0
+          }
+        }
+
+        // Mock active today (could be from analytics)
+        stats.value.activeToday = Math.floor(Math.random() * 50) + 10
+
+      } catch (error) {
+        console.error('Error loading stats:', error)
+      }
+    }
+
+    const loadAllUsers = async () => {
+      try {
+        const token = localStorage.getItem('authToken')
+        if (token && currentUser.value.role === 'admin') {
+          const response = await fetch(`${import.meta.env.VITE_API_BASE_URL}/users`, {
+            headers: {
+              'Authorization': `Bearer ${token}`
+            }
+          })
+          if (response.ok) {
+            const data = await response.json()
+            allUsers.value = data.data || []
+          }
+        }
+      } catch (error) {
+        console.error('Error loading users:', error)
+      }
+    }
+
+    const updateProfile = async () => {
+      try {
+        const token = localStorage.getItem('authToken')
+        const updateData = {
+          name: profileForm.value.name,
+          email: profileForm.value.email
+        }
+        
+        if (profileForm.value.password) {
+          updateData.password = profileForm.value.password
+        }
+
+        const response = await fetch(`${import.meta.env.VITE_API_BASE_URL}/users/${currentUser.value.id}`, {
+          method: 'PUT',
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${token}`
+          },
+          body: JSON.stringify(updateData)
+        })
+
+        const data = await response.json()
+        
+        if (response.ok && data.success) {
+          // Update localStorage
+          const updatedUser = { ...currentUser.value, ...data.data }
+          localStorage.setItem('user', JSON.stringify(updatedUser))
+          currentUser.value = updatedUser
+          
+          alert('Profile updated successfully!')
+          showProfileModal.value = false
+          profileForm.value.password = '' // Clear password field
+        } else {
+          alert(data.message || 'Failed to update profile')
+        }
+      } catch (error) {
+        console.error('Error updating profile:', error)
+        alert('Error updating profile')
+      }
+    }
+
+    const deleteUser = async (userId) => {
+      if (!confirm('Are you sure you want to delete this user?')) {
+        return
+      }
+
+      try {
+        const token = localStorage.getItem('authToken')
+        const response = await fetch(`${import.meta.env.VITE_API_BASE_URL}/users/${userId}`, {
+          method: 'DELETE',
+          headers: {
+            'Authorization': `Bearer ${token}`
+          }
+        })
+
+        const data = await response.json()
+        
+        if (response.ok && data.success) {
+          alert('User deleted successfully!')
+          loadAllUsers() // Reload users list
+          loadStats() // Reload stats
+        } else {
+          alert(data.message || 'Failed to delete user')
+        }
+      } catch (error) {
+        console.error('Error deleting user:', error)
+        alert('Error deleting user')
+      }
+    }
+
+    const openProfileModal = () => {
+      profileForm.value = {
+        name: currentUser.value.name,
+        email: currentUser.value.email,
+        password: ''
+      }
+      showProfileModal.value = true
+    }
+
+    const openUserModal = () => {
+      loadAllUsers()
+      showUserModal.value = true
+    }
+
+    const refreshStats = () => {
+      loadStats()
+    }
+
+    const logout = () => {
+      localStorage.removeItem('authToken')
+      localStorage.removeItem('user')
+      router.push('/')
+    }
+
+    onMounted(() => {
+      loadUserData()
+      loadStats()
+    })
+
+    return {
+      stats,
+      recentArticles,
+      currentUser,
+      currentDate,
+      formatDate,
+      refreshStats,
+      logout,
+      showProfileModal,
+      showUserModal,
+      profileForm,
+      allUsers,
+      updateProfile,
+      deleteUser,
+      openProfileModal,
+      openUserModal
+    }
+  }
+}
 </script>
 
 <style>
+/* Add Material Icons if not already included */
 @import url('https://fonts.googleapis.com/icon?family=Material+Icons');
 </style>

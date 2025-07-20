@@ -21,11 +21,13 @@ const routes = [
     path: "/admin/dashboard",
     name: "AdminDashboard",
     component: () => import("@/views/admin/Dashboard.vue"),
+    meta: { requiresAuth: true, requiresAdmin: true }
   },
   {
     path: "/admin/article-management",
     name: "ArticleManagement",
     component: () => import("@/views/admin/ArticleManagement.vue"),
+    meta: { requiresAuth: true, requiresAdmin: true }
   },
 ];
 
@@ -33,5 +35,27 @@ const router = createRouter({
   history: createWebHistory(),
   routes,
 });
+
+// Route guard
+router.beforeEach((to, from, next) => {
+  const token = localStorage.getItem('authToken')
+  const user = JSON.parse(localStorage.getItem('user') || '{}')
+  
+  if (to.meta.requiresAuth) {
+    if (!token) {
+      // Redirect to home page if not authenticated
+      next('/')
+      return
+    }
+    
+    if (to.meta.requiresAdmin && user.role !== 'admin') {
+      // Redirect to home page if not admin
+      next('/')
+      return
+    }
+  }
+  
+  next()
+})
 
 export default router;

@@ -190,7 +190,7 @@ export default {
     async loadArticleForEdit() {
       try {
         const response = await fetch(
-          `http://localhost:3000/api/article/get-articles?artikel_id=${this.articleId}`
+          `${import.meta.env.VITE_API_BASE_URL}/articles?artikel_id=${this.articleId}`
         );
 
         if (!response.ok) {
@@ -235,10 +235,14 @@ export default {
       formData.append("link_artikel", this.form.link_artikel);
       formData.append("gambar", this.imageFile);
 
+      const token = localStorage.getItem('authToken');
       const response = await fetch(
-        "http://localhost:3000/api/article/post-article",
+        `${import.meta.env.VITE_API_BASE_URL}/articles`,
         {
           method: "POST",
+          headers: {
+            'Authorization': `Bearer ${token}`
+          },
           body: formData,
         }
       );
@@ -265,10 +269,14 @@ export default {
         formData.append("link_artikel", this.form.link_artikel);
         formData.append("gambar", this.imageFile);
 
+        const token = localStorage.getItem('authToken');
         const response = await fetch(
-          "http://localhost:3000/api/article/post-article",
+          `${import.meta.env.VITE_API_BASE_URL}/articles`,
           {
             method: "POST",
+            headers: {
+              'Authorization': `Bearer ${token}`
+            },
             body: formData,
           }
         );
@@ -286,18 +294,19 @@ export default {
       } else {
         // Update without changing image using update endpoint
         const updateData = {
-          artikel_id: this.articleId,
           judul: this.form.judul,
           deskripsi: this.form.deskripsi,
           link_artikel: this.form.link_artikel || null,
         };
 
+        const token = localStorage.getItem('authToken');
         const response = await fetch(
-          "http://localhost:3000/api/article/update-article",
+          `${import.meta.env.VITE_API_BASE_URL}/articles/${this.articleId}`,
           {
             method: "PUT",
             headers: {
               "Content-Type": "application/json",
+              'Authorization': `Bearer ${token}`
             },
             body: JSON.stringify(updateData),
           }
@@ -318,10 +327,14 @@ export default {
 
     async deleteOldArticle() {
       try {
+        const token = localStorage.getItem('authToken');
         await fetch(
-          `http://localhost:3000/api/article/delete-article?artikel_id=${this.articleId}`,
+          `${import.meta.env.VITE_API_BASE_URL}/articles/${this.articleId}`,
           {
             method: "DELETE",
+            headers: {
+              'Authorization': `Bearer ${token}`
+            }
           }
         );
       } catch (error) {

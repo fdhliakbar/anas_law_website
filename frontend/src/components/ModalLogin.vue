@@ -84,27 +84,53 @@ const router = useRouter();
 
 async function handleSubmit() {
   try {
-    const response = await fetch("/api/check-account", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ email: email.value, password: password.value }),
-    });
-    if (!response.ok) {
-      const text = await response.text();
-      console.error("HTTP Error:", response.status, text);
-      alert("Terjadi kesalahan pada server: " + response.status);
+    // Validasi input
+    if (!email.value || !password.value) {
+      alert("Email dan password harus diisi");
       return;
     }
+
+    const response = await fetch(`${import.meta.env.VITE_API_BASE_URL}/auth/login`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ 
+        email: email.value.trim(), 
+        password: password.value 
+      }),
+    });
+
     const data = await response.json();
     console.log("API Response:", data);
-    if (data.exists) {
-      router.push("/chat");
+
+    if (response.ok && data.success) {
+      // Simpan token ke localStorage
+      localStorage.setItem('authToken', data.token);
+      localStorage.setItem('user', JSON.stringify(data.user));
+      
+      alert(`Login berhasil! Selamat datang ${data.user.name}`);
+      
+      // Redirect berdasarkan role
+      if (data.user.role === 'admin') {
+        console.log("Redirecting to admin dashboard...");
+        router.push("/admin/dashboard");
+      } else {
+        console.log("Redirecting to home...");
+        router.push("/");
+      }
+      
+      // Clear form
+      email.value = "";
+      password.value = "";
+      
     } else {
-      alert("Akun tidak ditemukan, silakan registrasi.");
+      // Error handling yang lebih baik
+      const errorMessage = data.message || "Login gagal, silakan coba lagi.";
+      alert(errorMessage);
+      console.error("Login failed:", data);
     }
   } catch (e) {
     console.error("Fetch error:", e);
-    alert("Terjadi kesalahan, silakan coba lagi.");
+    alert("Terjadi kesalahan koneksi, silakan coba lagi.");
   }
 }
 </script>

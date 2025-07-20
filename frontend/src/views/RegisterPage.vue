@@ -335,16 +335,14 @@ export default {
       // Kirim ke backend
       try {
         const response = await fetch(
-          "http://localhost:3000/api/users/post-users",
+          `${import.meta.env.VITE_API_BASE_URL}/auth/register`,
           {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({
-              action: "register",
               name: this.form.name,
               email: this.form.email,
               password: this.form.password,
-              confirmPassword: this.form.repeatPassword,
             }),
           }
         );
