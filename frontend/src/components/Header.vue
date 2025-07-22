@@ -102,6 +102,13 @@
             >
               <a
                 href="#"
+                @click=""
+                class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+              >
+                My Booking
+              </a>
+              <a
+                href="#"
                 @click="logout"
                 class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
               >
@@ -287,6 +294,8 @@ export default {
       }
     },
   },
+
+  // const goToMyBookings
   watch: {
     $route() {
       // Check auth status when route changes (like after login)

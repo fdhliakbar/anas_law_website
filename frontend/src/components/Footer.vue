@@ -9,56 +9,34 @@
       <!-- Logo kiri -->
       <div class="flex flex-col items-center mb-4 md:mb-0">
         <img src="../assets/images/logo.png" alt="Logo" class="h-8 mb-2" />
-        <div class="text-sm">{{ $t('footer.copyright') }}</div>
-      </div>
-      
-      <!-- Link kanan -->
-      <div class="flex items-center space-x-6">
-        <a href="#" class="hover:text-white transition">{{ $t('footer.termsConditions') }}</a>
-        <a href="#" class="hover:text-white transition">{{ $t('footer.returnPolicy') }}</a>
-        <div class="flex space-x-2 ml-4">
-          <a href="#" aria-label="Facebook" class="hover:text-white">
-            <svg
-              class="w-5 h-5"
-              fill="none"
-              stroke="currentColor"
-              stroke-width="1.5"
-              viewBox="0 0 24 24"
-            >
-              <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                d="M17 2.1A15.9 15.9 0 0 1 21.9 7M22 12c0 5.523-4.477 10-10 10S2 17.523 2 12 6.477 2 12 2c1.657 0 3.216.402 4.573 1.114M17 2.1V7h4.9"
-              ></path>
-            </svg>
+        <div class="text-sm">{{ $t("footer.copyright") }}</div>
+        <!-- Map kantor -->
+        <div class="mt-4 w-full flex flex-col items-center">
+          <a
+            href="https://www.google.com/maps?q=-6.200000,106.816666"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="block rounded overflow-hidden shadow-lg hover:shadow-xl transition border border-gray-700"
+            style="width: 1250px; max-width: 100%"
+          >
+            <iframe
+              src="https://www.google.com/maps?q=-6.200000,106.816666&hl=id&z=16&output=embed"
+              width="1250"
+              height="450"
+              style="border: 0"
+              allowfullscreen=""
+              loading="lazy"
+              referrerpolicy="no-referrer-when-downgrade"
+              title="Lokasi Kantor"
+            ></iframe>
           </a>
-          <a href="#" aria-label="Instagram" class="hover:text-white">
-            <svg
-              class="w-5 h-5"
-              fill="none"
-              stroke="currentColor"
-              stroke-width="1.5"
-              viewBox="0 0 24 24"
-            >
-              <rect width="18" height="18" x="3" y="3" rx="4" />
-              <circle cx="12" cy="12" r="4" />
-              <circle cx="17.5" cy="6.5" r="1" />
-            </svg>
-          </a>
-          <a href="#" aria-label="LinkedIn" class="hover:text-white">
-            <svg
-              class="w-5 h-5"
-              fill="none"
-              stroke="currentColor"
-              stroke-width="1.5"
-              viewBox="0 0 24 24"
-            >
-              <rect width="18" height="18" x="3" y="3" rx="2" />
-              <path d="M7 10v4M7 7v.01M12 10v4m0-4a2 2 0 0 1 4 0v4" />
-            </svg>
-          </a>
+          <div class="text-xs text-gray-400 mt-1">
+            Lihat lokasi kantor di Google Maps
+          </div>
         </div>
       </div>
+
+      <!-- Link kanan -->
     </div>
   </footer>
 </template>
