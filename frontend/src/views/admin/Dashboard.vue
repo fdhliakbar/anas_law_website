@@ -71,7 +71,7 @@
           </li>
           <li>
             <a
-              @click="goToArticleManagement"
+              @click="goToArticles"
               href="#"
               class="flex items-center px-4 py-2 text-gray-700 hover:bg-gray-100 rounded-lg"
             >
@@ -141,12 +141,7 @@
           </h1>
         </div>
         <div class="flex items-center space-x-4">
-          <button
-            @click="createNewArticle"
-            class="bg-indigo-600 text-white px-4 py-2 rounded-lg font-semibold hover:bg-indigo-700"
-          >
-            Tambah Artikel
-          </button>
+
           <button
             @click="goToHomepage"
             class="bg-gray-100 text-gray-700 px-4 py-2 rounded-lg font-semibold hover:bg-gray-200"
@@ -657,7 +652,7 @@ const logout = () => {
 };
 
 const goToArticles = () => {
-  router.push("/article");
+  router.push("/articles");
 };
 
 const goToArticleManagement = () => {
@@ -667,6 +662,7 @@ const goToArticleManagement = () => {
 const createNewArticle = () => {
   router.push("/admin/article-management");
 };
+
 
 const goToBookingManagement = () => {
   router.push("/admin/booking-management");
