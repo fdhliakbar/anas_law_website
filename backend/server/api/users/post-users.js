@@ -14,10 +14,16 @@ export default defineEventHandler(async (event) => {
 
   // Handle preflight OPTIONS
   if (event.node.req.method === "OPTIONS") {
-        // Tambahkan header di sini juga!
+    // Tambahkan header di sini juga!
     event.node.res.setHeader("Access-Control-Allow-Origin", "*");
-    event.node.res.setHeader("Access-Control-Allow-Methods", "GET,POST,PUT,DELETE,OPTIONS");
-    event.node.res.setHeader("Access-Control-Allow-Headers", "Content-Type, Authorization");
+    event.node.res.setHeader(
+      "Access-Control-Allow-Methods",
+      "GET,POST,PUT,DELETE,OPTIONS"
+    );
+    event.node.res.setHeader(
+      "Access-Control-Allow-Headers",
+      "Content-Type, Authorization"
+    );
     return "";
   }
 
@@ -60,10 +66,10 @@ export default defineEventHandler(async (event) => {
         [email]
       );
       if (existingUser.rows.length > 0) {
-        return {
+        throw createError({
           statusCode: 409,
-          message: "Email ini sudah terdaftar",
-        };
+          statusMessage: "Email ini sudah terdaftar",
+        });
       }
 
       const hashedPassword = await bcrypt.hash(password, 10);
@@ -77,6 +83,7 @@ export default defineEventHandler(async (event) => {
 
       console.log("Insert result:", newUserResult.rows);
 
+      setResponseStatus(event, 201);
       return {
         statusCode: 201,
         message: "User berhasil ditambahkan",
@@ -84,6 +91,7 @@ export default defineEventHandler(async (event) => {
       };
     } catch (error) {
       console.error(error);
+      if (error.statusCode) throw error;
       return {
         statusCode: 500,
         message: "Terjadi kesalahan pada server",
@@ -121,18 +129,16 @@ export default defineEventHandler(async (event) => {
         role: user.role,
       };
 
-      
-
-   const token = jwt.sign(
-    { 
-          userId: user.users_id,  
-          name: user.name,         
-          email: user.email,       
-          role: user.role       
-    },
-    process.env.JWT_SECRET, // pastikan ini ada
-  { expiresIn: "24h" }
-);
+      const token = jwt.sign(
+        {
+          userId: user.users_id,
+          name: user.name,
+          email: user.email,
+          role: user.role,
+        },
+        process.env.JWT_SECRET, // pastikan ini ada
+        { expiresIn: "24h" }
+      );
 
       return {
         message: "Login berhasil",

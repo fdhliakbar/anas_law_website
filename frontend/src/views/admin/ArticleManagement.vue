@@ -81,7 +81,7 @@
           type="text"
           class="w-full border px-3 py-2 rounded"
           required
-          maxlength="50"
+          maxlength="100"
         />
       </div>
       <div>
