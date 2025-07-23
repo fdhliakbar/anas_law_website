@@ -3,9 +3,9 @@
     <!-- Gambar utama -->
     <div class="flex justify-center">
       <img
-        src="/src/assets/images/injury.jpg"
+        src="/images/slide04.jpg"
         alt="Injury Image"
-        class="rounded-2xl w-[800px] shadow-md"
+        class="rounded-2xl w-[600px] shadow-md"
       />
     </div>
 

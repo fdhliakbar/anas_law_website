@@ -5,6 +5,7 @@
     "services": "Layanan",
     "pricing": "Harga",
     "bookConsultation": "Buat Janji Konsultasi",
+    "articles": "Artikel",
     "reviews": "Ulasan",
     "contact": "Kontak",
     "login": "Masuk",
@@ -148,7 +149,7 @@
     "morePosts": "Postingan Lainnya",
     "defaultTitle": "MyCase: Mengubah Praktik Hukum",
     "defaultDescription": "Memulai perjalanan melalui inovasi yang merupakan MyCase, mendefinisikan ulang bagaimana hukum...",
-    "defaultAuthor": "Fadhli Akbar",
+    "defaultAuthor": "Ardian",
     "defaultCompany": "Kantor Hukum Anas"
   },
   "admin": {
@@ -256,23 +257,23 @@
     "title": "Kata Klien Kami",
     "description": "Testimoni adalah cara yang bagus untuk meningkatkan kepercayaan dan kesadaran merek. Gunakan bagian ini untuk menyoroti pelanggan populer Anda.",
     "clients": {
-      "fadhli": {
+      "andika": {
         "review": "Tim mereka sangat profesional & berpengalaman dalam menangani kasus saya.",
-        "name": "Fadhli Akbar",
-        "position": "CEO di Google",
+        "name": "Andika Septian",
+        "position": "Pengusaha Kelapa",
         "highlight1": "profesional",
         "highlight2": "berpengalaman"
       },
-      "dylan": {
+      "supriyadi": {
         "review": "Pastikan Anda hanya memilih kalimat yang tepat untuk membuatnya singkat dan sederhana.",
-        "name": "Dylan Ambrose",
-        "position": "Lead marketer di Netflix", 
+        "name": "Supriyadi",
+        "position": "Kepala Desa Indramayu", 
         "highlight1": "kalimat yang tepat"
       },
-      "gabrielle": {
+      "tarisya": {
         "review": "Ini adalah template halaman landing yang luar biasa yang pernah saya lihat. Saya akan menggunakannya untuk apa pun.",
-        "name": "Gabrielle Winn",
-        "position": "Co-founder Acme Inc",
+        "name": "Tarisya ramayani",
+        "position": "Dokter Mata",
         "highlight1": "luar biasa"
       }
     }

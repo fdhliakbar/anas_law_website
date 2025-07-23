@@ -21,7 +21,6 @@
             {{ $t("booking.scheduleNow") }}
           </button>
           <button
-            @click="goToChat"
             class="border border-black text-black px-8 py-4 rounded-lg text-lg font-semibold bg-white hover:bg-black hover:text-white transition"
           >
             {{ $t("booking.getInTouch") }}
