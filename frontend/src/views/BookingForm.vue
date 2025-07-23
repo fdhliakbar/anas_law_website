@@ -26,7 +26,7 @@
     <!-- Main Content -->
     <div v-else-if="selectedLawyer" class="max-w-4xl mx-auto px-4 py-8">
       <!-- Header Section -->
-      <div class="bg-white rounded-lg shadow-sm p-6 mb-6">
+      <div class="bg-white rounded-lg shadow-sm p-6 m-6 mt-10">
         <div class="flex items-center gap-4">
           <img
             :src="getPhotoUrl(selectedLawyer.photo)"

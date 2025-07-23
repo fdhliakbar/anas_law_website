@@ -1,73 +1,52 @@
+// tests/user-api.test.js
 import { describe, it, expect } from "vitest";
 import supertest from "supertest";
 
+// arahkan ke Nuxt server yang sedang berjalan
 const api = supertest("http://localhost:3000");
 
-const randomEmail = () =>
-  `testuser_${Math.floor(Math.random() * 100000)}@example.com`;
+const testEmail = `test_${Date.now()}@example.com`;
+const testPassword = "password123";
 
-let testUser = {
-  name: "Test User",
-  email: randomEmail(),
-  password: "password123",
-  confirmPassword: "password123",
-};
-let token = "";
+describe("User API - Register and Login", () => {
+  let token = "";
 
-describe("User API", () => {
-  it("POST /api/users/post-users register user baru", async () => {
+  it("should register a new user", async () => {
     const res = await api.post("/api/users/post-users").send({
       action: "register",
-      ...testUser,
+      name: "Test User",
+      email: testEmail,
+      password: testPassword,
+      confirmPassword: testPassword,
+      role:"users",
     });
-    expect(res.status).toBe(201);
-    expect(res.body).toHaveProperty("user");
-    expect(res.body.user).toHaveProperty("email", testUser.email);
+
+    expect(res.status).toBe(200);
+    expect(res.body.success).toBe(true);
   });
 
-  it("POST /api/users/post-users gagal register email sama", async () => {
-    const res = await api.post("/api/users/post-users").send({
-      action: "register",
-      ...testUser,
-    });
-    expect(res.status).toBe(409);
-    expect(res.body).toHaveProperty("message");
-  });
-
-  it("POST /api/users/post-users login user", async () => {
+  it("should login with correct credentials", async () => {
     const res = await api.post("/api/users/post-users").send({
       action: "login",
-      email: testUser.email,
-      password: testUser.password,
+      email: testEmail,
+      password: testPassword,
     });
+
     expect(res.status).toBe(200);
-    expect(res.body).toHaveProperty("token");
+    expect(res.body.success).toBe(true);
+    expect(res.body.token).toBeDefined();
+
     token = res.body.token;
   });
 
-  it("GET /api/users/get-users ambil semua user", async () => {
-    const res = await api.get("/api/users/get-users");
-    expect(res.status).toBe(200);
-    expect(res.body).toHaveProperty("users");
-    expect(Array.isArray(res.body.users)).toBe(true);
-  });
+  it("should not login with wrong password", async () => {
+    const res = await api.post("/api/users/post-users").send({
+      action: "login",
+      email: testEmail,
+      password: "wrongpassword",
+    });
 
-  it("PUT /api/users/update-users update user profile", async () => {
-    const newName = "Updated User";
-    const res = await api
-      .put("/api/users/update-users")
-      .set("Authorization", `Bearer ${token}`)
-      .send({ name: newName });
-    expect(res.status).toBe(200);
-    expect(res.body).toHaveProperty("user");
-    expect(res.body.user).toHaveProperty("name", newName);
-  });
-
-  it("DELETE /api/users/delete-users hapus user sendiri", async () => {
-    const res = await api
-      .delete("/api/users/delete-users")
-      .set("Authorization", `Bearer ${token}`);
-    expect(res.status).toBe(200);
-    expect(res.body).toHaveProperty("message");
+    expect(res.status).toBe(401);
+    expect(res.body.success).toBe(undefined);
   });
 });

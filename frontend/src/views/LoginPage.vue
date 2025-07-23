@@ -4,6 +4,13 @@
       class="bg-white border border-gray-200 rounded-2xl overflow-hidden w-full max-w-4xl lg:flex shadow-lg"
     >
       <!-- Left Side - Form -->
+      <div
+        v-if="error"
+        class="mb-4 p-4 bg-red-100 border border-red-300 text-red-700 rounded-lg"
+      >
+        {{ error }}
+      </div>
+
       <div class="w-full lg:w-1/2 p-8 md:p-12">
         <div class="flex items-center mb-8">
           <button
@@ -162,6 +169,7 @@ export default {
     return {
       showPassword: false,
       isLoading: false,
+      error: null,
       form: {
         email: "",
         password: "",
@@ -174,6 +182,9 @@ export default {
       this.$router.go(-1);
     },
     async handleLogin() {
+      this.error = null; // reset error
+      this.isLoading = true;
+
       try {
         const response = await fetch(
           "http://localhost:3000/api/users/post-users",
@@ -191,16 +202,19 @@ export default {
         const data = await response.json();
 
         if (!response.ok) {
-          throw new Error(data.message || "Login failed");
+          // Tangani error login khusus 401
+          if (data.statusCode === 401) {
+            this.error = "Email atau password tidak sesuai";
+            return;
+          }
+
+          throw new Error(data.message || "Login gagal");
         }
 
-        // Simpan token jika perlu
+        // Simpan token
         localStorage.setItem("token", data.token);
-
-        // Trigger auth status update in other components
         window.dispatchEvent(new Event("storage"));
 
-        // Ambil role dan isAdmin dari data.user
         const user = data.user || {};
         if (user.role === "admin" || user.isAdmin === true) {
           this.$router.push("/admin/dashboard");
@@ -208,8 +222,9 @@ export default {
           this.$router.push("/");
         }
       } catch (error) {
-        console.error("Login error:", error);
-        this.error = error.message;
+        this.error = error.message || "Terjadi kesalahan saat login";
+      } finally {
+        this.isLoading = false;
       }
     },
   },

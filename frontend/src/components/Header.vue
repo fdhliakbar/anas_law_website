@@ -32,7 +32,7 @@
               {{ $t("header.home") }}
             </router-link>
           </li>
-          <!-- <li>
+          <li>
             <router-link
               to="/pricing"
               class="relative inline-block pb-1 after:content-[''] after:absolute after:left-0 after:bottom-0 after:w-0 after:h-[2px] after:bg-white after:transition-all after:duration-300 hover:after:w-full"

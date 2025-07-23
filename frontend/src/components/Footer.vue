@@ -14,13 +14,13 @@
         <!-- Kanan: Map -->
         <div class="flex-[2]">
           <a
-            href="https://www.google.com/maps?q=-6.200000,106.816666"
+            href="https://www.google.com/maps?q=-6.46750,107.93766"
             target="_blank"
             rel="noopener noreferrer"
             class="block rounded-lg overflow-hidden shadow-md border border-gray-700 hover:shadow-lg transition duration-300"
           >
             <iframe
-              src="https://www.google.com/maps?q=-6.200000,106.816666&hl=id&z=16&output=embed"
+              src="https://www.google.com/maps?q=-6.46750,107.93766&hl=id&z=16&output=embed"
               width="100%"
               height="350"
               style="border: 0"

@@ -45,7 +45,7 @@
               href="#"
               class="flex items-center px-4 py-2 bg-indigo-100 text-indigo-700 rounded-lg font-semibold"
             >
-              <span class="material-icons mr-3">dashboard</span>
+              <span class="material-icons mr-3"></span>
               Dashboard
             </a>
           </li>
@@ -105,8 +105,7 @@
           @click="logout"
           class="w-full flex items-center px-4 py-2 text-gray-700 hover:bg-gray-100 rounded-lg"
         >
-          <span class="material-icons mr-3">logout</span>
-          Keluar
+          <span class="material-icons mr-3">Log Out</span>
         </button>
       </div>
     </aside>

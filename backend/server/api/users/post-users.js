@@ -86,11 +86,15 @@ export default defineEventHandler(async (event) => {
 
       console.log("Insert result:", newUserResult.rows);
 
-      setResponseStatus(event, 201);
+      setResponseStatus(event, 200);
       return {
-        statusCode: 201,
+        success: true,
+        statusCode: 200,
         message: "User berhasil ditambahkan",
-        user: newUserResult.rows[0],
+        user: {
+          id: newUserResult.rows[0].users_id,
+          email: newUserResult.rows[0].email,
+        },
       };
     } catch (error) {
       console.error(error);
@@ -114,6 +118,7 @@ export default defineEventHandler(async (event) => {
         [email]
       );
       if (userResult.rows.length === 0) {
+        setResponseStatus(event, 401);
         return { statusCode: 401, message: "Email atau password salah" };
       }
 
@@ -121,6 +126,7 @@ export default defineEventHandler(async (event) => {
       const isPasswordValid = await bcrypt.compare(password, user.password);
 
       if (!isPasswordValid) {
+        setResponseStatus(event, 401);
         return { statusCode: 401, message: "Email atau password salah" };
       }
 
@@ -145,6 +151,7 @@ export default defineEventHandler(async (event) => {
       );
 
       return {
+        success: true,
         message: "Login berhasil",
         token: token,
         user: {
