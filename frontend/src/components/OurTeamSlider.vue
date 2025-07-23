@@ -17,7 +17,7 @@
       <div class="relative flex items-center justify-center">
         <div
           class="flex gap-8 overflow-hidden w-full"
-          style="min-height: 320px"
+          style="min-height: 330px"
         >
           <div
             v-for="(member, idx) in visibleMembers"
