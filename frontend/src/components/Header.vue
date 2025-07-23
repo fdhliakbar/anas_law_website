@@ -25,20 +25,37 @@
           class="hidden lg:flex items-center space-x-8 text-base text-[#f5f5f5] font-medium mx-8"
         >
           <li>
-            <router-link to="/">{{ $t("header.home") }}</router-link>
+            <router-link
+              to="/"
+              class="relative inline-block pb-1 after:content-[''] after:absolute after:left-0 after:bottom-0 after:w-0 after:h-[2px] after:bg-white after:transition-all after:duration-300 hover:after:w-full"
+            >
+              {{ $t("header.home") }}
+            </router-link>
           </li>
           <li>
-            <router-link to="/pricing">{{ $t("header.pricing") }}</router-link>
+            <router-link
+              to="/pricing"
+              class="relative inline-block pb-1 after:content-[''] after:absolute after:left-0 after:bottom-0 after:w-0 after:h-[2px] after:bg-white after:transition-all after:duration-300 hover:after:w-full"
+            >
+              {{ $t("header.pricing") }}
+            </router-link>
           </li>
           <li>
-            <router-link to="/booking">{{
-              $t("header.bookConsultation")
-            }}</router-link>
+            <router-link
+              to="/booking"
+              class="relative inline-block pb-1 after:content-[''] after:absolute after:left-0 after:bottom-0 after:w-0 after:h-[2px] after:bg-white after:transition-all after:duration-300 hover:after:w-full"
+            >
+              {{ $t("header.bookConsultation") }}
+            </router-link>
           </li>
           <li>
-            <a href="#" @click.prevent="scrollTo('reviews')">{{
-              $t("header.reviews")
-            }}</a>
+            <a
+              href="#"
+              @click.prevent="scrollTo('reviews')"
+              class="relative inline-block pb-1 after:content-[''] after:absolute after:left-0 after:bottom-0 after:w-0 after:h-[2px] after:bg-white after:transition-all after:duration-300 hover:after:w-full"
+            >
+              {{ $t("header.reviews") }}
+            </a>
           </li>
         </ul>
 
