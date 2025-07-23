@@ -25,21 +25,21 @@ const routes = [
     beforeEnter: (to, from, next) => {
       const token = localStorage.getItem("token");
       if (!token) {
-        next('/login');
+        next("/login");
         return;
       }
-      
+
       try {
-        const payload = JSON.parse(atob(token.split('.')[1]));
-        if (payload.role === 'admin') {
+        const payload = JSON.parse(atob(token.split(".")[1]));
+        if (payload.role === "admin") {
           next();
         } else {
-          next('/'); // Redirect non-admin users
+          next("/"); // Redirect non-admin users
         }
       } catch (error) {
-        next('/login');
+        next("/login");
       }
-    }
+    },
   },
   {
     path: "/articles",
@@ -60,21 +60,21 @@ const routes = [
     beforeEnter: (to, from, next) => {
       const token = localStorage.getItem("token");
       if (!token) {
-        next('/login');
+        next("/login");
         return;
       }
-      
+
       try {
-        const payload = JSON.parse(atob(token.split('.')[1]));
-        if (payload.role === 'admin') {
+        const payload = JSON.parse(atob(token.split(".")[1]));
+        if (payload.role === "admin") {
           next();
         } else {
-          next('/'); // Redirect non-admin users
+          next("/"); // Redirect non-admin users
         }
       } catch (error) {
-        next('/login');
+        next("/login");
       }
-    }
+    },
   },
   {
     path: "/admin/lawyer-management",
@@ -84,21 +84,21 @@ const routes = [
     beforeEnter: (to, from, next) => {
       const token = localStorage.getItem("token");
       if (!token) {
-        next('/login');
+        next("/login");
         return;
       }
-      
+
       try {
-        const payload = JSON.parse(atob(token.split('.')[1]));
-        if (payload.role === 'admin') {
+        const payload = JSON.parse(atob(token.split(".")[1]));
+        if (payload.role === "admin") {
           next();
         } else {
-          next('/'); // Redirect non-admin users
+          next("/"); // Redirect non-admin users
         }
       } catch (error) {
-        next('/login');
+        next("/login");
       }
-    }
+    },
   },
   {
     path: "/booking/:lawyerId",
@@ -118,6 +118,20 @@ const routes = [
     path: "/booking-success",
     name: "BookingSuccess",
     component: () => import("../views/BookingSuccess.vue"),
+  },
+  {
+    path: "/my-bookings",
+    name: "MyBookings",
+    component: () => import("../views/MyBooking.vue"),
+    meta: { requiresAuth: true },
+    beforeEnter: (to, from, next) => {
+      const token = localStorage.getItem("token");
+      if (!token) {
+        next(`/login?redirect=${to.fullPath}`);
+      } else {
+        next();
+      }
+    },
   },
 ];
 

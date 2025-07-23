@@ -444,7 +444,7 @@
                   class="flex items-center justify-center space-x-4 text-sm text-gray-500 mb-4"
                 >
                   <span>{{ lawyer.experience }} tahun</span>
-                  <span>⭐ {{ lawyer.rating }}/5</span>
+                  <span>⭐ {{ lawyer.rating }}</span>
                 </div>
 
                 <div class="text-center mb-4">
