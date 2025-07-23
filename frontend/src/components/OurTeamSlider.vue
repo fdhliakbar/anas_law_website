@@ -26,13 +26,13 @@
             @click="nextSlide"
           >
             <div
-              class="rounded-full border-4 mb-4 flex items-center justify-center transition-all duration-300"
+              class="rounded-full border-4 mb-4 flex items-center justify-center transition-all duration-300 overflow-hidden"
               :style="{
                 borderColor: '#F5F8E0',
-                width: idx === 1 ? '180px' : '150px',
-                height: idx === 1 ? '220px' : '180px',
-                boxShadow: idx === 1 ? '0 0 0 6px #F5F8E0' : 'none',
+                width: idx === 1 ? '190px' : '160px',
+                height: idx === 1 ? '230px' : '190px',
                 background: '#fff',
+                padding: '5px',
               }"
             >
               <img
@@ -44,6 +44,7 @@
                   height: idx === 1 ? '210px' : '170px',
                   filter: idx === 1 ? 'none' : 'grayscale(30%)',
                   transition: 'all 0.3s',
+                  objectFit: 'cover',
                 }"
               />
             </div>
