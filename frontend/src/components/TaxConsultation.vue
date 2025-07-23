@@ -42,9 +42,9 @@
           <span class="text-gray-500 ml-1 mb-1">/{{ yearly ? 'tahun' : 'bulan' }}</span>
         </div>
         <span class="text-xs text-gray-400 mb-4">{{ yearly ? $t('taxConsultation.billedYearly') : $t('taxConsultation.billedMonthly') }}</span>
-        <button class="bg-indigo-900 text-white px-6 py-2 rounded-lg font-semibold shadow hover:bg-indigo-700 transition-colors duration-300 mb-6">
+        <router-link to="/booking" class="bg-indigo-900 text-white px-6 py-2 rounded-lg font-semibold shadow hover:bg-indigo-700 transition-colors duration-300 mb-6">
           {{ $t('taxConsultation.getConsultation') }}
-        </button>
+        </router-link>
         <div class="w-full">
           <p class="font-semibold mb-2 text-gray-700">
             {{ $t(`taxConsultation.plans.${plan.key}.featuresTitle`) }}

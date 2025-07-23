@@ -72,26 +72,26 @@ const blogPosts = computed(() => [
   {
     title: t('blog.defaultTitle'),
     description: t('blog.defaultDescription'),
-    image: "/src/assets/images/lawyer01.jpg",
+    image: "/images/slide02.jpg",
     author: t('blog.defaultAuthor'),
     company: t('blog.defaultCompany'),
-    authorImage: "/src/assets/images/feris.jpg",
+    authorImage: "/images/founder.jpg",
   },
   {
     title: t('blog.defaultTitle'),
     description: t('blog.defaultDescription'),
-    image: "/src/assets/images/lawyer01.jpg",
+    image: "/images/slide02.jpg",
     author: t('blog.defaultAuthor'),
     company: t('blog.defaultCompany'),
-    authorImage: "/src/assets/images/feris.jpg",
+    authorImage: "/images/founder.jpg",
   },
   {
     title: t('blog.defaultTitle'),
     description: t('blog.defaultDescription'),
-    image: "/src/assets/images/lawyer01.jpg",
+    image: "/images/slide02.jpg",
     author: t('blog.defaultAuthor'),
     company: t('blog.defaultCompany'),
-    authorImage: "/src/assets/images/feris.jpg",
+    authorImage: "/images/founder.jpg",
   },
 ])
 </script>

@@ -19,10 +19,11 @@
             {{ $t('booking.scheduleNow') }}
           </button>
           <button
-            @click="goToChat"
             class="border border-black text-black px-8 py-4 rounded-lg text-lg font-semibold bg-white hover:bg-black hover:text-white transition"
           >
+          <a href="https://wa.me/6281394879411">
             {{ $t('booking.getInTouch') }}
+          </a>
           </button>
         </div>
       </div>

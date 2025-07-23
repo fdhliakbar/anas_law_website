@@ -7,12 +7,7 @@
         <h2 class="text-4xl font-bold text-white mb-6 md:mb-0">
           Strong Advocates, Committed<br />To Your Success
         </h2>
-        <button
-          class="px-8 py-3 rounded-full font-semibold text-lg"
-          :style="{ background: '#F5F8E0', color: '#222' }"
-        >
-          Learn More
-        </button>
+        
       </div>
       <div class="relative flex items-center justify-center">
         <div
@@ -48,7 +43,7 @@
               />
             </div>
             <div class="text-center">
-              <p class="font-bold text-lg text-white">{{ member.name }}</p>
+              <p class=" text-lg text-white">{{ member.name }}</p>
               <p class="text-[#F5F8E0] text-sm">{{ member.role }}</p>
             </div>
           </div>
