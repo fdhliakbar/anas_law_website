@@ -201,7 +201,7 @@ export default {
     async loadArticleForEdit() {
       try {
         const response = await fetch(
-          `http://localhost:3000/api/article/get-articles?artikel_id=${this.articleId}`
+          `https://mptibe-production.up.railway.app/api/article/get-articles?artikel_id=${this.articleId}`
         );
 
         if (!response.ok) {
@@ -249,7 +249,7 @@ export default {
       formData.append("gambar", this.imageFile);
 
       const response = await fetch(
-        "http://localhost:3000/api/article/post-article",
+        "https://mptibe-production.up.railway.app/api/article/post-article",
         {
           method: "POST",
           body: formData,
@@ -280,7 +280,7 @@ export default {
         formData.append("gambar", this.imageFile);
 
         const response = await fetch(
-          "http://localhost:3000/api/article/post-article",
+          "https://mptibe-production.up.railway.app/api/article/post-article",
           {
             method: "POST",
             body: formData,
@@ -307,7 +307,7 @@ export default {
         };
 
         const response = await fetch(
-          "http://localhost:3000/api/article/update-article",
+          "https://mptibe-production.up.railway.app/api/article/update-article",
           {
             method: "PUT",
             headers: {
@@ -333,7 +333,7 @@ export default {
     async deleteOldArticle() {
       try {
         await fetch(
-          `http://localhost:3000/api/article/delete-article?artikel_id=${this.articleId}`,
+          `https://mptibe-production.up.railway.app/api/article/delete-article?artikel_id=${this.articleId}`,
           {
             method: "DELETE",
           }

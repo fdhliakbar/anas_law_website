@@ -21,10 +21,11 @@
             {{ $t("booking.scheduleNow") }}
           </button>
           <button
-            @click="goToChat"
             class="border border-black text-black px-8 py-4 rounded-lg text-lg font-semibold bg-white hover:bg-black hover:text-white transition"
           >
-            {{ $t("booking.getInTouch") }}
+            <a href="https://wa.me/6281394879411">
+              {{ $t("booking.getInTouch") }}
+            </a>
           </button>
         </div>
       </div>
@@ -291,7 +292,7 @@ const loadLawyers = async (isLoadMore = false) => {
     }
 
     const response = await fetch(
-      `http://localhost:3000/api/lawyers/get-lawyers?${params}`
+      `https://mptibe-production.up.railway.app/api/lawyers/get-lawyers?${params}`
     );
     const data = await response.json();
 
@@ -339,7 +340,7 @@ const getPhotoUrl = (photo) => {
   // Gambar hasil upload backend
   if (photo.startsWith("/uploads/")) {
     // Pastikan URL backend benar (ganti jika deploy)
-    return `http://localhost:3000${photo}`;
+    return `https://mptibe-production.up.railway.app${photo}`;
   }
 
   // Gambar dari assets lokal frontend

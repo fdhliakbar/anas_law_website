@@ -435,7 +435,7 @@ const loadBookings = async () => {
       params.append('status', filters.value.status);
     }
 
-    const response = await fetch(`http://localhost:3000/api/booking/get-bookings?${params}`, {
+    const response = await fetch(`https://mptibe-production.up.railway.app/api/booking/get-bookings?${params}`, {
       headers: {
         'Authorization': `Bearer ${token}`,
         'Content-Type': 'application/json'
@@ -464,7 +464,7 @@ const loadBookings = async () => {
 const approveBooking = async (bookingId) => {
   try {
     const token = localStorage.getItem('token');
-    const response = await fetch(`http://localhost:3000/api/booking/update-booking`, {
+    const response = await fetch(`https://mptibe-production.up.railway.app/api/booking/update-booking`, {
       method: 'PUT',
       headers: {
         'Authorization': `Bearer ${token}`,
@@ -496,7 +496,7 @@ const rejectBooking = async (bookingId) => {
   
   try {
     const token = localStorage.getItem('token');
-    const response = await fetch(`http://localhost:3000/api/booking/update-booking`, {
+    const response = await fetch(`https://mptibe-production.up.railway.app/api/booking/update-booking`, {
       method: 'PUT',
       headers: {
         'Authorization': `Bearer ${token}`,

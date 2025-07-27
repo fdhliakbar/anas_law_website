@@ -806,7 +806,7 @@ const loadLawyers = async () => {
     }
 
     const response = await fetch(
-      `http://localhost:3000/api/lawyers/post-lawyers?${params}`
+      `https://mptibe-production.up.railway.app/api/lawyers/post-lawyers?${params}`
     );
     const data = await response.json();
 
@@ -902,7 +902,7 @@ const saveLawyer = async () => {
     let method = isEditing.value ? "PUT" : "POST";
 
     const response = await fetch(
-      `http://localhost:3000/api/lawyers/post-lawyers`,
+      `https://mptibe-production.up.railway.app/api/lawyers/post-lawyers`,
       {
         method,
         body: formData,

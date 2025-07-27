@@ -107,7 +107,7 @@ const fetchArticles = async () => {
   error.value = ''
   
   try {
-    const response = await fetch('http://localhost:3000/api/article/get-articles?limit=3&offset=0')
+    const response = await fetch('https://mptibe-production.up.railway.app/api/article/get-articles?limit=3&offset=0')
     const data = await response.json()
     
     if (response.ok && data.success) {

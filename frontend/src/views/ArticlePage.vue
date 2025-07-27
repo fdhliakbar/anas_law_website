@@ -239,7 +239,7 @@ const loadArticles = async (reset = false) => {
     const offset = reset ? 0 : (currentPage.value - 1) * articlesPerPage
     const limit = articlesPerPage
     
-    const response = await fetch(`http://localhost:3000/api/article/get-articles?limit=${limit}&offset=${offset}`)
+    const response = await fetch(`https://mptibe-production.up.railway.app/api/article/get-articles?limit=${limit}&offset=${offset}`)
     const data = await response.json()
     
     if (response.ok && data.success) {

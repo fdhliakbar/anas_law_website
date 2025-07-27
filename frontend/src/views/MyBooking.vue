@@ -73,7 +73,7 @@ onMounted(async () => {
   loading.value = true;
   try {
     const token = localStorage.getItem("token");
-    const res = await fetch("http://localhost:3000/api/booking/get-my-bookings", {
+    const res = await fetch("https://mptibe-production.up.railway.app/api/booking/get-my-bookings", {
       headers: { Authorization: `Bearer ${token}` },
     });
     const data = await res.json();

@@ -45,18 +45,8 @@
               href="#"
               class="flex items-center px-4 py-2 bg-indigo-100 text-indigo-700 rounded-lg font-semibold"
             >
-              <span class="material-icons mr-3">dashboard</span>
-              Dashboard
-            </a>
-          </li>
-          <li>
-            <a
-              @click="goToUsers"
-              href="#"
-              class="flex items-center px-4 py-2 text-gray-700 hover:bg-gray-100 rounded-lg"
-            >
               <span class="material-icons mr-3"></span>
-              Klien
+              Dashboard
             </a>
           </li>
           <li>
@@ -87,15 +77,6 @@
             >
               <span class="material-icons mr-3"></span>
               Manajemen Lawyers
-            </a>
-          </li>
-          <li>
-            <a
-              href="#"
-              class="flex items-center px-4 py-2 text-gray-700 hover:bg-gray-100 rounded-lg"
-            >
-              <span class="material-icons mr-3"></span>
-              Kasus Hukum
             </a>
           </li>
         </ul>
@@ -167,7 +148,6 @@
             <div class="text-2xl font-bold text-blue-600">
               {{ stats.totalUsers }}
             </div>
-            <div class="text-sm text-green-500 mt-1">+12% bulan ini</div>
           </div>
 
           <!-- Konsultasi Terjadwal -->

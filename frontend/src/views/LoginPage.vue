@@ -176,7 +176,7 @@ export default {
     async handleLogin() {
       try {
         const response = await fetch(
-          "http://localhost:3000/api/users/post-users",
+          "https://mptibe-production.up.railway.app/api/users/post-users",
           {
             method: "POST",
             headers: { "Content-Type": "application/json" },

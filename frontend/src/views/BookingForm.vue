@@ -262,7 +262,7 @@ const getPhotoUrl = (photo: string) => {
   }
   
   if (photo.startsWith('/uploads/')) {
-    return `http://localhost:3000${photo}`;
+    return `https://mptibe-production.up.railway.app${photo}`;
   }
   
   return '/src/assets/images/default-lawyer.jpg';
@@ -363,7 +363,7 @@ const loadLawyerData = async () => {
   try {
     console.log('Loading lawyer with ID:', lawyerId); // DEBUG
     
-    const response = await fetch(`http://localhost:3000/api/lawyers/get-lawyer?lawyer_id=${lawyerId}`);
+    const response = await fetch(`https://mptibe-production.up.railway.app/api/lawyers/get-lawyer?lawyer_id=${lawyerId}`);
     const data = await response.json();
     
     console.log('API Response:', data); // DEBUG
@@ -412,7 +412,7 @@ const submitBooking = async () => {
       pesan: form.value.pesan || null                 // SESUAI DB
     };
 
-    const response = await fetch('http://localhost:3000/api/booking/create-booking', {
+    const response = await fetch('https://mptibe-production.up.railway.app/api/booking/create-booking', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
