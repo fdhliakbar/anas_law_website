@@ -132,7 +132,7 @@
             <div class="flex items-center justify-between">
               <div class="flex items-center">
                 <img
-                  :src="article.author.avatar"
+                  src='/src/assets/images/founder.jpg'
                   :alt="article.author.name"
                   class="w-8 h-8 rounded-full mr-2"
                 />

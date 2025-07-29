@@ -930,7 +930,7 @@ const toggleLawyerStatus = async (lawyer) => {
   try {
     const token = localStorage.getItem("token");
     const response = await fetch(
-      `http://localhost:3000/api/lawyers/post-lawyers`,
+      `https://mptibe-production.up.railway.app/api/lawyers/post-lawyers`,
       {
         method: "PUT",
         headers: {
@@ -967,7 +967,7 @@ const deleteLawyer = async (lawyer) => {
   try {
     const token = localStorage.getItem("token");
     const response = await fetch(
-      `http://localhost:3000/api/lawyers/post-lawyers?lawyer_id=${lawyer.lawyer_id}`,
+      `https://mptibe-production.up.railway.app/api/lawyers/post-lawyers?lawyer_id=${lawyer.lawyer_id}`,
       {
         method: "DELETE",
         headers: {

@@ -27,13 +27,29 @@ export default defineEventHandler(async (event) => {
 
   const method = event.node.req.method;
   const body = await readBody(event).catch(() => ({}));
+  const body = await readBody(event).catch(() => ({}));
 
   if (method === "POST" && body.action === "register") {
+    const { name, email, password, confirmPassword, role } = body;
     const { name, email, password, confirmPassword, role } = body;
     const errors = [];
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     const allowedRoles = ["users", "admin"];
+    const allowedRoles = ["users", "admin"];
 
+    if (!name) {
+      errors.push("Nama Wajib Diisi");
+    }
+    if (!email) {
+      errors.push("Email wajib diisi");
+    } else if (!emailRegex.test(email)) {
+      errors.push("Format email tidak valid");
+    }
+    if (!password) {
+      errors.push("Password wajib diisi");
+    } else if (password.length < 8) {
+      errors.push("Password minimal 8 karakter");
+    } else if (password !== confirmPassword) {
     if (!name) {
       errors.push("Nama Wajib Diisi");
     }
@@ -54,6 +70,12 @@ export default defineEventHandler(async (event) => {
     } else if (!allowedRoles.includes(role)) {
       errors.push("Role tidak valid");
     }
+    }
+    if (!role) {
+      errors.push("Role Wajib diisi");
+    } else if (!allowedRoles.includes(role)) {
+      errors.push("Role tidak valid");
+    }
 
     if (errors.length > 0) {
       return {
@@ -66,8 +88,9 @@ export default defineEventHandler(async (event) => {
     try {
       const existingUser = await pool.query(
         "SELECT users_id FROM users WHERE email = $1",
-        [email]
+        [email],
       );
+
 
       if (existingUser.rows.length > 0) {
         throw createError({
@@ -81,7 +104,7 @@ export default defineEventHandler(async (event) => {
         `INSERT INTO users(name, email, password, role) 
          VALUES($1, $2, $3, $4) 
          RETURNING users_id, name, email, role`,
-        [name, email, hashedPassword, role]
+        [name, email, hashedPassword, role],
       );
 
       console.log("Insert result:", newUserResult.rows);
@@ -115,7 +138,7 @@ export default defineEventHandler(async (event) => {
     try {
       const userResult = await pool.query(
         "SELECT users_id, name, email, password, role FROM users WHERE email = $1",
-        [email]
+        [email],
       );
       if (userResult.rows.length === 0) {
         setResponseStatus(event, 401);
@@ -132,7 +155,10 @@ export default defineEventHandler(async (event) => {
 
       // --- PERBAIKAN DIMULAI DI SINI ---
 
+      // --- PERBAIKAN DIMULAI DI SINI ---
+
       const payload = {
+        users_id: user.users_id, // FIX 1: Nama properti dan referensi diperbaiki
         users_id: user.users_id, // FIX 1: Nama properti dan referensi diperbaiki
         name: user.name,
         email: user.email,

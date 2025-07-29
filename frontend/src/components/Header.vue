@@ -3,7 +3,7 @@
     <!-- Navbar -->
     <nav
       :class="[
-        'fixed w-full z-50 transition-all duration-300 ease-in-out bg-gray-400',
+        'fixed w-full z-50 transition-all duration-300 ease-in-out bg-blue-900',
         scrolled,
       ]"
     >
@@ -41,13 +41,12 @@
             </router-link>
           </li>
           <li>
-            <a
-              href="#"
-              @click.prevent="scrollTo('reviews')"
+            <router-link
+              to="/article"
               class="relative inline-block pb-1 after:content-[''] after:absolute after:left-0 after:bottom-0 after:w-0 after:h-[2px] after:bg-white after:transition-all after:duration-300 hover:after:w-full"
             >
-              {{ $t("header.reviews") }}
-            </a>
+              {{ $t("header.articles") }}
+            </router-link>
           </li>
         </ul>
 
@@ -77,7 +76,7 @@
           <div v-else class="relative">
             <button
               @click="toggleUserMenu"
-              class="flex items-center space-x-2 border border-gray-300 px-4 py-2 rounded-lg hover:bg-gray-100 transition text-sm"
+              class="flex items-center space-x-2 border border-gray-300 px-4 py-2 rounded-lg hover:bg-black transition text-sm text-white"
             >
               <span>{{ userInfo?.name || "User" }}</span>
               <svg

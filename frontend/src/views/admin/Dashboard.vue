@@ -86,7 +86,7 @@
           @click="logout"
           class="w-full flex items-center px-4 py-2 text-gray-700 hover:bg-gray-100 rounded-lg"
         >
-          <span class="material-icons mr-3">logout</span>
+          <span class="material-icons mr-3"></span>
           Keluar
         </button>
       </div>
@@ -513,7 +513,7 @@ const loadAdminData = () => {
 // Ambil users dari API dan hitung hanya yang role 'users'
 const fetchTotalUsers = async () => {
   try {
-    const response = await fetch("http://localhost:3000/api/users/get-users");
+    const response = await fetch("https://mptibe-production.up.railway.app/api/users/get-users");
     const data = await response.json();
     if (response.ok && data.users) {
       // Hanya user dengan role 'users'
@@ -550,7 +550,7 @@ const loadStats = async () => {
 const loadRecentArticles = async () => {
   try {
     const response = await fetch(
-      "http://localhost:3000/api/article/get-articles?limit=5&offset=0"
+      "https://mptibe-production.up.railway.app/api/article/get-articles?limit=5&offset=0"
     );
     const data = await response.json();
 
@@ -574,7 +574,7 @@ const loadRecentBookings = async () => {
     if (token) {
       // Try to call the API
       const response = await fetch(
-        "http://localhost:3000/api/booking/get-bookings?limit=20&offset=0",
+        "https://mptibe-production.up.railway.app/api/booking/get-bookings?limit=20&offset=0",
         {
           headers: {
             Authorization: `Bearer ${token}`,

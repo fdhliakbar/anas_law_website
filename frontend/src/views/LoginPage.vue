@@ -156,6 +156,8 @@
 </template>
 
 <script>
+import Swal from "sweetalert2";
+
 export default {
   name: "LoginPage",
   data() {
@@ -174,6 +176,8 @@ export default {
       this.$router.go(-1);
     },
     async handleLogin() {
+      this.isLoading = true;
+
       try {
         const response = await fetch(
           "https://mptibe-production.up.railway.app/api/users/post-users",
@@ -194,13 +198,9 @@ export default {
           throw new Error(data.message || "Login failed");
         }
 
-        // Simpan token jika perlu
         localStorage.setItem("token", data.token);
-
-        // Trigger auth status update in other components
         window.dispatchEvent(new Event("storage"));
 
-        // Ambil role dan isAdmin dari data.user
         const user = data.user || {};
         if (user.role === "admin" || user.isAdmin === true) {
           this.$router.push("/admin/dashboard");
@@ -208,8 +208,13 @@ export default {
           this.$router.push("/");
         }
       } catch (error) {
-        console.error("Login error:", error);
-        this.error = error.message;
+        Swal.fire({
+          icon: "error",
+          title: "Login Failed",
+          text: error.message,
+        });
+      } finally {
+        this.isLoading = false;
       }
     },
   },

@@ -1,5 +1,5 @@
 <template>
-  <footer class="bg-[#2c323b] text-gray-200 pt-10 pb-16">
+  <footer class="bg-blue-800 text-white pt-10 pb-16">
     <div class="max-w-screen-xl mx-auto px-4">
       <!-- Konten utama: Logo & Map -->
       <div class="flex flex-col md:flex-row justify-between items-start gap-8">

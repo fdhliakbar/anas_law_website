@@ -1,7 +1,7 @@
 <template>
   <Header />
   
-  <div class="min-h-screen bg-gray-50">
+  <div class="min-h-screen bg-gray-50 ">
     <!-- Loading State -->
     <div v-if="loading" class="flex items-center justify-center min-h-screen">
       <div class="text-center">
@@ -26,7 +26,7 @@
     <!-- Main Content -->
     <div v-else-if="selectedLawyer" class="max-w-4xl mx-auto px-4 py-8">
       <!-- Header Section -->
-      <div class="bg-white rounded-lg shadow-sm p-6 mb-6">
+      <div class="bg-white rounded-lg shadow-sm p-6 mb-6 mt-10 ">
         <div class="flex items-center gap-4">
           <img
             :src="getPhotoUrl(selectedLawyer.photo)"
@@ -42,7 +42,7 @@
         </div>
       </div>
 
-      <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 ">
         <!-- Left Column - About Mentor -->
         <div class="space-y-6">
           <div class="bg-white rounded-lg shadow-sm p-6">

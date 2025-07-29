@@ -3,8 +3,9 @@
 import pkg from "pg";
 const { Pool } = pkg;
 
-const config = useRuntimeConfig();
-
+const config = typeof useRuntimeConfig === 'function'
+  ? useRuntimeConfig()
+  : { databaseUrl: process.env.DATABASE_URL };
 // Membuat koneksi HANYA menggunakan connection string
 const pool = new Pool({
   connectionString: config.databaseUrl, // 'databaseUrl' adalah camelCase dari 'DATABASE_URL'

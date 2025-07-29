@@ -6,6 +6,7 @@
     "pricing": "Pricing",
     "bookConsultation": "Book Consultation",
     "reviews": "Reviews",
+    "articles": "Article",
     "contact": "Contact",
     "login": "Login",
     "chat": "Chat"
@@ -224,7 +225,7 @@
         "featuresTitle": "Everything you get with Basic"
       },
       "plus": {
-        "name": "Plus", 
+        "name": "Plus",
         "description": "Make your forms more beautiful and on-brand & analyze.",
         "featuresTitle": "Everything in Basic, Plus:"
       },
@@ -239,7 +240,7 @@
     "getConsultation": "Get a Free Consultation",
     "features": {
       "advancedSegmentation": "Advanced Segmentation",
-      "comparativeReporting": "Comparative Reporting", 
+      "comparativeReporting": "Comparative Reporting",
       "unlimitedSeats": "Unlimited Seats & Role Access",
       "multivariateTest": "Multivariate Testing",
       "dynamicContent": "Dynamic Content"
@@ -253,7 +254,7 @@
   },
   "testimonials": {
     "badge": "Testimonials",
-    "title": "What Our Clients Say", 
+    "title": "What Our Clients Say",
     "description": "Testimonials is a great way to increase brand trust and awareness. Use this section to highlight your popular customers.",
     "clients": {
       "fadhli": {
@@ -265,7 +266,7 @@
       },
       "dylan": {
         "review": "Make sure you only pick the right sentence to keep it short and simple.",
-        "name": "Dylan Ambrose", 
+        "name": "Dylan Ambrose",
         "position": "Lead marketer at Netflix",
         "highlight1": "right sentence"
       },

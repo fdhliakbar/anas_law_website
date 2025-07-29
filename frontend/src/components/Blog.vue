@@ -65,7 +65,7 @@
               :src="post.authorImage"
               :alt="post.author"
               class="w-10 h-10 rounded-full"
-              @error="(e) => e.target.src = '/src/assets/images/feris.jpg'"
+              @error="(e) => e.target.src = '/src/assets/images/founder.jpg'"
             />
             <div>
               <p class="text-sm font-medium">{{ post.author }}</p>
@@ -138,7 +138,7 @@ const blogPosts = computed(() => {
         image: "/src/assets/images/lawyer01.jpg",
         author: t('blog.defaultAuthor'),
         company: t('blog.defaultCompany'),
-        authorImage: "/src/assets/images/feris.jpg",
+        authorImage: "/src/assets/images/founder.jpg",
         artikel_id: null
       }
     ]
@@ -150,7 +150,7 @@ const blogPosts = computed(() => {
     image: article.gambar || "/src/assets/images/lawyer01.jpg",
     author: "Admin Anas Law", // Bisa diganti dengan data author dari API
     company: "Anas Law Firm",
-    authorImage: "/src/assets/images/feris.jpg",
+    authorImage: "/src/assets/images/founder.jpg",
     artikel_id: article.artikel_id,
     created_at: article.created_at
   }))
