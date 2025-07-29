@@ -44,7 +44,7 @@
               />
             </div>
             <div class="text-center">
-              <p class="font-bold text-lg text-white">{{ member.name }}</p>
+              <p class=" text-lg text-white">{{ member.name }}</p>
               <p class="text-[#F5F8E0] text-sm">{{ member.role }}</p>
             </div>
           </div>
@@ -61,42 +61,42 @@ const team = [
   {
     name: "Dr.(c) Wahyudi, S.H., M.H. Kes",
     role: "Senior Partner",
-    image: "/src/assets/images/2.jpg",
+    image: "/images/2.jpg",
   },
   {
     name: "Durohim Amnan, S.H., M.H.",
     role: "Partner",
-    image: "/src/assets/images/3.jpg",
+    image: "/images/3.jpg",
   },
   {
     name: "Dewi Indri Lestari, S.H.",
     role: "Partner",
-    image: "/src/assets/images/4.jpg",
+    image: "/images/4.jpg",
   },
   {
     name: "Lalu Hartawan Mandala Putra, S.H., C.me.",
     role: "Partner",
-    image: "/src/assets/images/6.jpg",
+    image: "/images/6.jpg",
   },
   {
     name: "Raspan Afandi, S.H.",
     role: "Associate",
-    image: "/src/assets/images/7.jpg",
+    image: "/images/7.jpg",
   },
   {
     name: "Gilang Wahyudin, S.H",
     role: "Associate",
-    image: "/src/assets/images/8.jpg",
+    image: "/images/8.jpg",
   },
   {
     name: "Muhammad Ainun Najib Surahman, S.H., LLM",
     role: "Founder & Managing Partner",
-    image: "/src/assets/images/founder.jpg",
+    image: "/images/founder.jpg",
   },
   {
     name: "Anggi Saputra, S.H., LLM",
     role: "Founder & Managing Partner",
-    image: "/src/assets/images/cofounder.jpg",
+    image: "/images/cofounder.jpg",
   },
 ];
 

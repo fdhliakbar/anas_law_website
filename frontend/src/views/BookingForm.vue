@@ -29,15 +29,15 @@
       <div class="bg-white rounded-lg shadow-sm p-6 mb-6 mt-10 ">
         <div class="flex items-center gap-4">
           <img
-            :src="getPhotoUrl(selectedLawyer.photo)"
-            :alt="selectedLawyer.name"
+            :src="selectedLawyer?.photo || '/src/assets/images/founder.jpg'"
+            :alt="selectedLawyer?.name || 'Lawyer'"
             class="w-16 h-16 rounded-full object-cover"
             @error="handleImageError"
           />
           <div>
-            <h1 class="text-2xl font-bold text-gray-900">{{ selectedLawyer.name }}</h1>
-            <p class="text-gray-600">{{ selectedLawyer.specialty }}</p>
-            <p class="text-sm text-gray-500">{{ selectedLawyer.experience }} tahun pengalaman</p>
+            <h1 class="text-2xl font-bold text-gray-900">{{ selectedLawyer?.name || 'Anas Nazarudin' }}</h1>
+            <p class="text-gray-600">{{ selectedLawyer?.specialty || 'Software Engineer' }}</p>
+            <p class="text-sm text-gray-500">{{ selectedLawyer?.experience || '5' }} tahun pengalaman</p>
           </div>
         </div>
       </div>
@@ -449,21 +449,31 @@ const closeSuccessModal = () => {
   router.push('/booking-success');
 };
 
-onMounted(async () => {
-  console.log('BookingForm mounted'); // DEBUG
-  console.log('Route params:', route.params); // DEBUG
+onMounted(() => {
+  // Get lawyer data from route params or query
+  const lawyerId = route.params.id || route.query.lawyerId;
   
-  // Check auth first
-  const token = localStorage.getItem('token');
-  if (!token) {
-    console.log('No token, redirecting to login'); // DEBUG
-    router.push(`/login?redirect=${route.fullPath}`);
-    return;
-  }
-
-  // Load lawyer data and prefill user data
-  await loadLawyerData();
-  prefillUserData();
+  // Mock lawyer data - in real app, fetch from API
+  const lawyers = [
+    {
+      id: 1,
+      name: "Anas Nazarudin",
+      specialty: "Pengacara Pidana",
+      experience: 5,
+      photo: "/src/assets/images/founder.jpg",
+      description: "Pengacara berpengalaman dengan latar belakang yang kuat dalam bidang hukum pidana, perdata, dan korporat. Berpengalaman menangani berbagai kasus hukum kompleks dan memberikan konsultasi profesional kepada klien dari berbagai kalangan."
+    },
+    {
+      id: 2,
+      name: "Andika Suyandra",
+      specialty: "Pengacara Korporat",
+      experience: 4,
+      photo: "/src/assets/images/cofounder.jpg",
+      description: "Spesialis hukum korporat dengan pengalaman dalam merger, akuisisi, dan kepatuhan perusahaan."
+    }
+  ];
+  
+  selectedLawyer.value = lawyers.find(l => l.id === Number(lawyerId)) || lawyers[0];
 });
 </script>
 

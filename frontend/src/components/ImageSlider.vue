@@ -21,11 +21,11 @@
 import { Splide, SplideSlide } from "@splidejs/vue-splide";
 
 const images = [
-  "/src/assets/images/justice.jpg",
-  "/src/assets/images/justice.jpg",
-  "/src/assets/images/justice.jpg",
-  "/src/assets/images/justice.jpg",
-  "/src/assets/images/justice.jpg",
+  "/images/slide01.jpg",
+  "/images/slide02.jpg",
+  "/images/slide03.jpg",
+  "/images/slide04.jpg",
+  "/images/slide05.jpg",
 ];
 
 const splideOptions = {

@@ -23,14 +23,17 @@
         <!-- Navigation Links (centered) -->
         <ul
           class="hidden lg:flex items-center space-x-8 text-base text-[#f5f5f5] font-medium mx-8"
-        >
+          >
+          <li>
+            <router-link to="/"
+            >{{ $t('header.home') }}</router-link
+            >
+          </li>
           <li>
             <router-link
               to="/"
               class="relative inline-block pb-1 after:content-[''] after:absolute after:left-0 after:bottom-0 after:w-0 after:h-[2px] after:bg-white after:transition-all after:duration-300 hover:after:w-full"
             >
-              {{ $t("header.home") }}
-            </router-link>
           </li>
           <li>
             <router-link
@@ -41,12 +44,11 @@
             </router-link>
           </li>
           <li>
-            <router-link
-              to="/article"
-              class="relative inline-block pb-1 after:content-[''] after:absolute after:left-0 after:bottom-0 after:w-0 after:h-[2px] after:bg-white after:transition-all after:duration-300 hover:after:w-full"
+            <a
+              href="#"
+              @click.prevent="scrollTo('reviews')"
+              >{{ $t('header.reviews') }}</a
             >
-              {{ $t("header.articles") }}
-            </router-link>
           </li>
         </ul>
 
@@ -146,18 +148,6 @@
           @click="closeMobileMenu"
           >{{ $t("header.home") }}</router-link
         >
-        <a
-          href="#"
-          class="block hover:underline"
-          @click.prevent="scrollTo('about')"
-          >{{ $t("header.about") }}</a
-        >
-        <a
-          href="#"
-          class="block hover:underline"
-          @click.prevent="scrollTo('services')"
-          >{{ $t("header.services") }}</a
-        >
         <router-link
           to="/pricing"
           class="block hover:underline"
@@ -172,18 +162,12 @@
         >
           {{ $t("header.bookConsultation") }}
         </router-link>
-        <a
-          href="#"
+        <router-link
+          to="/article"
           class="block hover:underline"
-          @click.prevent="scrollTo('reviews')"
-          >{{ $t("header.reviews") }}</a
-        >
-        <a
-          href="#"
-          class="block hover:underline"
-          @click.prevent="scrollTo('footer')"
-          >{{ $t("header.contact") }}</a
-        >
+          @click="closeMobileMenu"
+          >{{ $t("header.articles") }}
+          </router-link>
         <div class="pt-2">
           <LanguageSwitcher />
         </div>
@@ -334,8 +318,3 @@ export default {
   },
 };
 </script>
-
-<style scoped>
-/* Add any additional styles if needed */
-</style>
-/* Add any additional styles if needed */

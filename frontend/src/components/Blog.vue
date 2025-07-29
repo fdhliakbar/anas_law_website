@@ -94,99 +94,33 @@ import { useI18n } from 'vue-i18n'
 import { useRouter } from 'vue-router'
 
 const { t } = useI18n()
-const router = useRouter()
 
-// Reactive data
-const articles = ref([])
-const loading = ref(false)
-const error = ref('')
-
-// Fetch articles from API
-const fetchArticles = async () => {
-  loading.value = true
-  error.value = ''
-  
-  try {
-    const response = await fetch('https://mptibe-production.up.railway.app/api/article/get-articles?limit=3&offset=0')
-    const data = await response.json()
-    
-    if (response.ok && data.success) {
-      articles.value = data.articles || data.data || []
-      console.log('Articles loaded for blog:', articles.value)
-    } else {
-      console.error('Failed to load articles:', data.message)
-      error.value = 'Gagal memuat artikel'
-      articles.value = []
-    }
-  } catch (err) {
-    console.error('Error fetching articles:', err)
-    error.value = 'Terjadi kesalahan saat memuat artikel'
-    articles.value = []
-  } finally {
-    loading.value = false
-  }
-}
-
-// Format article data for display
-const blogPosts = computed(() => {
-  if (articles.value.length === 0) {
-    // Fallback ke data mock jika tidak ada artikel
-    return [
-      {
-        title: t('blog.defaultTitle'),
-        description: t('blog.defaultDescription'),
-        image: "/src/assets/images/lawyer01.jpg",
-        author: t('blog.defaultAuthor'),
-        company: t('blog.defaultCompany'),
-        authorImage: "/src/assets/images/founder.jpg",
-        artikel_id: null
-      }
-    ]
-  }
-  
-  return articles.value.map(article => ({
-    title: article.judul,
-    description: article.deskripsi,
-    image: article.gambar || "/src/assets/images/lawyer01.jpg",
-    author: "Admin Anas Law", // Bisa diganti dengan data author dari API
-    company: "Anas Law Firm",
-    authorImage: "/src/assets/images/founder.jpg",
-    artikel_id: article.artikel_id,
-    created_at: article.created_at
-  }))
-})
-
-// Handle image error
-const handleImageError = (event) => {
-  event.target.src = '/src/assets/images/lawyer01.jpg'
-}
-
-// Format date
-const formatDate = (dateString) => {
-  if (!dateString) return ''
-  const date = new Date(dateString)
-  return date.toLocaleDateString('id-ID', {
-    day: 'numeric',
-    month: 'short',
-    year: 'numeric'
-  })
-}
-
-// Navigate to article detail
-const goToArticle = (articleId) => {
-  if (articleId) {
-    // Untuk artikel dari database, bisa diarahkan ke halaman detail artikel
-    router.push(`/article/${articleId}`)
-  } else {
-    // Untuk artikel fallback/mock, arahkan ke halaman artikel umum
-    router.push('/article')
-  }
-}
-
-// Load articles on component mount
-onMounted(() => {
-  fetchArticles()
-})
+const blogPosts = computed(() => [
+  {
+    title: t('blog.defaultTitle'),
+    description: t('blog.defaultDescription'),
+    image: "/src/assets/images/lawyer01.jpg",
+    author: t('blog.defaultAuthor'),
+    company: t('blog.defaultCompany'),
+    authorImage: "/src/assets/images/feris.jpg",
+  },
+  {
+    title: t('blog.defaultTitle'),
+    description: t('blog.defaultDescription'),
+    image: "/src/assets/images/lawyer01.jpg",
+    author: t('blog.defaultAuthor'),
+    company: t('blog.defaultCompany'),
+    authorImage: "/src/assets/images/feris.jpg",
+  },
+  {
+    title: t('blog.defaultTitle'),
+    description: t('blog.defaultDescription'),
+    image: "/src/assets/images/lawyer01.jpg",
+    author: t('blog.defaultAuthor'),
+    company: t('blog.defaultCompany'),
+    authorImage: "/src/assets/images/feris.jpg",
+  },
+])
 </script>
 
 <style scoped>

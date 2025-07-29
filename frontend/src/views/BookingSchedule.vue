@@ -23,9 +23,7 @@
           <button
             class="border border-black text-black px-8 py-4 rounded-lg text-lg font-semibold bg-white hover:bg-black hover:text-white transition"
           >
-            <a href="https://wa.me/6281394879411">
-              {{ $t("booking.getInTouch") }}
-            </a>
+            {{ $t('booking.getInTouch') }}
           </button>
         </div>
       </div>
@@ -138,14 +136,19 @@
                   >
                 </div>
               </div>
-              <div class="text-center">
-                <button
-                  @click="goToBookingForm(lawyer.lawyer_id)"
-                  class="w-full border border-black bg-black text-white py-3 px-6 rounded-lg font-semibold transition hover:bg-gray-800"
-                >
-                  {{ $t("booking.bookConsultation") }}
-                </button>
+            </div>
+            
+            <div class="text-center">
+              <div class="mb-4">
+                <span class="text-2xl font-bold text-black">${{ lawyer.fee.toLocaleString() }}</span>
+                <span class="text-gray-500 line-through ml-2">${{ lawyer.oldFee.toLocaleString() }}</span>
               </div>
+              <button
+                @click="goToBookingForm(lawyer.id)"
+                class="w-full border border-black bg-black text-white py-3 px-6 rounded-lg font-semibold transition hover:bg-gray-800"
+              >
+                {{ $t('booking.bookConsultation') }}
+              </button>
             </div>
           </div>
 
@@ -201,23 +204,23 @@
     <section class="py-16 px-4 bg-gray-900 text-white">
       <div class="max-w-5xl mx-auto text-center">
         <h2 class="font-bold text-4xl md:text-5xl mb-8">
-          {{ $t("booking.readyToGetHelp") }}
+          {{ $t('booking.readyToGetHelp') }}
         </h2>
         <p class="text-xl text-gray-300 mb-12 max-w-3xl mx-auto">
-          {{ $t("booking.readyToGetHelpDesc") }}
+          {{ $t('booking.readyToGetHelpDesc') }}
         </p>
         <div class="flex flex-col md:flex-row gap-4 justify-center">
           <button
             @click="goToPricing"
             class="border border-white bg-white text-black px-8 py-4 rounded-lg text-lg font-semibold transition hover:bg-gray-100"
           >
-            {{ $t("booking.viewPricing") }}
+            {{ $t('booking.viewPricing') }}
           </button>
           <button
             @click="goToChat"
             class="border border-white text-white px-8 py-4 rounded-lg text-lg font-semibold bg-transparent hover:bg-white hover:text-black transition"
           >
-            {{ $t("booking.chatNow") }}
+            {{ $t('booking.chatNow') }}
           </button>
         </div>
       </div>
@@ -269,93 +272,119 @@ onMounted(() => {
   loadLawyers();
 });
 
-// Methods
-const loadLawyers = async (isLoadMore = false) => {
-  if (isLoadMore) {
-    loadingMore.value = true;
-  } else {
-    loading.value = true;
-    lawyers.value = [];
-    pagination.value.offset = 0;
-  }
-
-  error.value = "";
-
-  try {
-    const params = new URLSearchParams({
-      limit: pagination.value.limit.toString(),
-      offset: pagination.value.offset.toString(),
-    });
-
-    if (search.value.trim()) {
-      params.append("search", search.value.trim());
-    }
-
-    const response = await fetch(
-      `https://mptibe-production.up.railway.app/api/lawyers/get-lawyers?${params}`
-    );
-    const data = await response.json();
-
-    if (response.ok) {
-      if (isLoadMore) {
-        lawyers.value = [...lawyers.value, ...data.lawyers];
-      } else {
-        lawyers.value = data.lawyers;
-      }
-
-      pagination.value = {
-        ...data.pagination,
-        offset: pagination.value.offset + data.pagination.limit,
-      };
-    } else {
-      error.value = data.message || "Failed to load lawyers";
-    }
-  } catch (err) {
-    console.error("Error loading lawyers:", err);
-    error.value = "Network error. Please try again.";
-  } finally {
-    loading.value = false;
-    loadingMore.value = false;
-  }
-};
-
-const loadMoreLawyers = (event?: MouseEvent) => {
-  loadLawyers(true);
-};
-
-const handleSearch = () => {
-  // Debounce search
-  clearTimeout(searchTimeout);
-  const searchTimeout = setTimeout(() => {
-    loadLawyers();
-  }, 500);
-};
-
-const getPhotoUrl = (photo) => {
-  if (!photo) return "/src/assets/images/default-lawyer.jpg";
-
-  // Sudah URL absolut (http/https)
-  if (photo.startsWith("http")) return photo;
-
-  // Gambar hasil upload backend
-  if (photo.startsWith("/uploads/")) {
-    // Pastikan URL backend benar (ganti jika deploy)
-    return `https://mptibe-production.up.railway.app${photo}`;
-  }
-
-  // Gambar dari assets lokal frontend
-  if (photo.startsWith("/src/assets/") || photo.startsWith("src/assets/")) {
-    return photo.replace(/^\/?src\/assets\//, "/src/assets/");
-  }
-
-  // Fallback
-  return "/src/assets/images/default-lawyer.jpg";
-};
-
-const handleImageError = (event: Event) => {
-  const target = event.target as HTMLImageElement;
-  target.src = "/src/assets/images/default-lawyer.jpg";
-};
+// Dummy data for lawyers
+const lawyers = [
+  {
+    id: 1,
+    name: "Muhammad Ainun Najib Surahman, S.H., LLM",
+    specialty: "Founder & Managing Partner",
+    experience: 5,
+    rating: 97,
+    fee: 25000,
+    oldFee: 28000,
+    photo: "../src/assets/images/founder.jpg",
+    available: true,
+  },
+  {
+    id: 2,
+    name: "Anggi Saputra, S.H., LLM.",
+    specialty: "Founder and Managing Partner",
+    experience: 4,
+    rating: 94,
+    fee: 25000,
+    oldFee: 28000,
+    photo: "../src/assets/images/cofounder.jpg",
+    available: true,
+  },
+  {
+    id: 3,
+    name: "Wahyudi, S.H., M.H. Kes",
+    specialty: "Senior Partner",
+    experience: 4,
+    rating: 94,
+    fee: 25000,
+    oldFee: 28000,
+    photo: "../src/assets/images/2.jpg",
+    available: true,
+  },
+  {
+    id: 4,
+    name: "Dewi Indri Lestari, S.H.",
+    specialty: "Partner",
+    experience: 4,
+    rating: 94,
+    fee: 25000,
+    oldFee: 28000,
+    photo: "../src/assets/images/4.jpg",
+    available: true,
+  },
+  {
+    id: 5,
+    name: "Durohim Amnan, S.H., M.H.",
+    specialty: "Partner",
+    experience: 6,
+    rating: 96,
+    fee: 28000,
+    oldFee: 32000,
+    photo: "../src/assets/images/3.jpg",
+    available: true,
+  },
+  {
+    id: 6,
+    name: "Lalu Hartawan Mandala Putra, S.H., C.me.",
+    specialty: "Partner",
+    experience: 3,
+    rating: 92,
+    fee: 22000,
+    oldFee: 25000,
+    photo: "../src/assets/images/6.jpg",
+    available: true,
+  },
+  {
+    id: 7,
+    name: "Raspan Afandi, S.H.",
+    specialty: "Employment Law Attorney",
+    experience: 3,
+    rating: 92,
+    fee: 22000,
+    oldFee: 25000,
+    photo: "../src/assets/images/7.jpg",
+    available: true,
+  },
+  {
+    id: 8,
+    name: "Gilang Wahyudin, S.H",
+    specialty: "Employment Law Attorney",
+    experience: 3,
+    rating: 92,
+    fee: 22000,
+    oldFee: 25000,
+    photo: "../src/assets/images/8.jpg",
+    available: true,
+  },
+  {
+    id: 9,
+    name: "Rezky Panji Perdana Martua Hasibuan",
+    specialty: "Partner",
+    experience: 3,
+    rating: 92,
+    fee: 22000,
+    oldFee: 25000,
+    photo: "../src/assets/images/partner5.jpg",
+    available: true,
+  },
+  {
+    id: 10,
+    name: "Yusuf Agung Purnama, S.H., M.H.",
+    specialty: "Partner",
+    experience: 3,
+    rating: 92,
+    fee: 22000,
+    oldFee: 25000,
+    photo: "../src/assets/images/Partner1.jpg",
+    available: true,
+  },
+];
 
 const goToBookingForm = (lawyerId: number) => {
   // Check if user is logged in
@@ -410,7 +439,11 @@ const goToChat = () => {
 };
 
 const goToPricing = () => {
-  router.push("/pricing");
+  router.push('/pricing');
+};
+
+const goToBookingForm = (lawyerId: number) => {
+  router.push({ name: 'BookingForm', params: { id: lawyerId } });
 };
 </script>
 

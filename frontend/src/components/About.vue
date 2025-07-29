@@ -16,7 +16,7 @@
       <!-- Kanan -->
       <div class="space-y-6 w-full md:w-auto">
         <div>
-          <p class="text-xl font-semibold">$350,000k</p>
+          <p class="text-xl font-semibold">40+</p>
           <p class="text-sm text-gray-600">{{ $t('about.recoveredAmount') }}</p>
         </div>
         <div>
@@ -24,7 +24,7 @@
           <p class="text-sm text-gray-600">{{ $t('about.googleReviews') }}</p>
         </div>
         <div>
-          <p class="text-xl font-semibold">100+ years</p>
+          <p class="text-xl font-semibold">5+ years</p>
           <p class="text-sm text-gray-600">{{ $t('about.experience') }}</p>
         </div>
       </div>
