@@ -156,6 +156,8 @@
 </template>
 
 <script>
+import Swal from "sweetalert2";
+
 export default {
   name: "LoginPage",
   data() {
@@ -175,18 +177,42 @@ export default {
     },
     async handleLogin() {
       this.isLoading = true;
+
       try {
-        // Simulate API call
-        await new Promise(resolve => setTimeout(resolve, 1000));
-        
-        // Here you would typically make an API call to authenticate
-        console.log("Login attempt:", this.form);
-        
-        // Redirect to dashboard or home page
-        this.$router.push("/admin/dashboard");
+        const response = await fetch(
+          "https://mptibe-production.up.railway.app/api/users/post-users",
+          {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({
+              action: "login",
+              email: this.form.email,
+              password: this.form.password,
+            }),
+          }
+        );
+
+        const data = await response.json();
+
+        if (!response.ok) {
+          throw new Error(data.message || "Login failed");
+        }
+
+        localStorage.setItem("token", data.token);
+        window.dispatchEvent(new Event("storage"));
+
+        const user = data.user || {};
+        if (user.role === "admin" || user.isAdmin === true) {
+          this.$router.push("/admin/dashboard");
+        } else {
+          this.$router.push("/");
+        }
       } catch (error) {
-        console.error("Login error:", error);
-        alert(error.message || "Login failed. Please try again.");
+        Swal.fire({
+          icon: "error",
+          title: "Login Failed",
+          text: error.message,
+        });
       } finally {
         this.isLoading = false;
       }

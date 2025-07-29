@@ -46,7 +46,7 @@
               d="M15 19l-7-7 7-7"
             />
           </svg>
-          Kembali ke Articles
+          Semua Artikel
         </button>
         <button
           @click="goToDashboard"
@@ -81,7 +81,7 @@
           type="text"
           class="w-full border px-3 py-2 rounded"
           required
-          maxlength="50"
+          maxlength="100"
         />
       </div>
       <div>
@@ -91,6 +91,16 @@
           class="w-full border px-3 py-2 rounded"
           required
           rows="4"
+        ></textarea>
+      </div>
+      <div>
+        <label class="block mb-1 font-medium">Content Artikel</label>
+        <textarea
+          v-model="form.content_artikel"
+          class="w-full border px-3 py-2 rounded"
+          required
+          rows="6"
+          placeholder="Tulis konten lengkap artikel di sini..."
         ></textarea>
       </div>
       <div>
@@ -157,6 +167,7 @@ export default {
         judul: "",
         deskripsi: "",
         link_artikel: "",
+        content_artikel: "", // TAMBAHKAN INI
       },
       imageFile: null,
       imagePreview: null,
@@ -190,7 +201,7 @@ export default {
     async loadArticleForEdit() {
       try {
         const response = await fetch(
-          `http://localhost:3000/api/article/get-articles?artikel_id=${this.articleId}`
+          `https://mptibe-production.up.railway.app/api/article/get-articles?artikel_id=${this.articleId}`
         );
 
         if (!response.ok) {
@@ -204,6 +215,7 @@ export default {
         this.form.judul = this.currentArticle.judul;
         this.form.deskripsi = this.currentArticle.deskripsi;
         this.form.link_artikel = this.currentArticle.link_artikel || "";
+        this.form.content_artikel = this.currentArticle.content_artikel; // TAMBAHKAN INI
       } catch (error) {
         console.error("Error loading article:", error);
         this.error = "Gagal memuat artikel untuk diedit";
@@ -232,11 +244,12 @@ export default {
       const formData = new FormData();
       formData.append("judul", this.form.judul);
       formData.append("deskripsi", this.form.deskripsi);
+      formData.append('content_artikel', this.form.content_artikel); // PASTIKAN INI ADA
       formData.append("link_artikel", this.form.link_artikel);
       formData.append("gambar", this.imageFile);
 
       const response = await fetch(
-        "http://localhost:3000/api/article/post-article",
+        "https://mptibe-production.up.railway.app/api/article/post-article",
         {
           method: "POST",
           body: formData,
@@ -262,11 +275,12 @@ export default {
         const formData = new FormData();
         formData.append("judul", this.form.judul);
         formData.append("deskripsi", this.form.deskripsi);
+        formData.append('content_artikel', this.form.content_artikel); // PASTIKAN INI ADA
         formData.append("link_artikel", this.form.link_artikel);
         formData.append("gambar", this.imageFile);
 
         const response = await fetch(
-          "http://localhost:3000/api/article/post-article",
+          "https://mptibe-production.up.railway.app/api/article/post-article",
           {
             method: "POST",
             body: formData,
@@ -293,7 +307,7 @@ export default {
         };
 
         const response = await fetch(
-          "http://localhost:3000/api/article/update-article",
+          "https://mptibe-production.up.railway.app/api/article/update-article",
           {
             method: "PUT",
             headers: {
@@ -319,7 +333,7 @@ export default {
     async deleteOldArticle() {
       try {
         await fetch(
-          `http://localhost:3000/api/article/delete-article?artikel_id=${this.articleId}`,
+          `https://mptibe-production.up.railway.app/api/article/delete-article?artikel_id=${this.articleId}`,
           {
             method: "DELETE",
           }
@@ -333,6 +347,7 @@ export default {
       this.form.judul = "";
       this.form.deskripsi = "";
       this.form.link_artikel = "";
+      this.form.content_artikel = ""; // TAMBAHKAN INI
       this.imageFile = null;
       this.imagePreview = null;
     },

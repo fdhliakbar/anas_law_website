@@ -309,6 +309,9 @@
 </template>
 
 <script>
+
+import Swal from "sweetalert2";
+
 export default {
   name: "RegisterPage",
   data() {
@@ -325,17 +328,25 @@ export default {
   methods: {
     async handleRegister() {
       if (this.form.password.length < 8) {
-        alert("Password must be at least 8 characters long.");
+        Swal.fire({
+          icon: "warning",
+          title: "Oops...",
+          text: "Password must be at least 8 characters long.",
+        });
         return;
       }
       if (this.form.password !== this.form.repeatPassword) {
-        alert("Passwords do not match.");
+        Swal.fire({
+          icon: "error",
+          title: "Mismatch Password",
+          text: "Passwords do not match.",
+        });
         return;
       }
-      // Kirim ke backend
+
       try {
         const response = await fetch(
-          "http://localhost:3000/api/users/post-users",
+          "https://mptibe-production.up.railway.app/api/users/post-users",
           {
             method: "POST",
             headers: { "Content-Type": "application/json" },
@@ -345,6 +356,7 @@ export default {
               email: this.form.email,
               password: this.form.password,
               confirmPassword: this.form.repeatPassword,
+              role: "users",
             }),
           }
         );
@@ -355,10 +367,23 @@ export default {
           throw new Error(data.message || "Registration failed");
         }
 
-        alert("Registration successful!");
-        this.$router.push("/login");
+        Swal.fire({
+          icon: "success",
+          title: "Success",
+          text: "Registration successful!",
+          timer: 1500,
+          showConfirmButton: false,
+        });
+
+        setTimeout(() => {
+          this.$router.push("/login");
+        }, 1500);
       } catch (err) {
-        alert("Registration failed: " + err.message);
+        Swal.fire({
+          icon: "error",
+          title: "Registration Failed",
+          text: err.message,
+        });
       }
     },
     togglePasswordVisibility() {
@@ -371,7 +396,7 @@ export default {
       this.$router.push("/login");
     },
     changeLanguage() {
-      alert("Tombol ganti bahasa diklik!");
+      Swal.fire("Language switch clicked!");
     },
   },
 };

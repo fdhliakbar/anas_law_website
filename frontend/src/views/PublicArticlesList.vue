@@ -288,7 +288,7 @@ export default {
 
       try {
         const response = await fetch(
-          "http://localhost:3000/api/article/get-articles"
+          "https://mptibe-production.up.railway.app/api/article/get-articles"
         );
 
         if (!response.ok) {
@@ -354,7 +354,7 @@ export default {
 
       try {
         const response = await fetch(
-          `http://localhost:3000/api/article/delete-article?artikel_id=${article.artikel_id}`,
+          `https://mptibe-production.up.railway.app/api/article/delete-article?artikel_id=${article.artikel_id}`,
           {
             method: "DELETE",
             headers: {

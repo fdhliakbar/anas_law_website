@@ -39,6 +39,7 @@ export default defineEventHandler(async (event) => {
 
     const judul = fields.judul?.toString().trim();
     const deskripsi = fields.deskripsi?.toString().trim();
+    const content_artikel = fields.content_artikel?.toString().trim(); // TAMBAHKAN INI
     const link_artikel = fields.link_artikel
       ? fields.link_artikel.toString().trim()
       : null;
@@ -46,7 +47,7 @@ export default defineEventHandler(async (event) => {
       ? files.gambar[0]
       : files.gambar;
 
-    if (!judul || !deskripsi || !gambarFile || !gambarFile.filepath) {
+    if (!judul || !deskripsi || !content_artikel || !gambarFile || !gambarFile.filepath) {
       throw createError({
         statusCode: 400,
         statusMessage: "Semua field wajib diisi dan file gambar harus valid",
@@ -57,11 +58,11 @@ export default defineEventHandler(async (event) => {
 
     // Query sesuai tabel: judul, deskripsi, gambar, link_artikel
     const query = `
-      INSERT INTO artikel (judul, deskripsi, gambar, link_artikel, created_at, updated_at)
-      VALUES ($1, $2, $3, $4, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP)
-      RETURNING artikel_id, judul, deskripsi, gambar, link_artikel, created_at, updated_at
+      INSERT INTO artikel (judul, deskripsi, content_artikel, gambar, link_artikel, created_at, updated_at)
+      VALUES ($1, $2, $3, $4, $5, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP)
+      RETURNING artikel_id, judul, deskripsi, content_artikel, gambar, link_artikel, created_at, updated_at
     `;
-    const values = [judul, deskripsi, gambarPath, link_artikel];
+    const values = [judul, deskripsi, content_artikel, gambarPath, link_artikel];
 
     const result = await pool.query(query, values);
 

@@ -1,12 +1,11 @@
 import pool from "../../utils/db.js";
-
+import { getQuery } from "h3";
 // Tambahkan base URL dari server backend Anda
 // Untuk development, ini biasanya http://localhost:3000
 // Untuk produksi, ganti dengan URL domain Anda
 const baseUrl = "http://localhost:3000/api";
 
 export default defineEventHandler(async (event) => {
-  // ... (kode CORS Anda tetap di sini)
   setResponseHeaders(event, {
     "Access-Control-Allow-Origin": "*",
     "Access-Control-Allow-Methods": "GET,OPTIONS",
@@ -18,23 +17,27 @@ export default defineEventHandler(async (event) => {
   }
 
   try {
+      // TAMBAHKAN INI - ambil query parameters
     const query = getQuery(event);
-    const { artikel_id, limit = 10, offset = 0 } = query;
+    const artikel_id = query.artikel_id;
+    const limit = query.limit || 10;
+    const offset = query.offset || 0;
 
     let sqlQuery;
     let values = [];
 
+
     // ... (logika query Anda tetap sama)
     if (artikel_id) {
       sqlQuery = `
-        SELECT artikel_id, judul, deskripsi, gambar, link_artikel, created_at, updated_at
+        SELECT artikel_id, judul, deskripsi, gambar, content_artikel, link_artikel, created_at, updated_at
         FROM artikel 
         WHERE artikel_id = $1
       `;
       values = [artikel_id];
     } else {
       sqlQuery = `
-        SELECT artikel_id, judul, deskripsi, gambar, link_artikel, created_at, updated_at
+        SELECT artikel_id, judul, deskripsi, gambar, content_artikel, link_artikel, created_at, updated_at
         FROM artikel 
         ORDER BY created_at DESC 
         LIMIT $1 OFFSET $2

@@ -162,26 +162,23 @@ const hasApiKey = computed(() => {
   try {
     const openrouterToken = import.meta.env.VITE_OPENROUTER_API_KEY
     const geminiToken = import.meta.env.VITE_GEMINI_API_KEY
-    const isDebug = import.meta.env.VITE_CHATBOT_DEBUG === 'true'
     
-    if (isDebug) {
-      console.log('🔍 API Key Check:')
-      console.log('- OpenRouter:', openrouterToken ? `${openrouterToken.substring(0, 20)}...` : 'NOT SET')
-      console.log('- Gemini:', geminiToken ? `${geminiToken.substring(0, 20)}...` : 'NOT SET')
-    }
-    
+    // More detailed validation
     const hasOpenRouter = !!(openrouterToken && 
                             openrouterToken !== 'your_openrouter_api_key_here' && 
-                            openrouterToken.startsWith('sk-or-v1-'))
+                            openrouterToken.startsWith('sk-or-v1-') &&
+                            openrouterToken.length > 50)
     
     const hasGemini = !!(geminiToken && 
                         geminiToken !== 'your_gemini_api_key_here' && 
-                        geminiToken.length > 20)
+                        geminiToken.startsWith('AIza') &&
+                        geminiToken.length > 30)
     
-    if (isDebug) {
-      console.log('- OpenRouter Valid:', hasOpenRouter)
-      console.log('- Gemini Valid:', hasGemini)
-      console.log('- Any API Available:', hasOpenRouter || hasGemini)
+    // Enhanced logging
+    if (import.meta.env.DEV) {
+      console.log('🔑 API Key Validation:')
+      console.log('- OpenRouter Valid:', hasOpenRouter, openrouterToken ? `(${openrouterToken.length} chars)` : '(missing)')
+      console.log('- Gemini Valid:', hasGemini, geminiToken ? `(${geminiToken.length} chars)` : '(missing)')
     }
     
     return hasOpenRouter || hasGemini
@@ -280,38 +277,48 @@ const processMessage = async (message) => {
 
 // AI Response dengan multiple providers (OpenRouter -> Gemini -> Fallback)
 const getAIResponseWithFallback = async (message) => {
-  console.log('🤖 Trying AI providers...')
+  console.log('🤖 Starting AI response chain for:', message.substring(0, 50) + '...')
   
   // Try OpenRouter first (if available)
-  if (import.meta.env.VITE_OPENROUTER_API_KEY && 
-      import.meta.env.VITE_OPENROUTER_API_KEY !== 'your_openrouter_api_key_here' &&
-      import.meta.env.VITE_OPENROUTER_API_KEY.startsWith('sk-or-v1-')) {
+  const openrouterKey = import.meta.env.VITE_OPENROUTER_API_KEY
+  if (openrouterKey && 
+      openrouterKey !== 'your_openrouter_api_key_here' &&
+      openrouterKey.startsWith('sk-or-v1-')) {
     try {
-      console.log('🔄 Trying OpenRouter...')
+      console.log('🔄 Attempting OpenRouter...')
       const response = await getOpenRouterResponse(message)
-      if (response) {
-        console.log('✅ OpenRouter success!')
+      if (response && response.trim()) {
+        console.log('✅ OpenRouter success! Response length:', response.length)
         return response
       }
+      console.log('⚠️ OpenRouter returned empty response')
     } catch (error) {
       console.log('❌ OpenRouter failed:', error.message)
+      console.log('Full error:', error)
     }
+  } else {
+    console.log('⏭️ OpenRouter skipped (key not available)')
   }
   
   // Try Gemini as backup (if available)
-  if (import.meta.env.VITE_GEMINI_API_KEY && 
-      import.meta.env.VITE_GEMINI_API_KEY !== 'your_gemini_api_key_here' &&
-      import.meta.env.VITE_GEMINI_API_KEY.length > 20) {
+  const geminiKey = import.meta.env.VITE_GEMINI_API_KEY
+  if (geminiKey && 
+      geminiKey !== 'your_gemini_api_key_here' &&
+      geminiKey.length > 20) {
     try {
-      console.log('🔄 Trying Gemini...')
+      console.log('🔄 Attempting Gemini...')
       const response = await getGeminiResponse(message)
-      if (response) {
-        console.log('✅ Gemini success!')
+      if (response && response.trim()) {
+        console.log('✅ Gemini success! Response length:', response.length)
         return response
       }
+      console.log('⚠️ Gemini returned empty response')
     } catch (error) {
       console.log('❌ Gemini failed:', error.message)
+      console.log('Full error:', error)
     }
+  } else {
+    console.log('⏭️ Gemini skipped (key not available)')
   }
   
   // If all AI providers fail, use smart fallback
@@ -445,18 +452,26 @@ const getAIResponse = getOpenRouterResponse
 onMounted(() => {
   console.log('🏛️ Anas Law Customer Service loaded!')
   
-  // Debug info
-  setTimeout(() => {
-    const isDebug = import.meta.env.VITE_CHATBOT_DEBUG === 'true'
-    if (isDebug) {
-      console.log('🤖 Chatbot Debug Info:')
-      console.log('- Environment:', import.meta.env.MODE)
-      console.log('- API Available:', hasApiKey.value)
-      console.log('- All Env Vars:', Object.keys(import.meta.env).filter(key => key.startsWith('VITE_')))
-    }
-    
-    console.log(`💡 Chatbot Status: ${hasApiKey.value ? '✅ AI Ready' : '⚠️ Using Fallback Only'}`)
-  }, 1000)
+  // Immediate environment check
+  const openrouterToken = import.meta.env.VITE_OPENROUTER_API_KEY
+  const geminiToken = import.meta.env.VITE_GEMINI_API_KEY
+  const isDebugMode = import.meta.env.VITE_CHATBOT_DEBUG === 'true'
+  
+  console.log('🔍 Environment Status:')
+  console.log('- Mode:', import.meta.env.MODE)
+  console.log('- OpenRouter Available:', !!(openrouterToken && openrouterToken.startsWith('sk-or-v1-')))
+  console.log('- Gemini Available:', !!(geminiToken && geminiToken.length > 20))
+  console.log('- Debug Mode:', isDebugMode)
+  console.log('- Has API Keys:', hasApiKey.value)
+  
+  // Test fetch capability
+  console.log('🌐 Testing network connectivity...')
+  fetch('https://httpbin.org/get')
+    .then(response => response.json())
+    .then(data => console.log('✅ Network OK:', data.origin))
+    .catch(error => console.log('❌ Network Error:', error))
+  
+  console.log(`💡 Chatbot Status: ${hasApiKey.value ? '✅ AI Ready' : '⚠️ Using Fallback Only'}`)
 })
 </script>
 

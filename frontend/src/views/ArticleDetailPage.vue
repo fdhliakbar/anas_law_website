@@ -275,7 +275,7 @@ export default {
       }).format(date);
     },
 
-    shareOnFacebook() {
+    shareOnFacecbook() {
       const url = encodeURIComponent(window.location.href);
       window.open(
         `https://www.facebook.com/sharer/sharer.php?u=${url}`,

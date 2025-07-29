@@ -24,15 +24,24 @@ AOS.init();
 
 const app = createApp(App);
 
-// Mount the i18n instance first
+// Mount plugins in correct order
 app.use(i18n);
-app.use(i18nWatcher, { i18n });
 app.use(router);
+
+// Only use i18nWatcher if it exists and i18n is properly configured
+try {
+  if (i18n && i18n.global) {
+    app.use(i18nWatcher, { i18n });
+  }
+} catch (error) {
+  console.warn('i18nWatcher plugin failed to load:', error);
+}
+
 app.component("font-awesome-icon", FontAwesomeIcon);
 
 // Global error handler for missing translations
 app.config.errorHandler = (err, instance, info) => {
-  if (err.message.includes('Not found')) {
+  if (err && err.message && err.message.includes('Not found')) {
     console.warn('Translation missing:', err.message);
   } else {
     console.error('App error:', err, info);

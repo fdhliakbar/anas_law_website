@@ -49,7 +49,7 @@
         </div>
 
         <!-- Pricing Cards -->
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 ">
           <div
             v-for="service in filteredServices"
             :key="service.id"
@@ -86,7 +86,7 @@
               
               <!-- CTA Button -->
               <button
-                @click="contactForService(service)"
+                @click="goToBooking"
                 class="w-full border border-black bg-black text-white py-3 px-6 rounded-lg text-lg font-semibold transition hover:bg-gray-800"
               >
                 {{ $t('pricing.getStarted') }}

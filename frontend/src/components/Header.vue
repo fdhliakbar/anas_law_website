@@ -2,10 +2,9 @@
   <header class="sticky top-0 z-50">
     <!-- Navbar -->
     <nav
-      :class=" [
-        'fixed w-full z-50 transition-all duration-300 ease-in-out bg-gray-400',
-        scrolled
-          
+      :class="[
+        'fixed w-full z-50 transition-all duration-300 ease-in-out bg-blue-900',
+        scrolled,
       ]"
     >
       <div
@@ -24,30 +23,30 @@
         <!-- Navigation Links (centered) -->
         <ul
           class="hidden lg:flex items-center space-x-8 text-base text-[#f5f5f5] font-medium mx-8"
-          >
-          <li>
-            <router-link to="/"
-            >{{ $t('header.home') }}</router-link
-            >
-          </li>
+        >
           <li>
             <router-link
-              to="/pricing"
-              >{{ $t('header.pricing') }}</router-link
+              to="/"
+              class="relative inline-block pb-1 after:content-[''] after:absolute after:left-0 after:bottom-0 after:w-0 after:h-[2px] after:bg-white after:transition-all after:duration-300 hover:after:w-full"
             >
+              {{ $t("header.home") }}
+            </router-link>
           </li>
           <li>
             <router-link
               to="/booking"
-              >{{ $t('header.bookConsultation') }}</router-link
+              class="relative inline-block pb-1 after:content-[''] after:absolute after:left-0 after:bottom-0 after:w-0 after:h-[2px] after:bg-white after:transition-all after:duration-300 hover:after:w-full"
             >
+              {{ $t("header.bookConsultation") }}
+            </router-link>
           </li>
           <li>
-            <a
-              href="#"
-              @click.prevent="scrollTo('reviews')"
-              >{{ $t('header.reviews') }}</a
+            <router-link
+              to="/article"
+              class="relative inline-block pb-1 after:content-[''] after:absolute after:left-0 after:bottom-0 after:w-0 after:h-[2px] after:bg-white after:transition-all after:duration-300 hover:after:w-full"
             >
+              {{ $t("header.articles") }}
+            </router-link>
           </li>
         </ul>
 
@@ -77,7 +76,7 @@
           <div v-else class="relative">
             <button
               @click="toggleUserMenu"
-              class="flex items-center space-x-2 border border-gray-300 px-4 py-2 rounded-lg hover:bg-gray-100 transition text-sm"
+              class="flex items-center space-x-2 border border-gray-300 px-4 py-2 rounded-lg hover:bg-black transition text-sm text-white"
             >
               <span>{{ userInfo?.name || "User" }}</span>
               <svg
@@ -102,6 +101,13 @@
             >
               <a
                 href="#"
+                @click.prevent="goToMyBookings"
+                class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+              >
+                My Booking
+              </a>
+              <a
+                href="#"
                 @click="logout"
                 class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
               >
@@ -113,8 +119,18 @@
 
         <!-- Mobile Menu Button -->
         <button class="lg:hidden text-gray-800 p-2" @click="toggleMobileMenu">
-          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+          <svg
+            class="w-6 h-6"
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M4 6h16M4 12h16M4 18h16"
+            />
           </svg>
         </button>
       </div>
@@ -196,7 +212,7 @@
           class="block border border-blue-400 px-6 py-2 rounded-lg hover:bg-blue-100 transition text-blue-700 mt-2"
           @click="closeMobileMenu"
         >
-          {{ $t('header.chat') }}
+          {{ $t("header.chat") }}
         </router-link>
       </div>
     </nav>
@@ -241,6 +257,10 @@ export default {
     closeMobileMenu() {
       this.isMobileMenuOpen = false;
     },
+    goToMyBookings() {
+      this.isUserMenuOpen = false;
+      this.$router.push("/my-bookings");
+    },
     checkAuthStatus() {
       const token = localStorage.getItem("token");
       if (token) {
@@ -272,6 +292,7 @@ export default {
         this.userInfo = null;
       }
     },
+
     logout() {
       localStorage.removeItem("token");
       this.isLoggedIn = false;
@@ -287,6 +308,8 @@ export default {
       }
     },
   },
+
+  // const goToMyBookings
   watch: {
     $route() {
       // Check auth status when route changes (like after login)
