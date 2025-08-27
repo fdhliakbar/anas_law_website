@@ -152,7 +152,7 @@
           <!-- Load More Button -->
           <div v-if="pagination.hasMore" class="text-center mt-12">
             <button
-              @click="loadMoreLawyers"
+              @click="loadMoreLawyers($event)"
               :disabled="loadingMore"
               class="bg-black text-white px-8 py-3 rounded-lg font-semibold hover:bg-gray-800 transition disabled:opacity-50"
             >
@@ -193,32 +193,6 @@
               {{ faq.answer }}
             </div>
           </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- Contact CTA -->
-    <section class="py-16 px-4 bg-gray-900 text-white">
-      <div class="max-w-5xl mx-auto text-center">
-        <h2 class="font-bold text-4xl md:text-5xl mb-8">
-          {{ $t("booking.readyToGetHelp") }}
-        </h2>
-        <p class="text-xl text-gray-300 mb-12 max-w-3xl mx-auto">
-          {{ $t("booking.readyToGetHelpDesc") }}
-        </p>
-        <div class="flex flex-col md:flex-row gap-4 justify-center">
-          <button
-            @click="goToPricing"
-            class="border border-white bg-white text-black px-8 py-4 rounded-lg text-lg font-semibold transition hover:bg-gray-100"
-          >
-            {{ $t("booking.viewPricing") }}
-          </button>
-          <button
-            @click="goToChat"
-            class="border border-white text-white px-8 py-4 rounded-lg text-lg font-semibold bg-transparent hover:bg-white hover:text-black transition"
-          >
-            {{ $t("booking.chatNow") }}
-          </button>
         </div>
       </div>
     </section>
@@ -319,16 +293,12 @@ const loadLawyers = async (isLoadMore = false) => {
   }
 };
 
-const loadMoreLawyers = (event?: MouseEvent) => {
+const loadMoreLawyers = (_event?: MouseEvent) => {
   loadLawyers(true);
 };
 
 const handleSearch = () => {
-  // Debounce search
-  clearTimeout(searchTimeout);
-  const searchTimeout = setTimeout(() => {
-    loadLawyers();
-  }, 500);
+  loadLawyers();
 };
 
 const getPhotoUrl = (photo) => {

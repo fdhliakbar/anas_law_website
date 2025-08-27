@@ -29,15 +29,15 @@
       <div class="bg-white rounded-lg shadow-sm p-6 mb-6 mt-10 ">
         <div class="flex items-center gap-4">
           <img
-            :src="selectedLawyer?.photo || '/src/assets/images/founder.jpg'"
-            :alt="selectedLawyer?.name || 'Lawyer'"
+            :src="getPhotoUrl(selectedLawyer.photo)"
+            :alt="selectedLawyer.name"
             class="w-16 h-16 rounded-full object-cover"
             @error="handleImageError"
           />
           <div>
-            <h1 class="text-2xl font-bold text-gray-900">{{ selectedLawyer?.name || 'Anas Nazarudin' }}</h1>
-            <p class="text-gray-600">{{ selectedLawyer?.specialty || 'Software Engineer' }}</p>
-            <p class="text-sm text-gray-500">{{ selectedLawyer?.experience || '5' }} tahun pengalaman</p>
+            <h1 class="text-2xl font-bold text-gray-900">{{ selectedLawyer.name }}</h1>
+            <p class="text-gray-600">{{ selectedLawyer.specialty }}</p>
+            <p class="text-sm text-gray-500">{{ selectedLawyer.experience }} tahun pengalaman</p>
           </div>
         </div>
       </div>
@@ -163,7 +163,7 @@
               </label>
               <input
                 v-model="form.nomor_handphone"
-                type="tel"
+                type="number"
                 required
                 class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                 placeholder="08123456789"
@@ -449,31 +449,21 @@ const closeSuccessModal = () => {
   router.push('/booking-success');
 };
 
-onMounted(() => {
-  // Get lawyer data from route params or query
-  const lawyerId = route.params.id || route.query.lawyerId;
+onMounted(async () => {
+  console.log('BookingForm mounted'); // DEBUG
+  console.log('Route params:', route.params); // DEBUG
   
-  // Mock lawyer data - in real app, fetch from API
-  const lawyers = [
-    {
-      id: 1,
-      name: "Anas Nazarudin",
-      specialty: "Pengacara Pidana",
-      experience: 5,
-      photo: "/src/assets/images/founder.jpg",
-      description: "Pengacara berpengalaman dengan latar belakang yang kuat dalam bidang hukum pidana, perdata, dan korporat. Berpengalaman menangani berbagai kasus hukum kompleks dan memberikan konsultasi profesional kepada klien dari berbagai kalangan."
-    },
-    {
-      id: 2,
-      name: "Andika Suyandra",
-      specialty: "Pengacara Korporat",
-      experience: 4,
-      photo: "/src/assets/images/cofounder.jpg",
-      description: "Spesialis hukum korporat dengan pengalaman dalam merger, akuisisi, dan kepatuhan perusahaan."
-    }
-  ];
-  
-  selectedLawyer.value = lawyers.find(l => l.id === Number(lawyerId)) || lawyers[0];
+  // Check auth first
+  const token = localStorage.getItem('token');
+  if (!token) {
+    console.log('No token, redirecting to login'); // DEBUG
+    router.push(`/login?redirect=${route.fullPath}`);
+    return;
+  }
+
+  // Load lawyer data and prefill user data
+  await loadLawyerData();
+  prefillUserData();
 });
 </script>
 

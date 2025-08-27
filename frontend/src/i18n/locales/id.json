@@ -237,8 +237,8 @@
       }
     },
     "billedMonthly": "Ditagih Bulanan",
-    "billedYearly": "Ditagih Tahunan", 
-    "getConsultation": "Dapatkan Konsultasi Gratis",
+    "billedYearly": "Ditagih Tahunan",
+    "getConsultation": "Dapatkan Konsultasi",
     "features": {
       "advancedSegmentation": "Segmentasi Lanjutan",
       "comparativeReporting": "Pelaporan Komparatif",
@@ -268,7 +268,7 @@
       "supriyadi": {
         "review": "Pastikan Anda hanya memilih kalimat yang tepat untuk membuatnya singkat dan sederhana.",
         "name": "Supriyadi",
-        "position": "Kepala Desa Indramayu", 
+        "position": "Kepala Desa Indramayu",
         "highlight1": "kalimat yang tepat"
       },
       "tarisya": {

@@ -122,7 +122,6 @@
           </h1>
         </div>
         <div class="flex items-center space-x-4">
-
           <button
             @click="goToHomepage"
             class="bg-gray-100 text-gray-700 px-4 py-2 rounded-lg font-semibold hover:bg-gray-200"
@@ -143,7 +142,6 @@
           <div class="bg-white rounded-xl shadow p-6 flex flex-col">
             <div class="flex items-center justify-between mb-2">
               <span class="font-semibold text-gray-700">Total Klien</span>
-              <span class="material-icons text-blue-400">people</span>
             </div>
             <div class="text-2xl font-bold text-blue-600">
               {{ stats.totalUsers }}
@@ -154,7 +152,6 @@
           <div class="bg-white rounded-xl shadow p-6 flex flex-col">
             <div class="flex items-center justify-between mb-2">
               <span class="font-semibold text-gray-700">Booking Pending</span>
-              <span class="material-icons text-orange-400">pending</span>
             </div>
             <div class="text-2xl font-bold text-orange-600">
               {{ stats.pendingBookings }}
@@ -168,8 +165,7 @@
               <span class="font-semibold text-gray-700"
                 >Artikel Dipublikasi</span
               >
-              <span class="material-icons text-purple-400">article</span>
-            </div>
+          </div>
             <div class="text-2xl font-bold text-purple-600">
               {{ stats.totalArticles }}
             </div>
@@ -184,7 +180,6 @@
           >
             <div class="flex items-center justify-between mb-2">
               <span class="font-semibold">Pengacara Aktif</span>
-              <span class="material-icons">gavel</span>
             </div>
             <div class="text-2xl font-bold">{{ stats.totalLawyers }}</div>
             <div class="text-sm opacity-90 mt-1">Siap melayani klien</div>
@@ -210,7 +205,7 @@
                 Tambah Artikel
               </button>
               <button
-                @click="goToArticleManagement"
+                @click="goToArticles"
                 class="bg-gray-100 text-gray-700 px-4 py-1 rounded text-sm hover:bg-gray-200"
               >
                 Lihat Semua
@@ -244,12 +239,25 @@
                   <span class="text-xs text-gray-400">{{
                     formatDate(article.created_at)
                   }}</span>
-                  <button
-                    class="bg-indigo-100 text-indigo-700 px-2 py-1 rounded text-xs hover:bg-indigo-200"
-                    @click="goToArticleDetail(article.artikel_id)"
-                  >
-                    Lihat
-                  </button>
+                  <div class="flex space-x-1">
+                    <!-- button hapus -->
+                    <button
+                      @click="deleteArticle(article.artikel_id)"
+                      class="bg-red-100 text-red-700 px-2 py-1 rounded text-xs hover:bg-red-200"
+                      title="Hapus artikel"
+                    >
+                      Hapus
+                    </button>
+                    <!-- lihat -->
+                    <a
+                      :href="article.link || `/article/${article.artikel_id}`"
+                      class="bg-indigo-100 text-indigo-700 px-2 py-1 rounded text-xs hover:bg-indigo-200 inline-block"
+                      :target="article.link ? '_blank' : '_self'"
+                      rel="noopener noreferrer"
+                    >
+                      Lihat
+                    </a>
+                  </div>
                 </div>
               </div>
             </div>
@@ -297,7 +305,6 @@
                   <th class="py-2 px-4">Status</th>
                   <th class="py-2 px-4">Tanggal Booking</th>
                   <th class="py-2 px-4">Pengacara</th>
-                  <th class="py-2 px-4">Aksi</th>
                 </tr>
               </thead>
               <tbody>
@@ -355,18 +362,7 @@
                       v-if="booking.status === 'pending'"
                       class="flex space-x-1"
                     >
-                      <button
-                        class="bg-green-100 text-green-700 px-2 py-1 rounded text-xs hover:bg-green-200"
-                        @click="approveBooking(booking.booking_id)"
-                      >
-                        Setujui
-                      </button>
-                      <button
-                        class="bg-red-100 text-red-700 px-2 py-1 rounded text-xs hover:bg-red-200"
-                        @click="rejectBooking(booking.booking_id)"
-                      >
-                        Tolak
-                      </button>
+
                     </div>
                     <button
                       v-else
@@ -480,6 +476,50 @@ const openBookingDetail = (booking) => {
   showBookingModal.value = true;
 };
 
+const deleteArticle = async (articleId) => {
+  if (!confirm("Apakah Anda yakin ingin menghapus artikel ini?")) {
+    return;
+  }
+
+  try {
+    const token = localStorage.getItem("token");
+    if (!token) {
+      alert("Anda harus login sebagai admin");
+      return;
+    }
+
+    // ✅ Gunakan method DELETE dengan body JSON sesuai dokumentasi API
+    const response = await fetch(
+      `https://mptibe-production.up.railway.app/api/article/delete-article`,
+      {
+        method: "DELETE", // Method DELETE
+        headers: {
+          Authorization: `Bearer ${token}`,
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          artikel_id: articleId, // Body JSON dengan artikel_id
+        }),
+      }
+    );
+
+    if (response.ok) {
+      const result = await response.json();
+      alert("Artikel berhasil dihapus: " + result.data.judul);
+      await loadRecentArticles();
+      await loadStats();
+    } else {
+      const errorData = await response.json();
+      alert(
+        "Gagal menghapus artikel: " + (errorData.message || "Unknown error")
+      );
+    }
+  } catch (error) {
+    console.error("Error deleting article:", error);
+    alert("Terjadi kesalahan saat menghapus artikel: " + error.message);
+  }
+};
+
 const closeBookingModal = () => {
   showBookingModal.value = false;
   selectedBooking.value = null;
@@ -513,7 +553,9 @@ const loadAdminData = () => {
 // Ambil users dari API dan hitung hanya yang role 'users'
 const fetchTotalUsers = async () => {
   try {
-    const response = await fetch("https://mptibe-production.up.railway.app/api/users/get-users");
+    const response = await fetch(
+      "https://mptibe-production.up.railway.app/api/users/get-users"
+    );
     const data = await response.json();
     if (response.ok && data.users) {
       // Hanya user dengan role 'users'
@@ -550,20 +592,24 @@ const loadStats = async () => {
 const loadRecentArticles = async () => {
   try {
     const response = await fetch(
-      "https://mptibe-production.up.railway.app/api/article/get-articles?limit=5&offset=0"
+      "https://mptibe-production.up.railway.app/api/article/get-articles?limit=6"
     );
     const data = await response.json();
 
-    if (response.ok && data.success) {
-      recentArticles.value = data.articles || data.data || [];
-      console.log("Recent articles loaded:", recentArticles.value);
-    } else {
-      console.error("Failed to load articles:", data.message);
-      recentArticles.value = [];
+    if (data.success) {
+      // Transform data sama seperti ArticlePage.vue
+      recentArticles.value = data.articles.map((article) => ({
+        artikel_id: article.artikel_id,
+        judul: article.judul,
+        deskripsi: article.deskripsi,
+        gambar: article.gambar,
+        created_at: article.created_at,
+        // ✅ Pastikan field link ada
+        link: article.link_artikel, // Field yang sama seperti ArticlePage.vue
+      }));
     }
   } catch (error) {
-    console.error("Error loading recent articles:", error);
-    recentArticles.value = [];
+    console.error("Error loading articles:", error);
   }
 };
 
@@ -643,7 +689,6 @@ const createNewArticle = () => {
   router.push("/admin/article-management");
 };
 
-
 const goToBookingManagement = () => {
   router.push("/admin/booking-management");
 };
@@ -668,10 +713,6 @@ const goToUsers = () => {
 
 const goToLawyerManagement = () => {
   router.push("/admin/lawyer-management");
-};
-
-const goToArticleDetail = (articleId) => {
-  router.push(`/admin/article-detail/${articleId}`);
 };
 
 const formatDate = (dateString) => {

@@ -42,7 +42,7 @@
           </li>
           <li>
             <router-link
-              to="/article"
+              to="/articles"
               class="relative inline-block pb-1 after:content-[''] after:absolute after:left-0 after:bottom-0 after:w-0 after:h-[2px] after:bg-white after:transition-all after:duration-300 hover:after:w-full"
             >
               {{ $t("header.articles") }}
@@ -207,13 +207,7 @@
         >
           Dashboard Admin
         </router-link>
-        <router-link
-          to="/chat"
-          class="block border border-blue-400 px-6 py-2 rounded-lg hover:bg-blue-100 transition text-blue-700 mt-2"
-          @click="closeMobileMenu"
-        >
-          {{ $t("header.chat") }}
-        </router-link>
+   
       </div>
     </nav>
   </header>

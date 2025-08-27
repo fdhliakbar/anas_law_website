@@ -22,11 +22,11 @@ function goToBooking() {
         <p class="text-lg md:text-xl text-gray-800 mb-10 max-w-xl">
           {{ $t('schedule.description') }}
         </p>
-        <button
+        <router-link to="/booking"
           class="bg-black text-white px-8 py-4 rounded-lg text-lg font-semibold hover:bg-gray-900 transition"
         >
-          <a href="https://wa.me/6281394879411">{{ $t('schedule.scheduleNow') }}</a>
-        </button>
+          {{ $t('schedule.scheduleNow') }}
+        </router-link>
       </div>
       <!-- Right: Video -->
       <div class="flex-1 flex justify-center">

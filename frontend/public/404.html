@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Redirecting... - Anas Law Firm</title>
+    <script>
+      // Redirect to homepage and let Vue Router handle the route
+      const path = window.location.pathname;
+      const search = window.location.search;
+      const hash = window.location.hash;
+
+      // Store the intended URL
+      sessionStorage.setItem("redirectPath", path + search + hash);
+
+      // Redirect to homepage
+      window.location.replace("/");
+    </script>
+  </head>
+  <body>
+    <div
+      style="
+        text-align: center;
+        margin-top: 50px;
+        font-family: Arial, sans-serif;
+      "
+    >
+      <h2>Redirecting...</h2>
+      <p>Please wait while we redirect you to the correct page.</p>
+      <p><a href="/">Click here if not redirected automatically</a></p>
+    </div>
+  </body>
+</html>

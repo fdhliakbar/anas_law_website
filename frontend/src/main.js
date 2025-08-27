@@ -34,17 +34,30 @@ try {
     app.use(i18nWatcher, { i18n });
   }
 } catch (error) {
-  console.warn('i18nWatcher plugin failed to load:', error);
+  console.warn("i18nWatcher plugin failed to load:", error);
 }
 
 app.component("font-awesome-icon", FontAwesomeIcon);
 
+// Handle redirect from 404 page
+router.isReady().then(() => {
+  const redirectPath = sessionStorage.getItem("redirectPath");
+  if (redirectPath && redirectPath !== "/") {
+    sessionStorage.removeItem("redirectPath");
+    // Try to navigate to the intended path
+    router.push(redirectPath).catch(() => {
+      // If route doesn't exist, stay on homepage
+      router.push("/");
+    });
+  }
+});
+
 // Global error handler for missing translations
 app.config.errorHandler = (err, instance, info) => {
-  if (err && err.message && err.message.includes('Not found')) {
-    console.warn('Translation missing:', err.message);
+  if (err && err.message && err.message.includes("Not found")) {
+    console.warn("Translation missing:", err.message);
   } else {
-    console.error('App error:', err, info);
+    console.error("App error:", err, info);
   }
 };
 

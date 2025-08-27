@@ -8,15 +8,17 @@
         {{ $t("hero.subtitle") }}
       </p>
       <div class="flex flex-col md:flex-row gap-4">
-        <button
-          class="border border-black bg-black text-white px-8 py-4 rounded-lg text-lg font-semibold transition"
+        <router-link to="/booking"
+          class="border border-black bg-black text-white px-8 py-4 rounded-lg text-lg font-semibold transition hover:bg-gray-800"
         >
-          {{ $t('hero.scheduleConsultation') }}
-        </button>
+          {{ $t("booking.scheduleNow") }}
+        </router-link>
         <button
-          class="border border-black text-white px-8 py-4 rounded-lg text-lg font-semibold bg-black hover:bg-indigo-900  transition"
+          class="border border-black text-black px-8 py-4 rounded-lg text-lg font-semibold bg-white hover:bg-black hover:text-white transition"
         >
-          {{ $t('hero.getInTouch') }}
+          <a href="https://wa.me/6281394879411">
+            {{ $t("booking.getInTouch") }}
+          </a>
         </button>
       </div>
     </div>

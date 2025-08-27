@@ -7,6 +7,7 @@ import BookingForm from "../views/BookingForm.vue";
 import PricingPage from "../views/PricingPage.vue";
 import FreeChatBotTest from "../views/FreeChatBotTest.vue";
 import ArticlePage from "../views/ArticlePage.vue";
+import ArticleManagement from "../views/admin/ArticleManagement.vue";
 
 const routes = [
   { path: "/", component: HomePage },
@@ -14,7 +15,8 @@ const routes = [
   { path: "/register", component: RegisterPage }, // tambahkan ini
   { path: "/booking", component: BookingSchedule },
   { path: "/pricing", component: PricingPage },
-  { path: "/article", component: ArticlePage },
+  { path: "/article", component: ArticleManagement },
+  { path: "/articles", component: ArticlePage },
   { path: "/free-ai-test", component: FreeChatBotTest },
   {
     path: "/admin/dashboard",
@@ -127,11 +129,26 @@ const routes = [
       }
     },
   },
+  // ✅ Fallback route untuk menangani 404 - redirect ke homepage
+  {
+    path: "/:pathMatch(.*)*",
+    name: "NotFound",
+    redirect: "/",
+  },
 ];
 
 const router = createRouter({
   history: createWebHistory(),
   routes,
+  // ✅ Tambahkan ini untuk scroll ke atas setiap navigasi
+  scrollBehavior(to, from, savedPosition) {
+    // Jika ada savedPosition (tombol back browser), gunakan itu
+    if (savedPosition) {
+      return savedPosition;
+    }
+    // Selain itu, selalu scroll ke atas
+    return { top: 0 };
+  },
 });
 
 export default router;

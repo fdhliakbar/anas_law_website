@@ -1,15 +1,15 @@
 <template>
   <Header />
-  
+
   <!-- Hero Section -->
   <section class="bg-gradient-to-r from-blue-900 to-blue-800 text-white py-16">
     <div class="container mx-auto px-4 mt-25">
       <div class="text-center">
         <h1 class="text-4xl md:text-5xl font-bold mb-4">
-          {{ $t('articles.title') }}
+          {{ $t("articles.title") }}
         </h1>
         <p class="text-xl text-blue-200 max-w-2xl mx-auto">
-          {{ $t('articles.subtitle') }}
+          {{ $t("articles.subtitle") }}
         </p>
       </div>
     </div>
@@ -28,27 +28,23 @@
             class="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
             @input="filterArticles"
           />
-          <svg class="absolute left-3 top-3.5 h-5 w-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+          <svg
+            class="absolute left-3 top-3.5 h-5 w-5 text-gray-400"
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
+            ></path>
           </svg>
         </div>
 
         <!-- Category Filter -->
-        <div class="flex flex-wrap gap-2">
-          <button
-            v-for="category in categories"
-            :key="category.id"
-            @click="filterByCategory(category.id)"
-            :class="[
-              'px-4 py-2 rounded-full text-sm font-medium transition-colors',
-              selectedCategory === category.id
-                ? 'bg-blue-600 text-white'
-                : 'bg-white text-gray-700 hover:bg-gray-100 border border-gray-300'
-            ]"
-          >
-            {{ category.name }}
-          </button>
-        </div>
+        
       </div>
     </div>
   </section>
@@ -58,18 +54,22 @@
     <div class="container mx-auto px-4">
       <!-- Loading State -->
       <div v-if="loading" class="text-center py-12">
-        <div class="inline-block animate-spin rounded-full h-8 w-8 border-b-2 border-blue-600"></div>
-        <p class="mt-2 text-gray-600">{{ $t('articles.loading') }}</p>
+        <div
+          class="inline-block animate-spin rounded-full h-8 w-8 border-b-2 border-blue-600"
+        ></div>
+        <p class="mt-2 text-gray-600">{{ $t("articles.loading") }}</p>
       </div>
 
       <!-- Error State -->
       <div v-else-if="error" class="text-center py-12">
-        <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded mx-auto max-w-md mb-4">
+        <div
+          class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded mx-auto max-w-md mb-4"
+        >
           <p class="font-bold">Error!</p>
           <p class="text-sm">{{ error }}</p>
         </div>
-        <button 
-          @click="loadArticles(true)" 
+        <button
+          @click="loadArticles(true)"
           class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 transition"
         >
           Coba Lagi
@@ -78,11 +78,23 @@
 
       <!-- No Results -->
       <div v-else-if="filteredArticles.length === 0" class="text-center py-12">
-        <svg class="mx-auto h-16 w-16 text-gray-400 mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
+        <svg
+          class="mx-auto h-16 w-16 text-gray-400 mb-4"
+          fill="none"
+          stroke="currentColor"
+          viewBox="0 0 24 24"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"
+          ></path>
         </svg>
-        <h3 class="text-lg font-medium text-gray-900 mb-2">{{ $t('articles.noResults') }}</h3>
-        <p class="text-gray-500">{{ $t('articles.noResultsDesc') }}</p>
+        <h3 class="text-lg font-medium text-gray-900 mb-2">
+          {{ $t("articles.noResults") }}
+        </h3>
+        <p class="text-gray-500">{{ $t("articles.noResultsDesc") }}</p>
       </div>
 
       <!-- Articles Grid -->
@@ -101,7 +113,9 @@
               @error="handleImageError"
             />
             <div class="absolute top-4 left-4">
-              <span class="bg-blue-600 text-white px-3 py-1 rounded-full text-xs font-medium">
+              <span
+                class="bg-blue-600 text-white px-3 py-1 rounded-full text-xs font-medium"
+              >
                 {{ getCategoryName(article.categoryId) }}
               </span>
             </div>
@@ -110,13 +124,33 @@
           <!-- Article Content -->
           <div class="p-6">
             <div class="flex items-center text-sm text-gray-500 mb-3">
-              <svg class="h-4 w-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
+              <svg
+                class="h-4 w-4 mr-1"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"
+                ></path>
               </svg>
               {{ formatDate(article.publishedAt) }}
               <span class="mx-2">•</span>
-              <svg class="h-4 w-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+              <svg
+                class="h-4 w-4 mr-1"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"
+                ></path>
               </svg>
               {{ article.readTime }} min read
             </div>
@@ -132,7 +166,7 @@
             <div class="flex items-center justify-between">
               <div class="flex items-center">
                 <img
-                  src='/src/assets/images/founder.jpg'
+                  src="/src/assets/images/founder.jpg"
                   :alt="article.author.name"
                   class="w-8 h-8 rounded-full mr-2"
                 />
@@ -141,16 +175,27 @@
                 </span>
               </div>
 
-              <router-link
-                :to="article.link ? { path: article.link } : `/article/${article.id}`"
+              <a
+                :href="article.link ? article.link : `/article/${article.id}`"
                 class="inline-flex items-center text-blue-600 hover:text-blue-800 font-medium text-sm"
                 :target="article.link ? '_blank' : '_self'"
+                rel="noopener noreferrer"
               >
-                {{ $t('articles.readMore') }}
-                <svg class="ml-1 h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                {{ $t("articles.readMore") }}
+                <svg
+                  class="ml-1 h-4 w-4"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M9 5l7 7-7 7"
+                  ></path>
                 </svg>
-              </router-link>
+              </a>
             </div>
           </div>
         </article>
@@ -160,11 +205,11 @@
       <div v-if="totalPages > 1" class="flex justify-center mt-12">
         <nav class="flex items-center space-x-2">
           <button
-            @click="currentPage > 1 && (currentPage--)"
+            @click="currentPage > 1 && currentPage--"
             :disabled="currentPage === 1"
             class="px-4 py-2 border border-gray-300 rounded-lg text-sm font-medium text-gray-700 hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed"
           >
-            {{ $t('articles.previous') }}
+            {{ $t("articles.previous") }}
           </button>
 
           <span
@@ -177,301 +222,318 @@
                 ? 'bg-blue-600 text-white'
                 : page === '...'
                 ? 'text-gray-400 cursor-default'
-                : 'text-gray-700 hover:bg-gray-50 border border-gray-300'
+                : 'text-gray-700 hover:bg-gray-50 border border-gray-300',
             ]"
           >
             {{ page }}
           </span>
 
           <button
-            @click="currentPage < totalPages && (currentPage++)"
+            @click="currentPage < totalPages && currentPage++"
             :disabled="currentPage === totalPages"
             class="px-4 py-2 border border-gray-300 rounded-lg text-sm font-medium text-gray-700 hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed"
           >
-            {{ $t('articles.next') }}
+            {{ $t("articles.next") }}
           </button>
         </nav>
       </div>
     </div>
   </section>
 
-
   <Footer />
 </template>
 
 <script setup>
-import { ref, computed, onMounted } from 'vue'
-import { useI18n } from 'vue-i18n'
-import Header from '@/components/Header.vue'
-import Footer from '@/components/Footer.vue'
+import { ref, computed, onMounted } from "vue";
+import { useI18n } from "vue-i18n";
+import Header from "@/components/Header.vue";
+import Footer from "@/components/Footer.vue";
 
-const { t } = useI18n()
+const { t } = useI18n();
 
 // Reactive data
-const articles = ref([])
-const loading = ref(true)
-const searchQuery = ref('')
-const selectedCategory = ref('all')
-const currentPage = ref(1)
-const articlesPerPage = 9
-const emailSubscription = ref('')
-const subscribing = ref(false)
-const error = ref('')
-const totalArticles = ref(0)
+const articles = ref([]);
+const loading = ref(true);
+const searchQuery = ref("");
+const selectedCategory = ref("all");
+const currentPage = ref(1);
+const articlesPerPage = 9;
+const emailSubscription = ref("");
+const subscribing = ref(false);
+const error = ref("");
+const totalArticles = ref(0);
 
 // Categories
 const categories = ref([
-  { id: 'all', name: t('articles.categories.all') },
-  { id: 'corporate', name: t('articles.categories.corporate') },
-  { id: 'criminal', name: t('articles.categories.criminal') },
-  { id: 'family', name: t('articles.categories.family') },
-  { id: 'property', name: t('articles.categories.property') },
-  { id: 'employment', name: t('articles.categories.employment') }
-])
+  { id: "all", name: t("articles.categories.all") },
+  { id: "corporate", name: t("articles.categories.corporate") },
+  { id: "criminal", name: t("articles.categories.criminal") },
+  { id: "family", name: t("articles.categories.family") },
+  { id: "property", name: t("articles.categories.property") },
+  { id: "employment", name: t("articles.categories.employment") },
+]);
 
 // Fetch articles from API
 const loadArticles = async (reset = false) => {
-  loading.value = true
-  error.value = ''
-  
+  loading.value = true;
+  error.value = "";
+
   try {
     // Calculate offset for pagination
-    const offset = reset ? 0 : (currentPage.value - 1) * articlesPerPage
-    const limit = articlesPerPage
-    
-    const response = await fetch(`https://mptibe-production.up.railway.app/api/article/get-articles?limit=${limit}&offset=${offset}`)
-    const data = await response.json()
-    
+    const offset = reset ? 0 : (currentPage.value - 1) * articlesPerPage;
+    const limit = articlesPerPage;
+
+    const response = await fetch(
+      `https://mptibe-production.up.railway.app/api/article/get-articles?limit=${limit}&offset=${offset}`
+    );
+    const data = await response.json();
+
     if (response.ok && data.success) {
-      const apiArticles = data.articles || data.data || []
-      
+      const apiArticles = data.articles || data.data || [];
+
       // Transform API data to match component structure
-      const transformedArticles = apiArticles.map(article => ({
+      const transformedArticles = apiArticles.map((article) => ({
         id: article.artikel_id,
         title: article.judul,
         excerpt: article.deskripsi,
-        image: article.gambar || 'https://images.unsplash.com/photo-1589829545856-d10d557cf95f?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
-        categoryId: 'corporate', // Default category, bisa disesuaikan dengan data dari backend
+        image:
+          article.gambar ||
+          "https://images.unsplash.com/photo-1589829545856-d10d557cf95f?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+        categoryId: "corporate", // Default category, bisa disesuaikan dengan data dari backend
         publishedAt: article.created_at,
         readTime: Math.ceil((article.content_artikel?.length || 500) / 200), // Estimate reading time
         slug: `article-${article.artikel_id}`,
         content: article.content_artikel,
         link: article.link_artikel,
         author: {
-          name: 'Admin Anas Law',
-          avatar: 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-4.0.3&auto=format&fit=crop&w=100&q=80'
-        }
-      }))
-      
+          name: "Admin Anas Law",
+          avatar:
+            "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-4.0.3&auto=format&fit=crop&w=100&q=80",
+        },
+      }));
+
       if (reset) {
-        articles.value = transformedArticles
+        articles.value = transformedArticles;
       } else {
-        articles.value = [...articles.value, ...transformedArticles]
+        articles.value = [...articles.value, ...transformedArticles];
       }
-      
+
       // Set total from pagination info if available
       if (data.pagination && data.pagination.total) {
-        totalArticles.value = data.pagination.total
+        totalArticles.value = data.pagination.total;
       }
-      
-      console.log('Articles loaded:', transformedArticles)
+
+      console.log("Articles loaded:", transformedArticles);
     } else {
-      console.error('Failed to load articles:', data.message)
-      error.value = 'Gagal memuat artikel'
-      
+      console.error("Failed to load articles:", data.message);
+      error.value = "Gagal memuat artikel";
+
       // Fallback to sample data if API fails
       if (articles.value.length === 0) {
-        articles.value = sampleArticles
+        articles.value = sampleArticles;
       }
     }
   } catch (err) {
-    console.error('Error fetching articles:', err)
-    error.value = 'Terjadi kesalahan saat memuat artikel'
-    
+    console.error("Error fetching articles:", err);
+    error.value = "Terjadi kesalahan saat memuat artikel";
+
     // Fallback to sample data if API fails
     if (articles.value.length === 0) {
-      articles.value = sampleArticles
+      articles.value = sampleArticles;
     }
   } finally {
-    loading.value = false
+    loading.value = false;
   }
-}
+};
 
 // Sample articles data as fallback
 const sampleArticles = [
   {
     id: 1,
-    title: 'Panduan Lengkap Hukum Kontrak Bisnis di Indonesia',
-    excerpt: 'Memahami seluk-beluk hukum kontrak bisnis sangat penting untuk melindungi kepentingan perusahaan Anda. Artikel ini membahas dasar-dasar hukum kontrak yang perlu diketahui.',
-    image: 'https://images.unsplash.com/photo-1589829545856-d10d557cf95f?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
-    categoryId: 'corporate',
-    publishedAt: '2024-01-15',
+    title: "Panduan Lengkap Hukum Kontrak Bisnis di Indonesia",
+    excerpt:
+      "Memahami seluk-beluk hukum kontrak bisnis sangat penting untuk melindungi kepentingan perusahaan Anda. Artikel ini membahas dasar-dasar hukum kontrak yang perlu diketahui.",
+    image:
+      "https://images.unsplash.com/photo-1589829545856-d10d557cf95f?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+    categoryId: "corporate",
+    publishedAt: "2024-01-15",
     readTime: 8,
-    slug: 'panduan-hukum-kontrak-bisnis',
+    slug: "panduan-hukum-kontrak-bisnis",
     author: {
-      name: 'Dr. Ahmad Veritas',
-      avatar: 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-4.0.3&auto=format&fit=crop&w=100&q=80'
-    }
+      name: "Dr. Ahmad Veritas",
+      avatar:
+        "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-4.0.3&auto=format&fit=crop&w=100&q=80",
+    },
   },
   {
     id: 2,
-    title: 'Hak dan Kewajiban dalam Hukum Keluarga',
-    excerpt: 'Panduan komprehensif tentang hak dan kewajiban suami istri, hak asuh anak, dan pembagian harta gono-gini menurut hukum Indonesia.',
-    image: 'https://images.unsplash.com/photo-1581578731548-c64695cc6952?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
-    categoryId: 'family',
-    publishedAt: '2024-01-10',
+    title: "Hak dan Kewajiban dalam Hukum Keluarga",
+    excerpt:
+      "Panduan komprehensif tentang hak dan kewajiban suami istri, hak asuh anak, dan pembagian harta gono-gini menurut hukum Indonesia.",
+    image:
+      "https://images.unsplash.com/photo-1581578731548-c64695cc6952?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+    categoryId: "family",
+    publishedAt: "2024-01-10",
     readTime: 6,
-    slug: 'hak-kewajiban-hukum-keluarga',
+    slug: "hak-kewajiban-hukum-keluarga",
     author: {
-      name: 'Siti Nurhaliza, S.H.',
-      avatar: 'https://images.unsplash.com/photo-1494790108755-2616b612b098?ixlib=rb-4.0.3&auto=format&fit=crop&w=100&q=80'
-    }
+      name: "Siti Nurhaliza, S.H.",
+      avatar:
+        "https://images.unsplash.com/photo-1494790108755-2616b612b098?ixlib=rb-4.0.3&auto=format&fit=crop&w=100&q=80",
+    },
   },
   {
     id: 3,
-    title: 'Proses Hukum Pidana: Dari Penyidikan hingga Persidangan',
-    excerpt: 'Memahami tahapan-tahapan dalam proses hukum pidana di Indonesia, mulai dari penyidikan, penuntutan, hingga persidangan di pengadilan.',
-    image: 'https://images.unsplash.com/photo-1589391886645-d51941baf7fb?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
-    categoryId: 'criminal',
-    publishedAt: '2024-01-05',
+    title: "Proses Hukum Pidana: Dari Penyidikan hingga Persidangan",
+    excerpt:
+      "Memahami tahapan-tahapan dalam proses hukum pidana di Indonesia, mulai dari penyidikan, penuntutan, hingga persidangan di pengadilan.",
+    image:
+      "https://images.unsplash.com/photo-1589391886645-d51941baf7fb?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+    categoryId: "criminal",
+    publishedAt: "2024-01-05",
     readTime: 10,
-    slug: 'proses-hukum-pidana-indonesia',
+    slug: "proses-hukum-pidana-indonesia",
     author: {
-      name: 'Budi Santoso, S.H., M.H.',
-      avatar: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&auto=format&fit=crop&w=100&q=80'
-    }
-  }
-]
+      name: "Budi Santoso, S.H., M.H.",
+      avatar:
+        "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&auto=format&fit=crop&w=100&q=80",
+    },
+  },
+];
 
 // Computed properties
 const filteredArticles = computed(() => {
-  let filtered = articles.value
+  let filtered = articles.value;
 
   // Filter by category
-  if (selectedCategory.value !== 'all') {
-    filtered = filtered.filter(article => article.categoryId === selectedCategory.value)
+  if (selectedCategory.value !== "all") {
+    filtered = filtered.filter(
+      (article) => article.categoryId === selectedCategory.value
+    );
   }
 
   // Filter by search query
   if (searchQuery.value) {
-    const query = searchQuery.value.toLowerCase()
-    filtered = filtered.filter(article =>
-      article.title.toLowerCase().includes(query) ||
-      article.excerpt.toLowerCase().includes(query)
-    )
+    const query = searchQuery.value.toLowerCase();
+    filtered = filtered.filter(
+      (article) =>
+        article.title.toLowerCase().includes(query) ||
+        article.excerpt.toLowerCase().includes(query)
+    );
   }
 
-  return filtered
-})
+  return filtered;
+});
 
 const totalPages = computed(() => {
   // Use total from API if available, otherwise calculate from filtered articles
   if (totalArticles.value > 0) {
-    return Math.ceil(totalArticles.value / articlesPerPage)
+    return Math.ceil(totalArticles.value / articlesPerPage);
   }
-  return Math.ceil(filteredArticles.value.length / articlesPerPage)
-})
+  return Math.ceil(filteredArticles.value.length / articlesPerPage);
+});
 
 const paginatedArticles = computed(() => {
   // For API pagination, we already get the right articles
   // For client-side filtering, we need to slice
-  if (searchQuery.value || selectedCategory.value !== 'all') {
-    const start = (currentPage.value - 1) * articlesPerPage
-    const end = start + articlesPerPage
-    return filteredArticles.value.slice(start, end)
+  if (searchQuery.value || selectedCategory.value !== "all") {
+    const start = (currentPage.value - 1) * articlesPerPage;
+    const end = start + articlesPerPage;
+    return filteredArticles.value.slice(start, end);
   }
-  return articles.value
-})
+  return articles.value;
+});
 
 const visiblePages = computed(() => {
-  const pages = []
-  const total = totalPages.value
-  const current = currentPage.value
+  const pages = [];
+  const total = totalPages.value;
+  const current = currentPage.value;
 
   if (total <= 7) {
     for (let i = 1; i <= total; i++) {
-      pages.push(i)
+      pages.push(i);
     }
   } else {
     if (current <= 4) {
       for (let i = 1; i <= 5; i++) {
-        pages.push(i)
+        pages.push(i);
       }
-      pages.push('...')
-      pages.push(total)
+      pages.push("...");
+      pages.push(total);
     } else if (current >= total - 3) {
-      pages.push(1)
-      pages.push('...')
+      pages.push(1);
+      pages.push("...");
       for (let i = total - 4; i <= total; i++) {
-        pages.push(i)
+        pages.push(i);
       }
     } else {
-      pages.push(1)
-      pages.push('...')
+      pages.push(1);
+      pages.push("...");
       for (let i = current - 1; i <= current + 1; i++) {
-        pages.push(i)
+        pages.push(i);
       }
-      pages.push('...')
-      pages.push(total)
+      pages.push("...");
+      pages.push(total);
     }
   }
 
-  return pages
-})
+  return pages;
+});
 
 // Methods
 const filterArticles = () => {
-  currentPage.value = 1
+  currentPage.value = 1;
   // For search, we'll use client-side filtering for now
   // In production, you might want to implement server-side search
-}
+};
 
 const filterByCategory = (categoryId) => {
-  selectedCategory.value = categoryId
-  currentPage.value = 1
+  selectedCategory.value = categoryId;
+  currentPage.value = 1;
   // For category filtering, we'll use client-side filtering for now
   // In production, you might want to implement server-side filtering
-}
+};
 
 const getCategoryName = (categoryId) => {
-  const category = categories.value.find(cat => cat.id === categoryId)
-  return category ? category.name : ''
-}
+  const category = categories.value.find((cat) => cat.id === categoryId);
+  return category ? category.name : "";
+};
 
 const formatDate = (dateString) => {
-  if (!dateString) return ''
-  const date = new Date(dateString)
-  return date.toLocaleDateString('id-ID', {
-    year: 'numeric',
-    month: 'long',
-    day: 'numeric'
-  })
-}
+  if (!dateString) return "";
+  const date = new Date(dateString);
+  return date.toLocaleDateString("id-ID", {
+    year: "numeric",
+    month: "long",
+    day: "numeric",
+  });
+};
 
 const handleImageError = (event) => {
-  event.target.src = 'https://images.unsplash.com/photo-1589829545856-d10d557cf95f?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80'
-}
+  event.target.src =
+    "https://images.unsplash.com/photo-1589829545856-d10d557cf95f?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80";
+};
 
 const subscribeNewsletter = async () => {
-  if (!emailSubscription.value) return
+  if (!emailSubscription.value) return;
 
-  subscribing.value = true
+  subscribing.value = true;
   try {
     // Simulate API call
-    await new Promise(resolve => setTimeout(resolve, 1000))
-    alert(t('articles.newsletter.success'))
-    emailSubscription.value = ''
+    await new Promise((resolve) => setTimeout(resolve, 1000));
+    alert(t("articles.newsletter.success"));
+    emailSubscription.value = "";
   } catch (error) {
-    alert(t('articles.newsletter.error'))
+    alert(t("articles.newsletter.error"));
   } finally {
-    subscribing.value = false
+    subscribing.value = false;
   }
-}
+};
 
 // Lifecycle
 onMounted(() => {
-  loadArticles(true)
-})
+  loadArticles(true);
+});
 </script>
 
 <style scoped>

@@ -44,7 +44,7 @@
           </button>
 
           <button
-            @click="$router.push('/admin/article-management')"
+            @click="goToArticles"
             class="w-full flex items-center px-4 py-3 text-left text-gray-600 hover:bg-indigo-50 hover:text-indigo-600 rounded-lg transition-colors duration-200"
           >
             <svg
@@ -151,26 +151,9 @@
             </button>
             <h1 class="text-2xl font-bold text-gray-900">Manajemen Lawyers</h1>
           </div>
+
+          <!-- sfiaifasi -->
           <div class="flex items-center space-x-4">
-            <button
-              @click="openCreateModal"
-              class="px-4 py-2 bg-indigo-600 text-white rounded-md hover:bg-indigo-700 transition-colors duration-200"
-            >
-              <svg
-                class="w-5 h-5 inline mr-2"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-              >
-                <path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="2"
-                  d="M12 6v6m0 0v6m0-6h6m-6 0H6"
-                ></path>
-              </svg>
-              Tambah Lawyer
-            </button>
             <span class="text-gray-600">Selamat datang, {{ adminName }}</span>
           </div>
         </div>
@@ -286,84 +269,9 @@
         </div>
 
         <!-- Quick Actions -->
-        <div class="bg-white rounded-lg shadow p-6 mb-8">
-          <h3 class="text-lg font-medium text-gray-900 mb-4">Aksi Cepat</h3>
-          <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
-            <!-- Add New Lawyer Card -->
-            <div
-              @click="openCreateModal"
-              class="cursor-pointer border-2 border-dashed border-indigo-300 rounded-lg p-6 hover:border-indigo-500 hover:bg-indigo-50 transition-all duration-200 group"
-            >
-              <div class="text-center">
-                <div
-                  class="mx-auto w-12 h-12 bg-indigo-100 rounded-full flex items-center justify-center group-hover:bg-indigo-200 transition-colors duration-200"
-                >
-                  <svg
-                    class="w-6 h-6 text-indigo-600"
-                    fill="none"
-                    stroke="currentColor"
-                    viewBox="0 0 24 24"
-                  >
-                    <path
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                      stroke-width="2"
-                      d="M12 6v6m0 0v6m0-6h6m-6 0H6"
-                    ></path>
-                  </svg>
-                </div>
-                <h4 class="mt-3 text-sm font-medium text-gray-900">
-                  Tambah Lawyer Baru
-                </h4>
-                <p class="mt-1 text-xs text-gray-500">
-                  Klik untuk menambahkan lawyer baru ke sistem
-                </p>
-              </div>
-            </div>
-          </div>
-        </div>
-
+        
         <!-- Search & Filter -->
-        <div class="bg-white rounded-lg shadow p-6 mb-8">
-          <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
-            <div>
-              <label class="block text-sm font-medium text-gray-700 mb-2"
-                >Search</label
-              >
-              <input
-                v-model="searchQuery"
-                @input="debouncedSearch"
-                type="text"
-                placeholder="Cari nama atau spesialisasi..."
-                class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500"
-              />
-            </div>
-
-            <div>
-              <label class="block text-sm font-medium text-gray-700 mb-2"
-                >Status</label
-              >
-              <select
-                v-model="statusFilter"
-                @change="loadLawyers"
-                class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500"
-              >
-                <option value="">Semua Status</option>
-                <option value="active">Active</option>
-                <option value="inactive">Inactive</option>
-              </select>
-            </div>
-
-            <div class="flex items-end">
-              <button
-                @click="resetFilters"
-                class="w-full px-4 py-2 bg-gray-500 text-white rounded-md hover:bg-gray-600 transition-colors duration-200"
-              >
-                Reset Filter
-              </button>
-            </div>
-          </div>
-        </div>
+       
 
         <!-- Lawyers Grid -->
         <div class="bg-white rounded-lg shadow overflow-hidden">
@@ -994,6 +902,11 @@ const resetFilters = () => {
   statusFilter.value = "";
   pagination.value.offset = 0;
   loadLawyers();
+};
+
+
+const goToArticles = () => {
+  router.push("/articles");
 };
 
 const loadPreviousPage = () => {
