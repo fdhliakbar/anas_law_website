@@ -100,5 +100,3 @@ We welcome contributions to Nuxt! If you have suggestions or improvements, pleas
 ## License
 
 Nuxt is open-source software licensed under the [MIT License](https://github.com/nuxt/nuxt/blob/main/LICENSE)..
-
-<img src="/frontend/src/assets/images/yui_banner.jpg">
