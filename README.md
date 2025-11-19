@@ -77,24 +77,6 @@ Your Nuxt application should now be running on `http://localhost:3000`.
 For detailed documentation on how to use Nuxt, please refer to the [Nuxt Documentation](https://nuxt.com/docs).
 
 ---
-
-## Contribute
-
-We welcome contributions to Nuxt! If you have suggestions or improvements, please submit a pull request on our [GitHub repository](https://github.com/nuxt/nuxt).
-
----
-
-## Follow Us
-
-<div style="display: flex; align-items: center; gap: 10px;">
-  <a href="https://github.com/fdhliakbar">
-    <img src="/frontend/src/assets/images/icons/github.png" width="42" height="42" alt="GitHub">
-  </a>
-  <a href="https://github.com/fdhliakbar">
-    <img src="/frontend/src/assets/images/icons/instagram.png" width="42" height="42" alt="Instagram">
-  </a>
-</div>
-
 ---
 
 ## License
